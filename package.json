@@ -8,13 +8,14 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "quest/node_modules/.bin/react-scripts start",
-    "build": "quest/node_modules/.bin/react-scripts build",
-    "test": "quest/node_modules/.bin/react-scripts test",
-    "eject": "quest/node_modules/.bin/react-scripts eject"
+    "start": "node_modules/.bin/react-scripts start",
+    "build": "node_modules/.bin/react-scripts build",
+    "test": "node_modules/.bin/react-scripts test",
+    "eject": "node_modules/.bin/react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "antd": "^4.0.2",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
