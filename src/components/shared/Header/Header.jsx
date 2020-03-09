@@ -2,13 +2,12 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { PageHeader, Button } from 'antd';
 import {connect} from "react-redux";
-import mapStateToProps from "react-redux/es/connect/mapStateToProps";
-import mapDispatchToProps from "react-redux/es/connect/mapDispatchToProps";
+import {deleteToken} from "../../../redux/Actions/AuthActions";
 
 function Header(props) {
     let history = useHistory();
 
-    let primaryButton = () => {
+    function primaryButton() {
         if(props.loggedIn){
             return (
                 <Button key="1" onClick={() => history.push("/my-quests")} type="primary">
@@ -32,20 +31,18 @@ function Header(props) {
             extra={[
                 <Button key="3" onClick={() => history.push("/")}>Все квесты</Button>,
                 <Button key="2" onClick={() => history.push("/about")}>О нас</Button>,
-                <Button key="1" onClick={() => history.push("/my-quests")} type="primary">
-                    Мой квестспейс
-                </Button>,
+                primaryButton()
             ]}
         />
     );
 }
 
-const mapStateToProps = (state) => ({
-    const
-})
+const mapStateToProps = (store) => ({
+    loggedIn: store.authReducer.token !== ""
+});
 
-const mapDispatchToProps = {
-    // ... normally is an object full of action creators
-}
+const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(deleteToken())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

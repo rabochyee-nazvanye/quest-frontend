@@ -4,14 +4,13 @@ import {
     DELETE_TOKEN
 } from "../Actions/AuthActions"
 
-function authReducer(
+export default function authReducer(
     state = {
         isFetching: false,
         receivedAt: false,
         token: ""
-    },
-    action
-) {
+    }, action)
+{
     switch (action.type) {
         case REQUEST_TOKEN:
             return Object.assign({}, state, {
@@ -35,5 +34,3 @@ function authReducer(
             return state
     }
 }
-
-export default authReducer()

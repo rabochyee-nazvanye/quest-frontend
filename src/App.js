@@ -9,13 +9,10 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useHistory,
 } from "react-router-dom";
 
-import {connect, Provider} from "react-redux";
-import store from "./redux/store"
-import mapStateToProps from "react-redux/es/connect/mapStateToProps";
-import mapDispatchToProps from "react-redux/es/connect/mapDispatchToProps";
+import {Provider} from "react-redux";
+import {store} from "./redux/store"
 
 function App() {
     return (
