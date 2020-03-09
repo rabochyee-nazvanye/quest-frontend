@@ -13,6 +13,7 @@ import {
 
 import {Provider} from "react-redux";
 import {store} from "./redux/store"
+import Auth from "./components/Auth/Auth";
 
 function App() {
     return (
@@ -28,6 +29,9 @@ function App() {
                     </Route>
                     <Route exact path={"/myQuests"}>
                         <MyQuests/>
+                    </Route>
+                    <Route exact path={"/auth"}>
+                        <Auth/>
                     </Route>
                 </Switch>
             </Router>
