@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import QuestCard from "../QuestCard/QuestCard";
 import { Spin } from 'antd';
 import { BASE_URL } from "../../settings"
-import {repeat} from "redux-logger/src/helpers";
+
 
 class Home extends Component {
 
