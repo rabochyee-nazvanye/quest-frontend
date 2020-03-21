@@ -9,7 +9,7 @@ import { Typography } from 'antd';
 const { Title, Paragraph } = Typography;
 
 
-class Home extends Component {
+class QuestPage extends Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        fetch(BASE_URL + '/quests/9')
+        fetch(BASE_URL + '/quests/' + this.props.match.params.id)
             .then(response => response.json())
             .then(readResponse => this.setState({ dataReady:true, quest:readResponse }))
     }
@@ -57,4 +57,6 @@ class Home extends Component {
     }
 }
 
-export default Home;
+
+
+export default QuestPage;

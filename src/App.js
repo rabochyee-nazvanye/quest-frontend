@@ -11,7 +11,7 @@ import './App.css'
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
+    Route, useParams,
 } from "react-router-dom";
 
 import {Provider} from "react-redux";
@@ -24,14 +24,12 @@ function App() {
             <Router>
                 <Header/>
                 <Switch>
+                    <Route path="/quest/:id" exact component={QuestPage}/>
                     <Route exact path={"/"}>
                         <Home/>
                     </Route>
                     <Route exact path={"/about"}>
                         <About/>
-                    </Route>
-                    <Route exact path={"/quest"}>
-                        <QuestPage/>
                     </Route>
                     <Route exact path={"/myQuests"}>
                         <MyQuests/>
