@@ -1,11 +1,12 @@
 import React, { Component} from "react";
 import QuestTimeline from "../QuestTimeline/QuestTimeline";
 import TeamsList from "../TeamsList/TeamsList";
+import Picture from "../Picture/Picture";
 import {Button, Spin} from 'antd';
 import { BASE_URL } from "../../settings"
 import { Typography } from 'antd';
 
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 
 class Home extends Component {
@@ -14,14 +15,14 @@ class Home extends Component {
         super(props);
         this.state = {
             dataReady: false,
-            result: null
+            quest: null
         }
     }
 
     componentDidMount() {
         fetch(BASE_URL + '/quests/9')
             .then(response => response.json())
-            .then(readResponse => this.setState({ dataReady:true, result:readResponse }))
+            .then(readResponse => this.setState({ dataReady:true, quest:readResponse }))
     }
 
     getRepresentationByState() {
@@ -31,14 +32,17 @@ class Home extends Component {
         else {
             return (
                 <React.Fragment>
-                    <Title>this.state.result.quest.name</Title>
-                    <QuestTimeline quest={this.state.result.quest} />
-                    this.state.result.quest.description
+                    <Picture quest={this.state.quest} />
+                    <Title>{this.state.quest.name}</Title>
+                    <Paragraph>
+                        {this.state.quest.description}
+                    </Paragraph>
+                    <QuestTimeline quest={this.state.quest} />
                     <Button type="primary" htmlType="submit" className="button">
                         Регистрация на квест
                     </Button>
-                    <Title level={4}>Организатор квеста: </Title>this.state.result.quest.authorName
-                    <TeamsList quest={this.state.result.quest} />
+                    <Title level={4}>Организатор квеста: </Title>{this.state.quest.authorName}
+                    <TeamsList quest={this.state.quest} />
                 </React.Fragment>
             )
         }
