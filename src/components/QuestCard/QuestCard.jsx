@@ -1,28 +1,30 @@
-import React from "react";
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import React from 'react'
+import { Card } from 'antd'
 
-const { Meta } = Card;
+const { Meta } = Card
 
-function QuestCard(props) {
-    return (
-        <React.Fragment>
-            <Card
-                style={{ width: 300 }}
-                cover={
-                    <img
-                        alt={props.quest.name + ' картинка'}
-                        src={props.quest.imageUrl}
-                    />
-                }
-            >
-                <Meta
-                    title={props.quest.name}
-                    description={props.quest.description}
-                />
-            </Card>,
-        </React.Fragment>
-    );
+function QuestCards (props) {
+  return (
+    <React.Fragment>
+      <Card
+        hoverable
+        style ={{ margin: '10px 20px' }}
+        cover={
+          <img
+            alt={props.quest.name + ' картинка'}
+            src={'https://s0.rbk.ru/v6_top_pics/media/img/6/56/755719973686566.png'}
+          />
+        }
+      >
+        <Meta
+          title={props.quest.name}
+        />
+        <p>
+          {props.quest.description}
+        </p>
+      </Card>
+    </React.Fragment>
+  )
 }
 
-export default QuestCard;
+export default QuestCards
