@@ -5,6 +5,7 @@ import { Spin } from 'antd'
 import { BASE_URL } from '../../settings'
 // eslint-disable-next-line import/no-duplicates
 import { Row, Col } from 'antd'
+import {Link} from "react-router-dom";
 
 class Home extends Component {
   constructor (props) {
@@ -22,12 +23,9 @@ class Home extends Component {
   }
 
   mapQuestsToTemplate () {
-    // eslint-disable-next-line react/jsx-key
     return this.state.results.map((obj) =>
-    // eslint-disable-next-line react/jsx-no-undef,react/jsx-key
-      <Col xs={2} sm={4} md={3} lg={8} xl={100}>
-        {/* eslint-disable-next-line react/jsx-no-target-blank */}
-        <a style={{ display: 'table-cell' }} href="https://zen.yandex.ru/media/id/5b44b243ccce4f00a9f308db/chto-hochet-rasskazat-hoziainu-morskaia-svinka-5bd008121aa2e400aade4625"><QuestCard quest={obj} /></a>
+      <Col key={'quest:' + obj.id} xs={2} sm={4} md={3} lg={8} xl={100}>
+        <Link to={'/quests/' + obj.id}><QuestCard quest={obj} /></Link>
       </Col>
     )
   }
