@@ -4,6 +4,7 @@ import Header from "./components/shared/Header/Header";
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
 import MyQuests from "./components/Quests/MyQuests/MyQuests";
+import QuestPage from "./components/QuestPage/QuestPage";
 
 import './App.css'
 
@@ -28,6 +29,9 @@ function App() {
                     </Route>
                     <Route exact path={"/about"}>
                         <About/>
+                    </Route>
+                    <Route exact path={"/quest"}>
+                        <QuestPage/>
                     </Route>
                     <Route exact path={"/myQuests"}>
                         <MyQuests/>

@@ -167,3 +167,8 @@ typings/
 
 # production
 /quest/build
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/quest-frontend.iml
+.idea/vcs.xml
