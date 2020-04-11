@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import QuestCard from '../QuestCard/QuestCard'
-// eslint-disable-next-line import/no-duplicates
 import { Spin } from 'antd'
 import { BASE_URL } from '../../settings'
-// eslint-disable-next-line import/no-duplicates
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
 
 class Home extends Component {
   constructor (props) {
-    super(props)
+    super(props);
     this.state = {
       dataReady: false,
       results: []
@@ -44,13 +42,12 @@ class Home extends Component {
 
   render () {
     return (
-    // eslint-disable-next-line react/jsx-no-undef
-      <div className='container'>
-        <h2 style={{ margin: '10px 20px' }}>Квесты</h2>
+      <React.Fragment>
+        <h2>Квесты</h2>
         <Row type="flex">
           {this.getRepresentationByState()}
         </Row>
-      </div>
+      </React.Fragment>
     )
   }
 }

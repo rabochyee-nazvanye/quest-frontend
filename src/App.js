@@ -21,17 +21,13 @@ function App () {
     <Provider store={store}>
       <Router>
         <Header/>
-        <Switch>
-          <Route exact path={'/'}>
-            <Home/>
-          </Route>
-          <Route exact path={'/about'}>
-            <About/>
-          </Route>
-          <Route exact path={'/auth'}>
-            <Auth/>
-          </Route>
-        </Switch>
+        <div className={'container'}>
+          <Switch>
+            <Route exact path={'/'} component={Home} />
+            <Route exact path={'/about'} component={About} />
+            <Route exact path={'/auth'} component={Auth} />
+          </Switch>
+        </div>
       </Router>
     </Provider>
   )
