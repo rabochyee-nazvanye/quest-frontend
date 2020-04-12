@@ -10,7 +10,7 @@ function Header (props) {
   function primaryButton () {
     if (props.loggedIn) {
       return (
-        <Button key="1" onClick={() => history.push('/my-quests')} type="primary">
+        <Button key="1" onClick={() => history.push('/account')} type="primary">
                     Мой квестспейс
         </Button>
       )
@@ -37,7 +37,7 @@ function Header (props) {
 }
 
 const mapStateToProps = (store) => ({
-  loggedIn: store.authReducer.token !== ''
+  loggedIn: store.authReducer.user !== null
 })
 
 const mapDispatchToProps = dispatch => ({

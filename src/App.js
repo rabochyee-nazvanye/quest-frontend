@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import Header from './components/shared/Header/Header'
 import About from './components/About/About'
@@ -16,9 +16,14 @@ import {
 
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import connect from 'react-redux/es/connect/connect';
+import { login } from './redux/Actions/Api';
 
+export default function App () {
+  useEffect(() => {
+    login()
+  })
 
-function App () {
   return (
     <Provider store={store}>
       <Router>
@@ -28,6 +33,7 @@ function App () {
             <Route exact path={'/'} component={Home} />
             <Route exact path={'/about'} component={About} />
             <Route exact path={'/auth'} component={Auth} />
+            <Route exact path={'/auth/:redirectTo'} component={Auth} />
             <Route exact path={'/account'} component={Account} />
           </Switch>
         </div>
@@ -35,5 +41,3 @@ function App () {
     </Provider>
   )
 }
-
-export default App

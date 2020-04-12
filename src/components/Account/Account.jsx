@@ -1,19 +1,20 @@
 import React from 'react'
 import connect from 'react-redux/es/connect/connect'
-import Auth from '../Auth/Auth'
 import { Redirect } from 'react-router-dom'
+import AccountTemplate from "./AccountTemplate/AccountTemplate";
 
 function Account (props) {
   if (!props.loggedIn) {
     return (<Redirect to={'/auth'}/>)
   }
   return (
-    <p>Account!</p>
+    <AccountTemplate user={props.user}/>
   )
 };
 
 const mapStateToProps = (store) => ({
-  loggedIn: store.authReducer.token !== ''
+  loggedIn: store.authReducer.user !== null,
+  user: store.authReducer.user
 })
 
-export default connect(mapStateToProps)(Account)
+export default connect(mapStateToProps, null)(Account)

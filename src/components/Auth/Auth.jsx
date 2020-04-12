@@ -1,17 +1,29 @@
 import React from 'react'
 import AuthForm from './Form/AuthForm'
-import connect from 'react-redux/es/connect/connect';
+import connect from 'react-redux/es/connect/connect'
+import {
+  Redirect,
+  useParams
+} from 'react-router-dom'
 
 function Auth (props) {
-  return (
-    <React.Fragment>
+  let { redirectTo } = useParams()
+
+  if (redirectTo === undefined) {
+    redirectTo = 'account'
+  }
+
+  if (props.loggedIn) {
+    return (<Redirect to={{ pathname: '/' + redirectTo }} />)
+  } else {
+    return (
       <AuthForm exceptionDetail={props.exceptionDetail}/>
-    </React.Fragment>
-  )
+    )
+  }
 };
 
 const mapStateToProps = (store) => ({
-  loggedIn: store.authReducer.token !== '',
+  loggedIn: store.authReducer.user !== null,
   exceptionDetail: store.authReducer.exceptionDetail,
   user: store.authReducer.user
 })

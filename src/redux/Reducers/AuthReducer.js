@@ -2,49 +2,57 @@ import {
   REQUEST_USER_INFO,
   RECEIVE_USER_INFO,
   RECEIVE_EXCEPTION,
-  DELETE_USER_INFO
+  DELETE_USER_INFO,
+  RECEIVE_TOKEN,
+  REQUEST_TOKEN,
+  DELETE_TOKEN
 } from '../Actions/AuthActions'
 
 export default function authReducer (
   state = {
-    isFetching: false,
-    receivedAt: false,
-    token: '',
+    userInfoIsFetching: false,
+    tokenIsFetching: false,
+    tokenReceivedAt: false,
     exceptionDetail: '',
-    user: {}
+    user: null
   }, action) {
   switch (action.type) {
     case REQUEST_USER_INFO:
       return Object.assign({}, state, {
-        isFetching: true,
-        receivedAt: '',
-        token: '',
-        exceptionDetail: '',
-        user: {}
+        userInfoIsFetching: true,
+        user: null
       })
     case RECEIVE_USER_INFO:
       return Object.assign({}, state, {
-        isFetching: false,
-        receivedAt: action.receivedAt,
-        token: action.token,
+        userInfoIsFetching: false,
         exceptionDetail: '',
         user: action.user
       })
     case DELETE_USER_INFO:
       return Object.assign({}, state, {
-        isFetching: false,
-        receivedAt: '',
-        token: '',
-        exceptionDetail: '',
-        user: {}
+        userInfoIsFetching: false,
+        user: null
+      })
+    case REQUEST_TOKEN:
+      return Object.assign({}, state, {
+        tokenIsFetching: true,
+        exceptionDetail: ''
+      })
+    case RECEIVE_TOKEN:
+      return Object.assign({}, state, {
+        tokenIsFetching: false
+      })
+    case DELETE_TOKEN:
+      return Object.assign({}, state, {
+        tokenIsFetching: false
       })
     case RECEIVE_EXCEPTION:
       return Object.assign({}, state, {
-        isFetching: false,
-        receivedAt: '',
-        token: '',
+        userInfoIsFetching: false,
+        tokenInfoIsFetching: false,
+        tokenReceivedAt: '',
         exceptionDetail: action.exceptionDetail,
-        user: {}
+        user: null
       })
     default:
       return state

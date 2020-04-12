@@ -5,13 +5,13 @@ import './AuthForm.css'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
-import { login } from '../../../redux/Actions/Api'
+import { loginFromForm } from '../../../redux/Actions/Api'
 import { connect } from 'react-redux'
 import { decodeException } from './Utils'
 
 function AuthForm (props) {
   const onFinish = values => {
-    props.login(values.username, values.password)
+    props.login(values.username, values.password, values.remember)
   }
 
   const exceptionDetail = decodeException(props.exceptionDetail)
@@ -77,7 +77,7 @@ function AuthForm (props) {
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password) => { dispatch(login(username, password)) }
+  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) }
 })
 
 export default connect(null, mapDispatchToProps)(AuthForm)
