@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { PageHeader, Button } from 'antd'
 import { connect } from 'react-redux'
-import { deleteToken } from '../../../redux/Actions/AuthActions'
+import { logout } from '../../../redux/Actions/Api'
 
 function Header (props) {
   const history = useHistory()
@@ -41,7 +41,7 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(deleteToken())
+  logout: () => dispatch(logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

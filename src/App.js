@@ -3,6 +3,8 @@ import React from 'react'
 import Header from './components/shared/Header/Header'
 import About from './components/About/About'
 import Home from './components/Quests/Home'
+import Auth from './components/Auth/Auth'
+import Account from './components/Account/Account'
 
 import './App.css'
 
@@ -14,7 +16,7 @@ import {
 
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import Auth from './components/Auth/Auth'
+
 
 function App () {
   return (
@@ -26,6 +28,7 @@ function App () {
             <Route exact path={'/'} component={Home} />
             <Route exact path={'/about'} component={About} />
             <Route exact path={'/auth'} component={Auth} />
+            <Route exact path={'/account'} component={Account} />
           </Switch>
         </div>
       </Router>
