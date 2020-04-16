@@ -1,11 +1,10 @@
-import React, {useEffect } from 'react'
+import React, {useEffect} from 'react'
 
 import Header from './components/shared/Header/Header'
 import About from './components/About/About'
 import Home from './components/Quests/Home'
 import Auth from './components/Auth/Auth'
 import Account from './components/Account/Account'
-import QuestPage from './components/QuestPage/QuestPage';
 
 import './App.css'
 
@@ -17,7 +16,8 @@ import {
 
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import { login } from './redux/Actions/Api'
+import connect from 'react-redux/es/connect/connect';
+import { login } from './redux/Actions/Api';
 
 export default function App () {
   useEffect(() => {
@@ -35,7 +35,6 @@ export default function App () {
             <Route exact path={'/auth'} component={Auth} />
             <Route exact path={'/auth/:redirectTo'} component={Auth} />
             <Route exact path={'/account'} component={Account} />
-            <Route exact path={'/quests/:id'} component={QuestPage} />
           </Switch>
         </div>
       </Router>

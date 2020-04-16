@@ -1,36 +1,60 @@
 import {
-    REQUEST_TOKEN,
-    RECEIVE_TOKEN,
-    DELETE_TOKEN
-} from "../Actions/AuthActions"
+  REQUEST_USER_INFO,
+  RECEIVE_USER_INFO,
+  RECEIVE_EXCEPTION,
+  DELETE_USER_INFO,
+  RECEIVE_TOKEN,
+  REQUEST_TOKEN,
+  DELETE_TOKEN
+} from '../Actions/AuthActions'
 
-export default function authReducer(
-    state = {
-        isFetching: false,
-        receivedAt: false,
-        token: ""
-    }, action)
-{
-    switch (action.type) {
-        case REQUEST_TOKEN:
-            return Object.assign({}, state, {
-                isFetching: true,
-                receivedAt: "",
-                token: ""
-            })
-        case RECEIVE_TOKEN:
-            return Object.assign({}, state, {
-                isFetching: false,
-                receivedAt: action.receivedAt,
-                token: action.token,
-            })
-        case DELETE_TOKEN:
-            return Object.assign({}, state, {
-                isFetching: false,
-                receivedAt: "",
-                token: ""
-            })
-        default:
-            return state
-    }
+export default function authReducer (
+  state = {
+    userInfoIsFetching: false,
+    tokenIsFetching: false,
+    tokenReceivedAt: false,
+    exceptionDetail: '',
+    user: null
+  }, action) {
+  switch (action.type) {
+    case REQUEST_USER_INFO:
+      return Object.assign({}, state, {
+        userInfoIsFetching: true,
+        user: null
+      })
+    case RECEIVE_USER_INFO:
+      return Object.assign({}, state, {
+        userInfoIsFetching: false,
+        exceptionDetail: '',
+        user: action.user
+      })
+    case DELETE_USER_INFO:
+      return Object.assign({}, state, {
+        userInfoIsFetching: false,
+        user: null
+      })
+    case REQUEST_TOKEN:
+      return Object.assign({}, state, {
+        tokenIsFetching: true,
+        exceptionDetail: ''
+      })
+    case RECEIVE_TOKEN:
+      return Object.assign({}, state, {
+        tokenIsFetching: false
+      })
+    case DELETE_TOKEN:
+      return Object.assign({}, state, {
+        tokenIsFetching: false
+      })
+    case RECEIVE_EXCEPTION:
+      return Object.assign({}, state, {
+        userInfoIsFetching: false,
+        tokenInfoIsFetching: false,
+        tokenReceivedAt: '',
+        exceptionDetail: action.exceptionDetail,
+        user: null
+      })
+    default:
+      return state
+  }
 }

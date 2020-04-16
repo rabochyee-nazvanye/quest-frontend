@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { PageHeader, Button } from 'antd'
 import { connect } from 'react-redux'
-import { deleteToken } from '../../../redux/Actions/AuthActions'
+import { logout } from '../../../redux/Actions/Api'
 
 function Header (props) {
   const history = useHistory()
@@ -10,7 +10,7 @@ function Header (props) {
   function primaryButton () {
     if (props.loggedIn) {
       return (
-        <Button key="1" onClick={() => history.push('/my-quests')} type="primary">
+        <Button key="1" onClick={() => history.push('/account')} type="primary">
                     Мой квестспейс
         </Button>
       )
@@ -37,11 +37,11 @@ function Header (props) {
 }
 
 const mapStateToProps = (store) => ({
-  loggedIn: store.authReducer.token !== ''
+  loggedIn: store.authReducer.user !== null
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(deleteToken())
+  logout: () => dispatch(logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

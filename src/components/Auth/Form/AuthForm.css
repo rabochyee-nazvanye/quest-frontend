@@ -1,6 +1,3 @@
-.login-form-container {
-
-}
 .login-form {
     max-width: 300px;
     position: absolute;
@@ -16,7 +13,6 @@
 .login-form-button {
     width: 100%;
 }
-
 @media screen and (max-width: 480px) {
     .login-form {
         width: 300px;
