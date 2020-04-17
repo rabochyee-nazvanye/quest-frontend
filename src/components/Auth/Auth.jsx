@@ -1,10 +1,11 @@
 import React from 'react'
-import AuthForm from './Form/AuthForm'
+import LoginFormTemplate from './Templates/LoginFormTemplate'
 import connect from 'react-redux/es/connect/connect'
 import {
   Redirect,
   useParams
 } from 'react-router-dom'
+import { loginFromForm } from '../../redux/Actions/Api'
 
 function Auth (props) {
   let { redirectTo } = useParams()
@@ -17,7 +18,7 @@ function Auth (props) {
     return (<Redirect to={{ pathname: '/' + redirectTo }} />)
   } else {
     return (
-      <AuthForm exceptionDetail={props.exceptionDetail}/>
+      <LoginFormTemplate exceptionDetail={props.exceptionDetail} submitFunction={props.login}/>
     )
   }
 };
@@ -28,4 +29,8 @@ const mapStateToProps = (store) => ({
   user: store.authReducer.user
 })
 
-export default connect(mapStateToProps, null)(Auth)
+const mapDispatchToProps = dispatch => ({
+  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)
