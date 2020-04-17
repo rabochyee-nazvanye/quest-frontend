@@ -37,7 +37,7 @@ function getToken () {
 function fetchUserToken (username, password, rememberMe) {
   return dispatch => {
     dispatch(requestToken())
-    return fetch(BASE_URL + '/account', {
+    return fetch(BASE_URL + '/session', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -72,7 +72,7 @@ function fetchUserToken (username, password, rememberMe) {
 function getUserByToken (token) {
   return dispatch => {
     dispatch(requestUserInfo())
-    return fetch(BASE_URL + '/profiles', {
+    return fetch(BASE_URL + '/session', {
       method: 'GET',
       headers: {
         Accept: 'application/json',

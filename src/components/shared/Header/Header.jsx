@@ -3,34 +3,20 @@ import { useHistory } from 'react-router-dom'
 import { PageHeader, Button } from 'antd'
 import { connect } from 'react-redux'
 import { logout } from '../../../redux/Actions/Api'
+import UserButton from './UserButton./UserButton'
+import QuestspaceIcon from '../Icons/QuestspaceIcon'
 
 function Header (props) {
   const history = useHistory()
 
-  function primaryButton () {
-    if (props.loggedIn) {
-      return (
-        <Button key="1" onClick={() => history.push('/account')} type="primary">
-                    Мой квестспейс
-        </Button>
-      )
-    } else {
-      return (
-        <Button key="1" onClick={() => history.push('/auth')} type="primary">
-                    Войти или зарегистрироваться
-        </Button>
-      )
-    }
-  }
-
   return (
     <PageHeader
       ghost={false}
-      title="Квестспейс"
+      title={<QuestspaceIcon/>}
       extra={[
-        <Button key="3" onClick={() => history.push('/')}>Все квесты</Button>,
-        <Button key="2" onClick={() => history.push('/about')}>О нас</Button>,
-        primaryButton()
+        // <Button key="3" onClick={() => history.push('/')}>Все квесты</Button>,
+        // <Button key="2" onClick={() => history.push('/about')}>О нас</Button>,
+        <UserButton/>
       ]}
     />
   )

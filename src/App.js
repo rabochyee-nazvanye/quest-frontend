@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 import Header from './components/shared/Header/Header'
 import About from './components/About/About'
@@ -16,8 +16,7 @@ import {
 
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import connect from 'react-redux/es/connect/connect';
-import { login } from './redux/Actions/Api';
+import { login } from './redux/Actions/Api'
 
 export default function App () {
   useEffect(() => {
