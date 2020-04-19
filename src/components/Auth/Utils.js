@@ -7,7 +7,7 @@ export function decodeLoginState (isInLoginState) {
 
 export function decodePageTitle (isInLoginState) {
   if (isInLoginState) {
-    return 'Аутентификация'
+    return 'Вход в систему'
   }
   return 'Регистрация'
 }
