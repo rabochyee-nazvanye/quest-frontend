@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import Header from './components/shared/Header/Header'
 import About from './components/About/About'
@@ -16,8 +16,14 @@ import {
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import Auth from './components/Auth/Auth'
+import Account from "./components/Account/Account";
+import {login} from "./redux/Actions/Api";
 
 function App () {
+  useEffect(() => {
+    login()
+  })
+
   return (
     <Provider store={store}>
       <Router>
@@ -25,15 +31,11 @@ function App () {
         <div className={'container'}>
           <Switch>
             <Route path="/quests/:id" exact component={QuestPage}/>
-            <Route exact path={'/'}>
-              <Home/>
-            </Route>
-            <Route exact path={'/about'}>
-              <About/>
-            </Route>
-            <Route exact path={'/auth'}>
-              <Auth/>
-            </Route>
+            <Route exact path={'/'} component={Home}/>
+            <Route exact path={'/about'} component={About}/>
+            <Route exact path={'/auth'} component={Auth}/>
+            <Route exact path={'/auth/:redirectTo'} component={Auth} />
+            <Route exact path={'/account'} component={Account} />
           </Switch>
         </div>
       </Router>
