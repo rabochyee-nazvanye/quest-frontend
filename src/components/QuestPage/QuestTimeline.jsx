@@ -31,11 +31,12 @@ function QuestTimeline (props) {
         new Date(props.quest.endDate).getHours().toString() + ':' +
         new Date(props.quest.endDate).getMinutes().toString();
 
-    const regForm = new QuestModalReg(props)
+    // const regForm = new QuestModalReg({reg: false, success: false});
 
     if (props.quest.status === "scheduled") {
         return (
             <React.Fragment>
+
                 <Row type="flex">
                     <Col>
                         <Loading3QuartersOutlined /> Идет регистрация
@@ -44,7 +45,7 @@ function QuestTimeline (props) {
                             <Button type="primary"
                                     htmlType="submit"
                                     className="button"
-                                    onClick={() => regForm.setRegVisible(true)}
+                                    onClick={props.setRegVisible}
                             >
                                 Зарегистрироваться
                             </Button>
