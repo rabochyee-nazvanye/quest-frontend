@@ -2,15 +2,15 @@ import React from 'react'
 
 import './FormTemplate.css'
 
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { decodeException } from './Utils'
 import PropTypes from 'prop-types'
 
-export default function LoginFormTemplate (props) {
+export default function RegisterFormTemplate (props) {
   const onFinish = values => {
-    props.submitFunction(values.username, values.password, values.remember)
+    props.submitFunction(values.username, values.password)
   }
 
   const exceptionDetail = decodeException(props.exceptionDetail)
@@ -18,11 +18,8 @@ export default function LoginFormTemplate (props) {
   return (
     <div className="auth-form-container">
       <Form
-        name="login-form"
+        name="register-form"
         className="auth-form"
-        initialValues={{
-          remember: true
-        }}
         onFinish={onFinish}
       >
         <Form.Item
@@ -52,15 +49,35 @@ export default function LoginFormTemplate (props) {
           />
         </Form.Item>
 
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Запомнить меня</Checkbox>
-          </Form.Item>
+        <Form.Item
+          name="password_repeat"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Анука повтори свой пароль!'
+            },
+            ({ getFieldValue }) => ({
+              validator (rule, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject('Пароли не совпадают')
+              }
+            })
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="потвори пароль"
+          />
         </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit" className="auth-form-button">
-                        Войти
+                  Зарегистрироваться
           </Button>
         </Form.Item>
 
@@ -74,7 +91,6 @@ export default function LoginFormTemplate (props) {
   )
 };
 
-LoginFormTemplate.propTypes = {
-  exceptionDetail: PropTypes.object,
+RegisterFormTemplate.propTypes = {
   submitFunction: PropTypes.func
 }

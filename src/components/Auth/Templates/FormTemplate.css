@@ -1,20 +1,17 @@
-.login-form {
+.auth-form {
     max-width: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top:-100px;
-    margin-left:-200px;
-    transform: translate(-50%, -50%)
+    position: relative;
+
+
 }
-.login-form-forgot {
+.auth-form-forgot {
     float: right;
 }
-.login-form-button {
+.auth-form-button {
     width: 100%;
 }
 @media screen and (max-width: 480px) {
-    .login-form {
+    .auth-form {
         width: 300px;
         position: absolute;
         top: 50%;

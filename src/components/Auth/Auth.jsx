@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import LoginFormTemplate from './Templates/LoginFormTemplate'
 import connect from 'react-redux/es/connect/connect'
 import {
@@ -7,6 +8,10 @@ import {
 } from 'react-router-dom'
 import { loginFromForm } from '../../redux/Actions/Api'
 
+import { Button } from 'antd';
+import { decodeLoginState } from './Utils'
+import RegisterFormTemplate from './Templates/RegisterFormTemplate'
+
 function Auth (props) {
   let { redirectTo } = useParams()
 
@@ -14,14 +19,29 @@ function Auth (props) {
     redirectTo = 'account'
   }
 
+  const [isInLoginMode, setIsInLoginMode] = useState(true)
+
+  let form = <RegisterFormTemplate loginFunction={ props.login } />
+
   if (props.loggedIn) {
     return (<Redirect to={{ pathname: '/' + redirectTo }} />)
-  } else {
-    return (
-      <LoginFormTemplate exceptionDetail={props.exceptionDetail} submitFunction={props.login}/>
-    )
+  } else if (isInLoginMode) {
+    form = <LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.login } />
   }
-};
+
+  const changer = (
+    <Button type="link" onClick={() => setIsInLoginMode(!isInLoginMode)}>
+        или { decodeLoginState(isInLoginMode) }
+    </Button>
+  )
+
+  return (
+    <React.Fragment>
+      {form}
+      {changer}
+    </React.Fragment>
+  )
+}
 
 const mapStateToProps = (store) => ({
   loggedIn: store.authReducer.user !== null,

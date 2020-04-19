@@ -5,7 +5,6 @@ import About from './components/About/About'
 import Home from './components/Quests/Home'
 import QuestPage from './components/QuestPage/QuestPage'
 
-
 import './App.css'
 
 import {
@@ -23,18 +22,20 @@ function App () {
     <Provider store={store}>
       <Router>
         <Header/>
-        <Switch>
-          <Route path="/quests/:id" exact component={QuestPage}/>
-          <Route exact path={'/'}>
-            <Home/>
-          </Route>
-          <Route exact path={'/about'}>
-            <About/>
-          </Route>
-          <Route exact path={'/auth'}>local
-            <Auth/>
-          </Route>
-        </Switch>
+        <div className={'container'}>
+          <Switch>
+            <Route path="/quests/:id" exact component={QuestPage}/>
+            <Route exact path={'/'}>
+              <Home/>
+            </Route>
+            <Route exact path={'/about'}>
+              <About/>
+            </Route>
+            <Route exact path={'/auth'}>local
+              <Auth/>
+            </Route>
+          </Switch>
+        </div>
       </Router>
     </Provider>
   )

@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:57868';
+export const BASE_URL = 'http://api.questspace.live'
