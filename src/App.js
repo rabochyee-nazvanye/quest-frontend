@@ -18,6 +18,7 @@ import { store } from './redux/store'
 import Auth from './components/Auth/Auth'
 import Account from "./components/Account/Account";
 import {login} from "./redux/Actions/Api";
+import NoMatch from "./components/NoMatch/NoMatch";
 
 function App () {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App () {
             <Route exact path={'/auth'} component={Auth}/>
             <Route exact path={'/auth/:redirectTo'} component={Auth} />
             <Route exact path={'/account'} component={Account} />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
