@@ -18,7 +18,7 @@ function QuestMinimalInfo (props) {
                            className="btn btn-primary stretched-link">Екатеринбург, Россия</a>
                     </div>
                 </Col>
-                <Col span={10} offset={2}>
+                <Col span={15} offset={2}>
                     <h4>Организатор:  <Avatar src={props.quest.author.avatarUrl} size={'small'} /> {props.quest.author.name}</h4>
                 </Col>
             </Row>

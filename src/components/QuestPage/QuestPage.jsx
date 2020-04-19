@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import QuestTimeline from './QuestTimeline'
 import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import TeamsList from '../TeamsList/TeamsList'
-import Picture from '../Picture/Picture'
 import {Button, Spin, Typography, Row, Col, Progress, Steps} from 'antd'
 import { BASE_URL } from '../../settings'
-import { EnvironmentTwoTone } from '@ant-design/icons'
-let dateTimeNow = new Date();
 
 const { Title, Paragraph } = Typography
 const { Step } = Steps
