@@ -1,17 +1,16 @@
 import React from 'react'
-import {Button, Col, Row, Steps, Typography} from 'antd'
+import {Button, Col, Row, Steps} from 'antd'
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 let dateTimeNow = new Date();
 
-const { Title, Paragraph } = Typography;
 const { Step } = Steps
 
 
 function QuestTimeline (props) {
     const remainingTime = new Date(props.quest.endDate).getHours()*60 + new Date(props.quest.endDate).getMinutes() -
-        (dateTimeNow.getHours()*60 + dateTimeNow.getMinutes());
-    const remainingHours = parseInt(remainingTime/60);
-    const remainingMinutes = remainingTime%60;
+        ((dateTimeNow.getUTCHours()+5)*60 + dateTimeNow.getMinutes());
+    const remainingHours = parseInt(remainingTime / 60);
+    const remainingMinutes = remainingTime % 60;
     const remainingTimeText = 'Осталось ' + remainingHours.toString() + ' ч ' + remainingMinutes.toString() + ' мин';
     const regDeadline = 'до ' + new Date(props.quest.registrationDeadline).getDay().toString() + '/' +
         (new Date(props.quest.registrationDeadline).getMonth()+1).toString() + '/' +
@@ -31,11 +30,8 @@ function QuestTimeline (props) {
         new Date(props.quest.endDate).getHours().toString() + ':' +
         new Date(props.quest.endDate).getMinutes().toString();
 
-    if ((new Date(props.quest.registrationDeadline).getMonth()+1) >= dateTimeNow.getMonth()
-        && new Date(props.quest.registrationDeadline).getDate() >= dateTimeNow.getDate()
-        && new Date(props.quest.registrationDeadline).getTime() > dateTimeNow.getTime()) {
+    if (props.quest.status === "scheduled") {
         return (
-
             <React.Fragment>
                 <Row type="flex">
                     <Col>
@@ -58,10 +54,7 @@ function QuestTimeline (props) {
             </React.Fragment>
         )
     }
-    else if ((new Date(props.quest.startDate).getMonth()+1) === dateTimeNow.getMonth()
-        && new Date(props.quest.startDate).getDate() === dateTimeNow.getDate()
-        && new Date(props.quest.startDate).getTime() <= dateTimeNow.getTime() &&
-        new Date(props.quest.endDate).getTime() > dateTimeNow.getTime()){
+    else if (props.quest.status === "inprogress"){
         return (
             <React.Fragment>
                 <Row type="flex">
