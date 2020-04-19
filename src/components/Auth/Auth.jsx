@@ -1,46 +1,50 @@
 import React from 'react'
 import { useState } from 'react'
+
 import LoginFormTemplate from './Templates/LoginFormTemplate'
 import connect from 'react-redux/es/connect/connect'
 import {
   Redirect,
   useParams
 } from 'react-router-dom'
-import { loginFromForm } from '../../redux/Actions/Api'
-
-import { Button } from 'antd';
-import { decodeLoginState } from './Utils'
+import { loginFromForm, flushException, registerFromForm } from '../../redux/Actions/Api'
+import { Button, Typography } from 'antd'
+import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
+
+const { Title } = Typography
 
 function Auth (props) {
   let { redirectTo } = useParams()
+  const [isInLoginMode, setIsInLoginMode] = useState(true)
 
   if (redirectTo === undefined) {
     redirectTo = 'account'
   }
 
-  const [isInLoginMode, setIsInLoginMode] = useState(true)
+  const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
 
-  let form = <RegisterFormTemplate loginFunction={ props.login } />
+  const form = (isInLoginMode)
+    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login}/>)
+    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } />)
+
+  const isInLoginChanger = (
+    <a onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
+          или { decodeLoginState(isInLoginMode) }
+    </a>
+  )
 
   if (props.loggedIn) {
     return (<Redirect to={{ pathname: '/' + redirectTo }} />)
-  } else if (isInLoginMode) {
-    form = <LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.login } />
+  } else {
+    return (
+      <React.Fragment>
+        {title}
+        {form}
+        {isInLoginChanger}
+      </React.Fragment>
+    )
   }
-
-  const changer = (
-    <Button type="link" onClick={() => setIsInLoginMode(!isInLoginMode)}>
-        или { decodeLoginState(isInLoginMode) }
-    </Button>
-  )
-
-  return (
-    <React.Fragment>
-      {form}
-      {changer}
-    </React.Fragment>
-  )
 }
 
 const mapStateToProps = (store) => ({
@@ -50,7 +54,9 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) }
+  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) },
+  register: (username, password) => { dispatch(registerFromForm(username, password)) },
+  flushException: () => { dispatch(flushException()) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

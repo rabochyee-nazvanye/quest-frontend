@@ -4,3 +4,10 @@ export function decodeLoginState (isInLoginState) {
   }
   return 'войти'
 }
+
+export function decodePageTitle (isInLoginState) {
+  if (isInLoginState) {
+    return 'Аутентификация'
+  }
+  return 'Регистрация'
+}
