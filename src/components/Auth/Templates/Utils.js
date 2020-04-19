@@ -5,6 +5,6 @@ export function decodeException (exception) {
     case 'Wrong username or password.':
       return 'Неверный пароль или юзернейм'
     default:
-      return 'Что-то пошло не так!'
+      return exception
   }
 }
