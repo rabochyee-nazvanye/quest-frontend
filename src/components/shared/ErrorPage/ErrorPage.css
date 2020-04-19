@@ -1,0 +1,40 @@
+.error-text {
+    position: absolute;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    font-weight: 800;
+    width: 1170px;
+    height: 768px;
+}
+
+.error-code {
+    width: 100%;
+    position: absolute;
+    font-size: 500px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.error-description {
+    width: 100%;
+    position: absolute;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.error-background {
+    z-index: 0;
+
+    min-height: 100%;
+    min-width: 1024px;
+
+    width: 100%;
+    height: auto;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+}

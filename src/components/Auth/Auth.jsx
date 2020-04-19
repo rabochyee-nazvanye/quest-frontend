@@ -1,0 +1,62 @@
+import React from 'react'
+import { useState } from 'react'
+
+import LoginFormTemplate from './Templates/LoginFormTemplate'
+import connect from 'react-redux/es/connect/connect'
+import {
+  Redirect,
+  useParams
+} from 'react-router-dom'
+import { loginFromForm, flushException, registerFromForm } from '../../redux/Actions/Api'
+import { Button, Typography } from 'antd'
+import { decodeLoginState, decodePageTitle } from './Utils'
+import RegisterFormTemplate from './Templates/RegisterFormTemplate'
+
+const { Title } = Typography
+
+function Auth (props) {
+  let { redirectTo } = useParams()
+  const [isInLoginMode, setIsInLoginMode] = useState(true)
+
+  if (redirectTo === undefined) {
+    redirectTo = 'account'
+  }
+
+  const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
+
+  const form = (isInLoginMode)
+    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login}/>)
+    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } />)
+
+  const isInLoginChanger = (
+    <a onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
+          или { decodeLoginState(isInLoginMode) }
+    </a>
+  )
+
+  if (props.loggedIn) {
+    return (<Redirect to={{ pathname: '/' + redirectTo }} />)
+  } else {
+    return (
+      <React.Fragment>
+        {title}
+        {form}
+        {isInLoginChanger}
+      </React.Fragment>
+    )
+  }
+}
+
+const mapStateToProps = (store) => ({
+  loggedIn: store.authReducer.user !== null,
+  exceptionDetail: store.authReducer.exceptionDetail,
+  user: store.authReducer.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) },
+  register: (username, password) => { dispatch(registerFromForm(username, password)) },
+  flushException: () => { dispatch(flushException()) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)
