@@ -55,6 +55,7 @@ class QuestPage extends Component {
                           setSuccessVisible={() => this.setSuccessVisible()}
                           setRegUnVisible={() => this.setRegUnVisible()}
                           setSuccessUnVisible={() => this.setSuccessUnVisible()}
+                          quest_id = {this.props.match.params.id}
            />
           </h2>
            <QuestDescription quest={this.state.quest}/>
@@ -65,6 +66,7 @@ class QuestPage extends Component {
               setSuccessVisible={() => this.setSuccessVisible()}
               setRegUnVisible={() => this.setRegUnVisible()}
               setSuccessUnVisible={() => this.setSuccessUnVisible()}
+              quest_id = {this.props.match.params.id}
           />
         </React.Fragment>
       )

@@ -1,6 +1,5 @@
 import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
-import QuestModalReg from './QuestModalReg'
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 let dateTimeNow = new Date();
 

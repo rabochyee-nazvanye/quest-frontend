@@ -1,16 +1,36 @@
 import React, { useState, Component } from 'react'
 import { Modal, Button, Input, Typography, InputNumber, Form } from 'antd';
+import handleTeamCreation from './Api'
 const { Title, Paragraph, Text } = Typography;
 
 class QuestModalReg extends Component {
     constructor (props) {
         super(props);
+        this.state = {
+            inviteLink: '',
+            errorText: ''
+        }
     }
 
+
+
     render() {
-        const onFinish = values => {
+        const switchModals = (inviteLink) => {
             this.props.setRegUnVisible();
             this.props.setSuccessVisible();
+            this.state.inviteLink = inviteLink;
+        };
+
+        const setError = (errorText) => {
+            this.state.errorText = errorText
+        };
+
+        const onFinish = values => {
+            handleTeamCreation(
+                values.teamname,
+                this.props.quest_id,
+                (line) => setError(line),
+                (line) => switchModals(line))
             console.log('Success:', values);
         };
 
@@ -33,7 +53,7 @@ class QuestModalReg extends Component {
                         <Text strong>Пригласите друзей в свою команду — поделитесь ссылкой:</Text>
                     </p>
                     <p>
-                        <Paragraph copyable>questspace.live/team/haehwevcw9</Paragraph>
+                        <Paragraph copyable>{this.state.inviteLink}</Paragraph>
                     </p>
                 </Modal>
                 <Modal
@@ -72,6 +92,7 @@ class QuestModalReg extends Component {
                                 >
                                     Зарегистрироваться
                                 </Button>
+                                <Text type="danger">{this.state.errorText}</Text>
                             </Form.Item>
                         </p>
                     </Form>
