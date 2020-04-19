@@ -1,8 +1,9 @@
-.auth-form {
+.auth-form-container {
     max-width: 300px;
     position: relative;
-
-
+}
+.auth-alert-container {
+    padding-bottom: 25px;
 }
 .auth-form-forgot {
     float: right;

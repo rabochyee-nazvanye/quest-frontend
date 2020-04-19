@@ -2,7 +2,7 @@ import React from 'react'
 
 import './FormTemplate.css'
 
-import { Button, Form, Input } from 'antd'
+import { Alert, Button, Form, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { decodeException } from './Utils'
@@ -15,11 +15,17 @@ export default function RegisterFormTemplate (props) {
 
   const exceptionDetail = decodeException(props.exceptionDetail)
 
+    const alert = (exceptionDetail !== '') ? (
+        <div className={'auth-alert-container'}>
+            <Alert message={exceptionDetail} type="error" closable={true} showIcon />
+        </div>
+    ) : (<React.Fragment/>)
+
   return (
     <div className="auth-form-container">
+      {alert}
       <Form
         name="register-form"
-        className="auth-form"
         onFinish={onFinish}
       >
         <Form.Item
@@ -71,7 +77,7 @@ export default function RegisterFormTemplate (props) {
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
-            placeholder="потвори пароль"
+            placeholder="повтори пароль"
           />
         </Form.Item>
 
@@ -79,12 +85,6 @@ export default function RegisterFormTemplate (props) {
           <Button type="primary" htmlType="submit" className="auth-form-button">
                   Зарегистрироваться
           </Button>
-        </Form.Item>
-
-        <Form.Item>
-          <p>
-            {exceptionDetail}
-          </p>
         </Form.Item>
       </Form>
     </div>

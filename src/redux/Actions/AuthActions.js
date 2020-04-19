@@ -7,6 +7,7 @@ export const RECEIVE_TOKEN = 'RECEIVE_TOKEN'
 export const DELETE_TOKEN = 'DELETE_TOKEN'
 
 export const RECEIVE_EXCEPTION = 'RECEIVE_EXCEPTION'
+export const DELETE_EXCEPTION = 'DELETE_EXCEPTION'
 
 export function requestUserInfo () {
   return {
@@ -50,5 +51,11 @@ export function receiveToken (payload) {
 export function deleteToken () {
   return {
     type: DELETE_TOKEN
+  }
+}
+
+export function deleteException() {
+  return {
+    type: DELETE_EXCEPTION
   }
 }
