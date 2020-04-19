@@ -5,7 +5,7 @@ import {
   DELETE_USER_INFO,
   RECEIVE_TOKEN,
   REQUEST_TOKEN,
-  DELETE_TOKEN
+  DELETE_TOKEN, DELETE_EXCEPTION
 } from '../Actions/AuthActions'
 
 export default function authReducer (
@@ -53,6 +53,10 @@ export default function authReducer (
         tokenReceivedAt: '',
         exceptionDetail: action.exceptionDetail,
         user: null
+      })
+    case DELETE_EXCEPTION:
+      return Object.assign({}, state, {
+        exceptionDetail: ''
       })
     default:
       return state

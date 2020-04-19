@@ -2,7 +2,7 @@ import React from 'react'
 
 import './FormTemplate.css'
 
-import { Form, Input, Button, Checkbox } from 'antd'
+import {Form, Input, Button, Checkbox, Alert} from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { decodeException } from './Utils'
@@ -15,8 +15,15 @@ export default function LoginFormTemplate (props) {
 
   const exceptionDetail = decodeException(props.exceptionDetail)
 
+  const alert = (exceptionDetail !== '') ? (
+      <div className={'auth-alert-container'}>
+        <Alert message={exceptionDetail} type="error" closable={true} showIcon />
+      </div>
+  ) : (<React.Fragment/>)
+
   return (
     <div className="auth-form-container">
+      {alert}
       <Form
         name="login-form"
         className="auth-form"
@@ -62,12 +69,6 @@ export default function LoginFormTemplate (props) {
           <Button type="primary" htmlType="submit" className="auth-form-button">
                         Войти
           </Button>
-        </Form.Item>
-
-        <Form.Item>
-          <p>
-            {exceptionDetail}
-          </p>
         </Form.Item>
       </Form>
     </div>

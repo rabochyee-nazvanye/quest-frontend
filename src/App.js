@@ -31,7 +31,7 @@ function App () {
             <Route exact path={'/about'}>
               <About/>
             </Route>
-            <Route exact path={'/auth'}>local
+            <Route exact path={'/auth'}>
               <Auth/>
             </Route>
           </Switch>
