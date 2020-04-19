@@ -4,6 +4,7 @@ import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
 import {Button, Spin, Typography, Row, Col, Progress, Steps} from 'antd'
 import { BASE_URL } from '../../settings'
+import QuestModalReg from "./QuestModalReg";
 
 const { Title, Paragraph } = Typography
 const { Step } = Steps
@@ -13,9 +14,24 @@ class QuestPage extends Component {
     super(props)
     this.state = {
       dataReady: false,
-      quest: null
+      quest: null,
+      regVisible: false,
+      successVisible: false
     }
   }
+
+  setRegVisible(){
+      this.setState({regVisible: true})
+  }
+    setSuccessVisible(){
+      this.setState({successVisible: true})
+  }
+    setRegUnVisible(){
+        this.setState({regVisible: false})
+    }
+    setSuccessUnVisible(){
+        this.setState({successVisible: false})
+    }
 
   componentDidMount () {
     // eslint-disable-next-line react/prop-types
@@ -32,9 +48,24 @@ class QuestPage extends Component {
         <React.Fragment>
           <QuestMinimalInfo quest={this.state.quest}/>
           <h2>
-           <QuestTimeline quest={this.state.quest}/>
+           <QuestTimeline quest={this.state.quest}
+                          regVisible={this.state.regVisible}
+                          successVisible = {this.state.successVisible}
+                          setRegVisible={() => this.setRegVisible()}
+                          setSuccessVisible={() => this.setSuccessVisible()}
+                          setRegUnVisible={() => this.setRegUnVisible()}
+                          setSuccessUnVisible={() => this.setSuccessUnVisible()}
+           />
           </h2>
            <QuestDescription quest={this.state.quest}/>
+          <QuestModalReg
+              regVisible={this.state.regVisible}
+              successVisible = {this.state.successVisible}
+              setRegVisible={() => this.setRegVisible()}
+              setSuccessVisible={() => this.setSuccessVisible()}
+              setRegUnVisible={() => this.setRegUnVisible()}
+              setSuccessUnVisible={() => this.setSuccessUnVisible()}
+          />
         </React.Fragment>
       )
     }
