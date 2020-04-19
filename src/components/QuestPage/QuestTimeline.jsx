@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
+import QuestModalReg from './QuestModalReg'
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 let dateTimeNow = new Date();
 
@@ -30,6 +31,8 @@ function QuestTimeline (props) {
         new Date(props.quest.endDate).getHours().toString() + ':' +
         new Date(props.quest.endDate).getMinutes().toString();
 
+    const regForm = new QuestModalReg(props)
+
     if (props.quest.status === "scheduled") {
         return (
             <React.Fragment>
@@ -38,7 +41,11 @@ function QuestTimeline (props) {
                         <Loading3QuartersOutlined /> Идет регистрация
                         <p>
                             &nbsp;
-                            <Button type="primary" htmlType="submit" className="button">
+                            <Button type="primary"
+                                    htmlType="submit"
+                                    className="button"
+                                    onClick={() => regForm.setRegVisible(true)}
+                            >
                                 Зарегистрироваться
                             </Button>
                         </p>
