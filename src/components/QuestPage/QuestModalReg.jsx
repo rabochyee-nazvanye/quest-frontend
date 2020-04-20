@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import {Modal, Button, Input, Typography, InputNumber, Form, Alert} from 'antd';
 import handleTeamCreation from './Api'
+import {BASE_URL} from "../../settings";
 const { Title, Paragraph, Text } = Typography;
 
 class QuestModalReg extends Component {
@@ -14,13 +15,11 @@ class QuestModalReg extends Component {
         }
     }
 
-
-
     render() {
         const setSuccessstate = (inviteLink) => {
             this.props.setRegUnVisible();
             this.props.setSuccessVisible();
-            this.state.inviteLink = inviteLink;
+            this.setState({inviteLink: 'questspace.live' + inviteLink})
         };
 
         const setError = (error) => {
