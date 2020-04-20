@@ -1,12 +1,17 @@
 import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
+import getToken from '../../redux/Actions/Api.js';
+import { useHistory } from 'react-router-dom'
 let dateTimeNow = new Date();
+
 
 const { Step } = Steps
 
 
 function QuestTimeline (props) {
+    const history = useHistory()
+
     const remainingTime = new Date(props.quest.endDate).getHours()*60 + new Date(props.quest.endDate).getMinutes() -
         ((dateTimeNow.getUTCHours()+5)*60 + dateTimeNow.getMinutes());
     const remainingHours = parseInt(remainingTime / 60);
@@ -30,12 +35,9 @@ function QuestTimeline (props) {
         new Date(props.quest.endDate).getHours().toString() + ':' +
         new Date(props.quest.endDate).getMinutes().toString();
 
-    // const regForm = new QuestModalReg({reg: false, success: false});
-
     if (props.quest.status === "scheduled") {
         return (
             <React.Fragment>
-
                 <Row type="flex">
                     <Col>
                         <Loading3QuartersOutlined /> Идет регистрация
@@ -44,7 +46,14 @@ function QuestTimeline (props) {
                             <Button type="primary"
                                     htmlType="submit"
                                     className="button"
-                                    onClick={props.setRegVisible}
+                                    onClick={() => {
+                                            if (getToken() === '') {
+                                                history.push("/auth/" + encodeURIComponent(props.url))
+                                            } else {
+                                                props.setRegVisible()
+                                            }
+                                        }
+                                    }
                             >
                                 Зарегистрироваться
                             </Button>

@@ -56,6 +56,7 @@ class QuestPage extends Component {
                           setRegUnVisible={() => this.setRegUnVisible()}
                           setSuccessUnVisible={() => this.setSuccessUnVisible()}
                           quest_id = {this.state.quest.id}
+                          url = {'quests/' + this.state.quest.id}
            />
           </h2>
            <QuestDescription quest={this.state.quest}/>
