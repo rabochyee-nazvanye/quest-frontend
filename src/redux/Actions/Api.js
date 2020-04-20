@@ -30,9 +30,7 @@ export function registerFromForm (username, password) {
 
 export default function getToken () {
   const tokenFromLocalStorage = localStorage.getItem('token')
-  const tokenFromSessionStorage = localStorage.getItem('token')
-  alert('local token: ' + tokenFromLocalStorage)
-  alert('session token: ' + tokenFromSessionStorage)
+  const tokenFromSessionStorage = sessionStorage.getItem('token')
 
   if (tokenFromSessionStorage !== null) {
     return tokenFromSessionStorage
