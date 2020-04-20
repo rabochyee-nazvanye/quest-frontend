@@ -67,6 +67,7 @@ class QuestPage extends Component {
               setRegUnVisible={() => this.setRegUnVisible()}
               setSuccessUnVisible={() => this.setSuccessUnVisible()}
               quest_id = {this.props.match.params.id}
+              url = {'quests/' + this.props.match.params.id}
           />
         </React.Fragment>
       )

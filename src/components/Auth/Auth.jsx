@@ -20,6 +20,8 @@ function Auth (props) {
 
   if (redirectTo === undefined) {
     redirectTo = 'account'
+  } else {
+    redirectTo = decodeURIComponent(redirectTo)
   }
 
   const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
