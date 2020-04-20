@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
-import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
+import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined, PlayCircleFilled } from '@ant-design/icons'
 import getToken from '../../redux/Actions/Api.js';
 import { useHistory } from 'react-router-dom'
 let dateTimeNow = new Date();
@@ -40,7 +40,7 @@ function QuestTimeline (props) {
             <React.Fragment>
                 <Row type="flex">
                     <Col>
-                        <Loading3QuartersOutlined /> Идет регистрация
+                        <p style={{"color": "#faad14"}}> <Loading3QuartersOutlined spin /> Идет регистрация</p>
                         <p>
                             &nbsp;
                             <Button type="primary"
@@ -75,13 +75,13 @@ function QuestTimeline (props) {
             <React.Fragment>
                 <Row type="flex">
                     <Col>
-                        <LoadingOutlined /> Сейчас
+                        <p style={{"color": "#52c41a"}}> <PlayCircleFilled /> Сейчас</p>
                     </Col>
-                    <Col span={15} offset={1}>
+                    <Col span={15} offset={3}>
                         <Steps current={1}>
                             <Step title="Регистрация" subTitle="" description={regDeadline}/>
                             <Step title="Старт" subTitle={remainingTimeText} description={startTime}/>
-                            <Step title="Заевршение" description={endTime}/>
+                            <Step title="Завершение" description={endTime}/>
                         </Steps>
                     </Col>
                 </Row>
@@ -93,7 +93,7 @@ function QuestTimeline (props) {
             <React.Fragment>
                 <Row type="flex">
                     <Col>
-                        <CheckCircleOutlined /> Завершён
+                        <p style={{"color": "#8c8c8c"}}> <CheckCircleOutlined /> Завершён</p>
                     </Col>
                     <Col span={15} offset={3}>
                         <Steps current={2}>
