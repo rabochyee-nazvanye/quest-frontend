@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
-import getToken from '../../redux/Actions/Api.js';
+import { getToken } from '../../redux/Actions/Api.js';
 import { useHistory } from 'react-router-dom'
 let dateTimeNow = new Date();
 
