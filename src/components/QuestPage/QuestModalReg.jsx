@@ -12,8 +12,6 @@ class QuestModalReg extends Component {
         }
     }
 
-
-
     render() {
         const switchModals = (inviteLink) => {
             this.props.setRegUnVisible();

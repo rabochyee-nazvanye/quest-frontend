@@ -43,10 +43,12 @@ class Home extends Component {
   render () {
     return (
       <React.Fragment>
-        <h2>Квесты</h2>
+        <p>
+          &#160; <p>&#160;</p>
         <Row type="flex">
           {this.getRepresentationByState()}
         </Row>
+        </p>
       </React.Fragment>
     )
   }

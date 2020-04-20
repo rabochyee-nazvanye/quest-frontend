@@ -12,7 +12,7 @@ function QuestCards (props) {
         cover={
           <img
             alt={props.quest.name + ' картинка'}
-            src={props.quest.src}
+            src={props.quest.imageUrl}
           />
         }
       >

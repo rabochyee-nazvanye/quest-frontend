@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
+import "./QuestTimeline.css"
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 let dateTimeNow = new Date();
 
@@ -35,20 +36,18 @@ function QuestTimeline (props) {
     if (props.quest.status === "scheduled") {
         return (
             <React.Fragment>
-
                 <Row type="flex">
                     <Col>
-                        <Loading3QuartersOutlined /> Идет регистрация
-                        <p>
+                        <Loading3QuartersOutlined /> &#160;Идет регистрация
+                            <div className={'button-layout'}>
                             &nbsp;
                             <Button type="primary"
                                     htmlType="submit"
                                     className="button"
-                                    onClick={props.setRegVisible}
-                            >
+                                    onClick={props.setRegVisible}>
                                 Зарегистрироваться
                             </Button>
-                        </p>
+                            </div>
                     </Col>
                     <Col span={15} offset={1}>
                         <Steps current={0}>

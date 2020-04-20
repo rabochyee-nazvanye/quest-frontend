@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react'
 
 import Header from './components/shared/Header/Header'
+import Footer from './components/shared/Footer/Footer'
 import About from './components/About/About'
 import Home from './components/Quests/Home'
 import QuestPage from './components/QuestPage/QuestPage'
+import './add-space.css'
 
 import './App.css'
 
@@ -28,8 +30,9 @@ function App () {
   return (
     <Provider store={store}>
       <Router>
-        <Header/>
         <div className={'container'}>
+        <Header/>
+          <div className={'add-space'}>
           <Switch>
             <Route path="/quests/:id" exact component={QuestPage}/>
             <Route exact path={'/'} component={Home}/>
@@ -39,7 +42,9 @@ function App () {
             <Route exact path={'/account'} component={Account} />
             <Route component={NoMatch} />
           </Switch>
+          </div>
         </div>
+        <Footer/>
       </Router>
     </Provider>
   )
