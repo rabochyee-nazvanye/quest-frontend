@@ -1,22 +1,31 @@
 import React from 'react'
+import { Avatar, Button, Divider } from 'antd';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { logout } from '../../../redux/Actions/Api'
 import { connect } from 'react-redux'
+
+function getAvatar(avatarUrl) {
+    if (avatarUrl === null) {
+        return (<Avatar size={128} icon={<UserOutlined />} />)
+    } else {
+        return (<Avatar size={128} src={avatarUrl} />)
+    }
+}
+
 
 function AccountTemplate (props) {
   return (
     <React.Fragment>
-      <p>
-        Юзернейм: {props.user.name}
-      </p>
-      <p>
-        Аватарка: {props.user.avatarUrl}
-      </p>
-      <p>
-        Электропочта: {props.user.email}
-      </p>
-      <button onClick={() => props.logout()}>
-          Выйти
-      </button>
+        {getAvatar(props.user.avatarUrl)}
+        <h1> Привет, @{props.user.name}! </h1>
+        <Divider />
+        <Button
+            icon={<LogoutOutlined />}
+            onClick={() => props.logout()}
+            danger
+        >
+            Выйти
+        </Button>
     </React.Fragment>
   )
 };
