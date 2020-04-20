@@ -14,13 +14,11 @@ class QuestModalReg extends Component {
         }
     }
 
-
-
     render() {
         const setSuccessstate = (inviteLink) => {
             this.props.setRegUnVisible();
             this.props.setSuccessVisible();
-            this.state.inviteLink = inviteLink;
+            this.setState({inviteLink: 'questspace.live' + inviteLink})
         };
 
         const setError = (error) => {

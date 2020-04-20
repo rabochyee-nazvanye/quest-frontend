@@ -28,14 +28,14 @@ export function registerFromForm (username, password) {
   }
 }
 
-function getToken () {
+export default function getToken () {
   const tokenFromLocalStorage = localStorage.getItem('token')
   const tokenFromSessionStorage = sessionStorage.getItem('token')
 
-  if (tokenFromLocalStorage !== null) {
-    return tokenFromLocalStorage
-  } else if (tokenFromSessionStorage !== null) {
+  if (tokenFromSessionStorage !== null) {
     return tokenFromSessionStorage
+  } else if (tokenFromLocalStorage !== null) {
+    return tokenFromLocalStorage
   } else {
     return ''
   }
