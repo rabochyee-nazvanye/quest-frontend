@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from './footerImg.png'
 import './Footer.css'
-import Header from '/Users/annailina/Desktop/quest-frontend/src/components/shared/Header/Header.jsx'
+import { Header } from '../Header/Header.jsx'
 import { Layout, Breadcrumb } from 'antd';
 
 
