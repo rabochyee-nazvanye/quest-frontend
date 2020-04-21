@@ -5,6 +5,7 @@ import Footer from './components/shared/Footer/Footer'
 import About from './components/About/About'
 import Home from './components/Quests/Home'
 import QuestPage from './components/QuestPage/QuestPage'
+import InvitePage from "./components/InvitePage/InvitePage";
 import './add-space.css'
 
 import './App.css'
@@ -34,6 +35,7 @@ function App () {
         <Header/>
           <div className={'add-space'}>
           <Switch>
+            <Route path="/invites/:id" exact component={InvitePage}/>
             <Route path="/quests/:id" exact component={QuestPage}/>
             <Route exact path={'/'} component={Home}/>
             <Route exact path={'/about'} component={About}/>
