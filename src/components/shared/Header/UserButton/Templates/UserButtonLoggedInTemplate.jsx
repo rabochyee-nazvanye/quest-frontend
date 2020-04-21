@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import '../UserButtonStyles.css'
 
 import { useHistory } from 'react-router-dom'
@@ -35,7 +34,7 @@ export default function UserButtonLoggedInTemplate (props) {
         </Dropdown>
         <div className={'avatar-container'}>
           <Avatar size={'small'} icon={<UserOutlined />} src={props.avatar} />
-        </div>
+          </div>
       </div>
     </React.Fragment>
   )
