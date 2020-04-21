@@ -2,7 +2,10 @@ import React from 'react'
 import {Button, Col, Row, Steps} from 'antd'
 import "./QuestTimeline.css"
 import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
+import { getToken } from '../../redux/Actions/Api.js';
+import { useHistory } from 'react-router-dom'
 let dateTimeNow = new Date();
+
 
 const { Step } = Steps
 
@@ -20,6 +23,8 @@ function addNull2Months(props) {
 }
 
 function QuestTimeline (props) {
+    const history = useHistory()
+
     const remainingTime = new Date(props.quest.endDate).getHours()*60 + new Date(props.quest.endDate).getMinutes() -
         ((dateTimeNow.getUTCHours()+5)*60 + dateTimeNow.getMinutes());
     const remainingHours = parseInt(remainingTime / 60);
@@ -53,8 +58,6 @@ function QuestTimeline (props) {
         new Date(props.quest.endDate).getFullYear().toString() + '/ ' +
         new Date(props.quest.endDate).getHours().toString() + ':' + endMin;
 
-    // const regForm = new QuestModalReg({reg: false, success: false});
-
     if (props.quest.status === "scheduled") {
         return (
             <React.Fragment>
@@ -66,7 +69,15 @@ function QuestTimeline (props) {
                             <Button type="primary"
                                     htmlType="submit"
                                     className="button"
-                                    onClick={props.setRegVisible}>
+                                    onClick={() => {
+                                            if (getToken() === '') {
+                                                history.push("/auth/" + encodeURIComponent(props.url))
+                                            } else {
+                                                props.setRegVisible()
+                                            }
+                                        }
+                                    }
+                            >
                                 Зарегистрироваться
                             </Button>
                             </div>
