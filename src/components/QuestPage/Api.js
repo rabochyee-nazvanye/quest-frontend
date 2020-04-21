@@ -1,5 +1,5 @@
 import {BASE_URL} from "../../settings";
-import getToken from '../../redux/Actions/Api.js';
+import { getToken } from '../../redux/Actions/Api.js';
 
 export default function handleTeamCreation(teamName, questId, setErrorState, setSuccessState) {
     let query = {
@@ -7,7 +7,7 @@ export default function handleTeamCreation(teamName, questId, setErrorState, set
         "name": teamName
     };
 
-    let token = getToken();
+    const token = getToken();
 
     let response = fetch(BASE_URL + '/teams', {
         method: 'POST',

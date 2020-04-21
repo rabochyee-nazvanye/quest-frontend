@@ -28,7 +28,7 @@ export function registerFromForm (username, password) {
   }
 }
 
-export default function getToken () {
+export function getToken () {
   const tokenFromLocalStorage = localStorage.getItem('token')
   const tokenFromSessionStorage = sessionStorage.getItem('token')
 
