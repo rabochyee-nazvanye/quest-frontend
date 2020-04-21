@@ -12,6 +12,9 @@ function Account (props) {
   )
 };
 
+
+
+
 const mapStateToProps = (store) => ({
   loggedIn: store.authReducer.user !== null,
   user: store.authReducer.user

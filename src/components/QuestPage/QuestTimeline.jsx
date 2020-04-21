@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Col, Row, Steps, Popover} from 'antd'
 import "./QuestTimeline.css"
-import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
+import { Loading3QuartersOutlined, CheckCircleOutlined, LoadingOutlined, PlayCircleFilled, CheckOutlined } from '@ant-design/icons'
 import { getToken } from '../../redux/Actions/Api.js';
 import { useHistory } from 'react-router-dom'
 let dateTimeNow = new Date();
@@ -13,6 +13,8 @@ function RegDescription(props) {
 }
 
 function QuestTimeline (props) {
+
+
     const history = useHistory();
     const remainingTime = new Date(props.quest.endDate).getHours()*60 + new Date(props.quest.endDate).getMinutes() -
         ((dateTimeNow.getUTCHours()+5)*60 + dateTimeNow.getMinutes());
@@ -34,7 +36,7 @@ function QuestTimeline (props) {
             <React.Fragment>
                 <Row type="flex">
                     <Col>
-                        <Loading3QuartersOutlined /> &#160;Идет регистрация
+                        <p style={{"color": "#faad14"}}><Loading3QuartersOutlined spin/> &#160;Идет регистрация</p>
                             <div className={'button-layout'}>
                             &nbsp;
                             <Button type="primary"
@@ -69,25 +71,54 @@ function QuestTimeline (props) {
             <React.Fragment>
                 <Row type="flex">
                     <Col>
-                        <LoadingOutlined /> Сейчас
+                        <p style={{"color": "#52c41a"}}> <PlayCircleFilled /> &#160;Сейчас</p>
                     </Col>
                     <Col span={15} offset={1}>
                         <Steps current={1}>
                             <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
                             <Step title="Старт" subTitle={remainingTimeText} description={startTime}/>
-                            <Step title="Заевршение" description={endTime}/>
+                            <Step title="Завершение" description={endTime}/>
                         </Steps>
                     </Col>
                 </Row>
             </React.Fragment>
         )
     }
-    else if (props.quest.status === "finished"){
+    else if (props.quest.status === "registrationover")
+    {
         return (
             <React.Fragment>
                 <Row type="flex">
                     <Col>
-                        <CheckCircleOutlined /> Завершён
+                        <p style={{"color": "#8c8c8c"}}> <CheckCircleOutlined />&#160;Регистрация окончена</p>
+                        <div className={'button-layout'}>
+                            &nbsp;
+                            <Button type="primary"
+                                    htmlType="submit"
+                                    className="button"
+                                    onClick="Nothing"
+                                    disabled={true}
+                            >
+                                Ты в команде &ensp;<CheckOutlined />
+                            </Button>
+                        </div>
+                    </Col>
+                    <Col span={15} offset={1}>
+                        <Steps current={1}>
+                            <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
+                            <Step title="Старт" subTitle="" description={startTime}/>
+                            <Step title="Завершение" description={endTime}/>
+                        </Steps>
+                    </Col>
+                </Row>
+            </React.Fragment>)
+    }
+    else {
+        return (
+            <React.Fragment>
+                <Row type="flex">
+                    <Col>
+                        <p style={{"color": "#8c8c8c"}}> <CheckCircleOutlined /> &#160;Завершён</p>
                     </Col>
                     <Col span={15} offset={3}>
                         <Steps current={2}>

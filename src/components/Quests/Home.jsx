@@ -7,6 +7,14 @@ import {Link, Redirect} from "react-router-dom";
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
+function getAvatar(avatarUrl) {
+  if (avatarUrl === null) {
+    return (<Avatar size={128} icon={<UserOutlined />} />)
+  } else {
+    return (<Avatar size={128} src={avatarUrl} />)
+  }
+}
+
 class Home extends Component {
   constructor (props) {
     super(props);
@@ -30,15 +38,13 @@ class Home extends Component {
     )
   }
 
-  getRepresentationByState () {
+  getRepresentationByState (props) {
     if (!this.state.dataReady) {
       return <Spin />
     } else {
       return (
         <React.Fragment>
-          <div>
-            <Avatar size={64} icon={<UserOutlined />} />
-          </div>
+          {getAvatar()}
             <div className={"content-container"}>
           {this.mapQuestsToTemplate()}
             </div>
@@ -53,13 +59,13 @@ class Home extends Component {
     ) : (<React.Fragment/>)
       return (
         <React.Fragment>
+          {redirectToAuth}
           <p>
             &#160; <p>&#160;</p>
             <Row type="flex">
               {this.getRepresentationByState()}
             </Row>
           </p>
-          {redirectToAuth}
         </React.Fragment>)
       }
 
