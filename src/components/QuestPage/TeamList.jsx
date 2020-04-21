@@ -59,7 +59,11 @@ class TeamList extends Component {
                 }
             })
             .then(response => response.json())
-            .then(readResponse => {this.setState({ dataReady: true, team: readResponse[0] }); this.getInviteCode()})
+            .then(readResponse => {
+                this.setState({ dataReady: true, team: readResponse[0] });
+                if (this.state.team !== undefined)
+                    this.getInviteCode()
+            })
     }
 
     getRepresentationByState () {
