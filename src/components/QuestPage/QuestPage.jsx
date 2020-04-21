@@ -6,6 +6,7 @@ import {Button, Spin, Typography, Row, Col, Progress, Steps} from 'antd'
 import { BASE_URL } from '../../settings'
 import QuestModalReg from "./QuestModalReg";
 import TeamList from "./TeamList";
+import MetaTags from 'react-meta-tags';
 
 const { Title, Paragraph } = Typography
 const { Step } = Steps
@@ -43,10 +44,25 @@ class QuestPage extends Component {
 
   getRepresentationByState () {
     if (!this.state.dataReady) {
-      return <Spin />
+      return (
+          <React.Fragment>
+              <MetaTags>
+                  <title>Квестспейс</title>
+                  <meta name="description" content="Сервис для создания и проведения квестов" />
+                  <meta property="og:title" content="Квестспейс" />
+              </MetaTags>
+              <Spin />
+          </React.Fragment>
+          )
     } else {
       return (
         <React.Fragment>
+            <MetaTags>
+                <title>{this.state.quest.name}</title>
+                <meta name="description" content="Квест на квестспейсе" />
+                <meta property="og:title" content={this.state.quest.name} />
+                <meta property="og:image" content={this.state.quest.imageURL} />
+            </MetaTags>
           <QuestMinimalInfo quest={this.state.quest}/>
           <h2>
            <QuestTimeline quest={this.state.quest}
