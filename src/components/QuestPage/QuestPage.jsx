@@ -79,9 +79,9 @@ class QuestPage extends Component {
 
   render () {
     return (
-      <div className='container'>
+        <React.Fragment>
         {this.getRepresentationByState()}
-      </div>
+        </React.Fragment>
     )
   }
 }

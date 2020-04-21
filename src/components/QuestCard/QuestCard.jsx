@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'antd'
+import ProgressiveImage from "react-progressive-image";
 
 const { Meta } = Card
 
@@ -10,10 +11,12 @@ function QuestCards (props) {
         hoverable
         style ={{ margin: '10px 20px' }}
         cover={
-          <img
-            alt={props.quest.name + ' картинка'}
-            src={props.quest.src}
-          />
+            <ProgressiveImage src={props.quest.imageUrl} placeholder="tiny-image.jpg">
+                {src => <img
+                    alt={props.quest.name + ' картинка'}
+                    src={src}
+                />}
+            </ProgressiveImage>
         }
       >
         <Meta

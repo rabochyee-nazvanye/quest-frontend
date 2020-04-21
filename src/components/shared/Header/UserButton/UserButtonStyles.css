@@ -1,0 +1,12 @@
+
+.avatar-container {
+    padding-left: 10px;
+    float: right;
+
+}
+
+.user-button-logged-in-container {
+    width: fit-content;
+    position: relative;
+    left: 12px;
+}

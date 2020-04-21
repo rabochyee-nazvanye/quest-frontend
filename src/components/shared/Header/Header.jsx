@@ -8,8 +8,8 @@ import QuestspaceIcon from '../Icons/QuestspaceIcon'
 
 function Header (props) {
   const history = useHistory()
-
   return (
+      <div className='container'>
     <PageHeader
       ghost={false}
       title={<QuestspaceIcon/>}
@@ -17,6 +17,7 @@ function Header (props) {
         <UserButton/>
       ]}
     />
+      </div>
   )
 }
 

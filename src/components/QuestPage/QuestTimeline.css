@@ -1,0 +1,7 @@
+.button-layout{
+    position: absolute;
+    top: 105%;
+    left: 36%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
