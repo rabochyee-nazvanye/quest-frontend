@@ -61,7 +61,7 @@ class QuestPage extends Component {
            />
           </h2>
            <QuestDescription quest={this.state.quest}/>
-           <TeamList/>
+           <TeamList quest={this.state.quest}/>
           <QuestModalReg
               regVisible={this.state.regVisible}
               successVisible = {this.state.successVisible}

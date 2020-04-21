@@ -1,13 +1,30 @@
 import React from 'react'
 import { Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, StarFilled } from '@ant-design/icons';
 
 function Teammate(props) {
-    return (
-        <React.Fragment>
-            <h3><Avatar icon={<UserOutlined />} size={'default'} /> {props.name}</h3>
-        </React.Fragment>
-    )
+    if (props.name === props.captainName) {
+        return (
+            <React.Fragment>
+
+                    <Avatar icon={<UserOutlined />} size={'default'} />
+                    &nbsp;
+                    &nbsp;
+                    {props.name + " "}
+                    <StarFilled style = {{color: "#91d5ff"}}/>
+
+            </React.Fragment>
+        )
+    } else {
+        return (
+            <React.Fragment>
+                <Avatar icon={<UserOutlined />} size={'default'} />
+                &nbsp;
+                &nbsp;
+                {props.name}
+            </React.Fragment>
+        )
+    }
 }
 
 export default Teammate
