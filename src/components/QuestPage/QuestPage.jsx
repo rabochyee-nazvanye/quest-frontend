@@ -5,6 +5,7 @@ import QuestMinimalInfo from './QuestMinimalInfo'
 import {Button, Spin, Typography, Row, Col, Progress, Steps} from 'antd'
 import { BASE_URL } from '../../settings'
 import QuestModalReg from "./QuestModalReg";
+import TeamList from "./TeamList";
 
 const { Title, Paragraph } = Typography
 const { Step } = Steps
@@ -60,6 +61,7 @@ class QuestPage extends Component {
            />
           </h2>
            <QuestDescription quest={this.state.quest}/>
+           <TeamList quest={this.state.quest}/>
           <QuestModalReg
               regVisible={this.state.regVisible}
               successVisible = {this.state.successVisible}
