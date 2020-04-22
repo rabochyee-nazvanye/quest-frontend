@@ -20,9 +20,9 @@ export default function handleTeamCreation(teamName, questId, setErrorState, set
     })
         .then(response => {
             if (response.ok) {
-                response.json().then(data => {setSuccessState(data.inviteLink)});
+                response.json().then(data => { setSuccessState(data.inviteLink) });
             } else {
-                response.json().then(data => setErrorState({status: data.status, statusText: data.title}))
+                response.json().then(data => setErrorState({ status: data.status, statusText: data.title }))
             }
         })
 }

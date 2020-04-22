@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 import Header from './components/shared/Header/Header'
 import Footer from './components/shared/Footer/Footer'
@@ -19,9 +19,10 @@ import {
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import Auth from './components/Auth/Auth'
-import Account from "./components/Account/Account";
-import {login} from "./redux/Actions/Api";
-import NoMatch from "./components/NoMatch/NoMatch";
+import Account from './components/Account/Account'
+import { login } from './redux/Actions/Api'
+import NoMatch from './components/NoMatch/NoMatch'
+import QuestPlaymode from "./components/QuestPlaymode/QuestPlaymode";
 
 function App () {
   useEffect(() => {
@@ -32,11 +33,12 @@ function App () {
     <Provider store={store}>
       <Router>
         <div className={'container'}>
-        <Header/>
+          <Header/>
           <div className={'add-space'}>
           <Switch>
             <Route path="/invites/:id" exact component={InvitePage}/>
             <Route path="/quests/:id" exact component={QuestPage}/>
+            <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
             <Route exact path={'/'} component={Account}/>
             <Route exact path={'/about'} component={About}/>
             <Route exact path={'/auth'} component={Auth}/>

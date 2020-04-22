@@ -3,7 +3,7 @@ import QuestTimelineNoTeam from './QuestTimelineNoTeam'
 import QuestTimelineHaveTeam from './QuestTimelineHaveTeam'
 import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import {Button, Spin, Typography, Row, Col, Progress, Steps} from 'antd'
+import { Button, Spin, Typography, Row, Col, Progress, Steps } from 'antd'
 import { BASE_URL } from '../../settings'
 import QuestModalReg from "./QuestModalReg";
 import TeamList from "./TeamList";
@@ -24,18 +24,21 @@ class QuestPage extends Component {
     }
   }
 
-  setRegVisible(){
-      this.setState({regVisible: true})
+  setRegVisible () {
+    this.setState({ regVisible: true })
   }
-    setSuccessVisible(){
-      this.setState({successVisible: true})
+
+  setSuccessVisible () {
+    this.setState({ successVisible: true })
   }
-    setRegUnVisible(){
-        this.setState({regVisible: false})
-    }
-    setSuccessUnVisible(){
-        this.setState({successVisible: false})
-    }
+
+  setRegUnVisible () {
+    this.setState({ regVisible: false })
+  }
+
+  setSuccessUnVisible () {
+    this.setState({ successVisible: false })
+  }
 
     getTeam () {
         const token = getToken();
@@ -131,9 +134,9 @@ class QuestPage extends Component {
 
   render () {
     return (
-        <React.Fragment>
+      <React.Fragment>
         {this.getRepresentationByState()}
-        </React.Fragment>
+      </React.Fragment>
     )
   }
 }
