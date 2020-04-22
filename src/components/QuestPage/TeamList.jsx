@@ -93,7 +93,10 @@ class TeamList extends Component {
             return (
                 <React.Fragment>
                     <Divider />
+                    <p>
                     У тебя ещё нет команды для этого квеста
+                    </p>
+                    <p> &#160; </p>
                 </React.Fragment>
             )
         } else {
