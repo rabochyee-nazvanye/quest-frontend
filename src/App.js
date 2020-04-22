@@ -38,7 +38,7 @@ function App () {
           <Switch>
             <Route path="/invites/:id" exact component={InvitePage}/>
             <Route path="/quests/:id" exact component={QuestPage}/>
-            <Route excat path={'/quests/:id/play'} component={QuestPlaymode}/>
+            <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
             <Route exact path={'/'} component={Account}/>
             <Route exact path={'/about'} component={About}/>
             <Route exact path={'/auth'} component={Auth}/>
