@@ -28,7 +28,7 @@ function Footer (props) {
                 </div>
                 <div className={'link1'}><a href="https://github.com/lalka-anka"> Аня </a> </div>
                 <div className={'link2'}><a href="https://github.com/tramakarov"> Егор </a> </div>
-                <div className={'link3'}><a href="https://github.com/usernamedt"> Данил </a> </div>
+                <div className={'link3'}><a href="https://github.com/usernamedt"> Даниил </a> </div>
                 <div className={'link4'}><a href="https://github.com/toplenboren"> Миша </a> </div>
                     <img src={Image} width={'100%'} height="160" alt="Responsive image"/>
 
