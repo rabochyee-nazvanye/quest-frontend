@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import QuestCard from '../QuestCard/QuestCard'
-import { Spin } from 'antd'
-import { BASE_URL } from '../../settings'
+import QuestCard from '../../QuestCard/QuestCard'
+import {Divider, Spin} from 'antd'
+import { BASE_URL } from '../../../settings'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
+import './GuestsList.css'
 
-class Home extends Component {
+
+class GuestsList extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -22,7 +24,7 @@ class Home extends Component {
 
   mapQuestsToTemplate () {
     return this.state.results.map((obj) =>
-      <Col key={'quest:' + obj.id} xs={2} sm={4} md={3} lg={8} xl={100}>
+      <Col key={'quest:' + obj.id} ant-col ant-col-xs-12 ant-col-sm-12 ant-col-md-12 ant-col-lg-12  ant-col-xl-12 xs={8}>
         <Link to={'/quests/' + obj.id}><QuestCard quest={obj} /></Link>
       </Col>
     )
@@ -42,14 +44,14 @@ class Home extends Component {
 
   render () {
     return (
-      <React.Fragment>
-        <h2>Квесты</h2>
-        <Row type="flex">
-          {this.getRepresentationByState()}
-        </Row>
-      </React.Fragment>
-    )
-  }
+        <React.Fragment>
+          <div className={'quests-container'}>
+            <Row type="flex" >
+              {this.getRepresentationByState()}
+            </Row>
+          </div>
+        </React.Fragment>)
+      }
 }
 
-export default Home
+export default GuestsList

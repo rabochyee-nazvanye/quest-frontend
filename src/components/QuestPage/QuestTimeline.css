@@ -1,0 +1,37 @@
+.button-layout{
+    position: relative;
+    zoom: 0.89;
+    top: 50%;
+    margin-top:7px;
+}
+
+.status-layout{
+    position: relative;
+    zoom: 0.89;
+}
+
+.description{
+    white-space: nowrap !important;
+}
+
+
+.right-box{
+    position: relative;
+    left: 261px;
+    margin-top: -120px;
+    margin-right:400px;
+}
+
+.vertical-line {
+    position: relative;
+    top: 55%;
+    margin-top:-30px;
+    left: 21%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    border-left: 0.5px solid #858585;
+    height: 75px;
+}
+
+.timeline-layout{
+}

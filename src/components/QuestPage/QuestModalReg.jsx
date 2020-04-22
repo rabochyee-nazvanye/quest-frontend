@@ -1,6 +1,9 @@
-import React, { useState, Component } from 'react'
-import { Modal, Button, Input, Typography, InputNumber, Form } from 'antd';
+import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+import {Modal, Button, Input, Typography, InputNumber, Form, Alert} from 'antd';
 import handleTeamCreation from './Api'
+import { CLIENT_URL } from '../../settings'
+
 const { Title, Paragraph, Text } = Typography;
 
 class QuestModalReg extends Component {
@@ -8,34 +11,49 @@ class QuestModalReg extends Component {
         super(props);
         this.state = {
             inviteLink: '',
-            errorText: ''
+            statusText: '',
+            status: ''
         }
     }
 
-
-
     render() {
-        const switchModals = (inviteLink) => {
+        const setSuccessstate = (inviteLink) => {
             this.props.setRegUnVisible();
             this.props.setSuccessVisible();
-            this.state.inviteLink = inviteLink;
+            this.setState({inviteLink: CLIENT_URL + inviteLink})
         };
 
-        const setError = (errorText) => {
-            this.state.errorText = errorText
+        const setError = (error) => {
+            this.setState({statusText: error.statusText, status: error.status})
         };
+
+        const alert = (this.state.statusText !== '') ? (
+            <div className={'reg-alert-container'}>
+                <Alert
+                    message={this.state.statusText}
+                    type="error"
+                    showIcon
+                    closable={true}
+                    onClose={() => this.setState({statusText: ''})}
+                />
+            </div>
+        ) : (<React.Fragment/>);
+
+        const redirectToAuth = (this.state.status === 401) ? (
+            <Redirect from={this.props.url} to={"/auth/" + encodeURIComponent(this.props.url)} />
+            ) : (<React.Fragment/>)
+
 
         const onFinish = values => {
             handleTeamCreation(
                 values.teamname,
                 this.props.quest_id,
                 (line) => setError(line),
-                (line) => switchModals(line))
-            console.log('Success:', values);
+                (line) => setSuccessstate(line))
         };
 
         const onFinishFailed = errorInfo => {
-            console.log('Failed:', errorInfo);
+            this.state.errorText = errorInfo;
         };
 
         return (
@@ -64,6 +82,7 @@ class QuestModalReg extends Component {
                     onCancel={() => {this.props.setRegUnVisible()}}
                 >
                     <p><Title level={3}>Регистрация на квест</Title></p>
+                    {alert}
                     <Form
                         name="quest-reg"
                         onFinish={onFinish}
@@ -79,7 +98,8 @@ class QuestModalReg extends Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder={'Команда А'}/>
+                                <Input placeholder="Команда А" type="text" id="quest-reg_teamname" className="ant-input"
+                                       value="a" maxLength="26" minLength="3"/>
                             </Form.Item>
                             После регистрации станет доступна ссылка для приглашения других участников команды</p>
                         <p>
@@ -92,9 +112,9 @@ class QuestModalReg extends Component {
                                 >
                                     Зарегистрироваться
                                 </Button>
-                                <Text type="danger">{this.state.errorText}</Text>
                             </Form.Item>
                         </p>
+                        {redirectToAuth}
                     </Form>
                 </Modal>
             </div>

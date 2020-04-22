@@ -1,0 +1,16 @@
+.about{
+    position: relative;
+    top: 65%;
+    left: -2%;
+
+}
+
+.description {
+    position: relative;
+    top: 59%;
+    left: 2.3%;
+    word-wrap: break-word;
+    width: 100%;
+    text-align: left;
+    white-space: pre-wrap;
+}

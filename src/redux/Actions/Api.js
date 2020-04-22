@@ -28,14 +28,14 @@ export function registerFromForm (username, password) {
   }
 }
 
-function getToken () {
+export function getToken () {
   const tokenFromLocalStorage = localStorage.getItem('token')
-  const tokenFromSessionStorage = localStorage.getItem('token')
+  const tokenFromSessionStorage = sessionStorage.getItem('token')
 
-  if (tokenFromLocalStorage !== null) {
-    return tokenFromLocalStorage
-  } else if (tokenFromSessionStorage !== null) {
+  if (tokenFromSessionStorage !== null) {
     return tokenFromSessionStorage
+  } else if (tokenFromLocalStorage !== null) {
+    return tokenFromLocalStorage
   } else {
     return ''
   }
@@ -50,7 +50,6 @@ function fetchUserToken (username, password, rememberMe, path) {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-
       body: JSON.stringify({
         username: username,
         password: password
@@ -69,7 +68,7 @@ function fetchUserToken (username, password, rememberMe, path) {
           })
         } else {
           response.json().then(json => {
-            dispatch(receiveException(json))
+            dispatch(receiveException(json.title))
           })
         }
       })
@@ -88,7 +87,7 @@ function getUserByToken (token) {
       }
     })
       .then(response => {
-        if (response.status >= 200 && response.status <= 300) {
+        if (response.ok) {
           response.json().then(json => {
             const payload = {
               user: json,
