@@ -20,7 +20,7 @@ class QuestPage extends Component {
       quest: null,
       regVisible: false,
       successVisible: false,
-        team: null
+        team: undefined
     }
   }
 
@@ -58,19 +58,19 @@ class QuestPage extends Component {
     // eslint-disable-next-line react/prop-types
     fetch(BASE_URL + '/quests/' + this.props.match.params.id)
       .then(response => response.json())
-      .then(readResponse => this.setState({ dataReady: true, quest: readResponse}))
-      this.getTeam()
+      .then(readResponse => {this.setState({ quest: readResponse}); this.getTeam(); this.setState({ dataReady: true})})
+
   }
 
   getRepresentationByState () {
     if (!this.state.dataReady) {
       return <Spin />
-    } else if (this.state.team !== undefined){
+    } else if (this.state.team === undefined){
       return (
         <React.Fragment>
           <QuestMinimalInfo quest={this.state.quest}/>
           <h2>
-           <QuestTimelineHaveTeam quest={this.state.quest}
+           <QuestTimelineNoTeam quest={this.state.quest}
                                 regVisible={this.state.regVisible}
                                 successVisible = {this.state.successVisible}
                                 setRegVisible={() => this.setRegVisible()}
@@ -101,7 +101,7 @@ class QuestPage extends Component {
             <React.Fragment>
                 <QuestMinimalInfo quest={this.state.quest}/>
                 <h2>
-                    <QuestTimelineNoTeam quest={this.state.quest}
+                    <QuestTimelineHaveTeam quest={this.state.quest}
                                          regVisible={this.state.regVisible}
                                          successVisible = {this.state.successVisible}
                                          setRegVisible={() => this.setRegVisible()}
