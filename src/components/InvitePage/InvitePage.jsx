@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Button, Spin, Typography, Steps, Result} from 'antd'
-import { Link } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { handleTeamCreation } from './Api'
 import {CLIENT_URL} from "../../settings";
 
@@ -12,18 +12,24 @@ class InvitePage extends Component {
             success: null,
             teamName: '',
             errorText: '',
-            history: null
+            errorStatus: null,
+            history: null,
+            url: 'invites/' + this.props.match.params.id
         }
     }
 
     componentDidMount() {
         const setSuccessState = (teamName) => { this.setState({teamName: teamName, success: true}) };
-        const setError = (error) => { this.setState({success: false, errorText: error.statusText}) };
+        const setError = (error) => { this.setState({success: false, errorText: error.statusText, errorStatus: error.status}) };
         handleTeamCreation(this.state.inviteCode, setError, setSuccessState)
     }
 
 
     render () {
+        const redirectToAuth = (this.state.errorStatus === 401) ? (
+            <Redirect from={this.state.url} to={"/auth/" + encodeURIComponent(this.state.url)} />
+        ) : (<React.Fragment/>)
+
         const getRepresentationByState = () => {
             if (this.state.success) {
                 return (
@@ -64,6 +70,7 @@ class InvitePage extends Component {
         } else {
             return (
                 <React.Fragment>
+                    {redirectToAuth}
                     {getRepresentationByState()}
                 </React.Fragment>
             )
