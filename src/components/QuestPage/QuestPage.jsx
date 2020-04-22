@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import QuestTimeline from './QuestTimeline'
 import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import {Button, Spin, Typography, Row, Col, Progress, Steps} from 'antd'
+import { Button, Spin, Typography, Row, Col, Progress, Steps } from 'antd'
 import { BASE_URL } from '../../settings'
-import QuestModalReg from "./QuestModalReg";
-import TeamList from "./TeamList";
+import QuestModalReg from './QuestModalReg'
+import TeamList from './TeamList'
 
 const { Title, Paragraph } = Typography
 const { Step } = Steps
@@ -21,18 +21,21 @@ class QuestPage extends Component {
     }
   }
 
-  setRegVisible(){
-      this.setState({regVisible: true})
+  setRegVisible () {
+    this.setState({ regVisible: true })
   }
-    setSuccessVisible(){
-      this.setState({successVisible: true})
+
+  setSuccessVisible () {
+    this.setState({ successVisible: true })
   }
-    setRegUnVisible(){
-        this.setState({regVisible: false})
-    }
-    setSuccessUnVisible(){
-        this.setState({successVisible: false})
-    }
+
+  setRegUnVisible () {
+    this.setState({ regVisible: false })
+  }
+
+  setSuccessUnVisible () {
+    this.setState({ successVisible: false })
+  }
 
   componentDidMount () {
     // eslint-disable-next-line react/prop-types
@@ -49,20 +52,7 @@ class QuestPage extends Component {
         <React.Fragment>
           <QuestMinimalInfo quest={this.state.quest}/>
           <h2>
-           <QuestTimeline quest={this.state.quest}
-                          regVisible={this.state.regVisible}
-                          successVisible = {this.state.successVisible}
-                          setRegVisible={() => this.setRegVisible()}
-                          setSuccessVisible={() => this.setSuccessVisible()}
-                          setRegUnVisible={() => this.setRegUnVisible()}
-                          setSuccessUnVisible={() => this.setSuccessUnVisible()}
-                          quest_id = {this.state.quest.id}
-                          url = {'quests/' + this.state.quest.id}
-           />
-          </h2>
-           <QuestDescription quest={this.state.quest}/>
-           <TeamList quest={this.state.quest}/>
-          <QuestModalReg
+            <QuestTimeline quest={this.state.quest}
               regVisible={this.state.regVisible}
               successVisible = {this.state.successVisible}
               setRegVisible={() => this.setRegVisible()}
@@ -71,6 +61,19 @@ class QuestPage extends Component {
               setSuccessUnVisible={() => this.setSuccessUnVisible()}
               quest_id = {this.state.quest.id}
               url = {'quests/' + this.state.quest.id}
+            />
+          </h2>
+          <QuestDescription quest={this.state.quest}/>
+          <TeamList quest={this.state.quest}/>
+          <QuestModalReg
+            regVisible={this.state.regVisible}
+            successVisible = {this.state.successVisible}
+            setRegVisible={() => this.setRegVisible()}
+            setSuccessVisible={() => this.setSuccessVisible()}
+            setRegUnVisible={() => this.setRegUnVisible()}
+            setSuccessUnVisible={() => this.setSuccessUnVisible()}
+            quest_id = {this.state.quest.id}
+            url = {'quests/' + this.state.quest.id}
           />
         </React.Fragment>
       )
@@ -79,9 +82,9 @@ class QuestPage extends Component {
 
   render () {
     return (
-        <React.Fragment>
+      <React.Fragment>
         {this.getRepresentationByState()}
-        </React.Fragment>
+      </React.Fragment>
     )
   }
 }
