@@ -98,7 +98,8 @@ class QuestModalReg extends Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder={'Команда А'}/>
+                                <Input placeholder="Команда А" type="text" id="quest-reg_teamname" className="ant-input"
+                                       value="a" maxLength="26" minLength="3"/>
                             </Form.Item>
                             После регистрации станет доступна ссылка для приглашения других участников команды</p>
                         <p>
