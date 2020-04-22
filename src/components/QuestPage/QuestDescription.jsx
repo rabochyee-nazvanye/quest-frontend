@@ -1,6 +1,8 @@
 import React from 'react'
 import {Button, Col, Row, Steps, Typography, Divider} from 'antd'
 import "./QuestDescription.css"
+import ReactMarkdown from 'react-markdown'
+
 let dateTimeNow = new Date();
 
 
@@ -33,7 +35,7 @@ function QuestDescription (props) {
                     </svg>
                     <h3>
                         <div className={'description'}>
-                            {props.quest.description}
+                            <ReactMarkdown source={props.quest.description} />
                         </div>
                     </h3>
                 </div>

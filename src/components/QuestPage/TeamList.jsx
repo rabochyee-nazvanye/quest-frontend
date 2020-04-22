@@ -38,7 +38,7 @@ class TeamList extends Component {
     mapTeammatesToTemplate() {
         return this.state.team.members.map((member) =>
             <Col key={'quest:' + member.name} span={6} style = {{padding: '5px 0'}}>
-                <Teammate name={member.name} captainName = {this.state.team.captain.name} />
+                <Teammate member={member} captainName = {this.state.team.captain.name} />
             </Col>
         )
     }
