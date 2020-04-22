@@ -3,8 +3,9 @@ import React, { useEffect } from 'react'
 import Header from './components/shared/Header/Header'
 import Footer from './components/shared/Footer/Footer'
 import About from './components/About/About'
-import Home from './components/Quests/Home'
+import GuestsList from './components/Account/AccountTemplate/GuestsList'
 import QuestPage from './components/QuestPage/QuestPage'
+import InvitePage from "./components/InvitePage/InvitePage";
 import './add-space.css'
 
 import './App.css'
@@ -34,16 +35,17 @@ function App () {
         <div className={'container'}>
           <Header/>
           <div className={'add-space'}>
-            <Switch>
-              <Route path="/quests/:id" exact component={QuestPage}/>
-              <Route excat path={'/quests/:id/play'} component={QuestPlaymode}/>
-              <Route exact path={'/'} component={Home}/>
-              <Route exact path={'/about'} component={About}/>
-              <Route exact path={'/auth'} component={Auth}/>
-              <Route path={'/auth/:redirectTo'} component={Auth} />
-              <Route exact path={'/account'} component={Account} />
-              <Route component={NoMatch} />
-            </Switch>
+          <Switch>
+            <Route path="/invites/:id" exact component={InvitePage}/>
+            <Route path="/quests/:id" exact component={QuestPage}/>
+            <Route excat path={'/quests/:id/play'} component={QuestPlaymode}/>
+            <Route exact path={'/'} component={Account}/>
+            <Route exact path={'/about'} component={About}/>
+            <Route exact path={'/auth'} component={Auth}/>
+            <Route exact path={'/auth/:redirectTo'} component={Auth} />
+            <Route exact path={'/account'} component={Account} />
+            <Route component={NoMatch} />
+          </Switch>
           </div>
         </div>
         <Footer/>

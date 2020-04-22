@@ -3,14 +3,21 @@ import { Avatar } from 'antd';
 import { UserOutlined, StarFilled } from '@ant-design/icons';
 
 function Teammate(props) {
-    if (props.name === props.captainName) {
+    const avatar = ()=> {
+        if (props.member.avatarUrl !== null) {
+            return(<Avatar src={props.member.avatarUrl} size={'default'} />)
+        } else {
+            return (<Avatar icon={<UserOutlined />} size={'default'} />)
+        }
+    }
+
+    if (props.member.name === props.captainName) {
         return (
             <React.Fragment>
-
-                    <Avatar icon={<UserOutlined />} size={'default'} />
+                    {avatar()}
                     &nbsp;
                     &nbsp;
-                    {props.name + " "}
+                    {props.member.name + " "}
                     <StarFilled style = {{color: "#91d5ff"}}/>
 
             </React.Fragment>
@@ -18,10 +25,10 @@ function Teammate(props) {
     } else {
         return (
             <React.Fragment>
-                <Avatar icon={<UserOutlined />} size={'default'} />
+                {avatar()}
                 &nbsp;
                 &nbsp;
-                {props.name}
+                {props.member.name}
             </React.Fragment>
         )
     }

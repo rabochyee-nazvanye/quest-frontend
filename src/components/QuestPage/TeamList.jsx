@@ -38,7 +38,7 @@ class TeamList extends Component {
     mapTeammatesToTemplate() {
         return this.state.team.members.map((member) =>
             <Col key={'quest:' + member.name} span={6} style = {{padding: '5px 0'}}>
-                <Teammate name={member.name} captainName = {this.state.team.captain.name} />
+                <Teammate member={member} captainName = {this.state.team.captain.name} />
             </Col>
         )
     }
@@ -59,7 +59,11 @@ class TeamList extends Component {
                 }
             })
             .then(response => response.json())
-            .then(readResponse => {this.setState({ dataReady: true, team: readResponse[0] }); this.getInviteCode()})
+            .then(readResponse => {
+                this.setState({ dataReady: true, team: readResponse[0] });
+                if (this.state.team !== undefined)
+                    this.getInviteCode()
+            })
     }
 
     getRepresentationByState () {

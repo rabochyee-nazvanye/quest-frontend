@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import QuestCard from '../QuestCard/QuestCard'
-import { Spin } from 'antd'
-import { BASE_URL } from '../../settings'
+import QuestCard from '../../QuestCard/QuestCard'
+import {Divider, Spin} from 'antd'
+import { BASE_URL } from '../../../settings'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
+import './GuestsList.css'
 
-class Home extends Component {
+
+class GuestsList extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -42,16 +44,14 @@ class Home extends Component {
 
   render () {
     return (
-      <React.Fragment>
-        <p>
-          &#160; <p>&#160;</p>
-        <Row type="flex">
-          {this.getRepresentationByState()}
-        </Row>
-        </p>
-      </React.Fragment>
-    )
-  }
+        <React.Fragment>
+          <div className={'quests-container'}>
+            <Row type="flex" >
+              {this.getRepresentationByState()}
+            </Row>
+          </div>
+        </React.Fragment>)
+      }
 }
 
-export default Home
+export default GuestsList

@@ -12,8 +12,8 @@ function QuestCards (props) {
         style ={{ margin: '10px 20px' }}
         cover={
             <ProgressiveImage src={props.quest.imageUrl} placeholder="tiny-image.jpg">
-                {src => <img
-                    alt={props.quest.name + ' картинка'}
+                {src => <img width = "300" height = "150"
+                             alt={props.quest.name + ' картинка'}
                     src={src}
                 />}
             </ProgressiveImage>

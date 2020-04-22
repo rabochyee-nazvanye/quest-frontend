@@ -1,0 +1,12 @@
+.right-side{
+    position: relative;
+    left:-100%;
+    float:right;
+}
+.left-side{
+    position: relative;
+
+}
+.title{
+    white-space: nowrap;
+}
