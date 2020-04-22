@@ -1,0 +1,27 @@
+.title__low-opacity {
+    opacity: 0.7;
+}
+.title__container {
+    padding-top: 10px;
+}
+.title__blue {
+    color: #2f54eb;
+}
+.title__underscored {
+    text-decoration: underline;
+    text-decoration-color: #2f54eb;
+}
+.title__black {
+    color: black;
+}
+.title__main {
+    font-size: 36pt;
+    padding-top: 15px;
+    padding-bottom: 0;
+    margin: 0;
+}
+.title__subtitle {
+    font-size: 22pt;
+    font-weight: 300;
+    margin: 0;
+}
