@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
 import {Button, Spin, Typography, Steps, Result} from 'antd'
-import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { handleTeamCreation } from './Api'
-
-const { Title, Paragraph } = Typography
-const { Step } = Steps
+import {CLIENT_URL} from "../../settings";
 
 class InvitePage extends Component {
     constructor (props) {
-        super(props)
+        super(props);
         this.state = {
-            teamCode: this.props.match.params.id,
-            success: false,
-            teamName: 'Вниманию компьютерщиков второго курса',
-            errorText: 'Команда заполнена'
+            inviteCode: this.props.match.params.id,
+            success: null,
+            teamName: '',
+            errorText: '',
+            history: null
         }
     }
 
-    render () {
-        // const history = useHistory();
+    componentDidMount() {
         const setSuccessState = (teamName) => { this.setState({teamName: teamName, success: true}) };
-        const setError = (error) => { this.setState({errorText: error.statusText}) };
+        const setError = (error) => { this.setState({success: false, errorText: error.statusText}) };
+        handleTeamCreation(this.state.inviteCode, setError, setSuccessState)
+    }
 
+
+    render () {
         const getRepresentationByState = () => {
             if (this.state.success) {
                 return (
@@ -30,7 +32,11 @@ class InvitePage extends Component {
                             status="success"
                             title={ "Вы вступили в команду «" + this.state.teamName + "»"}
                             extra={[
-                                <Button type={'primary'}>Перейти к квесту</Button>
+                                <React.Fragment>
+                                    <Link to ='/' >
+                                        <Button type={'primary'} size={'large'}>Ну и отлично</Button>
+                                    </Link>
+                                </React.Fragment>
                             ]}
                         />
                     </React.Fragment>
@@ -40,7 +46,15 @@ class InvitePage extends Component {
                     <Result
                         status="warning"
                         title={this.state.errorText}
+                        extra={[
+                            <React.Fragment>
+                                <Link to ='/' >
+                                    <Button type={'primary'} size={'large'} >ОК</Button>
+                                </Link>
+                            </React.Fragment>
+                        ]}
                     />
+
                 )
             }
         };

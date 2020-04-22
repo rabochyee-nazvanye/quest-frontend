@@ -1,12 +1,12 @@
 import {BASE_URL} from "../../settings";
 import { getToken } from '../../redux/Actions/Api.js';
 
-export function handleTeamCreation(teamId, userId, setErrorState, setSuccessState) {
+export function handleTeamCreation(inviteCode, setErrorState, setSuccessState) {
 
     const token = getToken();
 
-    let response = fetch(BASE_URL + '/teams/' + teamId + '/members', {
-        method: 'POST',
+    let response = fetch(BASE_URL + '/invites/' + inviteCode, {
+        method: 'GET',
         headers: {
             'Authorization': 'bearer ' + token,
             'Accept': 'application/json',
@@ -15,9 +15,9 @@ export function handleTeamCreation(teamId, userId, setErrorState, setSuccessStat
     })
         .then(response => {
             if (response.ok) {
-                response.json().then(data => {setSuccessState(data.teamName)});
+                response.json().then(data => { setSuccessState(data.name)});
             } else {
-                response.json().then(data => setErrorState({status: data.status, statusText: data.title}))
+                response.json().then(data => { setErrorState({status: data.status, statusText: data.title}) })
             }
         })
 }
