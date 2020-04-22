@@ -29,11 +29,11 @@ function QuestTimelineNoTeam (props) {
         ((dateTimeNow.getUTCHours()+5)*60 + dateTimeNow.getMinutes());
     const remainingHours = parseInt(remainingTime / 60);
     const remainingMinutes = remainingTime % 60;
-    var commonOptions = {
+    const commonOptions = {
         year: 'numeric', month: 'numeric', day: 'numeric',
         hour: 'numeric', minute: 'numeric',
         hour12: false,
-        timeZone: 'America/Los_Angeles'
+        timeZone: 'Asia/Yekaterinburg'
     };
 
     const remainingTimeText = 'Осталось ' + remainingHours.toString() + ' ч ' + remainingMinutes.toString() + ' мин';
