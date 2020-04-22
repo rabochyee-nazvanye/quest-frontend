@@ -1,21 +1,13 @@
 import React, { Component } from 'react'
-import QuestCard from '../QuestCard/QuestCard'
-import { Spin } from 'antd'
-import { BASE_URL } from '../../settings'
+import QuestCard from '../../QuestCard/QuestCard'
+import {Divider, Spin} from 'antd'
+import { BASE_URL } from '../../../settings'
 import { Row, Col } from 'antd'
-import {Link, Redirect} from "react-router-dom";
-import { Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import {Link} from "react-router-dom";
+import './GuestsList.css'
 
-function getAvatar(avatarUrl) {
-  if (avatarUrl === null) {
-    return (<Avatar size={128} icon={<UserOutlined />} />)
-  } else {
-    return (<Avatar size={128} src={avatarUrl} />)
-  }
-}
 
-class Home extends Component {
+class GuestsList extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -38,37 +30,28 @@ class Home extends Component {
     )
   }
 
-  getRepresentationByState (props) {
+  getRepresentationByState () {
     if (!this.state.dataReady) {
       return <Spin />
     } else {
       return (
         <React.Fragment>
-          {getAvatar()}
-            <div className={"content-container"}>
           {this.mapQuestsToTemplate()}
-            </div>
         </React.Fragment>
       )
     }
   }
 
   render () {
-    const redirectToAuth = (this.state.status === 401) ? (
-        <Redirect from={this.props.url} to={"/auth/" + encodeURIComponent(this.props.url)} />
-    ) : (<React.Fragment/>)
-      return (
+    return (
         <React.Fragment>
-          {redirectToAuth}
-          <p>
-            &#160; <p>&#160;</p>
-            <Row type="flex">
+          <div className={'quests-container'}>
+            <Row type="flex" >
               {this.getRepresentationByState()}
             </Row>
-          </p>
+          </div>
         </React.Fragment>)
       }
-
 }
 
-export default Home
+export default GuestsList

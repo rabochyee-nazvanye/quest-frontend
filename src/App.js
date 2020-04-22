@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 import Header from './components/shared/Header/Header'
 import Footer from './components/shared/Footer/Footer'
 import About from './components/About/About'
-import Home from './components/Quests/Home'
+import GuestsList from './components/Account/AccountTemplate/GuestsList'
 import QuestPage from './components/QuestPage/QuestPage'
 import './add-space.css'
 
@@ -35,7 +35,7 @@ function App () {
           <div className={'add-space'}>
           <Switch>
             <Route path="/quests/:id" exact component={QuestPage}/>
-            <Route exact path={'/'} component={Home}/>
+            <Route exact path={'/'} component={Account}/>
             <Route exact path={'/about'} component={About}/>
             <Route exact path={'/auth'} component={Auth}/>
             <Route exact path={'/auth/:redirectTo'} component={Auth} />

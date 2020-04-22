@@ -1,11 +1,32 @@
 .button-layout{
     position: absolute;
-    top: 105%;
-    left: 36%;
+    top: 80%;
+    left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
 
+.status-layout{
+    position: absolute;
+    top: 55%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}
+
 .description{
     white-space: nowrap;
+}
+
+
+.left-info-box{
+    position: absolute;
+    left:1%;
+    top:100%;
+}
+
+.vertical-divider {
+    width: 2px;
+    margin: 6px 0;
+    background: blue;
 }
