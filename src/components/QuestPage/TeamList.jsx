@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Teammate from "./Teammate";
-import {Col, Row, Divider, Spin, Modal, Typography} from "antd";
+import {Col, Row, Divider, Spin, Modal, Typography, Button, Popconfirm, message} from "antd";
 import {BASE_URL} from "../../settings";
 import { getToken } from '../../redux/Actions/Api.js';
 import { CLIENT_URL } from '../../settings'
+import {LogoutOutlined} from "@ant-design/icons";
+import {leaveTeam} from './Api'
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -67,6 +69,15 @@ class TeamList extends Component {
     }
 
     getRepresentationByState () {
+        const successLeave = () => {
+            this.setState({team: undefined})
+            message.success('Ты вышел из команды');
+        };
+
+        const errorLeave = (d) => {
+            message.error('Выйти не получилось: ' + d.text)
+        };
+
         if (!this.state.dataReady) {
             return <Spin/>
         }
@@ -74,7 +85,24 @@ class TeamList extends Component {
             return (
                 <React.Fragment>
                     <Divider/>
-                    <h2>Твоя команда — {this.state.team.name}</h2>
+                    <Row style={{ display: "flex" }}>
+                        <h2>Твоя команда — {this.state.team.name}</h2>
+                        <Popconfirm
+                            placement="bottomRight"
+                            title={'Вы уверены?'}
+                            onConfirm={() => {leaveTeam(this.state.team.id, successLeave, errorLeave)}}
+                            okText="Да"
+                            cancelText="Нет"
+                        >
+                            <Button
+                                icon={<LogoutOutlined />}
+                                style={{marginLeft: "auto"}}
+                                danger
+                            >
+                                Выйти из команды
+                            </Button>
+                        </Popconfirm>
+                    </Row>
                     <Row>
                         {this.mapTeammatesToTemplate()}
                     </Row>
