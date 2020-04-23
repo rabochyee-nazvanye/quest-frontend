@@ -3,6 +3,7 @@ import {Button, Spin, Typography, Steps, Result} from 'antd'
 import {Link, Redirect} from 'react-router-dom'
 import { handleTeamCreation } from './Api'
 import {CLIENT_URL} from "../../settings";
+import MetaTags from "../shared/MetaTags/MetaTags";
 
 class InvitePage extends Component {
     constructor (props) {
@@ -32,8 +33,16 @@ class InvitePage extends Component {
 
         const getRepresentationByState = () => {
             if (this.state.success) {
+                const metaData = {
+                    title: "Вы вступили в команду",
+                    description: "",
+                    keywords: "квест",
+                    robots:"",
+                    canonicalUrl: CLIENT_URL
+                };
                 return (
                     <React.Fragment>
+                        <MetaTags metaData={metaData} />
                         <Result
                             status="success"
                             title={ "Вы вступили в команду «" + this.state.teamName + "»"}
@@ -48,28 +57,57 @@ class InvitePage extends Component {
                     </React.Fragment>
                 )
             } else {
+                const metaData = {
+                    title: "Приглашение в команду",
+                    description: "Откройте ссылку, чтобы присоединиться к команде и участвовать в квесте",
+                    keywords: "квест",
+                    robots:"",
+                    canonicalUrl: CLIENT_URL
+                };
                 return(
-                    <Result
-                        status="warning"
-                        title={this.state.errorText}
-                        extra={[
-                            <React.Fragment>
-                                <Link to ='/' >
-                                    <Button type={'primary'} size={'large'} >ОК</Button>
-                                </Link>
-                            </React.Fragment>
-                        ]}
-                    />
-
+                    <React.Fragment>
+                        <MetaTags metaData={metaData} />
+                        <Result
+                            status="warning"
+                            title={this.state.errorText}
+                            extra={[
+                                <React.Fragment>
+                                    <Link to ='/' >
+                                        <Button type={'primary'} size={'large'} >ОК</Button>
+                                    </Link>
+                                </React.Fragment>
+                            ]}
+                        />
+                    </React.Fragment>
                 )
             }
         };
 
         if (this.state.success === null) {
-            return <Spin />
-        } else {
+            const metaData = {
+                title: "Приглашение в команду",
+                description: "Откройте ссылку, чтобы присоединиться к команде и участвовать в квесте",
+                keywords: "квест",
+                robots: "",
+                canonicalUrl: CLIENT_URL
+            };
             return (
                 <React.Fragment>
+                    <Spin/>
+                    <MetaTags metaData={metaData}/>
+                </React.Fragment>
+            )
+        } else {
+            const metaData = {
+                title: "Приглашение в команду",
+                description: "Откройте ссылку, чтобы присоединиться к команде и участвовать в квесте",
+                keywords: "квест",
+                robots: "",
+                canonicalUrl: CLIENT_URL
+            };
+            return (
+                <React.Fragment>
+                    <MetaTags metaData={metaData}/>
                     {redirectToAuth}
                     {getRepresentationByState()}
                 </React.Fragment>

@@ -23,7 +23,7 @@ export default function RegisterFormTemplate (props) {
 
   return (
     <div className="auth-form-container">
-      {alert}
+        {alert}
       <Form
         name="register-form"
         onFinish={onFinish}
