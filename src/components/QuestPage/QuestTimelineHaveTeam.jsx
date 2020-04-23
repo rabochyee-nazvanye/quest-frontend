@@ -27,14 +27,13 @@ function QuestTimelineHaveTeam(props) {
 
     const history = useHistory();
     const remainingTime = new Date(props.quest.endDate).getHours() * 60 + new Date(props.quest.endDate).getMinutes() -
-        ((dateTimeNow.getUTCHours() + 5) * 60 + dateTimeNow.getMinutes());
+        ((dateTimeNow.getHours()) * 60 + dateTimeNow.getMinutes());
     const remainingHours = parseInt(remainingTime / 60);
     const remainingMinutes = remainingTime % 60;
     const commonOptions = {
         year: 'numeric', month: 'numeric', day: 'numeric',
         hour: 'numeric', minute: 'numeric',
-        hour12: false,
-        timeZone: 'Asia/Yekaterinburg'
+        hour12: false
     };
 
     const remainingTimeText = 'Осталось ' + remainingHours.toString() + ' ч ' + remainingMinutes.toString() + ' мин';
