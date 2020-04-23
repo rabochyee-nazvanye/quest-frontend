@@ -3,6 +3,7 @@ import { Avatar, Button, Divider } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { logout } from '../../../redux/Actions/Api'
 import { connect } from 'react-redux'
+import GuestsList from './GuestsList';
 
 function getAvatar(avatarUrl) {
     if (avatarUrl === null) {
@@ -17,8 +18,8 @@ function AccountTemplate (props) {
   return (
     <React.Fragment>
         {getAvatar(props.user.avatarUrl)}
-        <h1> Привет, @{props.user.name}! </h1>
-        <Divider />
+        <h1> Привет, &#160;@{props.user.name}! </h1>
+
         <Button
             icon={<LogoutOutlined />}
             onClick={() => props.logout()}
@@ -26,6 +27,9 @@ function AccountTemplate (props) {
         >
             Выйти
         </Button>
+        <Divider />
+        <GuestsList/>
+
     </React.Fragment>
   )
 };

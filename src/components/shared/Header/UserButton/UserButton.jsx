@@ -14,7 +14,7 @@ function UserButton (props) {
       username={props.user.name}
       logout={props.logout}
       avatar={props.user.avatarUrl}
-      account={() => { history.push('/account') }}/>)
+      account={() => { history.push('/') }}/>)
   } else {
     return (<UserButtonLoggedOutTemplate auth={() => { history.push('/auth') }}/>)
   }
