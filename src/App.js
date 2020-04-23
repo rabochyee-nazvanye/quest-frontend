@@ -40,7 +40,6 @@ function App () {
               <Route path="/quests/:id" exact component={QuestPage}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
               <Route exact path={'/'} component={Account}/>
-              <Route exact path={'/about'} component={About}/>
               <Route exact path={'/auth'} component={Auth}/>
               <Route exact path={'/auth/:redirectTo'} component={Auth} />
               <Route exact path={'/account'} component={Account} />
