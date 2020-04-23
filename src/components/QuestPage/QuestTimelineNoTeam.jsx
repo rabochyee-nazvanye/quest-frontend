@@ -43,34 +43,39 @@ function QuestTimelineNoTeam (props) {
     if (props.quest.status === "scheduled") {
         return (
             <React.Fragment>
-                <p> </p>
-                    <div className={'status-layout'} style={{"color": "#faad14"} }><Loading3QuartersOutlined spin/> &#160;Идет регистрация</div>
-                        <div className={'button-layout'}>
-                        <Button type="primary"
-                                htmlType="submit"
-                                className="button"
-                                style={{ "background-color": "#52c41a", "border-color": "#52c41a" }}
-                                onClick={() => {
-                                    if (getToken() === '') {
-                                        history.push("/auth/" + encodeURIComponent(props.url))
-                                    } else {
-                                        props.setRegVisible()
-                                    }
-                                }
-                                }
-                        >
-                            <UserAddOutlined /> Зарегистрироваться
-                        </Button></div>
-                <div className={"vertical-line "}> </div>
-                <div className={'right-box'}>
-                    <div className={'timeline-layout'}>
-                    <Steps current={0}>
-                        <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
-                        <Step title="Старт" subTitle="" description={startTime}/>
-                        <Step title="Завершение" description={endTime}/>
-                    </Steps>
-                    </div>
-                </div>
+                <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
+                    <Col span={6}>
+                        <div style={{width: "100%"}}>
+                            <h2>
+                                <div className={'status-layout'} style={{"color": "#faad14"} }><Loading3QuartersOutlined spin/> &#160;Идет регистрация</div>
+                            </h2>
+                            <div className={'button-layout'}>
+                                <Button type="primary"
+                                        htmlType="submit"
+                                        className="button"
+                                        style={{ "background-color": "#52c41a", "border-color": "#52c41a" }}
+                                        onClick={() => {
+                                            if (getToken() === '') {
+                                                history.push("/auth/" + encodeURIComponent(props.url))
+                                            } else {
+                                                props.setRegVisible()
+                                            }
+                                        }
+                                        }
+                                >
+                                    <UserAddOutlined /> Зарегистрироваться
+                                </Button>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col span={16}>
+                        <Steps current={0}>
+                            <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
+                            <Step title="Старт" subTitle="" description={startTime}/>
+                            <Step title="Завершение" description={endTime}/>
+                        </Steps>
+                    </Col>
+                </Row>
             </React.Fragment>
         )
     }
@@ -78,61 +83,66 @@ function QuestTimelineNoTeam (props) {
     {
         return (
             <React.Fragment>
-                <p> </p>
-                <div className={'status-layout'} style={{"color": "#1890ff"} }><CheckCircleOutlined />&thinsp;Регистрация окончена</div>
-                <div className={'button-layout'}>
-                    &nbsp;
-                </div>
-                <div className={"vertical-line "}> </div>
-                <div className={'right-box'}>
-                    <div className={'timeline-layout'}>
+                <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
+                    <Col span={6}>
+                        <div style={{width: "100%"}}>
+                            <h2>
+                                <div className={'status-layout'} style={{"color": "#1890ff"} }><CheckCircleOutlined />&thinsp;Регистрация окончена</div>
+                            </h2>
+                        </div>
+                    </Col>
+                    <Col span={16}>
                         <Steps current={1}>
                             <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
                             <Step title="Старт" subTitle="" description={startTime}/>
                             <Step title="Завершение" description={endTime}/>
                         </Steps>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </React.Fragment>
         )
     }
     else if (props.quest.status === "inprogress"){
         return (
             <React.Fragment>
-                <p> </p>
-                <div className={'status-layout'} style={{"color": "#52c41a"} }><PlayCircleFilled /> &#160;Сейчас</div>
-                <div className={'button-layout'}>
-                    &nbsp;
-                </div>
-                <div className={"vertical-line "}> </div>
-                <div className={'right-box'}>
-                    <div className={'timeline-layout'}>
+                <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
+                    <Col span={6}>
+                        <div style={{width: "100%"}}>
+                            <h2>
+                                <div className={'status-layout'} style={{"color": "#52c41a"} }><PlayCircleFilled /> &#160;Сейчас</div>
+                            </h2>
+                        </div>
+                    </Col>
+                    <Col span={16}>
                         <Steps current={1}>
                             <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
-                            <Step title="Старт" subTitle={remainingTimeText} description={startTime}/>
+                            <Step title="Старт" subTitle="" description={startTime}/>
                             <Step title="Завершение" description={endTime}/>
                         </Steps>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </React.Fragment>
         )
     }
     else {
         return (
             <React.Fragment>
-                <p> </p>
-                <div className={'status-layout'} style={{"color": "#8c8c8c"} }><CheckCircleOutlined /> &#160;Завершён</div>
-                <div className={'button-layout'}>&nbsp; </div>
-                <div className={"vertical-line "}> </div>
-                <div className={'right-box'}>
-                    <div className={'timeline-layout'}>
+                <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
+                    <Col span={6}>
+                        <div style={{width: "100%"}}>
+                            <h2>
+                                <div className={'status-layout'} style={{"color": "#8c8c8c"} }><CheckCircleOutlined /> &#160;Завершён</div>
+                            </h2>
+                        </div>
+                    </Col>
+                    <Col span={16}>
                         <Steps current={2}>
                             <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
                             <Step title="Старт" subTitle="" description={startTime}/>
                             <Step title="Завершён" description={endTime}/>
                         </Steps>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </React.Fragment>
         )
     }
