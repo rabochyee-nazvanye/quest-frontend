@@ -30,7 +30,7 @@ function Header (props) {
       {/*      <UserButton/> */}
       {/*    </div> */}
       {/*  </header> */}
-      <hr className={'header__divider'}/>
+      <Divider className={"header__divider"}/>
     </React.Fragment>
   )
 }
