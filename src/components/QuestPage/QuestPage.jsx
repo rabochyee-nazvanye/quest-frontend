@@ -4,10 +4,12 @@ import QuestTimelineHaveTeam from './QuestTimelineHaveTeam'
 import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
 import { Button, Spin, Typography, Row, Col, Progress, Steps } from 'antd'
-import { BASE_URL } from '../../settings'
+import {BASE_URL, CLIENT_URL} from '../../settings'
 import QuestModalReg from "./QuestModalReg";
 import TeamList from "./TeamList";
 import {getToken} from "../../redux/Actions/Api";
+import MetaTags from "../shared/MetaTags/MetaTags";
+
 
 const { Title, Paragraph } = Typography
 const { Step } = Steps
@@ -40,7 +42,22 @@ class QuestPage extends Component {
     this.setState({ successVisible: false })
   }
 
-    getTeam () {
+  getMetaData () {
+      if (this.state.dataReady) {
+          const metaData = {
+              title: this.state.quest.name,
+              description: "Квест на Квестспейсе",
+              keywords: "квест",
+              robots: "",
+              canonicalUrl: CLIENT_URL
+          };
+          return (<MetaTags metaData={metaData} />)
+      } else {
+          return <MetaTags/>
+      }
+  }
+
+  getTeam () {
         const token = getToken();
         fetch(BASE_URL + '/quests/' + this.state.quest.id + '/teams?members=currentUser ',
             {
@@ -135,7 +152,8 @@ class QuestPage extends Component {
   render () {
     return (
       <React.Fragment>
-        {this.getRepresentationByState()}
+            {this.getMetaData()}
+            {this.getRepresentationByState()}
       </React.Fragment>
     )
   }
