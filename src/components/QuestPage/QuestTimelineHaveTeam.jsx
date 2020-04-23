@@ -47,11 +47,9 @@ function QuestTimelineHaveTeam(props) {
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
                     <Col span={6}>
                         <div style={{width: "100%"}}>
-                            <h2>
                                 <div className={'status-layout'} style={{"color": "#faad14"}}><Loading3QuartersOutlined
                                     spin/> &#160;Идет регистрация
                                 </div>
-                            </h2>
                             <div className={'button-layout'}>
                                 <Button type="primary"
                                         htmlType="submit"
@@ -80,11 +78,9 @@ function QuestTimelineHaveTeam(props) {
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
                     <Col span={6}>
                         <div style={{width: "100%"}}>
-                            <h2>
                                 <div className={'status-layout'} style={{"color": "#1890ff"}}>
                                     <CheckCircleOutlined/>&thinsp;Регистрация окончена
                                 </div>
-                            </h2>
                             <div className={'button-layout'}>
                                 <Button type="primary"
                                         htmlType="submit"
@@ -98,7 +94,7 @@ function QuestTimelineHaveTeam(props) {
                         </div>
                     </Col>
                     <Col span={16}>
-                        <Steps current={0}>
+                        <Steps current={1}>
                             <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
                             <Step title="Старт" subTitle="" description={startTime}/>
                             <Step title="Завершение" description={endTime}/>
@@ -113,11 +109,9 @@ function QuestTimelineHaveTeam(props) {
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
                     <Col span={6}>
                         <div style={{width: "100%"}}>
-                            <h2>
                                 <div className={'status-layout'} style={{"color": "#52c41a"}}>
                                     <PlayCircleFilled/> &#160;Сейчас
                                 </div>
-                            </h2>
                             <div className={'button-layout'}>
                                 <Button type="primary"
                                         htmlType="submit"
@@ -148,21 +142,7 @@ function QuestTimelineHaveTeam(props) {
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
                     <Col span={6}>
                         <div style={{width: "100%"}}>
-                            <h2>
-                                <div className={'status-layout'} style={{"color": "#8c8c8c"}}><CheckCircleOutlined/> &#160;Завершён</div>
-                            </h2>
-                            <div className={'button-layout'}>
-                                <Button type="primary"
-                                        htmlType="submit"
-                                        className="button"
-                                        onClick={() => {
-                                            history.push("/quests/" + props.quest.id + "/play")
-                                        }
-                                        }
-                                >
-                                    Открыть задания
-                                </Button>
-                            </div>
+                                <div className={'status-layout'} style={{"color": "#8c8c8c"} }><CheckCircleOutlined /> &#160;Завершён</div>
                         </div>
                     </Col>
                     <Col span={16}>
