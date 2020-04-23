@@ -22,14 +22,6 @@ function Header (props) {
           </div>
         ]}
       />
-      {/*  <header className={"header"}> */}
-      {/*    <div className={"header__icon"}> */}
-      {/*      <QuestspaceIcon/> */}
-      {/*    </div> */}
-      {/*    <div className={"header__addition"}> */}
-      {/*      <UserButton/> */}
-      {/*    </div> */}
-      {/*  </header> */}
       <Divider className={"header__divider"}/>
     </React.Fragment>
   )
