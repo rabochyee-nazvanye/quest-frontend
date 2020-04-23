@@ -79,7 +79,7 @@ function QuestTimelineNoTeam (props) {
         return (
             <React.Fragment>
                 <p> </p>
-                <div className={'status-layout'} style={{"color": "#8c8c8c"} }><CheckCircleOutlined /> Регистрация окончена</div>
+                <div className={'status-layout'} style={{"color": "#1890ff"} }><CheckCircleOutlined />&thinsp;Регистрация окончена</div>
                 <div className={'button-layout'}>
                     &nbsp;
                 </div>
