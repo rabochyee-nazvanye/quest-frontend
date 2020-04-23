@@ -11,14 +11,3 @@
 .auth-form-button {
     width: 100%;
 }
-@media screen and (max-width: 480px) {
-    .auth-form {
-        width: 300px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top:-100px;
-        margin-left:-20px;
-        transform: translate(-50%, -50%)
-    }
-}

@@ -26,7 +26,6 @@ export default function LoginFormTemplate (props) {
       {alert}
       <Form
         name="login-form"
-        className="auth-form"
         initialValues={{
           remember: true
         }}

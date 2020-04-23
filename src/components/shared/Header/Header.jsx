@@ -1,23 +1,37 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { PageHeader } from 'antd'
+import { Divider, PageHeader } from 'antd'
 import { connect } from 'react-redux'
 import { logout } from '../../../redux/Actions/Api'
 import UserButton from './UserButton/UserButton'
 import QuestspaceIcon from '../Icons/QuestspaceIcon'
+import './Header.css'
 
 function Header (props) {
   const history = useHistory()
+
   return (
-      <div className='container'>
-    <PageHeader
-      ghost={false}
-      title={<QuestspaceIcon/>}
-      extra={[
-        <UserButton/>
-      ]}
-    />
-      </div>
+    <React.Fragment>
+      <PageHeader
+        ghost={false}
+        className={'header__padding-zero'}
+        title={ <QuestspaceIcon/> }
+        extra={[
+          <div className={'header__addition'}>
+            <UserButton/>
+          </div>
+        ]}
+      />
+      {/*  <header className={"header"}> */}
+      {/*    <div className={"header__icon"}> */}
+      {/*      <QuestspaceIcon/> */}
+      {/*    </div> */}
+      {/*    <div className={"header__addition"}> */}
+      {/*      <UserButton/> */}
+      {/*    </div> */}
+      {/*  </header> */}
+      <hr className={'header__divider'}/>
+    </React.Fragment>
   )
 }
 
