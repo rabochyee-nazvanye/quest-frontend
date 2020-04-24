@@ -1,18 +1,14 @@
 import React from 'react'
-import {Button, Col, Row, Steps, Popover, Avatar, Divider} from 'antd'
+import {Button, Col, Row, Steps} from 'antd'
 import "./QuestTimeline.css"
 import {
     Loading3QuartersOutlined,
     CheckCircleOutlined,
-    LoadingOutlined,
     PlayCircleFilled,
     CheckOutlined,
-    EnvironmentTwoTone,
-    UserAddOutlined
+    ClockCircleOutlined
 } from '@ant-design/icons'
-import {getToken} from '../../redux/Actions/Api.js';
 import {useHistory} from 'react-router-dom'
-import {BASE_URL} from "../../settings";
 
 let dateTimeNow = new Date();
 
@@ -135,7 +131,28 @@ function QuestTimelineHaveTeam(props) {
                 </Row>
             </React.Fragment>
         )
-    } else {
+    }
+    else if (props.quest.status === "finished"){
+        return (
+            <React.Fragment>
+                <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
+                    <Col span={6}>
+                        <div style={{width: "100%"}}>
+                            <div className={'status-layout'} style={{"color": "#1890ff"} }><ClockCircleOutlined /> &#160;Ждём результаты</div>
+                        </div>
+                    </Col>
+                    <Col span={16}>
+                        <Steps current={2}>
+                            <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
+                            <Step title="Старт" subTitle={remainingTimeText} description={startTime}/>
+                            <Step title="Завершение" description={endTime}/>
+                        </Steps>
+                    </Col>
+                </Row>
+            </React.Fragment>
+        )
+    }
+    else {
         return (
             <React.Fragment>
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
