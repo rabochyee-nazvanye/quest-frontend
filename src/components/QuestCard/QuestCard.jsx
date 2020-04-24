@@ -1,14 +1,12 @@
 import React from 'react'
-import {Avatar, Button, Card, Steps, Typography} from 'antd'
+import { Card, Typography} from 'antd'
 import ProgressiveImage from "react-progressive-image";
 import {
     CheckCircleOutlined,
-    CheckOutlined,
-    EnvironmentTwoTone,
     Loading3QuartersOutlined,
-    PlayCircleFilled
+    PlayCircleFilled,
+    ClockCircleOutlined
 } from "@ant-design/icons";
-import {getToken} from "../../redux/Actions/Api";
 
 const { Meta } = Card;
 const {Text} = Typography;
@@ -33,6 +31,12 @@ function getMeta(quest) {
     {
         return (
             <>{startTime} | <CheckCircleOutlined style={{color: '#1890ff'}}/> <Text style={{color: '#1890ff'}}>регистрация завершена</Text></>
+        )
+    }
+    else if (quest.status === "finished")
+    {
+        return (
+            <>{startTime} | <ClockCircleOutlined style={{color: '#1890ff'}}/> <Text style={{color: '#1890ff'}}>ждём результаты</Text></>
         )
     }
     else {
