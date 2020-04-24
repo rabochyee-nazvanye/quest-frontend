@@ -52,13 +52,15 @@ function QuestPlaymode (props) {
   }
 
   // todo implement a new way of getting if the data was changed
-  const getErrorResponse = (type, json) => {
+  const getErrorResponse = (json) => {
+    alert(JSON.stringify(json))
     setException(json)
     setDataReady({
-      quests: false,
-      teams: false,
-      tasks: false
+      quests: true,
+      teams: true,
+      tasks: true
     })
+    alert(JSON.stringify(dataReady))
   }
 
   if (!props.loggedIn) {
