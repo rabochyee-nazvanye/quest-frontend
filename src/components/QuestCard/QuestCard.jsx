@@ -15,8 +15,7 @@ const {Text} = Typography;
 
 function getMeta(quest) {
     const commonOptions = {
-        month: 'numeric', day: 'numeric',
-        timeZone: 'America/Los_Angeles'
+        month: 'numeric', day: 'numeric'
     };
     const startTime = new Intl.DateTimeFormat('default', commonOptions).format(new Date(quest.startDate)).toString();
 

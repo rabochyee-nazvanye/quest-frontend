@@ -4,6 +4,8 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { logout } from '../../../redux/Actions/Api'
 import { connect } from 'react-redux'
 import GuestsList from './GuestsList';
+import {CLIENT_URL} from "../../../settings";
+import MetaTags from "../../shared/MetaTags/MetaTags";
 
 function getAvatar(avatarUrl) {
     if (avatarUrl === null) {
@@ -15,8 +17,16 @@ function getAvatar(avatarUrl) {
 
 
 function AccountTemplate (props) {
+    const metaData = {
+        title: "Мой профиль",
+        description: "",
+        keywords: "квест",
+        robots: "",
+        canonicalUrl: CLIENT_URL
+    };
   return (
     <React.Fragment>
+        <MetaTags metaData={metaData} />
         {getAvatar(props.user.avatarUrl)}
         <h1> Привет, &#160;@{props.user.name}! </h1>
 
@@ -29,7 +39,6 @@ function AccountTemplate (props) {
         </Button>
         <Divider />
         <GuestsList/>
-
     </React.Fragment>
   )
 };

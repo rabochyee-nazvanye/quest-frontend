@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-
+import MetaTags from "../shared/MetaTags/MetaTags";
 import LoginFormTemplate from './Templates/LoginFormTemplate'
 import connect from 'react-redux/es/connect/connect'
 import {
@@ -41,6 +41,7 @@ function Auth (props) {
   } else {
     return (
       <React.Fragment>
+        <MetaTags />
         {title}
         {form}
         {isInLoginChanger}
