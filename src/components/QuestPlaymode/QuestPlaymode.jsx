@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getQuestTasks, getTeamInfo, getQuestInfo } from './Api'
+import { getQuestTasks, getTeamInfo, getQuestInfo, sendTaskAttempt, getTaskHint } from './Api'
 import { Spin } from 'antd'
 import { dataFullyReady, groupBy } from './Utils'
 import QuestTasks from './Templates/Tasks/QuestTasks'
@@ -53,14 +53,24 @@ function QuestPlaymode (props) {
 
   // todo implement a new way of getting if the data was changed
   const getErrorResponse = (json) => {
-    alert(JSON.stringify(json))
     setException(json)
     setDataReady({
       quests: true,
       teams: true,
       tasks: true
     })
-    alert(JSON.stringify(dataReady))
+  }
+
+  const updateTasks = () => {
+    getQuestTasks(questId, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
+  }
+
+  const getTaskHintInfo = (hintNumber, taskId) => {
+    getTaskHint(questId, taskId, hintNumber, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
+  }
+
+  const sendTaskInfo = (taskId, attemptText) => {
+    sendTaskAttempt(questId, taskId, data.teams[0].id, attemptText, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
   }
 
   if (!props.loggedIn) {
@@ -77,7 +87,11 @@ function QuestPlaymode (props) {
       return (
         <React.Fragment>
           <MetaInfoPlaymode quest={data.quests} team={data.teams[0]} />
-          <QuestTasks tasks={groupBy(data.tasks, 'group')}/>
+          <QuestTasks tasks={groupBy(data.tasks, 'group')}
+            sendTaskCallback = {(taskId, attemptText) => sendTaskInfo(taskId, attemptText)}
+            updateTasksCallback={() => updateTasks()}
+            getHintCallback={(hintNumber, taskId) => getTaskHintInfo(hintNumber, taskId)}
+          />
         </React.Fragment>
       )
     } else {
