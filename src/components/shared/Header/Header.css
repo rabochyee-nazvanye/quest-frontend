@@ -1,0 +1,22 @@
+.header__padding-zero {
+    padding: 10px 0 !important;
+    margin-top: 10px !important;
+}
+.header__divider {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    size: 1px;
+}
+.header {
+    display: inline;
+}
+.header__icon {
+    float: right;
+}
+.ant-page-header-heading > .ant-page-header-heading-extra {
+    float: right;
+    width: auto !important;
+    display: inline !important;
+}
