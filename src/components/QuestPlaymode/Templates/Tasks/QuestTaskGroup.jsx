@@ -71,7 +71,8 @@ export default function QuestTaskGroup (props) {
               <AnswerInput answerStatus={taskData.status}
                 taskId={taskData.id}
                 sendAnswer={(answer) => props.sendTaskCallback(taskData.id, answer)}
-                lastSubmittedAnswer={taskData.lastSubmittedAnswer}/>
+                lastSubmittedAnswer={taskData.lastSubmittedAnswer}
+                manualVerificationEnabled={taskData.manualVerificationEnabled}/>
             </div>
           </Col>
 

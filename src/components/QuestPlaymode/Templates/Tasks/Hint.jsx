@@ -18,7 +18,7 @@ export default function Hint (props) {
     return (
       <div className={'quest-task__container'}>
         <button className={'quest-task__button'} onClick={() => props.getHintCallback(props.number, props.id)}>
-          <div className={'quest-task__typography'}>
+          <div className={'quest-task__typography__podskazka'}>
             <p>{'Подсказочку ❓'}</p>
           </div>
         </button>

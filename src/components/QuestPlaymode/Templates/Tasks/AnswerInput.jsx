@@ -7,7 +7,7 @@ export default function AnswerInput (props) {
 
   const getPlaceholder = () => {
     if (props.manualVerificationEnabled) {
-      return 'Ручная проверка'
+      return 'Проверка модератором'
     }
     return 'Автоматическая проверка'
   }
@@ -19,7 +19,7 @@ export default function AnswerInput (props) {
           disabled={true}
           placeholder={getPlaceholder()}
           enterButton=">"
-          onSearch={(value) => props.sendAnswer(value)}
+          onSearch={(value) => (value)}
         />
       </div>)
   }
@@ -29,7 +29,7 @@ export default function AnswerInput (props) {
         disabled={false}
         placeholder={getPlaceholder()}
         enterButton=">"
-        onSearch={(value) => props.sendAnswer(value)}
+        onSearch={(value) => { if (value !== '') {props.sendAnswer(value)} }}
       />
     </div>)
 }

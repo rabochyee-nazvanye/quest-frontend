@@ -70,7 +70,7 @@ function QuestPlaymode (props) {
   }
 
   const sendTaskInfo = (taskId, attemptText) => {
-    sendTaskAttempt(questId, taskId, data.teams[0].id, attemptText, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
+    sendTaskAttempt(questId, taskId, data.teams.id, attemptText, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
   }
 
   if (!props.loggedIn) {
