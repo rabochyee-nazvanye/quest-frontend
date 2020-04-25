@@ -69,13 +69,13 @@ class GuestDescription extends Component {
     getCup(place) {
         switch(place) {
             case 1:
-                return 'gold';
+                return <TrophyOutlined style={{"color": "#FA8C16"}}/>;
             case 2:
-                return 'silver';
+                return <TrophyOutlined style={{"color": "#595959"}}/>;
             case 3:
-                return 'bronze';
+                return <TrophyOutlined style={{"color": "#5C0011"}}/>;
             default:
-                return 'another'
+                return ''
         }
     }
 
@@ -106,11 +106,10 @@ class GuestDescription extends Component {
                     </React.Fragment>
                 )
             } else {
-                const cups = { 'gold': <TrophyOutlined style={{"color": "#FA8C16"}}/>, 'silver': <TrophyOutlined style={{"color": "#595959"}}/>, 'bronze': <TrophyOutlined style={{"color": "#5C0011"}}/>, 'another': ''};
                 const a = this.mapResults();
                 const col1 = [];
                 const col2 = [];
-                a.forEach((x) => x['cup'] = cups[this.getCup(x.place)]);
+                a.forEach((x) => x['cup'] = this.getCup(x.place));
                 a.forEach((x) => {if (parseInt(x.place) < a.length/2+1) col1.push(x); else col2.push(x)});
                 return (
                     <React.Fragment>
