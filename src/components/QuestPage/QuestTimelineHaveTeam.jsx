@@ -6,9 +6,9 @@ import {
     CheckCircleOutlined,
     PlayCircleFilled,
     CheckOutlined,
-    ClockCircleOutlined
+    ClockCircleOutlined, StarOutlined
 } from '@ant-design/icons'
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 let dateTimeNow = new Date();
 
@@ -132,7 +132,7 @@ function QuestTimelineHaveTeam(props) {
             </React.Fragment>
         )
     }
-    else if (props.quest.status === "finished"){
+    else if (props.quest.status === "finished" && props.quest.status !== 'resultsavailable'){
         return (
             <React.Fragment>
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
@@ -158,7 +158,18 @@ function QuestTimelineHaveTeam(props) {
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
                     <Col span={6}>
                         <div style={{width: "100%"}}>
-                                <div className={'status-layout'} style={{"color": "#8c8c8c"} }><CheckCircleOutlined /> &#160;Завершён</div>
+                            <div className={'status-layout'} style={{"color": "#8c8c8c"} }><CheckCircleOutlined /> &#160;Завершён</div>
+                            <div className={'button-layout'}>
+                                <Button type="primary"
+                                        htmlType="submit"
+                                        style={{ "background-color": "#52c41a", "border-color": "#52c41a" }}
+                                        className="button"
+                                        onClick={function() {
+                                            document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSczHbtw8c05IanZ02rcDvzMw37t7-CDtkiw9oiOpgesFZxiNw/viewform'}}
+                                >
+                                    <StarOutlined/> Оставить отзыв
+                                </Button>
+                            </div>
                         </div>
                     </Col>
                     <Col span={16}>

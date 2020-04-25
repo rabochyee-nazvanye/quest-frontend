@@ -6,10 +6,10 @@ import {
     CheckCircleOutlined,
     PlayCircleFilled,
     UserAddOutlined,
-    ClockCircleOutlined
+    ClockCircleOutlined,
 } from '@ant-design/icons'
 import { getToken } from '../../redux/Actions/Api.js';
-import { useHistory } from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 let dateTimeNow = new Date();
 
 
@@ -114,7 +114,7 @@ function QuestTimelineNoTeam (props) {
             </React.Fragment>
         )
     }
-    else if (props.quest.status === "finished"){
+    else if (props.quest.status === "finished" && props.quest.status !== 'resultsavailable'){
         return (
             <React.Fragment>
                 <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
