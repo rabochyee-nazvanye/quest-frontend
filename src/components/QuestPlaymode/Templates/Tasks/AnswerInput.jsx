@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
+import { SendOutlined } from '@ant-design/icons'
 
 export default function AnswerInput (props) {
   const ANSWER_ACCEPTED_STATUS = 'accepted'
@@ -18,7 +19,7 @@ export default function AnswerInput (props) {
         <Input.Search
           disabled={true}
           placeholder={getPlaceholder()}
-          enterButton=">"
+          enterButton=<SendOutlined />
           onSearch={(value) => (value)}
         />
       </div>)
@@ -28,7 +29,7 @@ export default function AnswerInput (props) {
       <Input.Search
         disabled={false}
         placeholder={getPlaceholder()}
-        enterButton=">"
+        enterButton=<SendOutlined />
         onSearch={(value) => { if (value !== '') {props.sendAnswer(value)} }}
       />
     </div>)
