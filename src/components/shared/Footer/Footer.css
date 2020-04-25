@@ -1,11 +1,11 @@
 .footer {
-    padding-top: 100px;
+    padding-top: 40px;
     position: relative;
     width: 100%;
     text-align: center;
-    padding-top: 40px;
     padding-bottom: 40px;
     min-width: 1100px;
+    margin-top: 100px;
 }
 .main-text {
     padding-top: 10px;
@@ -31,10 +31,10 @@
 @media (max-width: 768px) {
     .footer {
         padding-top: 100px;
+        margin-top: 100px;
         position: relative;
         width: auto;
         text-align: center;
-        padding-top: 40px;
         padding-bottom: 40px;
         min-width: 1150px;
     }

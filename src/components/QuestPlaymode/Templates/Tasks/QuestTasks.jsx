@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './style.css'
+import './Tasks.css'
 import { Collapse } from 'antd'
 import QuestTaskGroup from './QuestTaskGroup'
 
@@ -9,7 +9,11 @@ export default function QuestTasks (props) {
     return Object.keys(props.tasks).map(
       (x) => (
         <Collapse.Panel header={x} key={x}>
-          <QuestTaskGroup data={props.tasks[x]}/>
+          <QuestTaskGroup taskGroupData={props.tasks[x]}
+            sendTaskCallback = {props.sendTaskCallback}
+            updateTasksCallback={props.updateTasksCallback}
+            getHintCallback={props.getHintCallback}
+          />
         </Collapse.Panel>
       )
     )
@@ -25,5 +29,8 @@ export default function QuestTasks (props) {
 }
 
 QuestTasks.propTypes = {
-  tasks: PropTypes.object
+  tasks: PropTypes.object,
+  sendTaskCallback: PropTypes.func,
+  updateTasksCallback: PropTypes.func,
+  getHintCallback: PropTypes.func
 }

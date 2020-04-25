@@ -71,7 +71,7 @@ class QuestModalReg extends Component {
                         <Text strong>Пригласите друзей в свою команду — поделитесь ссылкой:</Text>
                     </p>
                     <p>
-                        <Paragraph copyable>{this.state.inviteLink}</Paragraph>
+                        <Paragraph copyable>{'https://' + this.state.inviteLink}</Paragraph>
                     </p>
                 </Modal>
                 <Modal

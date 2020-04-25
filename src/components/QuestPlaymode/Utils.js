@@ -12,3 +12,11 @@ export const groupBy = (collection, key) => {
     return x
   }, {})
 }
+
+// todo Unit tests
+export const range = (b, e) => {
+  Array.apply(null, Array(e - b))
+    .map((_, i) => {
+      return i + b
+    })
+}

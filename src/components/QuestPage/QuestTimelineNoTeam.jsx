@@ -1,18 +1,15 @@
 import React from 'react'
-import {Button, Col, Row, Steps, Popover, Avatar} from 'antd'
+import {Button, Col, Row, Steps } from 'antd'
 import "./QuestTimeline.css"
 import {
     Loading3QuartersOutlined,
     CheckCircleOutlined,
-    LoadingOutlined,
     PlayCircleFilled,
-    CheckOutlined,
-    EnvironmentTwoTone,
-    UserAddOutlined
+    UserAddOutlined,
+    ClockCircleOutlined,
 } from '@ant-design/icons'
 import { getToken } from '../../redux/Actions/Api.js';
-import { useHistory } from 'react-router-dom'
-import {BASE_URL} from "../../settings";
+import {Link, useHistory} from 'react-router-dom'
 let dateTimeNow = new Date();
 
 
@@ -108,6 +105,26 @@ function QuestTimelineNoTeam (props) {
                     </Col>
                     <Col span={16}>
                         <Steps current={1}>
+                            <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
+                            <Step title="Старт" subTitle={remainingTimeText} description={startTime}/>
+                            <Step title="Завершение" description={endTime}/>
+                        </Steps>
+                    </Col>
+                </Row>
+            </React.Fragment>
+        )
+    }
+    else if (props.quest.status === "finished" && props.quest.status !== 'resultsavailable'){
+        return (
+            <React.Fragment>
+                <Row style={{marginTop: "15px"}} gutter={[16, 16]}>
+                    <Col span={6}>
+                        <div style={{width: "100%"}}>
+                            <div className={'status-layout'} style={{"color": "#1890ff"} }><ClockCircleOutlined /> &#160;Ждём результаты</div>
+                        </div>
+                    </Col>
+                    <Col span={16}>
+                        <Steps current={2}>
                             <Step title="Регистрация" subTitle="" description={RegDescription(regDeadline)}/>
                             <Step title="Старт" subTitle={remainingTimeText} description={startTime}/>
                             <Step title="Завершение" description={endTime}/>

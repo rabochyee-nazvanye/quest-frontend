@@ -6,6 +6,7 @@ import About from './components/About/About'
 import GuestsList from './components/Account/AccountTemplate/GuestsList'
 import QuestPage from './components/QuestPage/QuestPage'
 import InvitePage from './components/InvitePage/InvitePage'
+import Progressboard from "./components/Progressboard/Progressboard";
 import './add-space.css'
 
 import './App.css'
@@ -38,6 +39,7 @@ function App () {
             <Switch>
               <Route path="/invites/:id" exact component={InvitePage}/>
               <Route path="/quests/:id" exact component={QuestPage}/>
+              <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
               <Route exact path={'/'} component={Account}/>
               <Route exact path={'/auth'} component={Auth}/>

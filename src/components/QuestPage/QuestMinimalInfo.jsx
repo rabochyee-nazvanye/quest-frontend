@@ -13,7 +13,7 @@ function QuestMinimalInfo (props) {
       <Title>{props.quest.name}</Title>
       <Row>
         <Col>
-            <h4>Организатор:  <Avatar src={props.quest.author.avatarUrl} size={'small'} /> {props.quest.author.name}</h4>
+          <h4>Организатор:  <Avatar src={props.quest.author.avatarUrl} size={'small'} /> {props.quest.author.name}</h4>
         </Col>
       </Row>
     </React.Fragment>
