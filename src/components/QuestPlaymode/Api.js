@@ -31,7 +31,7 @@ export function getTaskHint (questId, taskId, hintNumber, callback, errorCallbac
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify({})
+    body: JSON.stringify({})
   })
     .then((response) => {
       if (response.ok) {
@@ -51,7 +51,38 @@ export function getQuestInfo (id, callback, errorCallback) {
 }
 
 export function getTeamInfo (id, callback, errorCallback) {
-  getWithToken(`${BASE_URL}/quests/${id}/teams?members=currentUser`, callback, errorCallback)
+  let teamData = {}
+  let teamIdJson = {}
+
+  const setTeamData = (val) => {
+    teamData = val
+  }
+
+  const setTeamIdJson = (val) => {
+    teamData['code'] = val
+  }
+
+  fetch(`${BASE_URL}/quests/${id}/teams?members=currentUser`, {
+    method: 'GET',
+    headers: {
+      Authorization: 'bearer ' + getToken(),
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => {
+      if (response.ok) {
+        response.json().then((json) => {
+          setTeamData(json[0])
+        }).then(() => {
+          getWithToken(`${BASE_URL}/teams/${teamData.id}/inviteCode`, ((teamInviteCode) => {
+            teamData['code'] = teamInviteCode;
+            callback(teamData)}), errorCallback)
+        })
+      } else {
+        response.json().then((json) => errorCallback(json))
+      }
+    })
 }
 
 export function getWithToken (path, callback, errorCallback) {

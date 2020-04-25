@@ -2,7 +2,7 @@
     padding-top: 30px;
 }
 .quest-task__container{
-    display: inline-block;
+    display: inline-flex;
     width: 33%;
     height: 22vh;
     padding-right: 10px;
@@ -40,8 +40,11 @@
     height: 100%;
 }
 .quest-answer-input__container {
-    display: inline-block;
-    width: auto;
+    display: inline-flex;
+    width: 100%;
     padding-right: 10px;
     height: auto;
+}
+.quest-task__answer-column {
+    padding-right: 20px;
 }

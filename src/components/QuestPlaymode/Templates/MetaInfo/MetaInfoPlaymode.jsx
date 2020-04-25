@@ -17,7 +17,7 @@ export default function MetaInfoPlaymode (props) {
       <h1 className={'title__main'} >{props.quest.name}<span className={'title__low-opacity'}> /Задания</span></h1>
       <h2 className={'title__subtitle title__blue title__close '} >Команда: {props.team.name} <span className={'title__black title__low-opacity'}> | </span>
         <Tooltip title={<TooltipBotTemplate/>}>
-          <span className={'title__underscored'}>{props.team.name}</span>
+          <span className={'title__underscored'}>{props.team.code}</span>
         </Tooltip>
       </h2>
     </React.Fragment>

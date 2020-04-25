@@ -5,6 +5,7 @@ import './Tasks.css'
 import Hint from './Hint'
 import ReactMarkdown from 'react-markdown'
 import AnswerStatus from './AnswerStatus'
+import AnswerInput from './AnswerInput'
 
 export default function QuestTaskGroup (props) {
   const forgeHintsArray = (taskData) => {
@@ -55,8 +56,10 @@ export default function QuestTaskGroup (props) {
       <React.Fragment>
         <Row>
           <Col sm={8}>
-            <p><b>{taskData.name}</b></p>
-            <p>{<ReactMarkdown source={taskData.question} />}</p>
+            <div className={'quest-task__answer-column'}>
+              <p><b>{taskData.name}</b></p>
+              <p>{<ReactMarkdown source={taskData.question} />}</p>
+            </div>
           </Col>
           <Col sm={16}>
             { forgeHints(taskData) }
@@ -64,14 +67,14 @@ export default function QuestTaskGroup (props) {
         </Row>
         <Row>
           <Col sm={8}>
-            <div className={'quest-answer-input__container'}>
-              <Input.Search
-                placeholder="Ответ"
-                enterButton=">"
-                onSearch={value => props.sendTaskCallback(taskData.id, value)}
-              />
+            <div className={'quest-task__answer-column'}>
+              <AnswerInput answerStatus={taskData.status}
+                taskId={taskData.id}
+                sendAnswer={(answer) => props.sendTaskCallback(taskData.id, answer)}
+                lastSubmittedAnswer={taskData.lastSubmittedAnswer}/>
             </div>
           </Col>
+
           <Col sm={16}>
             <AnswerStatus
               lastSubmittedAnswer={taskData.lastSubmittedAnswer}
