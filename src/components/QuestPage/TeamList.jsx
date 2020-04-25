@@ -79,7 +79,7 @@ class TeamList extends Component {
         };
 
         if (!this.state.dataReady) {
-            return <Spin/>
+            return ''
         }
         if (this.state.team !== undefined) {
             return (
