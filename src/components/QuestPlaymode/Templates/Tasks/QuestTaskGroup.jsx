@@ -20,6 +20,10 @@ export default function QuestTaskGroup (props) {
       }
     }
 
+    if(taskData.hintsCount === 0) {
+      return []
+    }
+
     const hintArray = {
       0: getDefaultData(0),
       1: getDefaultData(1),
@@ -65,7 +69,7 @@ export default function QuestTaskGroup (props) {
             { forgeHints(taskData) }
           </Col>
         </Row>
-        <Row>
+        <Row className={'mt-30'}>
           <Col sm={8}>
             <div className={'quest-task__answer-column'}>
               <AnswerInput answerStatus={taskData.status}
@@ -75,7 +79,6 @@ export default function QuestTaskGroup (props) {
                 manualVerificationEnabled={taskData.manualVerificationEnabled}/>
             </div>
           </Col>
-
           <Col sm={16}>
             <AnswerStatus
               lastSubmittedAnswer={taskData.lastSubmittedAnswer}
