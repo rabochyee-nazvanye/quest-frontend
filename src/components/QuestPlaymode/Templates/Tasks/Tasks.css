@@ -7,6 +7,19 @@
     height: 22vh;
     padding-right: 10px;
 }
+.quest-task__container__podskazka{
+    display: inline-flex;
+    padding-top: 40px;
+    width: 33%;
+    height: 22vh;
+    padding-right: 10px;
+}
+.quest-task__typography__podskazka {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+}
 .quest-task__typography__container{
     padding-top: 10px;
     padding-left: 10px;
