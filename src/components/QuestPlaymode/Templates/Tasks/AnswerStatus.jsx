@@ -34,11 +34,8 @@ export default function AnswerStatus (props) {
     }
   }
 
-  const questionType = props.manualVerificationEnabled ? <p>Ручная проверка</p> : <p>Автоматическая проверка</p>
-
   return (
     <React.Fragment>
-      {questionType}
       <p>Последний отправленный ответ: {props.lastSubmittedAnswer} {getStatusString()}</p>
       {getAdminComment()}
     </React.Fragment>

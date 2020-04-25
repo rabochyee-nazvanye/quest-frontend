@@ -23,7 +23,7 @@ function QuestPlaymode (props) {
       getTeamInfo(questId, getSuccessResponse.bind(null, DATA_TYPES.teams), getErrorResponse)
       getQuestTasks(questId, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
     }
-  }, []
+  }, [props.loggedIn]
   )
 
   const [dataReady, setDataReady] = useState({
@@ -86,7 +86,7 @@ function QuestPlaymode (props) {
     if (exception === null) {
       return (
         <React.Fragment>
-          <MetaInfoPlaymode quest={data.quests} team={data.teams[0]} />
+          <MetaInfoPlaymode quest={data.quests} team={data.teams} />
           <QuestTasks tasks={groupBy(data.tasks, 'group')}
             sendTaskCallback = {(taskId, attemptText) => sendTaskInfo(taskId, attemptText)}
             updateTasksCallback={() => updateTasks()}

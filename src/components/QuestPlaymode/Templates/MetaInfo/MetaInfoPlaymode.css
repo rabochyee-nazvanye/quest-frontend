@@ -1,5 +1,6 @@
 .title__low-opacity {
     opacity: 0.7;
+    font-weight: 300;
 }
 .title__container {
     padding-top: 10px;
