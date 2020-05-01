@@ -20,7 +20,7 @@ class QuestPage extends Component {
       regVisible: false,
       successVisible: false,
       team: undefined,
-      type: 'single',
+      type: 'solo',
       isInfinite: true
     }
   }
@@ -74,7 +74,6 @@ class QuestPage extends Component {
   }
 
   componentDidMount () {
-    // eslint-disable-next-line react/prop-types
     fetch(BASE_URL + '/quests/' + this.props.match.params.id)
       .then(response => response.json())
       .then(readResponse => { this.setState({ quest: readResponse, type: readResponse["type"], isInfinite: readResponse["isInfinite"] }); this.getTeam(); this.setState({ dataReady: true }) })
@@ -83,11 +82,13 @@ class QuestPage extends Component {
   getRepresentationByState () {
     let timing;
     let team;
-    if (this.state.type !== "single")
+    console.log(this.state.type)
+
+    if (this.state.type !== "solo")
       team = <TeamList quest={this.state.quest}/>;
     else
       team = '';
-    if (this.state.isInfinite !== true){
+    if (!this.state.isInfinite){
       timing = <QuestTimelineProcess quest={this.state.quest} team={this.state.team}
                                      regVisible={this.state.regVisible}
                                      successVisible = {this.state.successVisible}
