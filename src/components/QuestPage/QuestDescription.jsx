@@ -87,7 +87,6 @@ class GuestDescription extends Component {
                 return (
                     <React.Fragment>
                         <p>
-                            <p>&nbsp;</p>
                             <Divider/>
                             <div className={'about'}>
                                 <svg width="190" height="26" viewBox="0 0 190 36" fill="none"

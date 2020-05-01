@@ -80,6 +80,15 @@ class QuestPage extends Component {
   }
 
   getRepresentationByState () {
+    //mock flags
+    let timeFlag = "isInfinite";
+    let typeQuest = "single";
+    let team;
+    if (typeQuest !== "single")
+      team = <TeamList quest={this.state.quest}/>;
+    else
+      team = '';
+
     if (!this.state.dataReady) {
       return <Spin />
     } else
@@ -87,7 +96,7 @@ class QuestPage extends Component {
         <React.Fragment>
           <QuestMinimalInfo quest={this.state.quest}/>
           <h2>
-            <QuestTimelineDrawing quest={this.state.quest} team={this.state.team}
+            <QuestTimelineDrawing quest={this.state.quest} team={this.state.team} timeFlag={timeFlag}
               regVisible={this.state.regVisible}
               successVisible = {this.state.successVisible}
               setRegVisible={() => this.setRegVisible()}
@@ -98,8 +107,8 @@ class QuestPage extends Component {
               url = {'quests/' + this.state.quest.id}
             />
           </h2>
-          <QuestDescription quest={this.state}/>
-          <TeamList quest={this.state.quest}/>
+          <QuestDescription quest={this.state.quest}/>
+          {team}
           <QuestModalReg
             regVisible={this.state.regVisible}
             successVisible = {this.state.successVisible}

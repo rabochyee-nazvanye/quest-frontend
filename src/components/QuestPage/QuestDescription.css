@@ -14,3 +14,21 @@
     text-align: left;
     white-space: pre-wrap;
 }
+
+@media (max-width: 500px) {
+    .about {
+        position: relative;
+        top: 65%;
+        left: -6%;
+    }
+    .quest-descript {
+        position: relative;
+        top: 59%;
+        left: 6.2%;
+        word-wrap: break-word;
+        width: 100%;
+        text-align: left;
+        white-space: pre-wrap;
+    }
+}
+

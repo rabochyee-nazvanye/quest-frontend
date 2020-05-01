@@ -10,3 +10,13 @@
     position: relative;
     left: 12px;
 }
+
+@media (max-width: 500px) {
+    .user-button-logged-out-container  {
+        display: none;
+    }
+    .user-button-logged-in-container {
+        display: none;
+    }
+}
+
