@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import QuestTimelineTemplate from './QuestTimelineTemplate'
 import InfiniteQuestTemplate from "./InfiniteQuestTemplate";
 import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import {  Spin, Typography, Steps } from 'antd'
+import {  Spin } from 'antd'
 import { BASE_URL, CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
@@ -11,8 +10,6 @@ import { getToken } from '../../redux/Actions/Api'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
 
-const { Title, Paragraph } = Typography
-const { Step } = Steps
 
 class QuestPage extends Component {
   constructor (props) {
@@ -82,14 +79,6 @@ class QuestPage extends Component {
       .then(response => response.json())
       .then(readResponse => { this.setState({ quest: readResponse, type: readResponse["type"], isInfinite: readResponse["isInfinite"] }); this.getTeam(); this.setState({ dataReady: true }) })
   }
-
-
- // в общем предлагаю пока пойти по такому пути:
-   //   в /quests/get:
-     // добавится:
- // "type": "single" / "team"
- // "isInfinite": true / false
-//            .then(readResponse => this.setState({ dataReady: true, results:  readResponse["teamResults"]}));
 
   getRepresentationByState () {
     let timing;
