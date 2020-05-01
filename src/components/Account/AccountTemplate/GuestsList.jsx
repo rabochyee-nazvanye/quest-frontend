@@ -24,9 +24,9 @@ class GuestsList extends Component {
 
   mapQuestsToTemplate () {
     return this.state.results.map((obj) =>
-      <Col key={'quest:' + obj.id} ant-col ant-col-xs-12 ant-col-sm-12 ant-col-md-12 ant-col-lg-12  ant-col-xl-12 xs={8}>
-        <Link to={'/quests/' + obj.id}><QuestCard quest={obj} /></Link>
-      </Col>
+    <Col key={'quest:' + obj.id} xs={22} md={8}>
+          <Link to={'/quests/' + obj.id}><QuestCard quest={obj} /></Link>
+        </Col>
     )
   }
 
