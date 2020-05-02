@@ -18,17 +18,17 @@ export default function AnswerStatus (props) {
     if (props.adminComment === null || props.adminComment === '') {
       return (<React.Fragment/>)
     }
-    return (<span>{props.adminComment}</span>)
+    return (<span>{' / Комментарий: '}{props.adminComment}</span>)
   }
 
   const getStatusString = () => {
     switch (props.status) {
       case TASK_ATTEMPT_STATUSES.Error:
-        return (<span style={{ color: TASK_ATTEMPT_COLORS.Red }}>оказался неверным</span>)
+        return (<span style={{ color: TASK_ATTEMPT_COLORS.Red }}>Неправильный ответ</span>)
       case TASK_ATTEMPT_STATUSES.OnReview:
-        return (<span style={{ color: TASK_ATTEMPT_COLORS.Yellow }}>ожидает проверки</span>)
+        return (<span style={{ color: TASK_ATTEMPT_COLORS.Yellow }}>Ответ проверяется модератором. Это займёт некоторое время</span>)
       case TASK_ATTEMPT_STATUSES.Accepted:
-        return (<span style={{ color: TASK_ATTEMPT_COLORS.Green }}>был зачтен</span>)
+        return (<span style={{ color: TASK_ATTEMPT_COLORS.Green }}>Зачтено</span>)
       default:
         return (<React.Fragment/>)
     }
@@ -36,7 +36,7 @@ export default function AnswerStatus (props) {
 
   return (
     <React.Fragment>
-      <p>Последний отправленный ответ: {props.lastSubmittedAnswer} {getStatusString()}</p>
+      {getStatusString()}
       {getAdminComment()}
     </React.Fragment>
   )
