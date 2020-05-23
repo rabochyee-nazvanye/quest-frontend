@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import InfiniteQuestTemplate from "./InfiniteQuestTemplate";
-import QuestDescription from './QuestDescription'
+import QuestDescriptionLogic from './QuestDescriptionLogic'
 import QuestMinimalInfo from './QuestMinimalInfo'
 import {  Spin } from 'antd'
 import { BASE_URL, CLIENT_URL } from '../../settings'
@@ -115,7 +115,7 @@ class QuestPage extends Component {
           <h2>
             {timing}
           </h2>
-          <QuestDescription quest={this.state.quest}/>
+          <QuestDescriptionLogic quest={this.state.quest}/>
           {team}
           <QuestModalReg
             regVisible={this.state.regVisible}
