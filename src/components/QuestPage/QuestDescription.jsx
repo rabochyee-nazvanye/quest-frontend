@@ -3,7 +3,7 @@ import {Col, Divider, Row, Spin, Table} from 'antd'
 import './QuestDescription.css'
 
 import {TrophyOutlined} from '@ant-design/icons'
-import {getToken} from '../../redux/Actions/Api'
+import {getToken} from '../../api/AuthApi'
 import {BASE_URL} from '../../settings'
 import ReactMarkdown from 'react-markdown'
 
@@ -45,7 +45,7 @@ class GuestDescription extends Component {
         }
     }
     componentDidMount () {
-        const id = this.props.questId;
+        const id = this.props.quest.id;
         const token = getToken()
         fetch(BASE_URL + '/quests/' + id + '/scoreboard',
             {
