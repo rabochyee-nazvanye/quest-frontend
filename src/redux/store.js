@@ -5,12 +5,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import authReducer from "./Reducers/AuthReducer";
 import questsReducer from './Reducers/QuestsReducer'
+import applicationReducer from './Reducers/ApplicationReducer'
 
 const loggerMiddleware = createLogger();
 
 const rootReducer = combineReducers({
     authReducer,
-    questsReducer
+    questsReducer,
+    applicationReducer,
 });
 
 export const store = createStore(
