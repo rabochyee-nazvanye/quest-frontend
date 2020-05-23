@@ -6,21 +6,14 @@ import { SendOutlined } from '@ant-design/icons'
 export default function AnswerInput (props) {
   const ANSWER_ACCEPTED_STATUS = 'accepted'
 
-  const getPlaceholder = () => {
-    if (props.manualVerificationEnabled) {
-      return 'Проверка модератором'
-    }
-    return 'Автоматическая проверка'
-  }
-
   if (props.answerStatus === ANSWER_ACCEPTED_STATUS) {
     return (
       <div className={'quest-answer-input__container '}>
         <Input.Search
           disabled={true}
-          placeholder={getPlaceholder()}
           enterButton=<SendOutlined />
           onSearch={(value) => (value)}
+          placeholder={props.lastSubmittedAnswer}
         />
       </div>)
   }
@@ -28,9 +21,9 @@ export default function AnswerInput (props) {
     <div className={'quest-answer-input__container'}>
       <Input.Search
         disabled={false}
-        placeholder={getPlaceholder()}
         enterButton=<SendOutlined />
         onSearch={(value) => { if (value !== '') {props.sendAnswer(value)} }}
+        placeholder={props.lastSubmittedAnswer}
       />
     </div>)
 }
