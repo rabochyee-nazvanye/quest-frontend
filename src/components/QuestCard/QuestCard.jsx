@@ -47,7 +47,11 @@ function getMeta(quest) {
 }
 
 function QuestCards (props) {
-
+    let meta;
+    if(!props.isInfinite)
+        meta = getMeta(props.quest);
+    else
+        meta = <> <PlayCircleFilled style={{color: '#52c41a'}}/> <Text style={{color: '#52c41a'}}>сейчас</Text></>;
   return (
     <React.Fragment>
       <Card
@@ -65,7 +69,7 @@ function QuestCards (props) {
         <Meta
           title={props.quest.name}
         />
-        {getMeta(props.quest)}
+          {meta}
       </Card>
     </React.Fragment>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import {Button} from 'antd'
-import "./QuestTimeline.css"
 import {
     Loading3QuartersOutlined,
     CheckCircleOutlined,
@@ -10,10 +9,11 @@ import {
 } from '@ant-design/icons'
 import {useHistory} from 'react-router-dom'
 import {getToken} from "../../redux/Actions/Api";
+import QuestTimelineTemplate from './QuestTimelineTemplate'
 let dateTimeNow = new Date();
 
-
-function QuestTimelineInfo(props) {
+function QuestTimelineProcess(props) {
+    let status = props.quest.status;
     const history = useHistory();
     const componentsHaveCommand = {"scheduled": <Button type="primary" htmlType="submit" className="button" onClick="Nothing" disabled={true}>Ты в команде <CheckOutlined/></Button>,
         "registrationover": <Button type="primary" htmlType="submit" className="button" onClick="Nothing" disabled={true}>Ты в команде <CheckOutlined/></Button>,
@@ -46,7 +46,15 @@ function QuestTimelineInfo(props) {
     const startTime = new Intl.DateTimeFormat('default', commonOptions).format(new Date(props.quest.startDate)).toString();
     const endTime = new Intl.DateTimeFormat('default', commonOptions).format(new Date(props.quest.endDate)).toString();
 
-    return {"buttons": buttons, "elements": statusDescripts, "reg": regDeadline, "start": startTime, "end": endTime}
+    //HAVE SOME PROBLEM HERE
+    return <QuestTimelineTemplate buttons={buttons[status]}
+                                  color={statusDescripts[status]["color"]}
+                                  pin={statusDescripts[status]["pin"]}
+                                  step={statusDescripts[status]["step"]}
+                                  comment={statusDescripts[status]["comment"]}
+                                  subtitle={statusDescripts[status]["subtitle"]}
+                                  reg={regDeadline} start={startTime}
+                                  end={endTime}/>
 }
 
-export default QuestTimelineInfo
+export default QuestTimelineProcess

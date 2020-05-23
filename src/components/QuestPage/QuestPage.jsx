@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
-import QuestTimelineDrawing from './QuestTimelineDrawing'
+import InfiniteQuestTemplate from "./InfiniteQuestTemplate";
 import QuestDescription from './QuestDescription'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import {  Spin, Typography, Steps } from 'antd'
+import {  Spin } from 'antd'
 import { BASE_URL, CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
 import { getToken } from '../../redux/Actions/Api'
 import MetaTags from '../shared/MetaTags/MetaTags'
+import QuestTimelineProcess from "./QuestTimelineProcess";
 import { fetchQuestInfo } from '../../redux/Actions/QuestsApi'
 import { connect } from 'react-redux'
 
-const { Title, Paragraph } = Typography
-const { Step } = Steps
 
 class QuestPage extends Component {
   constructor (props) {
@@ -22,7 +21,9 @@ class QuestPage extends Component {
       quest: null,
       regVisible: false,
       successVisible: false,
-      team: undefined
+      team: undefined,
+      type: 'solo',
+      isInfinite: true
     }
   }
 
@@ -79,18 +80,31 @@ class QuestPage extends Component {
     this.props.fetchQuestFromRedux(this.props.match.params.id)
     fetch(BASE_URL + '/quests/' + this.props.match.params.id)
       .then(response => response.json())
-      .then(readResponse => { this.setState({ quest: readResponse }); this.getTeam(); this.setState({ dataReady: true }) })
+      .then(readResponse => { this.setState({ quest: readResponse, type: readResponse["type"], isInfinite: readResponse["isInfinite"] }); this.getTeam(); this.setState({ dataReady: true }) })
   }
 
   getRepresentationByState () {
-    //mock flags
-    let timeFlag = "isInfinite";
-    let typeQuest = "single";
+    let timing;
     let team;
-    if (typeQuest !== "single")
+    console.log(this.state.type)
+
+    if (this.state.type !== "solo")
       team = <TeamList quest={this.state.quest}/>;
     else
       team = '';
+    if (!this.state.isInfinite){
+      timing = <QuestTimelineProcess quest={this.state.quest} team={this.state.team}
+                                     regVisible={this.state.regVisible}
+                                     successVisible = {this.state.successVisible}
+                                     setRegVisible={() => this.setRegVisible()}
+                                     setSuccessVisible={() => this.setSuccessVisible()}
+                                     setRegUnVisible={() => this.setRegUnVisible()}
+                                     setSuccessUnVisible={() => this.setSuccessUnVisible()}
+                                     quest_id = {this.state.quest.id}
+                                     url = {'quests/' + this.state.quest.id}
+      />
+    }
+    else timing = <InfiniteQuestTemplate quest={this.state.quest}/>;
 
     if (!this.state.dataReady) {
       return <Spin />
@@ -99,16 +113,7 @@ class QuestPage extends Component {
         <React.Fragment>
           <QuestMinimalInfo quest={this.state.quest}/>
           <h2>
-            <QuestTimelineDrawing quest={this.state.quest} team={this.state.team} timeFlag={timeFlag}
-              regVisible={this.state.regVisible}
-              successVisible = {this.state.successVisible}
-              setRegVisible={() => this.setRegVisible()}
-              setSuccessVisible={() => this.setSuccessVisible()}
-              setRegUnVisible={() => this.setRegUnVisible()}
-              setSuccessUnVisible={() => this.setSuccessUnVisible()}
-              quest_id = {this.state.quest.id}
-              url = {'quests/' + this.state.quest.id}
-            />
+            {timing}
           </h2>
           <QuestDescription quest={this.state.quest}/>
           {team}

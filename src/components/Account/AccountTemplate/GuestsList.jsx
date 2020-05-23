@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import QuestCard from '../../QuestCard/QuestCard'
-import {Divider, Spin} from 'antd'
+import {Spin} from 'antd'
 import { BASE_URL } from '../../../settings'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
@@ -19,14 +19,14 @@ class GuestsList extends Component {
   componentDidMount () {
     fetch(BASE_URL + '/quests')
       .then(response => response.json())
-      .then(readResponse => this.setState({ dataReady: true, results: readResponse }))
+      .then(readResponse => this.setState({ dataReady: true, results: readResponse}))
   }
 
   mapQuestsToTemplate () {
     return this.state.results.map((obj) =>
-      <Col key={'quest:' + obj.id} ant-col ant-col-xs-12 ant-col-sm-12 ant-col-md-12 ant-col-lg-12  ant-col-xl-12 xs={8}>
-        <Link to={'/quests/' + obj.id}><QuestCard quest={obj} /></Link>
-      </Col>
+    <Col key={'quest:' + obj.id} xs={22} md={8}>
+          <Link to={'/quests/' + obj.id}><QuestCard quest={obj} isInfinite={obj.isInfinite} /></Link>
+        </Col>
     )
   }
 
