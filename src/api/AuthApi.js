@@ -6,9 +6,9 @@ import {
   deleteUserInfo,
   receiveUserInfo,
   receiveException, deleteToken, requestToken, deleteException
-} from './AuthActions'
-import { BASE_URL, BACKEND_AUTH_FETCH_PATH, BACKEND_AUTH_PATH, BACKEND_AUTH_REGISTER_PATH } from './../../settings'
-import { store } from '../store'
+} from '../redux/Actions/AuthActions'
+import { BASE_URL, BACKEND_AUTH_FETCH_PATH, BACKEND_AUTH_PATH, BACKEND_AUTH_REGISTER_PATH } from '../settings'
+import { store } from '../redux/store'
 
 export function loginFromForm (username, password, rememberMe) {
   return dispatch => {

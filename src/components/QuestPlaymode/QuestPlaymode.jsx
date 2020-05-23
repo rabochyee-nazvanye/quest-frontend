@@ -18,8 +18,6 @@ function QuestPlaymode (props) {
   const questId = props.match.params.id
 
   useEffect(() => {
-    setInterval(updateTasks, 5000)
-
     if (props.loggedIn) {
       getQuestInfo(questId, getSuccessResponse.bind(null, DATA_TYPES.quests), getErrorResponse)
       getTeamInfo(questId, getSuccessResponse.bind(null, DATA_TYPES.teams), getErrorResponse)

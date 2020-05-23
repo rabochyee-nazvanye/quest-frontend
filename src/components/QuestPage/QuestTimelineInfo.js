@@ -9,7 +9,7 @@ import {
     ClockCircleOutlined, StarOutlined, UserAddOutlined
 } from '@ant-design/icons'
 import {useHistory} from 'react-router-dom'
-import {getToken} from "../../redux/Actions/Api";
+import {getToken} from "../../api/AuthApi";
 let dateTimeNow = new Date();
 
 

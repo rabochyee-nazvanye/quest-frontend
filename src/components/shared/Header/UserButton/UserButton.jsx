@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import UserButtonLoggedInTemplate from './Templates/UserButtonLoggedInTemplate'
 import UserButtonLoggedOutTemplate from './Templates/UserButtonLoggedOutTemplate'
 import { connect } from 'react-redux'
-import { logout } from '../../../../redux/Actions/Api'
+import { logout } from '../../../../api/AuthApi'
 
 function UserButton (props) {
   const history = useHistory()

@@ -6,9 +6,9 @@ import {  Spin, Typography, Steps } from 'antd'
 import { BASE_URL, CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
-import { getToken } from '../../redux/Actions/Api'
+import { getToken } from '../../api/AuthApi'
 import MetaTags from '../shared/MetaTags/MetaTags'
-import { fetchQuestInfo } from '../../redux/Actions/QuestsApi'
+import { fetchQuestInfo } from '../../api/QuestsApi'
 import { connect } from 'react-redux'
 
 const { Title, Paragraph } = Typography
@@ -76,7 +76,7 @@ class QuestPage extends Component {
 
   componentDidMount () {
     // eslint-disable-next-line react/prop-types
-    this.props.fetchQuestFromRedux(this.props.match.params.id)
+    //this.props.fetchQuestFromRedux(this.props.match.params.id)
     fetch(BASE_URL + '/quests/' + this.props.match.params.id)
       .then(response => response.json())
       .then(readResponse => { this.setState({ quest: readResponse }); this.getTeam(); this.setState({ dataReady: true }) })

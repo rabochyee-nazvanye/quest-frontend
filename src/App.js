@@ -21,7 +21,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import Auth from './components/Auth/Auth'
 import Account from './components/Account/Account'
-import { login } from './redux/Actions/Api'
+import { login } from './api/AuthApi'
 import NoMatch from './components/NoMatch/NoMatch'
 import QuestPlaymode from './components/QuestPlaymode/QuestPlaymode'
 

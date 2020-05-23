@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Button, Divider } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { logout } from '../../../redux/Actions/Api'
+import { logout } from '../../../api/AuthApi'
 import { connect } from 'react-redux'
 import GuestsList from './GuestsList';
 import {CLIENT_URL} from "../../../settings";

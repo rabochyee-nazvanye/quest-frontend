@@ -1,5 +1,5 @@
 import {BASE_URL} from "../../settings";
-import { getToken } from '../../redux/Actions/Api.js';
+import { getToken } from '../../api/AuthApi.js';
 
 export function handleTeamCreation(inviteCode, setErrorState, setSuccessState) {
 
