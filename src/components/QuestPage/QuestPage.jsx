@@ -6,7 +6,7 @@ import {  Spin, Typography, Steps } from 'antd'
 import { BASE_URL, CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
-import { getToken } from '../../api/AuthApi'
+import { getToken } from '../../api/CommonApi.js';
 import MetaTags from '../shared/MetaTags/MetaTags'
 import { fetchQuestInfo } from '../../api/QuestsApi'
 import { connect } from 'react-redux'

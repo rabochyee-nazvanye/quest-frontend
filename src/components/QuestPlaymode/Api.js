@@ -1,5 +1,5 @@
 import { BASE_URL } from '../../settings'
-import { getToken } from '../../api/AuthApi'
+import { getToken } from '../../api/CommonApi'
 
 export function sendTaskAttempt (questId, taskId, teamId, attemptText, callback, errorCallback) {
   fetch(`${BASE_URL}/tasks/${taskId}/attempts`, {

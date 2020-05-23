@@ -3,7 +3,7 @@ import {Col, Divider, Row, Spin, Table} from 'antd'
 import './QuestDescription.css'
 
 import {TrophyOutlined} from '@ant-design/icons'
-import {getToken} from '../../api/AuthApi'
+import { getToken } from '../../api/CommonApi.js';
 import {BASE_URL} from '../../settings'
 import ReactMarkdown from 'react-markdown'
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Teammate from "./Teammate";
 import {Col, Row, Divider, Spin, Modal, Typography, Button, Popconfirm, message} from "antd";
 import {BASE_URL} from "../../settings";
-import { getToken } from '../../api/AuthApi.js';
+import { getToken } from '../../api/CommonApi.js';
 import { CLIENT_URL } from '../../settings'
 import {LogoutOutlined} from "@ant-design/icons";
 import {leaveTeam} from './Api'
