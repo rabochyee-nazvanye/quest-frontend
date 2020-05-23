@@ -1,5 +1,5 @@
 export const REQUEST_QUEST_INFO = 'REQUEST_QUEST_INFO'
-export const RECEIVE_QUEST_INFO = 'RECEIVE_USER_INFO'
+export const RECEIVE_QUEST_INFO = 'RECEIVE_QUEST_INFO'
 export const DELETE_QUEST_INFO = 'DELETE_QUEST_INFO'
 
 export function requestQuestInfo () {
