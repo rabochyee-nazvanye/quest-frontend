@@ -4,11 +4,13 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import authReducer from "./Reducers/AuthReducer";
+import questsReducer from './Reducers/QuestsReducer'
 
 const loggerMiddleware = createLogger();
 
 const rootReducer = combineReducers({
-    authReducer
+    authReducer,
+    questsReducer
 });
 
 export const store = createStore(

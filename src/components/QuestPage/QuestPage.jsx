@@ -9,6 +9,8 @@ import TeamList from './TeamList'
 import { getToken } from '../../redux/Actions/Api'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
+import { fetchQuestInfo } from '../../redux/Actions/QuestsApi'
+import { connect } from 'react-redux'
 
 
 class QuestPage extends Component {
@@ -74,6 +76,8 @@ class QuestPage extends Component {
   }
 
   componentDidMount () {
+    // eslint-disable-next-line react/prop-types
+    this.props.fetchQuestFromRedux(this.props.match.params.id)
     fetch(BASE_URL + '/quests/' + this.props.match.params.id)
       .then(response => response.json())
       .then(readResponse => { this.setState({ quest: readResponse, type: readResponse["type"], isInfinite: readResponse["isInfinite"] }); this.getTeam(); this.setState({ dataReady: true }) })
@@ -137,4 +141,13 @@ class QuestPage extends Component {
   }
 }
 
-export default QuestPage
+const mapStateToProps = (store) => ({
+  questFromRedux: store.questsReducer.quest,
+  questFromReduxIsFetching: store.questsReducer.isFetching
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)
