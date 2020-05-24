@@ -24,7 +24,7 @@ function QuestTimelineProcess(props) {
 
     let buttons = {"scheduled": <Button type="primary" htmlType="submit" className="button" style={{ "background-color": "#52c41a", "border-color": "#52c41a" }} onClick={() => {if (getToken() === '') {history.push("/auth/" + encodeURIComponent(props.url))} else { props.setRegVisible()}}}><UserAddOutlined /> Зарегистрироваться</Button>,
         "registrationover": "", "inprogress": "", "finished" : "", "resultsavailable": ""};
-    if (props.team !== undefined)
+    if (props.registered === true)
         buttons = componentsHaveCommand;
 
     const remainingTime = new Date(props.quest.endDate).getHours() * 60 + new Date(props.quest.endDate).getMinutes() -

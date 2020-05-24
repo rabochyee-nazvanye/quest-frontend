@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import Header from './components/shared/Header/Header'
 import Footer from './components/shared/Footer/Footer'
 import About from './components/About/About'
-import GuestsList from './components/Account/AccountTemplate/GuestsList'
+import QuestsList from './components/Account/AccountTemplate/QuestsList'
 import QuestPage from './components/QuestPage/QuestPage'
 import InvitePage from './components/InvitePage/InvitePage'
 import Progressboard from "./components/Progressboard/Progressboard";

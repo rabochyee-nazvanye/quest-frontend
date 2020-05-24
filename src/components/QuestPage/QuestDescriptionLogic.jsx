@@ -89,7 +89,7 @@ class GuestDescription extends Component {
                         fill="black"/>
                 </svg>;
                 description = <ReactMarkdown source={this.props.quest.description}/>;
-                results = 'привет';
+                results = '';
             } else {
                 const a = this.mapResults();
                 const col1 = [];
