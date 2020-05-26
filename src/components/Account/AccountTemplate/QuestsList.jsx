@@ -11,11 +11,11 @@ import {connect} from "react-redux";
 class QuestsList extends Component {
 
   componentDidMount () {
-    this.props.fetchQuestsListFromRedux()
+    this.props.fetchQuestsList()
   }
 
   mapQuestsToTemplate () {
-      return this.props.questsListFromRedux.map((obj) =>
+      return this.props.questsList.map((obj) =>
           <Col key={'quest:' + obj.id} xs={22} md={8}>
             <Link to={'/quests/' + obj.id}><QuestCard quest={obj} isInfinite={obj.isInfinite}/></Link>
           </Col>
@@ -23,10 +23,10 @@ class QuestsList extends Component {
   }
 
   getRepresentationByState () {
-    if (this.props.questsListFromReduxIsFetching)
+    if (this.props.questsListIsFetching)
       return <Spin/>;
     else {
-      if (this.props.questsListFromRedux !== null) {
+      if (this.props.questsList !== null) {
         return (
             <React.Fragment>
               {this.mapQuestsToTemplate()}
@@ -49,13 +49,12 @@ class QuestsList extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  questsListFromRedux: store.questsListReducer.quests,
-  questsListFromReduxIsFetching: store.questsListReducer.isFetching
+  questsList: store.questsListReducer.quests,
+  questsListIsFetching: store.questsListReducer.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestsListFromRedux: () => dispatch(fetchQuestsListInfo())
+  fetchQuestsList: () => dispatch(fetchQuestsListInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestsList)
-
