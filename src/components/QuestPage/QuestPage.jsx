@@ -6,9 +6,10 @@ import {  Spin } from 'antd'
 import {  CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
+import { getToken } from '../../api/CommonApi.js';
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
-import { fetchQuestInfo } from '../../redux/Actions/QuestsApi'
+import { fetchQuestInfo } from '../../api/QuestsApi'
 import { connect } from 'react-redux'
 
 

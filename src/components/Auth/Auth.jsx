@@ -7,7 +7,7 @@ import {
   Redirect,
   useParams
 } from 'react-router-dom'
-import { loginFromForm, flushException, registerFromForm } from '../../redux/Actions/Api'
+import { loginFromForm, flushException, registerFromForm } from '../../api/AuthApi'
 import { Button, Typography } from 'antd'
 import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
