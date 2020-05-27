@@ -46,7 +46,6 @@ function QuestTimelineProcess(props) {
     const startTime = new Intl.DateTimeFormat('default', commonOptions).format(new Date(props.quest.startDate)).toString();
     const endTime = new Intl.DateTimeFormat('default', commonOptions).format(new Date(props.quest.endDate)).toString();
 
-    //HAVE SOME PROBLEM HERE
     return <QuestTimelineTemplate buttons={buttons[status]}
                                   color={statusDescripts[status]["color"]}
                                   pin={statusDescripts[status]["pin"]}
