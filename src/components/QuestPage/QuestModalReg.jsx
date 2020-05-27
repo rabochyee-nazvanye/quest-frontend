@@ -13,8 +13,7 @@ class QuestModalReg extends Component {
     }
 
     render() {
-
-        const alert = (this.props.statusText !== '') ? (
+        const errorMessage = (this.props.statusText !== '') ? (
             <div className={'reg-alert-container'}>
                 <Alert
                     message={this.props.statusText}
@@ -32,7 +31,8 @@ class QuestModalReg extends Component {
 
 
         const onFinish = values => {
-            handleTeamCreation(
+            alert(this.props.quest_id)
+            this.props.handleTeamCreation(
                 values.teamname,
                 this.props.quest_id)
         };
@@ -67,7 +67,7 @@ class QuestModalReg extends Component {
                     onCancel={() => {this.props.closeForm()}}
                 >
                     <p><Title level={3}>Регистрация на квест</Title></p>
-                    {alert}
+                    {errorMessage}
                     <Form
                         name="quest-reg"
                         onFinish={onFinish}
@@ -110,14 +110,15 @@ class QuestModalReg extends Component {
 const mapStateToProps = (store) => ({
     regVisible: store.questRegistrationReducer.regVisible,
     successVisible: store.questRegistrationReducer.successVisible,
-    inviteLink: store.questRegistrationReducer.regVisible,
-    errorText: store.questRegistrationReducer.statusText,
-    error: store.authReducer.status
+    inviteLink: store.questRegistrationReducer.inviteLink,
+    statusText: store.questRegistrationReducer.statusText,
+    status: store.authReducer.status
 })
 
 const mapDispatchToProps = dispatch => ({
     closeErrorMessage: () => dispatch(closeErrorMessage()),
-    closeForm: () => dispatch(closeForm())
+    closeForm: () => dispatch(closeForm()),
+    handleTeamCreation: (teamname, questId) => dispatch(handleTeamCreation(teamname, questId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestModalReg)
