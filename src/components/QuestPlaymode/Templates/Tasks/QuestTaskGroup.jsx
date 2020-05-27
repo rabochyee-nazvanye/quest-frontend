@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Col, Divider, Input, Row } from 'antd'
+import {Button, Col, Divider, Input, Popconfirm, Row, Tooltip, Typography} from 'antd'
 import './Tasks.css'
 import Hint from './Hint'
 import ReactMarkdown from 'react-markdown'
 import AnswerStatus from './AnswerStatus'
 import AnswerInput from './AnswerInput'
+import {QuestionCircleFilled} from "@ant-design/icons";
+
+const { Title } = Typography;
 
 export default function QuestTaskGroup (props) {
   const forgeHintsArray = (taskData) => {
@@ -52,25 +55,40 @@ export default function QuestTaskGroup (props) {
     return Object.values(forgeHintsArray(taskData)).map(hint =>
       <Hint {...hint}/>)
   }
+  const getVerificationPlaceholder = (manualVerificationEnabled) => {
+    if (manualVerificationEnabled) {
+      return {'header': 'Проверка модератором', 'tooltipText': 'Ответ проверит модератор твоей команды. Это займёт некоторое время'}
+    }
+    return {'header': 'Автоматическая проверка', 'tooltipText': 'Ответ проверяется автоматически'}
+  }
 
   const forgeTaskPanel = (taskData) => {
+    const verification = getVerificationPlaceholder(taskData.manualVerificationEnabled)
+
     console.log(taskData)
     console.log(taskData.question)
     return (
       <React.Fragment>
+        <Row style={{ display: "flex", color: '#000000' }}>
+                <Title level={3}>{taskData.name}</Title>
+                <p style={{marginLeft: "auto", color: '#8c8c8c'}}>
+                  {verification.header}
+                  &nbsp;
+                  <Tooltip title={verification.tooltipText} placement="bottomRight" >
+                    <QuestionCircleFilled />
+                  </Tooltip>
+                </p>
+        </Row>
         <Row>
-          <Col sm={8}>
-            <div className={'quest-task__answer-column'}>
-              <p><b>{taskData.name}</b></p>
+          <div className={'quest-task_text-hints'} style={{'color': '#000000'}}>
               <p>{<ReactMarkdown source={taskData.question} />}</p>
             </div>
-          </Col>
-          <Col sm={16}>
-            { forgeHints(taskData) }
-          </Col>
+        </Row>
+        <Row>
+          { forgeHints(taskData) }
         </Row>
         <Row className={'mt-30'}>
-          <Col sm={8}>
+          <Col sm={12}>
             <div className={'quest-task__answer-column'}>
               <AnswerInput answerStatus={taskData.status}
                 taskId={taskData.id}
@@ -79,7 +97,7 @@ export default function QuestTaskGroup (props) {
                 manualVerificationEnabled={taskData.manualVerificationEnabled}/>
             </div>
           </Col>
-          <Col sm={16}>
+          <Col sm={12}>
             <AnswerStatus
               lastSubmittedAnswer={taskData.lastSubmittedAnswer}
               manualVerificationEnabled={taskData.manualVerificationEnabled}

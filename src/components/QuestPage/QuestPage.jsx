@@ -1,28 +1,26 @@
 import React, { Component } from 'react'
-import QuestTimelineDrawing from './QuestTimelineDrawing'
-import QuestDescription from './QuestDescription'
+import InfiniteQuestTemplate from "./InfiniteQuestTemplate";
+import QuestDescriptionLogic from './QuestDescriptionLogic'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import {  Spin, Typography, Steps } from 'antd'
-import { BASE_URL, CLIENT_URL } from '../../settings'
+import {  Spin } from 'antd'
+import {  CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
 import { getToken } from '../../api/CommonApi.js';
 import MetaTags from '../shared/MetaTags/MetaTags'
+import QuestTimelineProcess from "./QuestTimelineProcess";
 import { fetchQuestInfo } from '../../api/QuestsApi'
 import { connect } from 'react-redux'
 
-const { Title, Paragraph } = Typography
-const { Step } = Steps
+
 
 class QuestPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      dataReady: false,
-      quest: null,
       regVisible: false,
       successVisible: false,
-      team: undefined
+      registered: false,
     }
   }
 
@@ -57,74 +55,58 @@ class QuestPage extends Component {
     }
   }
 
-  getTeam () {
-    const token = getToken()
-    fetch(BASE_URL + '/quests/' + this.state.quest.id + '/teams?members=currentUser ',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: 'bearer ' + token,
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => response.json())
-      .then(readResponse => {
-        this.setState({ team: readResponse[0] })
-      })
-  }
-
   componentDidMount () {
-    // eslint-disable-next-line react/prop-types
-    //this.props.fetchQuestFromRedux(this.props.match.params.id)
-    fetch(BASE_URL + '/quests/' + this.props.match.params.id)
-      .then(response => response.json())
-      .then(readResponse => { this.setState({ quest: readResponse }); this.getTeam(); this.setState({ dataReady: true }) })
-  }
+    this.props.fetchQuestFromRedux(this.props.match.params.id)
+}
 
-  getRepresentationByState () {
-    //mock flags
-    let timeFlag = "isInfinite";
-    let typeQuest = "single";
-    let team;
-    if (typeQuest !== "single")
-      team = <TeamList quest={this.state.quest}/>;
-    else
-      team = '';
+getRepresentationByState () {
+  let timing;
+  let team;
+  if (this.props.questFromReduxIsFetching)
+    return <Spin/>
+  else {
+    if(this.props.questFromRedux!== null){
+      if(this.props.questFromRedux.teams!== undefined)
+      this.props.questFromRedux.teams.forEach((x) => x.members.forEach((y) => {if(y === this.props.user.id) this.state.registered = true}));
 
-    if (!this.state.dataReady) {
-      return <Spin />
-    } else
+      if (this.props.questFromRedux.type !== "solo")
+        team = <TeamList quest={this.props.questFromRedux}/>;
+      else
+        team = '';
+    if (!this.props.questFromRedux.isInfinite) {
+      timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={this.state.registered}
+                                     regVisible={this.props.regVisible}
+                                     successVisible={this.props.successVisible}
+                                     setRegVisible={() => this.setRegVisible()}
+                                     setSuccessVisible={() => this.setSuccessVisible()}
+                                     setRegUnVisible={() => this.setRegUnVisible()}
+                                     setSuccessUnVisible={() => this.setSuccessUnVisible()}
+                                     quest_id={this.props.questFromRedux.id}
+                                     url={'quests/' + this.props.questFromRedux.id}
+      />
+    } else timing = <InfiniteQuestTemplate quest={this.props.questFromRedux}/>;
       return (
-        <React.Fragment>
-          <QuestMinimalInfo quest={this.state.quest}/>
-          <h2>
-            <QuestTimelineDrawing quest={this.state.quest} team={this.state.team} timeFlag={timeFlag}
-              regVisible={this.state.regVisible}
-              successVisible = {this.state.successVisible}
-              setRegVisible={() => this.setRegVisible()}
-              setSuccessVisible={() => this.setSuccessVisible()}
-              setRegUnVisible={() => this.setRegUnVisible()}
-              setSuccessUnVisible={() => this.setSuccessUnVisible()}
-              quest_id = {this.state.quest.id}
-              url = {'quests/' + this.state.quest.id}
+          <React.Fragment>
+            <QuestMinimalInfo quest={this.props.questFromRedux}/>
+            <h2>
+              {timing}
+            </h2>
+            <QuestDescriptionLogic quest={this.props.questFromRedux}/>
+            {team}
+            <QuestModalReg
+                regVisible={this.state.regVisible}
+                successVisible={this.state.successVisible}
+                setRegVisible={() => this.setRegVisible()}
+                setSuccessVisible={() => this.setSuccessVisible()}
+                setRegUnVisible={() => this.setRegUnVisible()}
+                setSuccessUnVisible={() => this.setSuccessUnVisible()}
+                quest_id={this.props.questFromRedux.id}
+                url={'quests/' + this.props.questFromRedux.id}
             />
-          </h2>
-          <QuestDescription quest={this.state.quest}/>
-          {team}
-          <QuestModalReg
-            regVisible={this.state.regVisible}
-            successVisible = {this.state.successVisible}
-            setRegVisible={() => this.setRegVisible()}
-            setSuccessVisible={() => this.setSuccessVisible()}
-            setRegUnVisible={() => this.setRegUnVisible()}
-            setSuccessUnVisible={() => this.setSuccessUnVisible()}
-            quest_id = {this.state.quest.id}
-            url = {'quests/' + this.state.quest.id}
-          />
-        </React.Fragment>
+          </React.Fragment>
       )
-  }
+  }}
+}
 
   render () {
     return (
@@ -138,7 +120,8 @@ class QuestPage extends Component {
 
 const mapStateToProps = (store) => ({
   questFromRedux: store.questsReducer.quest,
-  questFromReduxIsFetching: store.questsReducer.isFetching
+  questFromReduxIsFetching: store.questsReducer.isFetching,
+  user: store.authReducer.user
 })
 
 const mapDispatchToProps = dispatch => ({
