@@ -1,45 +1,32 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import {Modal, Button, Input, Typography, InputNumber, Form, Alert} from 'antd';
-import handleTeamCreation from './Api'
-import { CLIENT_URL } from '../../settings'
+import handleTeamCreation from '../../api/QuestRegistartionApi'
+import {connect} from "react-redux";
+import {closeErrorMessage, closeForm } from "../../redux/Actions/QuestRegistrationActions";
 
 const { Title, Paragraph, Text } = Typography;
 
 class QuestModalReg extends Component {
     constructor (props) {
         super(props);
-        this.state = {
-            inviteLink: '',
-            statusText: '',
-            status: ''
-        }
     }
 
     render() {
-        const setSuccessstate = (inviteLink) => {
-            this.props.setRegUnVisible();
-            this.props.setSuccessVisible();
-            this.setState({inviteLink: CLIENT_URL + inviteLink})
-        };
 
-        const setError = (error) => {
-            this.setState({statusText: error.statusText, status: error.status})
-        };
-
-        const alert = (this.state.statusText !== '') ? (
+        const alert = (this.props.statusText !== '') ? (
             <div className={'reg-alert-container'}>
                 <Alert
-                    message={this.state.statusText}
+                    message={this.props.statusText}
                     type="error"
                     showIcon
                     closable={true}
-                    onClose={() => this.setState({statusText: ''})}
+                    onClose={() => this.props.closeErrorMessage()}
                 />
             </div>
         ) : (<React.Fragment/>);
 
-        const redirectToAuth = (this.state.status === 401) ? (
+        const redirectToAuth = (this.props.status === 401) ? (
             <Redirect from={this.props.url} to={"/auth/" + encodeURIComponent(this.props.url)} />
             ) : (<React.Fragment/>)
 
@@ -47,13 +34,11 @@ class QuestModalReg extends Component {
         const onFinish = values => {
             handleTeamCreation(
                 values.teamname,
-                this.props.quest_id,
-                (line) => setError(line),
-                (line) => setSuccessstate(line))
+                this.props.quest_id)
         };
 
         const onFinishFailed = errorInfo => {
-            this.state.errorText = errorInfo;
+            this.props.errorText = errorInfo;
         };
 
         return (
@@ -62,7 +47,7 @@ class QuestModalReg extends Component {
                     width={350}
                     centered
                     visible={this.props.successVisible}
-                    onCancel={() => {this.props.setSuccessUnVisible()}}
+                    onCancel={() => {this.props.closeForm()}}
                     footer={null}
                 >
                     <p></p>
@@ -71,7 +56,7 @@ class QuestModalReg extends Component {
                         <Text strong>Пригласите друзей в свою команду — поделитесь ссылкой:</Text>
                     </p>
                     <p>
-                        <Paragraph copyable>{'https://' + this.state.inviteLink}</Paragraph>
+                        <Paragraph copyable>{'https://' + this.props.inviteLink}</Paragraph>
                     </p>
                 </Modal>
                 <Modal
@@ -79,7 +64,7 @@ class QuestModalReg extends Component {
                     footer={null}
                     centered
                     visible={this.props.regVisible}
-                    onCancel={() => {this.props.setRegUnVisible()}}
+                    onCancel={() => {this.props.closeForm()}}
                 >
                     <p><Title level={3}>Регистрация на квест</Title></p>
                     {alert}
@@ -122,4 +107,17 @@ class QuestModalReg extends Component {
     }
 }
 
-export default QuestModalReg
+const mapStateToProps = (store) => ({
+    regVisible: store.questRegistrationReducer.regVisible,
+    successVisible: store.questRegistrationReducer.successVisible,
+    inviteLink: store.questRegistrationReducer.regVisible,
+    errorText: store.questRegistrationReducer.statusText,
+    error: store.authReducer.status
+})
+
+const mapDispatchToProps = dispatch => ({
+    closeErrorMessage: () => dispatch(closeErrorMessage()),
+    closeForm: () => dispatch(closeForm())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestModalReg)

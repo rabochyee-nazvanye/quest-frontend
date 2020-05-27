@@ -6,10 +6,10 @@ import {  Spin } from 'antd'
 import {  CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
-import { getToken } from '../../api/CommonApi.js';
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
 import { fetchQuestInfo } from '../../api/QuestsApi'
+import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
 import { connect } from 'react-redux'
 
 
@@ -18,26 +18,8 @@ class QuestPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      regVisible: false,
-      successVisible: false,
       registered: false,
     }
-  }
-
-  setRegVisible () {
-    this.setState({ regVisible: true })
-  }
-
-  setSuccessVisible () {
-    this.setState({ successVisible: true })
-  }
-
-  setRegUnVisible () {
-    this.setState({ regVisible: false })
-  }
-
-  setSuccessUnVisible () {
-    this.setState({ successVisible: false })
   }
 
   getMetaData () {
@@ -75,12 +57,7 @@ getRepresentationByState () {
         team = '';
     if (!this.props.questFromRedux.isInfinite) {
       timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={this.state.registered}
-                                     regVisible={this.props.regVisible}
-                                     successVisible={this.props.successVisible}
-                                     setRegVisible={() => this.setRegVisible()}
-                                     setSuccessVisible={() => this.setSuccessVisible()}
-                                     setRegUnVisible={() => this.setRegUnVisible()}
-                                     setSuccessUnVisible={() => this.setSuccessUnVisible()}
+                                     openForm={() => this.props.openForm()}
                                      quest_id={this.props.questFromRedux.id}
                                      url={'quests/' + this.props.questFromRedux.id}
       />
@@ -125,7 +102,8 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id))
+  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id)),
+  openForm: () => dispatch(openRegistrationForm())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)

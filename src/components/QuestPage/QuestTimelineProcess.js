@@ -22,7 +22,7 @@ function QuestTimelineProcess(props) {
         "resultsavailable": <Button type="primary" htmlType="submit" style={{ "background-color": "#52c41a", "border-color": "#52c41a" }} className="button"
                                     onClick={function() {document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSczHbtw8c05IanZ02rcDvzMw37t7-CDtkiw9oiOpgesFZxiNw/viewform'}}><StarOutlined/> Оставить отзыв</Button>};
 
-    let buttons = {"scheduled": <Button type="primary" htmlType="submit" className="button" style={{ "background-color": "#52c41a", "border-color": "#52c41a" }} onClick={() => {if (getToken() === '') {history.push("/auth/" + encodeURIComponent(props.url))} else { props.setRegVisible()}}}><UserAddOutlined /> Зарегистрироваться</Button>,
+    let buttons = {"scheduled": <Button type="primary" htmlType="submit" className="button" style={{ "background-color": "#52c41a", "border-color": "#52c41a" }} onClick={() => {if (getToken() === '') {history.push("/auth/" + encodeURIComponent(props.url))} else { props.openForm()}}}><UserAddOutlined /> Зарегистрироваться</Button>,
         "registrationover": "", "inprogress": "", "finished" : "", "resultsavailable": ""};
     if (props.registered === true)
         buttons = componentsHaveCommand;
