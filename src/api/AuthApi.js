@@ -6,9 +6,10 @@ import {
   deleteUserInfo,
   receiveUserInfo,
   receiveException, deleteToken, requestToken, deleteException
-} from './AuthActions'
-import { BASE_URL, BACKEND_AUTH_FETCH_PATH, BACKEND_AUTH_PATH, BACKEND_AUTH_REGISTER_PATH } from './../../settings'
-import { store } from '../store'
+} from '../redux/Actions/AuthActions'
+import { BASE_URL, BACKEND_AUTH_FETCH_PATH, BACKEND_AUTH_PATH, BACKEND_AUTH_REGISTER_PATH } from '../settings'
+import { store } from '../redux/store'
+import { getToken, getWithToken } from './CommonApi'
 
 export function loginFromForm (username, password, rememberMe) {
   return dispatch => {
@@ -25,19 +26,6 @@ export function registerFromForm (username, password) {
   return dispatch => {
     dispatch(logout())
     dispatch(fetchUserToken(username, password, true, BACKEND_AUTH_REGISTER_PATH))
-  }
-}
-
-export function getToken () {
-  const tokenFromLocalStorage = localStorage.getItem('token')
-  const tokenFromSessionStorage = sessionStorage.getItem('token')
-
-  if (tokenFromSessionStorage !== null) {
-    return tokenFromSessionStorage
-  } else if (tokenFromLocalStorage !== null) {
-    return tokenFromLocalStorage
-  } else {
-    return ''
   }
 }
 
@@ -78,14 +66,7 @@ function fetchUserToken (username, password, rememberMe, path) {
 function getUserByToken (token) {
   return dispatch => {
     dispatch(requestUserInfo())
-    return fetch(BASE_URL + BACKEND_AUTH_FETCH_PATH, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
-      }
-    })
+    return getWithToken(BASE_URL + BACKEND_AUTH_FETCH_PATH)
       .then(response => {
         if (response.ok) {
           response.json().then(json => {
