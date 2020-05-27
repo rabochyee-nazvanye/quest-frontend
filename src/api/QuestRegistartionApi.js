@@ -1,8 +1,8 @@
 import {getToken} from "./CommonApi";
 import {BASE_URL} from "../settings";
 import {
-    setSuccessState,
-    setErrorState
+    setSuccessfulRegistration,
+    setRegistrationError
 } from '../redux/Actions/QuestRegistrationActions'
 
 
@@ -26,9 +26,9 @@ export default function handleTeamCreation(teamName, questId) {
             })
                 .then(response => {
                     if (response.ok) {
-                        response.json().then(data => { dispatch(setSuccessState(data.inviteLink)) });
+                        response.json().then(data => { dispatch(setSuccessfulRegistration(data.inviteLink)) });
                     } else {
-                        response.json().then(data => dispatch(setErrorState({ status: data.status, statusText: data.title })))
+                        response.json().then(data => dispatch(setRegistrationError({ status: data.status, statusText: data.title })))
                     }
                 })
     }
