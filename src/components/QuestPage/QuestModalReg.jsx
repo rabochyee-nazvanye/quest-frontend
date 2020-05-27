@@ -25,7 +25,7 @@ class QuestModalReg extends Component {
             </div>
         ) : (<React.Fragment/>);
 
-        const redirectToAuth = (this.props.status === 401) ? (
+        const redirectToAuth = (this.props.user !== null) ? (
             <Redirect from={this.props.url} to={"/auth/" + encodeURIComponent(this.props.url)} />
             ) : (<React.Fragment/>)
 
@@ -112,7 +112,8 @@ const mapStateToProps = (store) => ({
     successVisible: store.questRegistrationReducer.successVisible,
     inviteLink: store.questRegistrationReducer.inviteLink,
     statusText: store.questRegistrationReducer.statusText,
-    status: store.authReducer.status
+    status: store.authReducer.status,
+    user: store.authReducer.user
 })
 
 const mapDispatchToProps = dispatch => ({
