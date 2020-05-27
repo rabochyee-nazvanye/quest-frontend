@@ -31,7 +31,6 @@ class QuestModalReg extends Component {
 
 
         const onFinish = values => {
-            alert(this.props.quest_id)
             this.props.handleTeamCreation(
                 values.teamname,
                 this.props.quest_id)
