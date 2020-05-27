@@ -1,10 +1,9 @@
 import {
-    SET_REGWINDOW_VISIBLE,
-    SET_REGWINDOW_UNVISIBLE,
-    SET_SUCCESSWINDOW_VISIBLE,
-    SET_SUCCESSWINDOW_UNVISIBLE,
-    SET_ERROR
-} from '../Actions/QuestRegistration'
+    CLOSE_FORM,
+    OPEN_REGISTARTION_FORM,
+    REGISTRARION_FAILED,
+    REGISTRARION_SUCCEEDED, REGISTRATION_ERROR_READ,
+} from '../Actions/QuestRegistrationActions'
 
 export default function questRegistrationReducer (
     state = {
@@ -15,16 +14,20 @@ export default function questRegistrationReducer (
         successVisible: false
     }, action ) {
     switch (action.type) {
-        case SET_REGWINDOW_VISIBLE:
-            return {...state, regVisible: action.regVisible};
-        case SET_REGWINDOW_UNVISIBLE:
-            return {...state, regVisible: action.regVisible};
-        case SET_SUCCESSWINDOW_VISIBLE:
-            return {...state, successVisible: action.successVisible};
-        case SET_SUCCESSWINDOW_UNVISIBLE:
-            return {...state, successVisible: action.successVisible};
-        case SET_ERROR:
+        case REGISTRARION_SUCCEEDED:
+            return {
+                ...state,
+                successVisible: action.successVisible,
+                regVisible: action.regVisible,
+                inviteLink: action.inviteLink}
+        case REGISTRARION_FAILED:
             return {...state, statusText: action.statusText, status: action.status}
+        case REGISTRATION_ERROR_READ:
+            return {...state, statusText: action.statusText, status: action.status}
+        case OPEN_REGISTARTION_FORM:
+            return {...state, regVisible: action.regVisible}
+        case CLOSE_FORM:
+            return {...state, regVisible: action.regVisible, successVisible: action.successVisible}
         default:
             return state
     }

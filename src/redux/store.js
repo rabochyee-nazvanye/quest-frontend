@@ -7,6 +7,7 @@ import authReducer from "./Reducers/AuthReducer";
 import questsReducer from './Reducers/QuestsReducer'
 import applicationReducer from './Reducers/ApplicationReducer'
 import questsListReducer from './Reducers/QuestsListReducer'
+import questRegistrationReducer from './Reducers/QuestRegistrationReducer'
 
 const loggerMiddleware = createLogger();
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     authReducer,
     questsReducer,
     applicationReducer,
-    questsListReducer
+    questsListReducer,
+    questRegistrationReducer
 });
 
 export const store = createStore(
