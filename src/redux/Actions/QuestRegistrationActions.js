@@ -1,14 +1,14 @@
 import { CLIENT_URL } from '../../settings'
 
-export const REGISTRARION_SUCCEEDED = 'REGISTRARION_SUCCEEDED'
-export const REGISTRARION_FAILED = 'REGISTRARION_FAILED'
-export const CLOSE_FORM = 'CLOSE_FORM'
-export const OPEN_REGISTARTION_FORM = 'OPEN_REGISTARTION_FORM'
+export const QUEST_REGISTRATION_SUCCEEDED = 'QUEST_REGISTRATION_SUCCEEDED'
+export const QUEST_REGISTRATION_FAILED = 'QUEST_REGISTRATION_FAILED'
+export const CLOSE_QUEST_REGISTRATION_FORM = 'CLOSE_QUEST_REGISTRATION_FORM'
+export const OPEN_QUEST_REGISTRATION_FORM = 'OPEN_QUEST_REGISTRATION_FORM'
 export const REGISTRATION_ERROR_READ = 'REGISTRATION_ERROR_READ'
 
 export function closeForm() {
     return {
-        type: CLOSE_FORM,
+        type: CLOSE_QUEST_REGISTRATION_FORM,
         regVisible: false,
         successVisible: false
     }
@@ -16,14 +16,14 @@ export function closeForm() {
 
 export function openRegistrationForm() {
     return {
-        type: OPEN_REGISTARTION_FORM,
+        type: OPEN_QUEST_REGISTRATION_FORM,
         regVisible: true
     }
 }
 
-export function setSuccessState(payload) {
+export function setSuccessfulRegistration(payload) {
     return {
-        type: REGISTRARION_SUCCEEDED,
+        type: QUEST_REGISTRATION_SUCCEEDED,
         regVisible: false,
         successVisible: true,
         inviteLink: CLIENT_URL + payload
@@ -31,9 +31,9 @@ export function setSuccessState(payload) {
 }
 
 
-export function setErrorState (payload) {
+export function setRegistrationError (payload) {
     return {
-        type: REGISTRARION_FAILED,
+        type: QUEST_REGISTRATION_FAILED,
         statusText: payload.statusText,
         status: payload.status
     }
