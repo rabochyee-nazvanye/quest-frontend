@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import InfiniteQuestTemplate from "./InfiniteQuestTemplate";
 import QuestDescriptionLogic from './QuestDescriptionLogic'
+import QuestResultsLogic from './QuestResultsLogic'
 import QuestMinimalInfo from './QuestMinimalInfo'
 import {  Spin } from 'antd'
 import {  CLIENT_URL } from '../../settings'
@@ -17,9 +18,6 @@ import { connect } from 'react-redux'
 class QuestPage extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      registered: false,
-    }
   }
 
   getMetaData () {
@@ -44,19 +42,31 @@ class QuestPage extends Component {
 getRepresentationByState () {
   let timing;
   let team;
+  let questBottom;
+  let registered = false;
   if (this.props.questFromReduxIsFetching)
-    return <Spin/>
+    return <Spin/>;
   else {
-    if(this.props.questFromRedux!== null){
-      if(this.props.questFromRedux.teams!== undefined)
-      this.props.questFromRedux.teams.forEach((x) => x.members.forEach((y) => {if(y === this.props.user.id) this.state.registered = true}));
-
+    if(this.props.questFromRedux=== null)
+      return <Spin/>;
+    else{
+      if(this.props.questFromRedux.teams!== undefined && this.props.questFromRedux.teams!== null && this.props.loggedIn) {
+        this.props.questFromRedux.teams.forEach((x) => x.members.forEach((y) => {
+          if (y === this.props.user.id) registered = true
+        }));
+      }
       if (this.props.questFromRedux.type !== "solo")
         team = <TeamList quest={this.props.questFromRedux}/>;
       else
         team = '';
-    if (!this.props.questFromRedux.isInfinite) {
-      timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={this.state.registered}
+
+      if (!this.props.questFromRedux.isInfinite && this.props.questFromRedux.status === 'resultsavailable')
+        questBottom = <QuestResultsLogic id={this.props.questFromRedux.id}/>;
+      else
+        questBottom = <QuestDescriptionLogic quest={this.props.questFromRedux}/>;
+
+      if (!this.props.questFromRedux.isInfinite) {
+      timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={registered}
                                      openForm={() => this.props.openForm()}
                                      quest_id={this.props.questFromRedux.id}
                                      url={'quests/' + this.props.questFromRedux.id}
@@ -68,7 +78,7 @@ getRepresentationByState () {
             <h2>
               {timing}
             </h2>
-            <QuestDescriptionLogic quest={this.props.questFromRedux}/>
+            {questBottom}
             {team}
             <QuestModalReg
                 regVisible={this.state.regVisible}
@@ -98,8 +108,9 @@ getRepresentationByState () {
 const mapStateToProps = (store) => ({
   questFromRedux: store.questsReducer.quest,
   questFromReduxIsFetching: store.questsReducer.isFetching,
-  user: store.authReducer.user
-})
+  user: store.authReducer.user,
+  loggedIn: store.authReducer.user !== null
+});
 
 const mapDispatchToProps = dispatch => ({
   fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id)),
