@@ -11,7 +11,7 @@ export function requestScoreboard () {
 export function receiveScoreboard(payload) {
     return {
         type: RECEIVE_SCOREBOARD,
-        quest: payload
+        scoreboard: payload
     }
 }
 
