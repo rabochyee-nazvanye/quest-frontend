@@ -21,9 +21,9 @@ class QuestPage extends Component {
   }
 
   getMetaData () {
-    if (this.state.dataReady) {
+    if (this.props.dataReady) {
       const metaData = {
-        title: this.state.quest.name,
+        title: this.props.quest.name,
         description: 'Квест на Квестспейсе',
         keywords: 'квест',
         robots: '',
@@ -66,7 +66,7 @@ getRepresentationByState () {
         questBottom = <QuestDescriptionLogic quest={this.props.questFromRedux}/>;
 
       if (!this.props.questFromRedux.isInfinite) {
-        timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={this.state.registered}
+        timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={registered}
                                        openForm={() => this.props.openForm()}
                                        quest_id={this.props.questFromRedux.id}
                                        url={'quests/' + this.props.questFromRedux.id}
@@ -81,12 +81,6 @@ getRepresentationByState () {
             {questBottom}
             {team}
             <QuestModalReg
-                regVisible={this.state.regVisible}
-                successVisible={this.state.successVisible}
-                setRegVisible={() => this.setRegVisible()}
-                setSuccessVisible={() => this.setSuccessVisible()}
-                setRegUnVisible={() => this.setRegUnVisible()}
-                setSuccessUnVisible={() => this.setSuccessUnVisible()}
                 quest_id={this.props.questFromRedux.id}
                 url={'quests/' + this.props.questFromRedux.id}
             />
