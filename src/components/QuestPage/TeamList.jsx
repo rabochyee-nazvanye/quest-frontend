@@ -38,16 +38,18 @@ class TeamList extends Component {
                     break
             }
             this.props.showTeamLeaveMessage()
+        }
 
-            if (!this.props.dataReady) {
-                return ''
-            }
+        if (!this.props.dataReady) {
+            return ''
+        }
+        if (this.props.logged) {
             if (this.props.team !== undefined) {
-                getInviteCode(this.props.team.id)
+                this.props.getInviteCode(this.props.team.id)
                 return (
                     <React.Fragment>
                         <Divider/>
-                        {showMessage}
+                        {showMessage()}
                         <Row style={{display: "flex"}}>
                             <h2>Твоя команда — {this.props.team.name}</h2>
                             <Popconfirm
@@ -81,10 +83,10 @@ class TeamList extends Component {
                         &#160;
                     </React.Fragment>
                 )
-            }
-            if (this.props.logged) {
+            } else {
                 return (
                     <React.Fragment>
+                        {showMessage()}
                         <Divider/>
                         <p>
                             У тебя ещё нет команды для этого квеста
@@ -92,9 +94,9 @@ class TeamList extends Component {
                         <p> &#160; </p>
                     </React.Fragment>
                 )
-            } else {
-                return ('')
             }
+        } else {
+            return ('')
         }
     }
 

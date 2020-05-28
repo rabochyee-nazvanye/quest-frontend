@@ -30,7 +30,7 @@ export function receiveInviteCode(payload) {
 export function setSuccessTeamLeave() {
     return {
         type: TEAM_LEAVE_SUCCEEDED,
-        team: null,
+        team: undefined,
         showMessage: TEAM_LEAVE_SUCCEEDED
     }
 }
