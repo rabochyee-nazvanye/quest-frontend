@@ -21,7 +21,7 @@ class QuestPage extends Component {
   }
 
   getMetaData () {
-    if (this.state.dataReady) {
+    if (this.props.dataReady) {
       const metaData = {
         title: this.state.quest.name,
         description: 'Квест на Квестспейсе',
@@ -81,12 +81,6 @@ getRepresentationByState () {
             {questBottom}
             {team}
             <QuestModalReg
-                regVisible={this.state.regVisible}
-                successVisible={this.state.successVisible}
-                setRegVisible={() => this.setRegVisible()}
-                setSuccessVisible={() => this.setSuccessVisible()}
-                setRegUnVisible={() => this.setRegUnVisible()}
-                setSuccessUnVisible={() => this.setSuccessUnVisible()}
                 quest_id={this.props.questFromRedux.id}
                 url={'quests/' + this.props.questFromRedux.id}
             />
