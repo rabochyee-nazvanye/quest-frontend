@@ -8,6 +8,7 @@ import {
     setFailTeamLeave
 } from "../redux/Actions/TeamListActions";
 
+//TODO(tramakarov): getWithToken()
 export function getInviteCode(teamId) {
     const token = getToken();
     return dispatch => {
@@ -25,6 +26,7 @@ export function getInviteCode(teamId) {
     }
 }
 
+//TODO(tramakarov): getWithToken()
 export function getTeamList(questId) {
     requestTeamList()
     const token = getToken()
