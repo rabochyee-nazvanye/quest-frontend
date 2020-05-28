@@ -70,8 +70,11 @@ getRepresentationByState () {
     if(this.props.questFromRedux=== null)
       return <Spin/>;
     else{
-      if(this.props.questFromRedux.teams!== undefined && this.props.questFromRedux.teams!== null )
-      this.props.questFromRedux.teams.forEach((x) => x.members.forEach((y) => {if(y === this.props.user.id) registered = true}));
+      if(this.props.questFromRedux.teams!== undefined && this.props.questFromRedux.teams!== null && this.props.loggedIn) {
+        this.props.questFromRedux.teams.forEach((x) => x.members.forEach((y) => {
+          if (y === this.props.user.id) registered = true
+        }));
+      }
       if (this.props.questFromRedux.type !== "solo")
         team = <TeamList quest={this.props.questFromRedux}/>;
       else
@@ -130,7 +133,8 @@ getRepresentationByState () {
 const mapStateToProps = (store) => ({
   questFromRedux: store.questsReducer.quest,
   questFromReduxIsFetching: store.questsReducer.isFetching,
-  user: store.authReducer.user
+  user: store.authReducer.user,
+  loggedIn: store.authReducer.user !== null
 });
 
 const mapDispatchToProps = dispatch => ({

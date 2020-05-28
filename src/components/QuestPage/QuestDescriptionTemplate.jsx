@@ -1,6 +1,6 @@
 import React from 'react'
 import { Divider } from 'antd'
-import './QuestDescription.css'
+import './QuestBottom.css'
 
 
 function QuestDescriptionTemplate(props) {

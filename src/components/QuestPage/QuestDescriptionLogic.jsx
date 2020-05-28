@@ -1,33 +1,8 @@
 import React, {Component} from 'react'
-import {Col, Divider, Row, Spin, Table} from 'antd'
-import './QuestDescription.css'
-import {TrophyOutlined} from '@ant-design/icons'
-import {getToken} from '../../redux/Actions/Api'
-import {BASE_URL} from '../../settings'
+import './QuestBottom.css'
 import ReactMarkdown from 'react-markdown'
 import QuestDescriptionTemplate from './QuestDescriptionTemplate'
 
-const columns = [
-    {
-        title: '',
-        dataIndex: 'cup',
-        width: 5
-    },
-    {
-        title: '',
-        dataIndex: 'place',
-        width: 5
-    },
-    {
-        title: '',
-        dataIndex: 'name'
-    },
-    {
-        title: '',
-        dataIndex: 'score',
-        width: 5
-    }
-];
 
 class GuestDescription extends Component {
     getRepresentationByState () {
