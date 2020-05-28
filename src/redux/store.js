@@ -7,6 +7,7 @@ import authReducer from "./Reducers/AuthReducer";
 import questsReducer from './Reducers/QuestsReducer'
 import applicationReducer from './Reducers/ApplicationReducer'
 import questsListReducer from './Reducers/QuestsListReducer'
+import scoreboardReducer from "./Reducers/ScoreboardReducer";
 import questRegistrationReducer from './Reducers/QuestRegistrationReducer'
 import teamListReducer from "./Reducers/TeamListReducer";
 
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     applicationReducer,
     questsListReducer,
     questRegistrationReducer,
-    teamListReducer
+    teamListReducer,
+    scoreboardReducer
 });
 
 export const store = createStore(
