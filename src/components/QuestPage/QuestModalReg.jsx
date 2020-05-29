@@ -8,10 +8,6 @@ import {closeErrorMessage, closeForm } from "../../redux/Actions/QuestRegistrati
 const { Title, Paragraph, Text } = Typography;
 
 class QuestModalReg extends Component {
-    constructor (props) {
-        super(props);
-    }
-
     render() {
         const errorMessage = (this.props.statusText !== '') ? (
             <div className={'reg-alert-container'}>
@@ -25,7 +21,7 @@ class QuestModalReg extends Component {
             </div>
         ) : (<React.Fragment/>);
 
-        const redirectToAuth = (this.props.status === 401) ? (
+        const redirectToAuth = (this.props.loggedIn) ? (
             <Redirect from={this.props.url} to={"/auth/" + encodeURIComponent(this.props.url)} />
             ) : (<React.Fragment/>)
 
@@ -111,7 +107,8 @@ const mapStateToProps = (store) => ({
     successVisible: store.questRegistrationReducer.successVisible,
     inviteLink: store.questRegistrationReducer.inviteLink,
     statusText: store.questRegistrationReducer.statusText,
-    status: store.authReducer.status
+    status: store.authReducer.status,
+    loggedIn: store.authReducer.user !== null
 })
 
 const mapDispatchToProps = dispatch => ({
