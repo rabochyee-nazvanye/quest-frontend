@@ -11,7 +11,7 @@ function QuestResultsTemplate(props) {
             {props.heading}
         </div>
         <h3>
-            <div className={'quest-descript'}>
+            <div className={'quest-description'}>
                 {props.description}
             </div>
         </h3>
