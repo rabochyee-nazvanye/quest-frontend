@@ -28,9 +28,9 @@ export function getInviteCode(teamId) {
 
 //TODO(tramakarov): getWithToken()
 export function getTeamList(questId) {
-    requestTeamList()
     const token = getToken()
     return dispatch => {
+        dispatch(requestTeamList())
         return fetch(BASE_URL + '/quests/' + questId + '/participants?members=currentUser',
             {
                 method: 'GET',
