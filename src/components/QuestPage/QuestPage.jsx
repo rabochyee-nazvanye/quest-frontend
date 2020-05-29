@@ -63,13 +63,13 @@ getRepresentationByState () {
       else
         questBottom = <QuestDescriptionLogic quest={this.props.quest}/>;
 
-      if (!this.props.questFromRedux.isInfinite) {
-        timing = <QuestTimelineProcess quest={this.props.questFromRedux} registered={registered}
+      if (!this.props.quest.isInfinite) {
+        timing = <QuestTimelineProcess quest={this.props.quest} registered={registered}
                                        openForm={() => this.props.openForm()}
-                                       quest_id={this.props.questFromRedux.id}
-                                       url={'quests/' + this.props.questFromRedux.id}
+                                       quest_id={this.props.quest.id}
+                                       url={'quests/' + this.props.quest.id}
         />
-    } else timing = <InfiniteQuestTemplate quest={this.props.questFromRedux}/>;
+    } else timing = <InfiniteQuestTemplate quest={this.props.quest}/>;
       return (
           <React.Fragment>
             <QuestMinimalInfo quest={this.props.quest}/>
@@ -79,8 +79,8 @@ getRepresentationByState () {
             {questBottom}
             {team}
             <QuestModalReg
-                quest_id={this.props.questFromRedux.id}
-                url={'quests/' + this.props.questFromRedux.id}
+                quest_id={this.props.quest.id}
+                url={'quests/' + this.props.quest.id}
             />
           </React.Fragment>
       )
@@ -107,6 +107,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch => ({
   fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id)),
   openForm: () => dispatch(openRegistrationForm())
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)
