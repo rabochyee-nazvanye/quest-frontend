@@ -19,7 +19,7 @@ function QuestResultsTemplate(props) {
         <div className={'second-col'}></div>
         {props.results}
     </React.Fragment>
-    //soon I will add here paddings for 2 table columns
+    //TODO(lalka-anka): soon I will add here paddings for 2 table columns
 }
 
 export default QuestResultsTemplate
