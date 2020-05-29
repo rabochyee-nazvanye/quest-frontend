@@ -7,11 +7,12 @@ import {
     CheckOutlined,
     ClockCircleOutlined, StarOutlined, UserAddOutlined
 } from '@ant-design/icons'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { getToken } from '../../api/CommonApi.js';
 import QuestTimelineTemplate from './QuestTimelineTemplate'
 let dateTimeNow = new Date();
 
+//TODO(lalka-anka): Please remove this huge dictionaries :(
 function QuestTimelineProcess(props) {
     let status = props.quest.status;
     const history = useHistory();

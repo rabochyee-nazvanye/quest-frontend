@@ -27,6 +27,7 @@ class TeamList extends Component {
         this.props.getTeamList(this.props.quest.id)
     }
 
+    //TODO(tramakarov): Create TeamListTemplate and move this function to created file
     getRepresentationByState () {
         const showMessage = () => {
             switch (this.props.showMessage) {
