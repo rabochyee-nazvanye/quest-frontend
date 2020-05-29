@@ -12,8 +12,6 @@ import QuestTimelineProcess from "./QuestTimelineProcess";
 import { fetchQuestInfo } from '../../api/QuestsApi'
 import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
 import { connect } from 'react-redux'
-import IsRegistered from './Utils'
-
 
 
 class QuestPage extends Component {
@@ -44,7 +42,6 @@ getRepresentationByState () {
   let timing;
   let team;
   let questBottom;
-  let registered = false;
   if (this.props.questIsFetching)
     return <Spin/>;
   else {
@@ -52,7 +49,6 @@ getRepresentationByState () {
       return <Spin/>;
     else{
       if(this.props.quest.teams!== undefined && this.props.loggedIn)
-        registered = <IsRegistered teams={this.props.quest.teams}/>;
       if (this.props.quest.type !== "solo")
         team = <TeamList quest={this.props.quest}/>;
       else
@@ -64,7 +60,7 @@ getRepresentationByState () {
         questBottom = <QuestDescriptionLogic quest={this.props.quest}/>;
 
       if (!this.props.quest.isInfinite) {
-        timing = <QuestTimelineProcess quest={this.props.quest} registered={registered}
+        timing = <QuestTimelineProcess quest={this.props.quest} registered={this.props.userHasTeam}
                                        openForm={() => this.props.openForm()}
                                        quest_id={this.props.quest.id}
                                        url={'quests/' + this.props.quest.id}
@@ -101,6 +97,7 @@ const mapStateToProps = (store) => ({
   quest: store.questsReducer.quest,
   questIsFetching: store.questsReducer.isFetching,
   user: store.authReducer.user,
+  userHasTeam: store.teamListReducer.team !== undefined,
   loggedIn: store.authReducer.user !== null
 });
 
