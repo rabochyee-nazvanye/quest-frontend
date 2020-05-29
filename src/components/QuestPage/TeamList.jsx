@@ -6,6 +6,7 @@ import {LogoutOutlined} from "@ant-design/icons";
 import {connect} from "react-redux";
 import {getInviteCode, getTeamList, leaveTeam} from "../../api/TeamListApi";
 import {showTeamLeaveMessage, TEAM_LEAVE_FAILED, TEAM_LEAVE_SUCCEEDED} from "../../redux/Actions/TeamListActions";
+import './TeamList.css'
 
 const { Paragraph } = Typography;
 
@@ -17,7 +18,7 @@ class TeamList extends Component {
 
     mapTeammatesToTemplate() {
         return this.props.team.members.map((member) =>
-            <Col key={'quest:' + member.name} span={6} style = {{padding: '5px 0'}}>
+            <Col key={'quest:' + member.name} span={6} className='teammate-col'>
                 <Teammate member={member} captainName = {this.props.team.captain.name} />
             </Col>
         )
@@ -51,7 +52,7 @@ class TeamList extends Component {
                     <React.Fragment>
                         <Divider/>
                         {showMessage()}
-                        <Row style={{display: "flex"}}>
+                        <Row className='team-heading'>
                             <h2>Твоя команда — {this.props.team.name}</h2>
                             <Popconfirm
                                 placement="bottomRight"
@@ -63,8 +64,8 @@ class TeamList extends Component {
                                 cancelText="Нет"
                             >
                                 <Button
+                                    className='logout-button'
                                     icon={<LogoutOutlined/>}
-                                    style={{marginLeft: "auto"}}
                                     danger
                                 >
                                     Выйти из команды
@@ -76,10 +77,12 @@ class TeamList extends Component {
                         </Row>
                         &#160;
                         <div>
-                            {'Пригласите друзей в свою команду — поделитесь ссылкой: '}
-                            <Paragraph copyable style={{display: 'inline-block', color: '#1890ff'}}>
-                                {CLIENT_URL + '/invites/' + this.props.inviteCode}
-                            </Paragraph>
+                            {'Пригласите друзей в свою команду — поделитесь ссылкой:'}
+                            <div className='link'>
+                                <Paragraph copyable style={{display: 'inline-block', color: '#1890ff'}}>
+                                    {CLIENT_URL + '/invites/' + this.props.inviteCode}
+                                </Paragraph>
+                            </div>
                         </div>
                         &#160;
                     </React.Fragment>
