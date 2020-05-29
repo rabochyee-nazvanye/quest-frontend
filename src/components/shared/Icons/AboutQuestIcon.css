@@ -1,11 +1,11 @@
-.results-icon{
-    left: 0%;
+.about-icon{
+    left: -2.2%;
     position: relative;
 }
 
 @media (max-width: 500px) {
-    .res-icon{
-        left: -0.5%;
+    .about-icon{
+        left: -6.4%;
         position: relative;
     }
 }

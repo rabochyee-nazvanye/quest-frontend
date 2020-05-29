@@ -1,0 +1,38 @@
+.about{
+    position: relative;
+    top: 65%;
+    left: 0.4%;
+
+}
+
+.quest-description {
+    position: relative;
+    top: 59%;
+    left: 0.4%;
+    word-wrap: break-word;
+    width: 100%;
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.first-col{}
+
+.second-col{}
+
+@media (max-width: 500px) {
+    .about {
+        position: relative;
+        top: 65%;
+        left: 3.2%;
+    }
+    .quest-descript {
+        position: relative;
+        top: 59%;
+        left: 3.2%;
+        word-wrap: break-word;
+        width: 100%;
+        text-align: left;
+        white-space: pre-wrap;
+    }
+}
+
