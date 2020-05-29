@@ -1,4 +1,4 @@
-import {getToken} from "./CommonApi";
+import {getToken, getWithToken} from "./CommonApi";
 import {BASE_URL} from "../settings";
 import {
     requestTeamList,
@@ -8,19 +8,11 @@ import {
     setFailTeamLeave
 } from "../redux/Actions/TeamListActions";
 
-//TODO(tramakarov): getWithToken()
+
 export function getInviteCode(teamId) {
-    const token = getToken();
+    const path = BASE_URL + '/teams/' + teamId + '/inviteCode';
     return dispatch => {
-        return fetch(BASE_URL + '/teams/' + teamId + '/inviteCode',
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'bearer ' + token,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
+        return getWithToken(path)
             .then(response => response.json())
             .then(readResponse => {dispatch(receiveInviteCode(readResponse))})
     }
@@ -28,18 +20,10 @@ export function getInviteCode(teamId) {
 
 //TODO(tramakarov): getWithToken()
 export function getTeamList(questId) {
-    const token = getToken()
+    const path = BASE_URL + '/quests/' + questId + '/participants?members=currentUser';
     return dispatch => {
         dispatch(requestTeamList())
-        return fetch(BASE_URL + '/quests/' + questId + '/participants?members=currentUser',
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'bearer ' + token,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
+        return getWithToken(path)
             .then(response => response.json())
             .then(readResponse => {
                 dispatch(receiveTeamList(readResponse[0]))
@@ -56,13 +40,13 @@ export function leaveTeam(teamId) {
     return dispatch => {
         return fetch(BASE_URL + '/Teams/' + teamId +'/members/currentUser',
             {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': 'bearer ' + token,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(query)
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'bearer ' + token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(query)
             })
             .then(response => {
                 if (response.ok) {
