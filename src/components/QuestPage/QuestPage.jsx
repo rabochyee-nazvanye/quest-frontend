@@ -10,40 +10,19 @@ import TeamList from './TeamList'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
 import { fetchQuestInfo } from '../../api/QuestsApi'
+import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
 import { connect } from 'react-redux'
-import IsRegistered from './Utils'
-
 
 
 class QuestPage extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      regVisible: false,
-      successVisible: false
-    }
-  }
-
-  setRegVisible () {
-    this.setState({ regVisible: true })
-  }
-
-  setSuccessVisible () {
-    this.setState({ successVisible: true })
-  }
-
-  setRegUnVisible () {
-    this.setState({ regVisible: false })
-  }
-
-  setSuccessUnVisible () {
-    this.setState({ successVisible: false })
   }
 
   getMetaData () {
-    if (this.state.dataReady) {
+    if (this.props.dataReady) {
       const metaData = {
-        title: this.state.quest.name,
+        title: this.props.quest.name,
         description: 'Квест на Квестспейсе',
         keywords: 'квест',
         robots: '',
@@ -63,7 +42,6 @@ getRepresentationByState () {
   let timing;
   let team;
   let questBottom;
-  let registered = false;
   if (this.props.questIsFetching)
     return <Spin/>;
   else {
@@ -71,7 +49,6 @@ getRepresentationByState () {
       return <Spin/>;
     else{
       if(this.props.quest.teams!== undefined && this.props.loggedIn)
-        registered = <IsRegistered teams={this.props.quest.teams}/>;
       if (this.props.quest.type !== "solo")
         team = <TeamList quest={this.props.quest}/>;
       else
@@ -83,16 +60,11 @@ getRepresentationByState () {
         questBottom = <QuestDescriptionLogic quest={this.props.quest}/>;
 
       if (!this.props.quest.isInfinite) {
-      timing = <QuestTimelineProcess quest={this.props.quest} registered={registered}
-                                     regVisible={this.props.regVisible}
-                                     successVisible={this.props.successVisible}
-                                     setRegVisible={() => this.setRegVisible()}
-                                     setSuccessVisible={() => this.setSuccessVisible()}
-                                     setRegUnVisible={() => this.setRegUnVisible()}
-                                     setSuccessUnVisible={() => this.setSuccessUnVisible()}
-                                     quest_id={this.props.quest.id}
-                                     url={'quests/' + this.props.quest.id}
-      />
+        timing = <QuestTimelineProcess quest={this.props.quest} registered={this.props.userHasTeam}
+                                       openForm={() => this.props.openForm()}
+                                       quest_id={this.props.quest.id}
+                                       url={'quests/' + this.props.quest.id}
+        />
     } else timing = <InfiniteQuestTemplate quest={this.props.quest}/>;
       return (
           <React.Fragment>
@@ -103,12 +75,6 @@ getRepresentationByState () {
             {questBottom}
             {team}
             <QuestModalReg
-                regVisible={this.state.regVisible}
-                successVisible={this.state.successVisible}
-                setRegVisible={() => this.setRegVisible()}
-                setSuccessVisible={() => this.setSuccessVisible()}
-                setRegUnVisible={() => this.setRegUnVisible()}
-                setSuccessUnVisible={() => this.setSuccessUnVisible()}
                 quest_id={this.props.quest.id}
                 url={'quests/' + this.props.quest.id}
             />
@@ -131,11 +97,13 @@ const mapStateToProps = (store) => ({
   quest: store.questsReducer.quest,
   questIsFetching: store.questsReducer.isFetching,
   user: store.authReducer.user,
+  userHasTeam: store.teamListReducer.team !== undefined,
   loggedIn: store.authReducer.user !== null
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id))
+  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id)),
+  openForm: () => dispatch(openRegistrationForm())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)
