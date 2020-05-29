@@ -1,6 +1,6 @@
 import React from 'react'
 import { Divider } from 'antd'
-import './QuestBottom.css'
+import './QuestDescription.css'
 
 
 function QuestDescriptionTemplate(props) {
@@ -9,14 +9,12 @@ function QuestDescriptionTemplate(props) {
         <Divider/>
         <div className={'about'}>
             {props.heading}
+        </div>
             <h3>
                 <div className={'quest-descript'}>
                     {props.description}
                 </div>
             </h3>
-        </div>
-        <p>&nbsp;</p>
-        {props.results}
     </React.Fragment>
 }
 
