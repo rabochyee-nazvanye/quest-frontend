@@ -4,6 +4,7 @@ import {
     setSuccessState,
     setErrorState
 } from '../redux/Actions/QuestRegistrationActions'
+import {getTeamList} from "./TeamListApi";
 
 
 export default function handleTeamCreation(teamName, questId) {
@@ -26,7 +27,11 @@ export default function handleTeamCreation(teamName, questId) {
             })
                 .then(response => {
                     if (response.ok) {
-                        response.json().then(data => { dispatch(setSuccessState(data.inviteLink)) });
+                        response.json().then(data =>
+                        {
+                            dispatch(getTeamList(questId))
+                            dispatch(setSuccessState(data.inviteLink))
+                        });
                     } else {
                         response.json().then(data => dispatch(setErrorState({ status: data.status, statusText: data.title })))
                     }
