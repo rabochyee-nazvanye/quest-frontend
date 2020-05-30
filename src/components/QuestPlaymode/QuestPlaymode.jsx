@@ -6,7 +6,7 @@ import { groupBy } from './Utils';
 import QuestTasks from './Templates/Tasks/QuestTasks';
 import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode';
 import { fetchQuestInfo } from '../../api/QuestsApi';
-import { getInviteCode, getTeamList } from '../../api/TeamListApi';
+import { getInviteCode, getTeam } from '../../api/TeamListApi'
 import {
     getQuestTasks,
     getTaskHint,
@@ -14,6 +14,7 @@ import {
 } from '../../api/QuestPlaymodeApi';
 
 function dataIsReady(props) {
+    console.log(props)
     return (
         !props.questIsFetching &&
         !props.teamIsFetching &&
@@ -29,6 +30,7 @@ function QuestPlaymode(props) {
             props.getQuest(questId);
             props.getTeam(questId);
             props.getTasks(questId);
+            props.getInviteCode()
         }
     }, [props.loggedIn]);
 
@@ -45,7 +47,7 @@ function QuestPlaymode(props) {
     } else if (dataIsReady(props)) {
         return (
             <React.Fragment>
-                <MetaInfoPlaymode quest={props.quest} team={props.team} />
+                <MetaInfoPlaymode quest={props.quest} team={props.team} inviteCode={props.teamInviteCode} />
                 <QuestTasks
                     tasks={groupBy(props.tasks, 'group')}
                     sendTaskCallback={(taskId, attemptText) =>
@@ -80,7 +82,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getQuest: (id) => dispatch(fetchQuestInfo(id)),
-    getTeam: (questId) => dispatch(getTeamList(questId)),
+    getTeam: (questId) => dispatch(getTeam(questId)),
     getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
     getTasks: (questId) => dispatch(getQuestTasks(questId)),
     sendTaskAttempt: (taskId, attemptText) =>
