@@ -87,16 +87,16 @@ export default function RegisterFormTemplate (props) {
             <Button type="primary" htmlType="submit" className="auth-form-button">
                 Зарегистрироваться
             </Button>
-            <GoogleLogin
-                clientId={GOOGLE_CLIENT_ID}
-                render={renderProps => (
-                    <Button className='auth-form-button' icon={<GoogleOutlined />} onClick={renderProps.onClick} disabled={renderProps.disabled}>Войти с помощью Google</Button>
-                )}
-                buttonText="Войти с помощью Google"
-                onSuccess={props.googleAuth}
-                onFailure={props.googleAuth}
-            />
         </Form.Item>
+          <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              render={renderProps => (
+                  <Button className='oauth-button' icon={<GoogleOutlined />} onClick={renderProps.onClick} disabled={renderProps.disabled}>Регистрация с помощью Google</Button>
+              )}
+              buttonText="Войти с помощью Google"
+              onSuccess={props.googleAuth}
+              onFailure={props.googleAuth}
+          />
       </Form>
     </div>
   )
