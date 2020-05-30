@@ -7,7 +7,7 @@ import {UserOutlined, LockOutlined, GoogleOutlined} from '@ant-design/icons'
 
 import { decodeException } from './Utils'
 import PropTypes from 'prop-types'
-import {GOOGLE_CLIENT_ID} from "../../../api/authConfig";
+import { GOOGLE_CLIENT_ID } from '../../../settings'
 import {GoogleLogin} from "react-google-login";
 
 export default function RegisterFormTemplate (props) {

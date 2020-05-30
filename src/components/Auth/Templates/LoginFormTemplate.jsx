@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import { GoogleOutlined } from "@ant-design/icons";
 
 import { GoogleLogin } from 'react-google-login';
-import {GOOGLE_CLIENT_ID} from "../../../api/authConfig";
+import { GOOGLE_CLIENT_ID } from '../../../settings'
 
 
 export default function LoginFormTemplate (props) {
