@@ -3,7 +3,7 @@ import ProgressboardTable from "./ProgressboardTable";
 import {Button, Spin, Typography, Result, Divider} from 'antd'
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import {BASE_URL, CLIENT_URL} from '../../settings'
-import {getToken} from "../../redux/Actions/Api";
+import { getToken } from '../../api/CommonApi.js';
 import {Link} from "react-router-dom";
 import QuestMinimalInfo from "../QuestPage/QuestMinimalInfo";
 import MetaTags from "../shared/MetaTags/MetaTags";

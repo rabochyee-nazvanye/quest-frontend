@@ -1,0 +1,21 @@
+.captain-icon {
+    color: #91d5ff;
+    display: inline-block;
+}
+
+.link {
+    display: inline-block;
+    color: #1890ff
+}
+
+.logout-button {
+    margin-left: auto
+}
+
+.team-heading {
+    display: flex
+}
+
+.teammate-col {
+    padding: 5px 0
+}

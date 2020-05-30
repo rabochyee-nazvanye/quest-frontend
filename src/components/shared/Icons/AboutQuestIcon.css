@@ -1,0 +1,11 @@
+.about-icon{
+    left: -2.2%;
+    position: relative;
+}
+
+@media (max-width: 500px) {
+    .about-icon{
+        left: -6.4%;
+        position: relative;
+    }
+}

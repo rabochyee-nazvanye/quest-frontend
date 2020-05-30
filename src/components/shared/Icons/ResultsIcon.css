@@ -1,0 +1,11 @@
+.results-icon{
+    left: 0%;
+    position: relative;
+}
+
+@media (max-width: 500px) {
+    .res-icon{
+        left: 0%;
+        position: relative;
+    }
+}
