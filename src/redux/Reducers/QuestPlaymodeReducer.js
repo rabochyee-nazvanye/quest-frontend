@@ -1,11 +1,8 @@
 import {
-REQUEST_QUEST_TASKS,
-RECEIVE_QUEST_TASKS,
-DELETE_QUEST_TASKS,
-SEND_QUEST_TASK_ATTEMPT,
-RECEIVE_QUEST_TASK_ATTEMPT_RESPONSE,
-SEND_QUEST_TASK_HINT_REQUEST,
-RECEIVE_QUEST_TASK_HINT
+    REQUEST_QUEST_TASKS,
+    RECEIVE_QUEST_TASKS,
+    DELETE_QUEST_TASKS,
+    UPDATE_QUEST_TASKS,
 } from '../Actions/QuestPlaymodeActions'
 
 export default function questPlaymodeReducer (
@@ -18,8 +15,11 @@ export default function questPlaymodeReducer (
             return {...state, tasksAreFetching:true};
         case RECEIVE_QUEST_TASKS:
             return {...state, tasksAreFetching: false, tasks: action.tasks};
+        // copy made intentionally, c.o ./Actions/questPlaymodeActions
+        case UPDATE_QUEST_TASKS:
+            return {...state, tasksAreFetching: false, tasks: action.tasks};
         case DELETE_QUEST_TASKS:
-            return {...state, isFetching: false, tasks: null};
+            return {...state, tasksAreFetching: false, tasks: null};
         default:
             return state
     }

@@ -1,12 +1,10 @@
 export const REQUEST_QUEST_TASKS = 'REQUEST_QUEST_TASKS'
 export const RECEIVE_QUEST_TASKS = 'RECEIVE_QUEST_TASKS'
+export const UPDATE_QUEST_TASKS = 'UPDATE_QUEST_TASKS'
 export const DELETE_QUEST_TASKS = 'DELETE_QUEST_TASKS'
 
 export const SEND_QUEST_TASK_ATTEMPT = 'SEND_QUEST_TASK_ATTEMPT'
-export const RECEIVE_QUEST_TASK_ATTEMPT_RESPONSE = 'RECEIVE_QUEST_TASK_ATTEMPT_RESPONSE'
-
 export const SEND_QUEST_TASK_HINT_REQUEST = 'SEND_QUEST_TASK_HINT_REQUEST'
-export const RECEIVE_QUEST_TASK_HINT = 'RECEIVE_QUEST_TASK_HINT'
 
 export function requestQuestTasks () {
     return {
@@ -17,7 +15,17 @@ export function requestQuestTasks () {
 export function receiveQuestTasks (payload) {
     return {
         type: RECEIVE_QUEST_TASKS,
-        tasks: payload.tasks
+        tasks: payload
+    }
+}
+
+// updateQuestTasks is a copy of receiveQuestTasks, made intentionnaly to diverse the src of updates
+// updateQuestTasks is used when we do something with collection and send the whole new object, but processed
+// receiveQuestTasks is used when we fetch the whole collection from api
+export function updateQuestTasks (payload) {
+    return {
+        type: UPDATE_QUEST_TASKS,
+        tasks: payload
     }
 }
 
@@ -33,22 +41,8 @@ export function sendQuestTaskAttempt() {
     }
 }
 
-export function receiveQuestTaskAttempt(payload) {
-    return {
-        type: RECEIVE_QUEST_TASK_ATTEMPT_RESPONSE,
-        respone: payload.response
-    }
-}
-
 export function sendQuestTaskHintRequest() {
     return {
         type: SEND_QUEST_TASK_HINT_REQUEST
-    }
-}
-
-export function receiveQuestTaskHint(payload) {
-    return {
-        type: RECEIVE_QUEST_TASK_HINT,
-        hints: payload.hints
     }
 }
