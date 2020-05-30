@@ -5,7 +5,7 @@ import { getToken, getWithToken, postWithToken } from './CommonApi'
 import {
     deleteQuestTasks,
     receiveQuestTasks,
-    requestQuestTasks, sendQuestTaskAttempt,
+    requestQuestTasks, sendQuestTaskAttempt, sendQuestTaskHintRequest,
     updateQuestTasks,
 } from '../redux/Actions/QuestPlaymodeActions'
 import { store } from '../redux/store'
@@ -19,14 +19,12 @@ export function sendTaskAttempt (taskId, attemptText) {
         .then((response) => {
             if (response.ok) {
                 response.json().then((json) => {
-                    console.log(json)
                     const oldTasks = store.getState().questPlaymodeReducer.tasks
                     const updatedTasks = oldTasks.map(x => {
                         if (x.id === json.id)
                             return(json)
                         else
                             return(x)})
-                    console.log(updatedTasks)
                     dispatch(updateQuestTasks(updatedTasks))
                 })
             } else {
@@ -37,25 +35,34 @@ export function sendTaskAttempt (taskId, attemptText) {
 }
 
 export function getTaskHint (taskId, hintNumber) {
-    fetch(`${BASE_URL}/tasks/${taskId}/hintrequests/${hintNumber}`, {
-        method: 'POST',
-        headers: {
-            Authorization: 'bearer ' + getToken(),
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-    })
-        .then((response) => {
+    alert(taskId)
+    alert(hintNumber)
+    return dispatch => {
+        dispatch(sendQuestTaskHintRequest())
+        postWithToken(`${BASE_URL}/tasks/${taskId}/hintrequests/${hintNumber}`, {})
+            .then((response) => {
             if (response.ok) {
-                //getQuestTasks(questId, callback, errorCallback)
+                response.json().then((json) => {
+                    const oldTasks = store.getState().questPlaymodeReducer.tasks
+                    const updatedTasks = oldTasks.map(task => {
+                        if (task.id === taskId) {
+                            task.usedHints.push(json)
+                        }
+                        else
+                            return(task)
+                        }
+                    )
+                    dispatch(updateQuestTasks(updatedTasks))
+                })
             } else {
-                response.json().then((json) => errorCallback(json))
+                response.json().then((json) => console.log(json))
             }
-        })
+        }
+        )
+    }
 }
 
-export function getQuestTasksR (questId) {
+export function getQuestTasks (questId) {
     return dispatch => {
         dispatch(deleteQuestTasks())
         dispatch(requestQuestTasks())
