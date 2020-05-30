@@ -100,7 +100,6 @@ export function flushException () {
 
 
 export function googleAuth (props) {
-  dispatch(googleLogin())
   const query = {
     'accessToken': props.tokenId,
     'oAuthProvider': 'google'
@@ -114,6 +113,7 @@ export function googleAuth (props) {
     body: JSON.stringify(query)
   };
   return dispatch => {
+    dispatch(googleLogin())
     return fetch(BASE_URL + '/externalauth', options)
         .then(response => {
           if (response.status >= 200 && response.status <= 300) {
