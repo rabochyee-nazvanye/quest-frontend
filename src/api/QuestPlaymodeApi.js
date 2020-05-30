@@ -20,11 +20,11 @@ export function sendTaskAttempt (taskId, attemptText) {
             if (response.ok) {
                 response.json().then((json) => {
                     const oldTasks = store.getState().questPlaymodeReducer.tasks
-                    const updatedTasks = oldTasks.map(x => {
-                        if (x.id === json.id)
+                    const updatedTasks = oldTasks.map(task => {
+                        if (task.id === json.id)
                             return(json)
                         else
-                            return(x)})
+                            return(task)})
                     dispatch(updateQuestTasks(updatedTasks))
                 })
             } else {
