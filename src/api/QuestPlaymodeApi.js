@@ -35,8 +35,6 @@ export function sendTaskAttempt (taskId, attemptText) {
 }
 
 export function getTaskHint (taskId, hintNumber) {
-    alert(taskId)
-    alert(hintNumber)
     return dispatch => {
         dispatch(sendQuestTaskHintRequest())
         postWithToken(`${BASE_URL}/tasks/${taskId}/hintrequests/${hintNumber}`, {})
@@ -48,8 +46,7 @@ export function getTaskHint (taskId, hintNumber) {
                         if (task.id === taskId) {
                             task.usedHints.push(json)
                         }
-                        else
-                            return(task)
+                        return(task)
                         }
                     )
                     dispatch(updateQuestTasks(updatedTasks))
