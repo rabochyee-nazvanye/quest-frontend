@@ -36,5 +36,5 @@ export default function MetaInfoPlaymode(props) {
 
 MetaInfoPlaymode.propTypes = {
     quest: PropTypes.object,
-    team: PropTypes.object,
+    team: PropTypes.object
 };

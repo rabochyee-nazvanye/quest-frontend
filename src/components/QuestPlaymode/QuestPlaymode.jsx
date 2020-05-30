@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Spin } from 'antd';
 import { groupBy } from './Utils';
 import QuestTasks from './Templates/Tasks/QuestTasks';
 import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode';
-import QuestPlaymodeExceptionHandler from './QuestPlaymodeExceptionHandler';
 import { fetchQuestInfo } from '../../api/QuestsApi';
 import { getInviteCode, getTeamList } from '../../api/TeamListApi';
 import {
     getQuestTasks,
     getTaskHint,
-    sendTaskAttempt,
+    sendTaskAttempt
 } from '../../api/QuestPlaymodeApi';
 
-const DATA_TYPES = {
-    quests: 'quests',
-    teams: 'teams',
-    tasks: 'tasks',
-};
+function dataIsReady(props) {
+    return (
+        !props.questIsFetching &&
+        !props.teamIsFetching &&
+        !props.tasksAreFetching
+    );
+}
 
 function QuestPlaymode(props) {
     const questId = props.match.params.id;
@@ -41,17 +42,7 @@ function QuestPlaymode(props) {
                 }
             />
         );
-    } else if (
-        props.questIsFetching ||
-        props.teamIsFetching ||
-        props.tasksAreFetching
-    ) {
-        return <Spin />;
-    } else if (
-        !props.questIsFetching &&
-        !props.teamIsFetching &&
-        !props.tasksAreFetching
-    ) {
+    } else if (dataIsReady(props)) {
         return (
             <React.Fragment>
                 <MetaInfoPlaymode quest={props.quest} team={props.team} />
@@ -67,6 +58,8 @@ function QuestPlaymode(props) {
                 />
             </React.Fragment>
         );
+    } else {
+        return <Spin />;
     }
 }
 
@@ -82,7 +75,7 @@ const mapStateToProps = (store) => ({
     tasks: store.questPlaymodeReducer.tasks,
 
     user: store.authReducer.user,
-    loggedIn: store.authReducer.user !== null,
+    loggedIn: store.authReducer.user !== null
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -93,7 +86,7 @@ const mapDispatchToProps = (dispatch) => ({
     sendTaskAttempt: (taskId, attemptText) =>
         dispatch(sendTaskAttempt(taskId, attemptText)),
     getTaskHint: (taskId, hintNumber) =>
-        dispatch(getTaskHint(taskId, hintNumber)),
+        dispatch(getTaskHint(taskId, hintNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode);

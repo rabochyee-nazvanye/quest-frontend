@@ -38,5 +38,5 @@ AnswerInput.propTypes = {
     sendAnswer: PropTypes.func,
     answerStatus: PropTypes.string,
     manualVerificationEnabled: PropTypes.bool,
-    lastSubmittedAnswer: PropTypes.string,
+    lastSubmittedAnswer: PropTypes.string
 };

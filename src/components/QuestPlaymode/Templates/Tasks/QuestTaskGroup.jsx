@@ -8,7 +8,7 @@ import {
     Popconfirm,
     Row,
     Tooltip,
-    Typography,
+    Typography
 } from 'antd';
 import './Tasks.css';
 import Hint from './Hint';
@@ -28,7 +28,7 @@ export default function QuestTaskGroup(props) {
                 id: taskData.id,
                 number: number,
                 key: number,
-                getHintCallback: props.getHintCallback,
+                getHintCallback: props.getHintCallback
             };
         };
 
@@ -39,7 +39,7 @@ export default function QuestTaskGroup(props) {
         const hintArray = {
             0: getDefaultData(0),
             1: getDefaultData(1),
-            2: getDefaultData(2),
+            2: getDefaultData(2)
         };
 
         Object.values(taskData.usedHints).forEach((usedHint) => {
@@ -50,7 +50,7 @@ export default function QuestTaskGroup(props) {
                 id: taskData.id,
                 number: usedHint.number,
                 key: usedHint.number,
-                getHintCallback: props.getHintCallback,
+                getHintCallback: props.getHintCallback
             };
         });
 
@@ -68,12 +68,12 @@ export default function QuestTaskGroup(props) {
             return {
                 header: 'Проверка модератором',
                 tooltipText:
-                    'Ответ проверит модератор твоей команды. Это займёт некоторое время',
+                    'Ответ проверит модератор твоей команды. Это займёт некоторое время'
             };
         }
         return {
             header: 'Автоматическая проверка',
-            tooltipText: 'Ответ проверяется автоматически',
+            tooltipText: 'Ответ проверяется автоматически'
         };
     };
 
@@ -155,5 +155,5 @@ QuestTaskGroup.propTypes = {
     taskGroupData: PropTypes.array,
     sendTaskCallback: PropTypes.func,
     updateTasksCallback: PropTypes.func,
-    getHintCallback: PropTypes.func,
+    getHintCallback: PropTypes.func
 };

@@ -9,12 +9,12 @@ import {
     Button,
     Row,
     Menu,
-    Divider,
+    Divider
 } from 'antd';
 import {
     AppstoreOutlined,
     MailOutlined,
-    SettingOutlined,
+    SettingOutlined
 } from '@ant-design/icons';
 import QuestTaskGroup from './QuestTaskGroup';
 
@@ -78,5 +78,5 @@ QuestTasks.propTypes = {
     tasks: PropTypes.object,
     sendTaskCallback: PropTypes.func,
     updateTasksCallback: PropTypes.func,
-    getHintCallback: PropTypes.func,
+    getHintCallback: PropTypes.func
 };

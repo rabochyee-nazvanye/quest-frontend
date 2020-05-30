@@ -5,13 +5,13 @@ export default function AnswerStatus(props) {
     const TASK_ATTEMPT_COLORS = {
         Yellow: '#e0c538',
         Red: '#ff4f33',
-        Green: '#4bb735',
+        Green: '#4bb735'
     };
 
     const TASK_ATTEMPT_STATUSES = {
         Error: 'error',
         OnReview: 'onreview',
-        Accepted: 'accepted',
+        Accepted: 'accepted'
     };
 
     const getAdminComment = () => {
@@ -64,5 +64,5 @@ AnswerStatus.propTypes = {
     lastSubmittedAnswer: PropTypes.string,
     manualVerificationEnabled: PropTypes.bool,
     status: PropTypes.string,
-    adminComment: PropTypes.string,
+    adminComment: PropTypes.string
 };

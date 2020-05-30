@@ -14,12 +14,12 @@ export function sendTaskAttempt(
         headers: {
             Authorization: 'bearer ' + getToken(),
             Accept: 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             teamId: teamId,
-            attemptText: attemptText,
-        }),
+            attemptText: attemptText
+        })
     }).then((response) => {
         if (response.ok) {
             getQuestTasks(questId, callback, errorCallback);
@@ -41,9 +41,9 @@ export function getTaskHint(
         headers: {
             Authorization: 'bearer ' + getToken(),
             Accept: 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({})
     }).then((response) => {
         if (response.ok) {
             getQuestTasks(questId, callback, errorCallback);
@@ -78,8 +78,8 @@ export function getTeamInfo(id, callback, errorCallback) {
         headers: {
             Authorization: 'bearer ' + getToken(),
             Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
+            'Content-Type': 'application/json'
+        }
     }).then((response) => {
         if (response.ok) {
             response
@@ -109,8 +109,8 @@ export function getWithToken(path, callback, errorCallback) {
         headers: {
             Authorization: 'bearer ' + getToken(),
             Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
+            'Content-Type': 'application/json'
+        }
     }).then((response) => {
         if (response.ok) {
             response.json().then((json) => {

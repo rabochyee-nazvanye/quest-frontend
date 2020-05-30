@@ -12,5 +12,5 @@ export default function QuestPlaymodeExceptionHandler(props) {
 }
 
 QuestPlaymodeExceptionHandler.propTypes = {
-    exception: PropTypes.object,
+    exception: PropTypes.object
 };

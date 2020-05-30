@@ -47,5 +47,5 @@ Hint.propTypes = {
     id: PropTypes.id,
     content: PropTypes.string,
     isHidden: PropTypes.bool,
-    getHintCallback: PropTypes.func,
+    getHintCallback: PropTypes.func
 };
