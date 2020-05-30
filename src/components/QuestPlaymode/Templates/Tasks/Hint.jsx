@@ -21,7 +21,7 @@ export default function Hint (props) {
       <div className={'quest-task__container'}>
         <Popconfirm
           title="За взятие подсказок мы снимаем баллы, вы точно хотите взять подсказку?"
-          onConfirm={() => props.getHintCallback(props.number, props.id)}
+          onConfirm={() => props.getHintCallback(props.id, props.number)}
           onCancel={() => { console.log('closed') }}
           okText="Да"
           cancelText="Нет"

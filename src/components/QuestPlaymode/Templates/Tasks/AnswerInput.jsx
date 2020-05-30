@@ -22,7 +22,7 @@ export default function AnswerInput (props) {
       <Input.Search
         disabled={false}
         enterButton=<SendOutlined />
-        onSearch={(value) => { if (value !== '') {props.sendAnswer(value)} }}
+        onSearch={(value) => { if (value !== '') { props.sendAnswer(value) }}}
         placeholder={props.lastSubmittedAnswer}
       />
     </div>)
