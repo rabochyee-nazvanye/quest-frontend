@@ -2,9 +2,9 @@ import {
     receiveScoreboard,
     requestScoreboard,
     deleteScoreboard
-} from '../Actions/ScoreboardActions'
+} from '../redux/Actions/ScoreboardActions'
 
-import { BASE_URL } from './../../settings'
+import { BASE_URL } from '../settings'
 
 export function fetchScoreboard(id) {
     return dispatch => {

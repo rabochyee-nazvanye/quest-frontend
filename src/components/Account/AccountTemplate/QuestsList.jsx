@@ -4,7 +4,7 @@ import {Spin} from 'antd'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
 import './QuestsList.css'
-import { fetchQuestsListInfo } from '../../../redux/Actions/QuestsListApi'
+import { fetchQuestsListInfo } from '../../../api/QuestsListApi'
 import {connect} from "react-redux";
 
 
