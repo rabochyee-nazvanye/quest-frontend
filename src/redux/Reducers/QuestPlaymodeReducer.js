@@ -7,7 +7,7 @@ import {
 
 export default function questPlaymodeReducer (
     state = {
-        tasksAreFetching: false,
+        tasksAreFetching: true,
         tasks: null
     }, action ) {
     switch (action.type) {
@@ -19,7 +19,7 @@ export default function questPlaymodeReducer (
         case UPDATE_QUEST_TASKS:
             return {...state, tasksAreFetching: false, tasks: action.tasks};
         case DELETE_QUEST_TASKS:
-            return {...state, tasksAreFetching: false, tasks: null};
+            return {...state, tasksAreFetching: true, tasks: null};
         default:
             return state
     }
