@@ -57,8 +57,7 @@ export default function authReducer (
       })
     case DELETE_EXCEPTION:
       return Object.assign({}, state, {
-        user: action.payload,
-        isOAuthenticated: true
+        exceptionDetail: ''
       })
     case GOOGLE_LOGIN:
       return Object.assign({}, state, {
