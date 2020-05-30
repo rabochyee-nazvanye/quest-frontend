@@ -5,13 +5,14 @@ import { getToken, getWithToken, postWithToken } from './CommonApi'
 import {
     deleteQuestTasks,
     receiveQuestTasks,
-    requestQuestTasks,
+    requestQuestTasks, sendQuestTaskAttempt,
     updateQuestTasks,
 } from '../redux/Actions/QuestPlaymodeActions'
 import { store } from '../redux/store'
 
 export function sendTaskAttempt (taskId, attemptText) {
     return dispatch => {
+        dispatch(sendQuestTaskAttempt())
         postWithToken(`${BASE_URL}/tasks/${taskId}/attempts`, {
             attemptText: attemptText
         })
@@ -19,8 +20,12 @@ export function sendTaskAttempt (taskId, attemptText) {
             if (response.ok) {
                 response.json().then((json) => {
                     console.log(json)
-                    const updatedTasks = {...store.questPlaymodeReducer.tasks}
-                    updatedTasks.map(x => { if (x.id === json.id) x = json })
+                    const oldTasks = store.getState().questPlaymodeReducer.tasks
+                    const updatedTasks = oldTasks.map(x => {
+                        if (x.id === json.id)
+                            return(json)
+                        else
+                            return(x)})
                     console.log(updatedTasks)
                     dispatch(updateQuestTasks(updatedTasks))
                 })
@@ -31,7 +36,7 @@ export function sendTaskAttempt (taskId, attemptText) {
     }
 }
 
-export function getTaskHint (questId, taskId, hintNumber, callback, errorCallback) {
+export function getTaskHint (taskId, hintNumber) {
     fetch(`${BASE_URL}/tasks/${taskId}/hintrequests/${hintNumber}`, {
         method: 'POST',
         headers: {
