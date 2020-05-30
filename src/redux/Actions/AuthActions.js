@@ -9,6 +9,9 @@ export const DELETE_TOKEN = 'DELETE_TOKEN'
 export const RECEIVE_EXCEPTION = 'RECEIVE_EXCEPTION'
 export const DELETE_EXCEPTION = 'DELETE_EXCEPTION'
 
+export const GOOGLE_LOGIN = 'GOOGLE_LOGIN'
+export const GOOGLE_LOGOUT = 'GOOGLE_LOGOUT'
+
 export function requestUserInfo () {
   return {
     type: REQUEST_USER_INFO
@@ -57,5 +60,11 @@ export function deleteToken () {
 export function deleteException() {
   return {
     type: DELETE_EXCEPTION
+  }
+}
+
+export function googleLogin() {
+  return {
+      type: GOOGLE_LOGIN
   }
 }

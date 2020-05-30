@@ -5,7 +5,7 @@ import {
   DELETE_USER_INFO,
   RECEIVE_TOKEN,
   REQUEST_TOKEN,
-  DELETE_TOKEN, DELETE_EXCEPTION
+  DELETE_TOKEN, DELETE_EXCEPTION, GOOGLE_LOGIN, GOOGLE_LOGOUT
 } from '../Actions/AuthActions'
 
 export default function authReducer (
@@ -14,7 +14,8 @@ export default function authReducer (
     tokenIsFetching: false,
     tokenReceivedAt: false,
     exceptionDetail: '',
-    user: null
+    user: null,
+    isOAuthenticated: false
   }, action) {
   switch (action.type) {
     case REQUEST_USER_INFO:
@@ -56,6 +57,12 @@ export default function authReducer (
       })
     case DELETE_EXCEPTION:
       return Object.assign({}, state, {
+        user: action.payload,
+        isOAuthenticated: true
+      })
+    case GOOGLE_LOGIN:
+      return Object.assign({}, state, {
+        tokenIsFetching: true,
         exceptionDetail: ''
       })
     default:
