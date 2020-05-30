@@ -168,3 +168,4 @@ typings/
 
 # production
 /quest/build
+src/api/authConfig.js
