@@ -1,5 +1,5 @@
-import { BASE_URL } from "../../settings";
-import { getToken } from "../../api/CommonApi";
+import { BASE_URL } from '../../settings';
+import { getToken } from '../../api/CommonApi';
 
 export function sendTaskAttempt(
     questId,
@@ -10,11 +10,11 @@ export function sendTaskAttempt(
     errorCallback
 ) {
     fetch(`${BASE_URL}/tasks/${taskId}/attempts`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            Authorization: "bearer " + getToken(),
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Authorization: 'bearer ' + getToken(),
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             teamId: teamId,
@@ -37,11 +37,11 @@ export function getTaskHint(
     errorCallback
 ) {
     fetch(`${BASE_URL}/tasks/${taskId}/hintrequests/${hintNumber}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            Authorization: "bearer " + getToken(),
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Authorization: 'bearer ' + getToken(),
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({}),
     }).then((response) => {
@@ -70,15 +70,15 @@ export function getTeamInfo(id, callback, errorCallback) {
     };
 
     const setTeamIdJson = (val) => {
-        teamData["code"] = val;
+        teamData['code'] = val;
     };
 
     fetch(`${BASE_URL}/quests/${id}/participants?members=currentUser`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            Authorization: "bearer " + getToken(),
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Authorization: 'bearer ' + getToken(),
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
     }).then((response) => {
         if (response.ok) {
@@ -91,7 +91,7 @@ export function getTeamInfo(id, callback, errorCallback) {
                     getWithToken(
                         `${BASE_URL}/teams/${teamData.id}/inviteCode`,
                         (teamInviteCode) => {
-                            teamData["code"] = teamInviteCode;
+                            teamData['code'] = teamInviteCode;
                             callback(teamData);
                         },
                         errorCallback
@@ -105,11 +105,11 @@ export function getTeamInfo(id, callback, errorCallback) {
 
 export function getWithToken(path, callback, errorCallback) {
     fetch(path, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            Authorization: "bearer " + getToken(),
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Authorization: 'bearer ' + getToken(),
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
     }).then((response) => {
         if (response.ok) {

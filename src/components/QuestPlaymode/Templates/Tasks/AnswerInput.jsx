@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Input } from "antd";
-import { SendOutlined } from "@ant-design/icons";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Input } from 'antd';
+import { SendOutlined } from '@ant-design/icons';
 
 export default function AnswerInput(props) {
-    const ANSWER_ACCEPTED_STATUS = "accepted";
+    const ANSWER_ACCEPTED_STATUS = 'accepted';
 
     if (props.answerStatus === ANSWER_ACCEPTED_STATUS) {
         return (
-            <div className={"quest-answer-input__container "}>
+            <div className={'quest-answer-input__container '}>
                 <Input.Search
                     disabled={true}
                     enterButton=<SendOutlined />
@@ -19,12 +19,12 @@ export default function AnswerInput(props) {
         );
     }
     return (
-        <div className={"quest-answer-input__container"}>
+        <div className={'quest-answer-input__container'}>
             <Input.Search
                 disabled={false}
                 enterButton=<SendOutlined />
                 onSearch={(value) => {
-                    if (value !== "") {
+                    if (value !== '') {
                         props.sendAnswer(value);
                     }
                 }}

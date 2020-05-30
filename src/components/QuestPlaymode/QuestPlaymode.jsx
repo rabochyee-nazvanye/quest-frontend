@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Spin } from "antd";
-import { groupBy } from "./Utils";
-import QuestTasks from "./Templates/Tasks/QuestTasks";
-import MetaInfoPlaymode from "./Templates/MetaInfo/MetaInfoPlaymode";
-import QuestPlaymodeExceptionHandler from "./QuestPlaymodeExceptionHandler";
-import { fetchQuestInfo } from "../../api/QuestsApi";
-import { getInviteCode, getTeamList } from "../../api/TeamListApi";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { Spin } from 'antd';
+import { groupBy } from './Utils';
+import QuestTasks from './Templates/Tasks/QuestTasks';
+import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode';
+import QuestPlaymodeExceptionHandler from './QuestPlaymodeExceptionHandler';
+import { fetchQuestInfo } from '../../api/QuestsApi';
+import { getInviteCode, getTeamList } from '../../api/TeamListApi';
 import {
     getQuestTasks,
     getTaskHint,
     sendTaskAttempt,
-} from "../../api/QuestPlaymodeApi";
+} from '../../api/QuestPlaymodeApi';
 
 const DATA_TYPES = {
-    quests: "quests",
-    teams: "teams",
-    tasks: "tasks",
+    quests: 'quests',
+    teams: 'teams',
+    tasks: 'tasks',
 };
 
 function QuestPlaymode(props) {
@@ -37,7 +37,7 @@ function QuestPlaymode(props) {
             <Redirect
                 from={window.location.pathname}
                 to={
-                    "/auth/" + encodeURIComponent("quests/" + questId + "/play")
+                    '/auth/' + encodeURIComponent('quests/' + questId + '/play')
                 }
             />
         );
@@ -56,11 +56,11 @@ function QuestPlaymode(props) {
             <React.Fragment>
                 <MetaInfoPlaymode quest={props.quest} team={props.team} />
                 <QuestTasks
-                    tasks={groupBy(props.tasks, "group")}
+                    tasks={groupBy(props.tasks, 'group')}
                     sendTaskCallback={(taskId, attemptText) =>
                         props.sendTaskAttempt(taskId, attemptText)
                     }
-                    updateTasksCallback={() => console.log("upd")}
+                    updateTasksCallback={() => console.log('upd')}
                     getHintCallback={(taskId, hintNumber) =>
                         props.getTaskHint(taskId, hintNumber)
                     }

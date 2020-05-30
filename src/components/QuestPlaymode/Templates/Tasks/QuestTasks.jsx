@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./Tasks.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Tasks.css';
 import {
     Col,
     Collapse,
@@ -10,13 +10,13 @@ import {
     Row,
     Menu,
     Divider,
-} from "antd";
+} from 'antd';
 import {
     AppstoreOutlined,
     MailOutlined,
     SettingOutlined,
-} from "@ant-design/icons";
-import QuestTaskGroup from "./QuestTaskGroup";
+} from '@ant-design/icons';
+import QuestTaskGroup from './QuestTaskGroup';
 
 const { Title } = Typography;
 const { SubMenu } = Menu;
@@ -42,7 +42,7 @@ export default function QuestTasks(props) {
     const insertQuestTaskSectionsToAffix = () => {
         return Object.keys(props.tasks).map((x) => (
             <div>
-                <a style={{ fontSize: 18 }} href={"#" + encodeURI(x)}>
+                <a style={{ fontSize: 18 }} href={'#' + encodeURI(x)}>
                     {x}
                 </a>
             </div>
@@ -53,10 +53,10 @@ export default function QuestTasks(props) {
         <React.Fragment>
             <Row>
                 <Col sm={18}>
-                    <div className={"task__container"}>
+                    <div className={'task__container'}>
                         <Collapse
                             bordered={false}
-                            style={{ "background-color": "#ffffff" }}
+                            style={{ 'background-color': '#ffffff' }}
                         >
                             {forgeQuestTaskSections()}
                         </Collapse>

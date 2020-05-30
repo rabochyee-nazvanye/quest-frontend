@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Button,
     Col,
@@ -9,13 +9,13 @@ import {
     Row,
     Tooltip,
     Typography,
-} from "antd";
-import "./Tasks.css";
-import Hint from "./Hint";
-import ReactMarkdown from "react-markdown";
-import AnswerStatus from "./AnswerStatus";
-import AnswerInput from "./AnswerInput";
-import { QuestionCircleFilled } from "@ant-design/icons";
+} from 'antd';
+import './Tasks.css';
+import Hint from './Hint';
+import ReactMarkdown from 'react-markdown';
+import AnswerStatus from './AnswerStatus';
+import AnswerInput from './AnswerInput';
+import { QuestionCircleFilled } from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -24,7 +24,7 @@ export default function QuestTaskGroup(props) {
         const getDefaultData = (number) => {
             return {
                 isHidden: true,
-                content: "",
+                content: '',
                 id: taskData.id,
                 number: number,
                 key: number,
@@ -66,14 +66,14 @@ export default function QuestTaskGroup(props) {
     const getVerificationPlaceholder = (manualVerificationEnabled) => {
         if (manualVerificationEnabled) {
             return {
-                header: "Проверка модератором",
+                header: 'Проверка модератором',
                 tooltipText:
-                    "Ответ проверит модератор твоей команды. Это займёт некоторое время",
+                    'Ответ проверит модератор твоей команды. Это займёт некоторое время',
             };
         }
         return {
-            header: "Автоматическая проверка",
-            tooltipText: "Ответ проверяется автоматически",
+            header: 'Автоматическая проверка',
+            tooltipText: 'Ответ проверяется автоматически',
         };
     };
 
@@ -86,9 +86,9 @@ export default function QuestTaskGroup(props) {
         console.log(taskData.question);
         return (
             <React.Fragment>
-                <Row style={{ display: "flex", color: "#000000" }}>
+                <Row style={{ display: 'flex', color: '#000000' }}>
                     <Title level={3}>{taskData.name}</Title>
-                    <p style={{ marginLeft: "auto", color: "#8c8c8c" }}>
+                    <p style={{ marginLeft: 'auto', color: '#8c8c8c' }}>
                         {verification.header}
                         &nbsp;
                         <Tooltip
@@ -101,16 +101,16 @@ export default function QuestTaskGroup(props) {
                 </Row>
                 <Row>
                     <div
-                        className={"quest-task_text-hints"}
-                        style={{ color: "#000000" }}
+                        className={'quest-task_text-hints'}
+                        style={{ color: '#000000' }}
                     >
                         <p>{<ReactMarkdown source={taskData.question} />}</p>
                     </div>
                 </Row>
                 <Row>{forgeHints(taskData)}</Row>
-                <Row className={"mt-30"}>
+                <Row className={'mt-30'}>
                     <Col sm={12}>
-                        <div className={"quest-task__answer-column"}>
+                        <div className={'quest-task__answer-column'}>
                             <AnswerInput
                                 answerStatus={taskData.status}
                                 taskId={taskData.id}

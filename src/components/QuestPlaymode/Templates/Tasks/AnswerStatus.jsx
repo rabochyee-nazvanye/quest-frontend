@@ -1,26 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function AnswerStatus(props) {
     const TASK_ATTEMPT_COLORS = {
-        Yellow: "#e0c538",
-        Red: "#ff4f33",
-        Green: "#4bb735",
+        Yellow: '#e0c538',
+        Red: '#ff4f33',
+        Green: '#4bb735',
     };
 
     const TASK_ATTEMPT_STATUSES = {
-        Error: "error",
-        OnReview: "onreview",
-        Accepted: "accepted",
+        Error: 'error',
+        OnReview: 'onreview',
+        Accepted: 'accepted',
     };
 
     const getAdminComment = () => {
-        if (props.adminComment === null || props.adminComment === "") {
+        if (props.adminComment === null || props.adminComment === '') {
             return <React.Fragment />;
         }
         return (
             <span>
-                {" / Комментарий: "}
+                {' / Комментарий: '}
                 {props.adminComment}
             </span>
         );

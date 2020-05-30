@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ErrorPage from "../shared/ErrorPage/ErrorPage";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ErrorPage from '../shared/ErrorPage/ErrorPage';
 
 export default function QuestPlaymodeExceptionHandler(props) {
     return (
