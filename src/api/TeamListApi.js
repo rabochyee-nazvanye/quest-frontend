@@ -18,7 +18,7 @@ export function getInviteCode(teamId) {
     }
 }
 
-//TODO(tramakarov): getWithToken()
+
 export function getTeamList(questId) {
     const path = BASE_URL + '/quests/' + questId + '/participants?members=currentUser';
     return dispatch => {
