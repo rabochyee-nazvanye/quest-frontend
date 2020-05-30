@@ -1,30 +1,29 @@
 .task__container {
     padding-top: 30px;
 }
-.quest-task__container{
+.quest-task__container {
     display: inline-flex;
     width: 33%;
     height: 22vh;
     padding-right: 10px;
 }
-.quest-task__container__podskazka{
+.quest-task__container__hint {
     display: inline-flex;
     padding-top: 40px;
     width: 33%;
     height: 22vh;
     padding-right: 10px;
 }
-.quest-task__typography__podskazka {
+.quest-task__typography__hint {
     display: block;
     width: 100%;
     height: 100%;
-    padding-top: 30px;
 }
-.quest-task__typography__container{
+.quest-task__typography__container {
     padding-top: 10px;
     padding-left: 10px;
 }
-.quest-task__button{
+.quest-task__button {
     border-radius: 5px;
     background-color: #f6f6f6;
     min-height: 150px;
@@ -45,7 +44,7 @@
     background-color: #dedede;
 }
 .quest-task__button:active {
-    transform: scale(0.99)
+    transform: scale(0.99);
 }
 .quest-task__typography {
     display: block;

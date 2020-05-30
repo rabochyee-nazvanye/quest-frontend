@@ -18,7 +18,6 @@ export function getInviteCode(teamId) {
     }
 }
 
-
 export function getTeamList(questId) {
     const path = BASE_URL + '/quests/' + questId + '/participants?members=currentUser';
     return dispatch => {
@@ -27,6 +26,19 @@ export function getTeamList(questId) {
             .then(response => response.json())
             .then(readResponse => {
                 dispatch(receiveTeamList(readResponse[0]))
+            })
+    }
+}
+
+export function getTeam(questId) {
+    const path = BASE_URL + '/quests/' + questId + '/participants?members=currentUser';
+    return dispatch => {
+        dispatch(requestTeamList())
+        return getWithToken(path)
+            .then(response => response.json())
+            .then(readResponse => {
+                dispatch(receiveTeamList(readResponse[0]))
+                dispatch(getInviteCode(readResponse[0].id))
             })
     }
 }
