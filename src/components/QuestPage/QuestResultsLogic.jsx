@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Col, Divider, Row, Spin, Table} from 'antd'
+import {Col, Divider, Row, Spin, Steps, Table} from 'antd'
 import './QuestDescription.css'
 import {TrophyOutlined} from '@ant-design/icons'
 import QuestResultsTemplate from './QuestResultsTemplate'
@@ -55,15 +55,13 @@ class QuestResultsLogic extends Component {
     }
 
     getCol(col) {
-        return <Col span={11}>
-            <div>
+        return <Col span={11} xs={11} md={11}>
                 <Table
                     columns={columns}
                     dataSource={col}
                     pagination={false}
                     showHeader={false}
                 />
-            </div>
         </Col>
     }
 
@@ -72,15 +70,24 @@ class QuestResultsLogic extends Component {
         const scoreboardInfo = this.mapResults();
         const col1 = [];
         const col2 = [];
+        let res;
         scoreboardInfo.forEach((x) => x['cup'] = this.getCup(x.place));
         scoreboardInfo.forEach((x) => {
             if (parseInt(x.place) < scoreboardInfo.length / 2 + 1) col1.push(x); else col2.push(x)
         });
-        return  <Row>
-            {this.getCol(col1)}
-            {this.getCol(col2)}
+        res = <Row gutter={[16, 16]} type="flex">
+            {this.isEmptyData(col1)}
+            {this.isEmptyData(col2)}
         </Row>;
+        return res;
     }
+
+    isEmptyData(data){
+        if (data.length === 0)
+            return '';
+        else return this.getCol(data)
+    }
+
 
     getRepresentationByState() {
         let heading;
@@ -98,8 +105,8 @@ class QuestResultsLogic extends Component {
             }
         }
         return <QuestResultsTemplate heading={heading}
-                                         description={description}
-                                         results={results}/>
+                                     description={description}
+                                     results = {results}/>
     }
     render() {
         return (
