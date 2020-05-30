@@ -3,7 +3,7 @@ import {Col, Spin, Table} from 'antd'
 import './QuestDescription.css'
 import {TrophyOutlined} from '@ant-design/icons'
 import QuestResultsTemplate from './QuestResultsTemplate'
-import { fetchScoreboard } from '../../redux/Actions/ScoreboardApi'
+import { fetchScoreboard } from '../../api/ScoreboardApi'
 import { connect } from 'react-redux'
 import ResultsIcon from '../shared/Icons/ResultsIcon'
 

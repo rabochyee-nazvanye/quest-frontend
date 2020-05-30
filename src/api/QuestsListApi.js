@@ -2,9 +2,9 @@ import {
     receiveQuestsListInfo,
     requestQuestsListInfo,
     deleteQuestsListInfo
-} from '../Actions/QuestsListActions'
+} from '../redux/Actions/QuestsListActions'
 
-import { BASE_URL } from './../../settings'
+import { BASE_URL } from '../settings'
 
 export function fetchQuestsListInfo () {
     return dispatch => {
