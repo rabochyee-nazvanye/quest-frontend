@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getQuestTasks, getTaskHint } from './Api'
 import { Spin } from 'antd'
 import { groupBy } from './Utils'
 import QuestTasks from './Templates/Tasks/QuestTasks'
@@ -9,7 +8,7 @@ import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode'
 import QuestPlaymodeExceptionHandler from './QuestPlaymodeExceptionHandler'
 import { fetchQuestInfo } from '../../api/QuestsApi'
 import { getInviteCode, getTeamList } from '../../api/TeamListApi'
-import { getQuestTasksR, sendTaskAttempt } from '../../api/QuestPlaymodeApi'
+import { getQuestTasks, getTaskHint, sendTaskAttempt } from '../../api/QuestPlaymodeApi'
 
 const DATA_TYPES = {
   quests: 'quests',
@@ -68,14 +67,6 @@ function QuestPlaymode (props) {
     getQuestTasks(questId, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
   }
 
-  const getTaskHintInfo = (hintNumber, taskId) => {
-    getTaskHint(questId, taskId, hintNumber, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
-  }
-
-  const sendTaskInfo = (taskId, attemptText) => {
-    props.sendTaskAttempt(taskId, attemptText)
-  }
-
   if (!props.loggedIn) {
     return (
       <Redirect
@@ -91,9 +82,9 @@ function QuestPlaymode (props) {
         <React.Fragment>
           <MetaInfoPlaymode quest={props.quest} team={props.team} />
           <QuestTasks tasks={groupBy(props.tasks, 'group')}
-            sendTaskCallback = {(taskId, attemptText) => sendTaskInfo(taskId, attemptText)}
+            sendTaskCallback = {(taskId, attemptText) => props.sendTaskAttempt(taskId, attemptText)}
             updateTasksCallback={() => updateTasks()}
-            getHintCallback={(hintNumber, taskId) => getTaskHintInfo(hintNumber, taskId)}
+            getHintCallback={(taskId, hintNumber) => props.getTaskHint(taskId, hintNumber)}
           />
         </React.Fragment>
       )
@@ -122,8 +113,9 @@ const mapDispatchToProps = dispatch => ({
   getQuest: (id) => dispatch(fetchQuestInfo(id)),
   getTeam: (questId) => dispatch(getTeamList(questId)),
   getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
-  getTasks: (questId) => dispatch(getQuestTasksR(questId)),
-  sendTaskAttempt: (taskId, attemptText) => dispatch(sendTaskAttempt(taskId, attemptText))
+  getTasks: (questId) => dispatch(getQuestTasks(questId)),
+  sendTaskAttempt: (taskId, attemptText) => dispatch(sendTaskAttempt(taskId, attemptText)),
+  getTaskHint: (taskId, hintNumber) => dispatch(getTaskHint(taskId, hintNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode)
