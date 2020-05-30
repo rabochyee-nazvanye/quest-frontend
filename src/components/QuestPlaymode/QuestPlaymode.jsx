@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getQuestTasks, getTeamInfo, getQuestInfo, sendTaskAttempt, getTaskHint } from './Api'
+import { getQuestTasks, getTaskHint } from './Api'
 import { Spin } from 'antd'
-import { dataFullyReady, groupBy } from './Utils'
+import { groupBy } from './Utils'
 import QuestTasks from './Templates/Tasks/QuestTasks'
 import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode'
 import QuestPlaymodeExceptionHandler from './QuestPlaymodeExceptionHandler'
+import { fetchQuestInfo } from '../../api/QuestsApi'
+import { getInviteCode, getTeamList } from '../../api/TeamListApi'
+import { getQuestTasksR, sendTaskAttempt } from '../../api/QuestPlaymodeApi'
 
 const DATA_TYPES = {
   quests: 'quests',
@@ -19,9 +22,9 @@ function QuestPlaymode (props) {
 
   useEffect(() => {
     if (props.loggedIn) {
-      getQuestInfo(questId, getSuccessResponse.bind(null, DATA_TYPES.quests), getErrorResponse)
-      getTeamInfo(questId, getSuccessResponse.bind(null, DATA_TYPES.teams), getErrorResponse)
-      getQuestTasks(questId, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
+      props.getQuest(questId)
+      props.getTeam(questId)
+      props.getTasks(questId)
     }
   }, [props.loggedIn]
   )
@@ -70,7 +73,7 @@ function QuestPlaymode (props) {
   }
 
   const sendTaskInfo = (taskId, attemptText) => {
-    sendTaskAttempt(questId, taskId, data.teams.id, attemptText, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
+    props.sendTaskAttempt(taskId, attemptText)
   }
 
   if (!props.loggedIn) {
@@ -80,14 +83,14 @@ function QuestPlaymode (props) {
         to={'/auth/' + encodeURIComponent('quests/' + questId + '/play')}
       />
     )
-  } else if (!dataFullyReady(dataReady)) {
+  } else if (props.questIsFetching || props.teamIsFetching || props.tasksAreFetching) {
     return (<Spin/>)
-  } else if (dataFullyReady(dataReady)) {
+  } else if (!props.questIsFetching && !props.teamIsFetching && !props.tasksAreFetching) {
     if (exception === null) {
       return (
         <React.Fragment>
-          <MetaInfoPlaymode quest={data.quests} team={data.teams} />
-          <QuestTasks tasks={groupBy(data.tasks, 'group')}
+          <MetaInfoPlaymode quest={props.quest} team={props.team} />
+          <QuestTasks tasks={groupBy(props.tasks, 'group')}
             sendTaskCallback = {(taskId, attemptText) => sendTaskInfo(taskId, attemptText)}
             updateTasksCallback={() => updateTasks()}
             getHintCallback={(hintNumber, taskId) => getTaskHintInfo(hintNumber, taskId)}
@@ -101,7 +104,26 @@ function QuestPlaymode (props) {
 }
 
 const mapStateToProps = (store) => ({
-  loggedIn: store.authReducer.user !== null
-})
+  quest: store.questsReducer.quest,
+  questIsFetching: store.questsReducer.isFetching,
 
-export default connect(mapStateToProps, null)(QuestPlaymode)
+  teamIsFetching: !store.teamListReducer.dataReady,
+  team: store.teamListReducer.team,
+  teamInviteCode: store.teamListReducer.inviteCode,
+
+  tasksAreFetching: store.questPlaymodeReducer.tasksAreFetching,
+  tasks: store.questPlaymodeReducer.tasks,
+
+  user: store.authReducer.user,
+  loggedIn: store.authReducer.user !== null
+});
+
+const mapDispatchToProps = dispatch => ({
+  getQuest: (id) => dispatch(fetchQuestInfo(id)),
+  getTeam: (questId) => dispatch(getTeamList(questId)),
+  getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
+  getTasks: (questId) => dispatch(getQuestTasksR(questId)),
+  sendTaskAttempt: (taskId, attemptText) => dispatch(sendTaskAttempt(taskId, attemptText))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode)
