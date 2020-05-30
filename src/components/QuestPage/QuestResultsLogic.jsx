@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Col, Divider, Row, Spin, Steps, Table} from 'antd'
+import {Col, Spin, Table} from 'antd'
 import './QuestDescription.css'
 import {TrophyOutlined} from '@ant-design/icons'
 import QuestResultsTemplate from './QuestResultsTemplate'
@@ -70,16 +70,11 @@ class QuestResultsLogic extends Component {
         const scoreboardInfo = this.mapResults();
         const col1 = [];
         const col2 = [];
-        let res;
         scoreboardInfo.forEach((x) => x['cup'] = this.getCup(x.place));
         scoreboardInfo.forEach((x) => {
             if (parseInt(x.place) < scoreboardInfo.length / 2 + 1) col1.push(x); else col2.push(x)
         });
-        res = <Row gutter={[16, 16]} type="flex">
-            {this.isEmptyData(col1)}
-            {this.isEmptyData(col2)}
-        </Row>;
-        return res;
+        return [this.isEmptyData(col1), this.isEmptyData(col2)]
     }
 
     isEmptyData(data){
@@ -88,11 +83,12 @@ class QuestResultsLogic extends Component {
         else return this.getCol(data)
     }
 
-
     getRepresentationByState() {
         let heading;
         let description;
         let results;
+        let col1;
+        let col2;
         if (this.props.scoreboardIsFetching)
             return <Spin/>;
         else {
@@ -102,11 +98,14 @@ class QuestResultsLogic extends Component {
                 heading = <ResultsIcon/>;
                 description = <p>В таблице указана разность количества баллов команды и баллов первого места</p>;
                 results = this.getTable();
+                col1 = results[0];
+                col2 = results[1];
             }
         }
         return <QuestResultsTemplate heading={heading}
                                      description={description}
-                                     results = {results}/>
+                                     col1 = {col1}
+                                     col2 = {col2}/>
     }
     render() {
         return (
