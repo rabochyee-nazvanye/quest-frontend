@@ -23,7 +23,7 @@ export function getWithToken(path, token=getToken()) {
  */
 export function postWithToken(path, body, token=getToken()) {
     return fetch(path, {
-        method: "GET",
+        method: "POST",
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
