@@ -4,6 +4,7 @@ import './Tasks.css';
 import { PropTypes } from 'prop-types';
 import { Popconfirm } from 'antd';
 import ReactMarkdown from 'react-markdown';
+import QuestionOutlined from '@ant-design/icons/es/icons/QuestionOutlined'
 
 export default function Hint(props) {
     if (!props.isHidden) {
@@ -32,8 +33,8 @@ export default function Hint(props) {
                     cancelText="Нет"
                 >
                     <button className={'quest-task__button'}>
-                        <div className={'quest-task__typography__podskazka'}>
-                            <p>{'Подсказочку ❓'}</p>
+                        <div className={'quest-task__typography__hint'}>
+                            <QuestionOutlined />
                         </div>
                     </button>
                 </Popconfirm>

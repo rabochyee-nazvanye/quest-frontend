@@ -29,12 +29,12 @@ export default function QuestTasks(props) {
                 header={<Title level={3}>{x}</Title>}
                 key={x}
             >
-                <QuestTaskGroup
-                    taskGroupData={props.tasks[x]}
-                    sendTaskCallback={props.sendTaskCallback}
-                    updateTasksCallback={props.updateTasksCallback}
-                    getHintCallback={props.getHintCallback}
-                />
+            <QuestTaskGroup
+                taskGroupData={props.tasks[x]}
+                sendTaskCallback={props.sendTaskCallback}
+                updateTasksCallback={props.updateTasksCallback}
+                getHintCallback={props.getHintCallback}
+            />
             </Collapse.Panel>
         ));
     };
