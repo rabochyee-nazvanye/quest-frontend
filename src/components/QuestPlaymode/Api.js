@@ -62,7 +62,7 @@ export function getTeamInfo (id, callback, errorCallback) {
     teamData['code'] = val
   }
 
-  fetch(`${BASE_URL}/quests/${id}/teams?members=currentUser`, {
+  fetch(`${BASE_URL}/quests/${id}/participants?members=currentUser`, {
     method: 'GET',
     headers: {
       Authorization: 'bearer ' + getToken(),
