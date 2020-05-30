@@ -28,44 +28,6 @@ function QuestPlaymode (props) {
   }, [props.loggedIn]
   )
 
-  const [dataReady, setDataReady] = useState({
-    quests: false,
-    teams: false,
-    tasks: false
-  })
-
-  const [data, setData] = useState({
-    quests: {},
-    teams: {},
-    tasks: {}
-  })
-
-  const [exception, setException] = useState(null)
-
-  // todo remove duplication
-  const getSuccessResponse = (type, json) => {
-    const updatedData = data
-    updatedData[type] = json
-    setData({ ...updatedData })
-
-    const updatedDataReady = dataReady
-    updatedDataReady[type] = true
-    setDataReady({ ...updatedDataReady })
-  }
-
-  // todo implement a new way of getting if the data was changed
-  const getErrorResponse = (json) => {
-    setException(json)
-    setDataReady({
-      quests: true,
-      teams: true,
-      tasks: true
-    })
-  }
-
-  const updateTasks = () => {
-    getQuestTasks(questId, getSuccessResponse.bind(null, DATA_TYPES.tasks), getErrorResponse)
-  }
 
   if (!props.loggedIn) {
     return (
@@ -83,7 +45,7 @@ function QuestPlaymode (props) {
           <MetaInfoPlaymode quest={props.quest} team={props.team} />
           <QuestTasks tasks={groupBy(props.tasks, 'group')}
             sendTaskCallback = {(taskId, attemptText) => props.sendTaskAttempt(taskId, attemptText)}
-            updateTasksCallback={() => updateTasks()}
+            updateTasksCallback={() => console.log('upd')}
             getHintCallback={(taskId, hintNumber) => props.getTaskHint(taskId, hintNumber)}
           />
         </React.Fragment>
