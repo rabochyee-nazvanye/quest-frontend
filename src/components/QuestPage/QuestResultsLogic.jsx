@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Col, Divider, Row, Spin, Table} from 'antd'
+import {Col, Spin, Table} from 'antd'
 import './QuestDescription.css'
 import {TrophyOutlined} from '@ant-design/icons'
 import QuestResultsTemplate from './QuestResultsTemplate'
@@ -55,15 +55,13 @@ class QuestResultsLogic extends Component {
     }
 
     getCol(col) {
-        return <Col span={11}>
-            <div>
+        return <Col span={11} xs={11} md={11}>
                 <Table
                     columns={columns}
                     dataSource={col}
                     pagination={false}
                     showHeader={false}
                 />
-            </div>
         </Col>
     }
 
@@ -76,16 +74,21 @@ class QuestResultsLogic extends Component {
         scoreboardInfo.forEach((x) => {
             if (parseInt(x.place) < scoreboardInfo.length / 2 + 1) col1.push(x); else col2.push(x)
         });
-        return  <Row>
-            {this.getCol(col1)}
-            {this.getCol(col2)}
-        </Row>;
+        return [this.isEmptyData(col1), this.isEmptyData(col2)]
+    }
+
+    isEmptyData(data){
+        if (data.length === 0)
+            return '';
+        else return this.getCol(data)
     }
 
     getRepresentationByState() {
         let heading;
         let description;
         let results;
+        let col1;
+        let col2;
         if (this.props.scoreboardIsFetching)
             return <Spin/>;
         else {
@@ -95,11 +98,14 @@ class QuestResultsLogic extends Component {
                 heading = <ResultsIcon/>;
                 description = <p>В таблице указана разность количества баллов команды и баллов первого места</p>;
                 results = this.getTable();
+                col1 = results[0];
+                col2 = results[1];
             }
         }
         return <QuestResultsTemplate heading={heading}
-                                         description={description}
-                                         results={results}/>
+                                     description={description}
+                                     col1 = {col1}
+                                     col2 = {col2}/>
     }
     render() {
         return (

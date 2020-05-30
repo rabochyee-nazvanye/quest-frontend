@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider } from 'antd'
+import { Divider, Row } from 'antd'
 import './QuestResults.css'
 
 
@@ -15,11 +15,11 @@ function QuestResultsTemplate(props) {
                 {props.description}
             </div>
         </h3>
-        <div className={'first-col'}></div>
-        <div className={'second-col'}></div>
-        {props.results}
+        <Row gutter={[16, 16]} type="flex">
+            {props.col1}
+            {props.col2}
+        </Row>;
     </React.Fragment>
-    //TODO(lalka-anka): soon I will add here paddings for 2 table columns
 }
 
 export default QuestResultsTemplate
