@@ -7,7 +7,7 @@ import {
   Redirect,
   useParams
 } from 'react-router-dom'
-import { loginFromForm, flushException, registerFromForm } from '../../api/AuthApi'
+import {loginFromForm, flushException, registerFromForm, googleAuth} from '../../api/AuthApi'
 import { Button, Typography } from 'antd'
 import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
@@ -27,8 +27,8 @@ function Auth (props) {
   const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
 
   const form = (isInLoginMode)
-    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login}/>)
-    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } />)
+    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login} googleAuth={props.googleAuth}/>)
+    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } googleAuth={props.googleAuth}/>)
 
   const isInLoginChanger = (
     <a onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
@@ -59,7 +59,8 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch => ({
   login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) },
   register: (username, password) => { dispatch(registerFromForm(username, password)) },
-  flushException: () => { dispatch(flushException()) }
+  flushException: () => { dispatch(flushException()) },
+  googleAuth: (response) => {dispatch(googleAuth(response))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

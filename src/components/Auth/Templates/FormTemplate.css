@@ -10,4 +10,9 @@
 }
 .auth-form-button {
     width: 100%;
+    padding-bottom: 2px !important;
+}
+
+.oauth-button {
+    width: 100%;
 }
