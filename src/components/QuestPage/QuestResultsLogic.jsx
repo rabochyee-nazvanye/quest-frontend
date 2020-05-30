@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Col, Divider, Row, Spin, Table} from 'antd'
-import './QuestBottom.css'
+import './QuestDescription.css'
 import {TrophyOutlined} from '@ant-design/icons'
-import QuestDescriptionTemplate from './QuestDescriptionTemplate'
+import QuestResultsTemplate from './QuestResultsTemplate'
 import { fetchScoreboard } from '../../redux/Actions/ScoreboardApi'
 import { connect } from 'react-redux'
 import ResultsIcon from '../shared/Icons/ResultsIcon'
@@ -37,7 +37,6 @@ class QuestResultsLogic extends Component {
 
     mapResults() {
                 const a = Object.values(this.props.scoreboard.teamResults);
-                //возможно, здесь надо будет просто this.props.scoreboard, но пока хз
                 a.forEach(x => x.place += 1);
                 return a;
     }
@@ -68,6 +67,21 @@ class QuestResultsLogic extends Component {
         </Col>
     }
 
+    getTable()
+    {
+        const scoreboardInfo = this.mapResults();
+        const col1 = [];
+        const col2 = [];
+        scoreboardInfo.forEach((x) => x['cup'] = this.getCup(x.place));
+        scoreboardInfo.forEach((x) => {
+            if (parseInt(x.place) < scoreboardInfo.length / 2 + 1) col1.push(x); else col2.push(x)
+        });
+        return  <Row>
+            {this.getCol(col1)}
+            {this.getCol(col2)}
+        </Row>;
+    }
+
     getRepresentationByState() {
         let heading;
         let description;
@@ -75,26 +89,15 @@ class QuestResultsLogic extends Component {
         if (this.props.scoreboardIsFetching)
             return <Spin/>;
         else {
-            if (this.props.scoreboard === null || this.props.scoreboard === undefined)
+            if (this.props.scoreboard === null)
                 return <Spin/>;
             else {
-                const a = this.mapResults();
-                let col1 = [];
-                let col2 = [];
-                a.forEach((x) => x['cup'] = this.getCup(x.place));
-                a.forEach((x) => {
-                    if (parseInt(x.place) < a.length / 2 + 1) col1.push(x); else col2.push(x)
-                });
                 heading = <ResultsIcon/>;
                 description = <p>В таблице указана разность количества баллов команды и баллов первого места</p>;
-                results = <Row>
-                    {this.getCol(col1)}
-                    <div>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</div>
-                    {this.getCol(col2)}
-                </Row>;
+                results = this.getTable();
             }
         }
-        return <QuestDescriptionTemplate heading={heading}
+        return <QuestResultsTemplate heading={heading}
                                          description={description}
                                          results={results}/>
     }

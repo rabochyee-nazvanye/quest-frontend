@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar } from 'antd';
 import { UserOutlined, StarFilled } from '@ant-design/icons';
+import './TeamList.css'
 
 function Teammate(props) {
     const avatar = ()=> {
@@ -18,7 +19,9 @@ function Teammate(props) {
                     &nbsp;
                     &nbsp;
                     {props.member.name + " "}
-                    <StarFilled style = {{color: "#91d5ff"}}/>
+                    <div className='captain-icon'>
+                        <StarFilled/>
+                    </div>
 
             </React.Fragment>
         )

@@ -8,6 +8,8 @@ import questsReducer from './Reducers/QuestsReducer'
 import applicationReducer from './Reducers/ApplicationReducer'
 import questsListReducer from './Reducers/QuestsListReducer'
 import scoreboardReducer from "./Reducers/ScoreboardReducer";
+import questRegistrationReducer from './Reducers/QuestRegistrationReducer'
+import teamListReducer from "./Reducers/TeamListReducer";
 import questPlaymodeReducer from "./Reducers/QuestPlaymodeReducer"
 
 const loggerMiddleware = createLogger();
@@ -18,7 +20,9 @@ const rootReducer = combineReducers({
     applicationReducer,
     questsListReducer,
     scoreboardReducer,
-    questPlaymodeReducer
+    questPlaymodeReducer,
+    questRegistrationReducer,
+    teamListReducer,
 });
 
 export const store = createStore(
