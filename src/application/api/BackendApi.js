@@ -1,7 +1,7 @@
 import AbstractApi from './AbstractApi'
-import { flushException, login, loginFromForm, logout, registerFromForm } from '../../api/AuthApi'
+import { flushException, googleAuth, login, loginFromForm, logout, registerFromForm } from '../../api/AuthApi'
 
-export default class ProductionApi extends AbstractApi {
+export default class BackendApi extends AbstractApi {
     /**
      * Gets token from username, password.
      * Decides where to save on rememberMe
@@ -50,6 +50,16 @@ export default class ProductionApi extends AbstractApi {
     flushException() {
         return dispatch => {
             dispatch(flushException())
+        }
+    }
+
+    /**
+     * Handles google OAuth
+     * */
+    //todo(toplenboren) define props
+    googleAuth(props) {
+        return dispatch => {
+            dispatch(googleAuth(props))
         }
     }
 }

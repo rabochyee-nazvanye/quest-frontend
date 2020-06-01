@@ -1,7 +1,10 @@
 import ProductionConfig from './config/ProductionConfig'
 import DevelopmentConfig from './config/DevelopmentConfig'
-import ProductionApi from './api/ProductionApi'
+import BackendApi from './api/BackendApi'
+import LocalConfig from './config/LocalConfig'
 
-const productionApi = new ProductionApi(new ProductionConfig())
+const productionApi = new BackendApi(new ProductionConfig())
+const developmentApi = new BackendApi(new DevelopmentConfig())
+const localApi = new BackendApi(new LocalConfig())
 
-export const Api = productionApi
+export const Api = developmentApi
