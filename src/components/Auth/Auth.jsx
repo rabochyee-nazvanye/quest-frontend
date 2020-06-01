@@ -11,12 +11,15 @@ import { loginFromForm, flushException, registerFromForm } from '../../api/AuthA
 import { Button, Typography } from 'antd'
 import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
+import { Api } from './../../application/app'
 
 const { Title } = Typography
 
 function Auth (props) {
   let { redirectTo } = useParams()
   const [isInLoginMode, setIsInLoginMode] = useState(true)
+
+  console.log(Api)
 
   if (redirectTo === undefined) {
     redirectTo = 'account'
@@ -57,9 +60,9 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) },
-  register: (username, password) => { dispatch(registerFromForm(username, password)) },
-  flushException: () => { dispatch(flushException()) }
+  login: (username, password, rememberMe) => { dispatch(Api.loginFromForm(username, password, rememberMe)) },
+  register: (username, password) => { dispatch(Api.registerFromForm(username, password)) },
+  flushException: () => { dispatch(Api.flushException()) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

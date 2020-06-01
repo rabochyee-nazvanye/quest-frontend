@@ -7,14 +7,14 @@ import {
   receiveUserInfo,
   receiveException, deleteToken, requestToken, deleteException
 } from '../redux/Actions/AuthActions'
-import { BASE_URL, BACKEND_AUTH_FETCH_PATH, BACKEND_AUTH_PATH, BACKEND_AUTH_REGISTER_PATH } from '../settings'
 import { store } from '../redux/store'
 import { getToken, getWithToken } from './CommonApi'
+import { Api } from './../application/app'
 
 export function loginFromForm (username, password, rememberMe) {
   return dispatch => {
     dispatch(logout())
-    dispatch(fetchUserToken(username, password, rememberMe, BACKEND_AUTH_PATH))
+    dispatch(fetchUserToken(username, password, rememberMe, Api.config.BACKEND_AUTH_PATH))
   }
 }
 
@@ -25,14 +25,14 @@ export function login () {
 export function registerFromForm (username, password) {
   return dispatch => {
     dispatch(logout())
-    dispatch(fetchUserToken(username, password, true, BACKEND_AUTH_REGISTER_PATH))
+    dispatch(fetchUserToken(username, password, true, Api.config.BACKEND_AUTH_REGISTER_PATH))
   }
 }
 
 function fetchUserToken (username, password, rememberMe, path) {
   return dispatch => {
     dispatch(requestToken())
-    return fetch(BASE_URL + path, {
+    return fetch(Api.config.BASE_URL + path, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -66,7 +66,7 @@ function fetchUserToken (username, password, rememberMe, path) {
 function getUserByToken (token) {
   return dispatch => {
     dispatch(requestUserInfo())
-    return getWithToken(BASE_URL + BACKEND_AUTH_FETCH_PATH)
+    return getWithToken(Api.config.BASE_URL + Api.config.BACKEND_AUTH_FETCH_PATH)
       .then(response => {
         if (response.ok) {
           response.json().then(json => {
