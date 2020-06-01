@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import { GoogleOutlined } from "@ant-design/icons";
 
 import { GoogleLogin } from 'react-google-login';
+//todo decide where to put GOOGLE_CLIENT_ID
 import { GOOGLE_CLIENT_ID } from '../../../settings'
 
 

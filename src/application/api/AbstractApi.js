@@ -38,4 +38,9 @@ export default class AbstractApi {
      *  Deletes the login exception
      *  */
     flushException() {}
+
+    /**
+     * Handles google OAuth
+     * */
+    googleAuth() {}
 }

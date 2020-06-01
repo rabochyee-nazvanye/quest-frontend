@@ -7,12 +7,9 @@ import {
   receiveUserInfo,
   receiveException, deleteToken, requestToken, deleteException, googleLogin
 } from '../redux/Actions/AuthActions'
-import { BASE_URL, BACKEND_AUTH_FETCH_PATH, BACKEND_AUTH_PATH, BACKEND_AUTH_REGISTER_PATH } from '../settings'
 import { store } from '../redux/store'
 import { getToken, getWithToken } from './CommonApi'
 import { Api } from './../application/app'
-import {getTeamList} from "./TeamListApi";
-import {setErrorState, setSuccessState} from "../redux/Actions/QuestRegistrationActions";
 
 export function loginFromForm (username, password, rememberMe) {
   return dispatch => {
@@ -115,7 +112,7 @@ export function googleAuth (props) {
   };
   return dispatch => {
     dispatch(googleLogin())
-    return fetch(BASE_URL + '/externalauth', options)
+    return fetch(Api.config.BASE_URL + '/externalauth', options)
         .then(response => {
           if (response.status >= 200 && response.status <= 300) {
             response.json().then(json => {

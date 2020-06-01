@@ -7,8 +7,7 @@ import {
   Redirect,
   useParams
 } from 'react-router-dom'
-import {loginFromForm, flushException, registerFromForm, googleAuth} from '../../api/AuthApi'
-import { Button, Typography } from 'antd'
+import { Typography } from 'antd'
 import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
 import { Api } from './../../application/app'
@@ -61,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
   login: (username, password, rememberMe) => { dispatch(Api.loginFromForm(username, password, rememberMe)) },
   register: (username, password) => { dispatch(Api.registerFromForm(username, password)) },
   flushException: () => { dispatch(Api.flushException()) },
-  googleAuth: (response) => {dispatch(googleAuth(response))}
+  googleAuth: (response) => {dispatch(Api.googleAuth(response))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)
