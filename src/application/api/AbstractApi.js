@@ -3,8 +3,8 @@
  * should call to parent's constructor and implement all API endpoints getters
 */
 export default class AbstractApi {
-    constructor (config){
-        this.config = config
+    constructor (opts){
+        this.config = opts.config
     }
 
     /**
