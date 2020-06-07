@@ -56,7 +56,7 @@ function QuestTimelineProcess(props) {
                 className="button"
                 onClick={
                     function() {
-                        //TODO(lalka-anka): Remove hardcoded link
+                        //TODO(tramakarov): Create common google-form
                         document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSczHbtw8c05IanZ02rcDvzMw37t7-CDtkiw9oiOpgesFZxiNw/viewform'
                     }}
             >

@@ -18,7 +18,7 @@ function QuestResultsTemplate(props) {
         <Row gutter={[16, 16]} type="flex">
             {props.col1}
             {props.col2}
-        </Row>;
+        </Row>
     </React.Fragment>
 }
 
