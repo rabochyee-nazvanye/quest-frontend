@@ -40,7 +40,7 @@ export default class AbstractApi {
     flushException() {}
 
     /**
-     * Handles google OAuth
+     * Handles all OAuth
      * */
-    googleAuth() {}
+    oAuth() {}
 }

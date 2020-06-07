@@ -97,10 +97,10 @@ export function flushException () {
 }
 
 
-export function googleAuth (props) {
+export function oAuth (props) {
   const query = {
-    'accessToken': props.tokenId,
-    'oAuthProvider': 'google'
+    'accessToken': props.response.tokenId,
+    'oAuthProvider': props.oAuthProvider
   }
   const options = {
     method: 'POST',
