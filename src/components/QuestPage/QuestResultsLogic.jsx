@@ -6,6 +6,7 @@ import QuestResultsTemplate from './QuestResultsTemplate'
 import { fetchScoreboard } from '../../api/ScoreboardApi'
 import { connect } from 'react-redux'
 import ResultsIcon from '../shared/Icons/ResultsIcon'
+import { Api } from './../../application/app'
 
 const columns = [
     {
@@ -121,7 +122,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchScoreboard: (id) => dispatch(fetchScoreboard(id))
+    fetchScoreboard: (id) => { dispatch(Api.fetchScoreboard(id)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestResultsLogic)
