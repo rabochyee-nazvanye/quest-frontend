@@ -1,5 +1,5 @@
 import AbstractApi from './AbstractApi'
-import { flushException, googleAuth, login, loginFromForm, logout, registerFromForm } from '../../api/AuthApi'
+import { flushException, oAuth, login, loginFromForm, logout, registerFromForm } from '../../api/AuthApi'
 import {fetchQuestInfo} from "../../api/QuestsApi";
 import {fetchScoreboard} from "../../api/ScoreboardApi";
 import {fetchQuestsListInfo} from "../../api/QuestsListApi";
@@ -63,9 +63,9 @@ export default class BackendApi extends AbstractApi {
      * Handles google OAuth
      * */
     //todo(toplenboren) define props
-    googleAuth(props) {
+    oAuth(props) {
         return dispatch => {
-            dispatch(googleAuth(props))
+            dispatch(oAuth(props))
         }
     }
 
