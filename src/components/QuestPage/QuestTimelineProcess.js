@@ -56,8 +56,7 @@ function QuestTimelineProcess(props) {
                 className="button"
                 onClick={
                     function() {
-                        //TODO(tramakarov): Create common google-form
-                        document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSczHbtw8c05IanZ02rcDvzMw37t7-CDtkiw9oiOpgesFZxiNw/viewform'
+                        document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSeDcmG1Iai2nmFUDMR1pXMKMY6l5Tp5iVyDO_H8sSvMOvHhhA/viewform'
                     }}
             >
                 <StarOutlined/>
