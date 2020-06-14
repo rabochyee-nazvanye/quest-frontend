@@ -103,7 +103,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchQuestFromRedux: (id) => {dispatch(Api.fetchQuestInfo(id))},
-  openForm: () => {Api.dispatch(openRegistrationForm())}
+  openForm: () => {dispatch(Api.openRegistrationForm())}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)
