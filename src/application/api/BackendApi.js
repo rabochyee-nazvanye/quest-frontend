@@ -1,7 +1,15 @@
-import AbstractApi from './AbstractApi'
+import AbstractApi from './Api'
 import { flushException, googleAuth, login, loginFromForm, logout, registerFromForm } from '../../api/AuthApi'
+import CommonApi from './CommonApi'
 
 export default class BackendApi extends AbstractApi {
+
+    constructor(opts) {
+        super(opts)
+        this.commonApi = new CommonApi()
+        this.Auth = opts.AuthApi(this.config, this.commonApi)
+    }
+
     /**
      * Gets token from username, password.
      * Decides where to save on rememberMe

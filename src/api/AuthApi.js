@@ -11,121 +11,128 @@ import { store } from '../redux/store'
 import { getToken, getWithToken } from './CommonApi'
 import { Api } from './../application/app'
 
-export function loginFromForm (username, password, rememberMe) {
-  return dispatch => {
-    dispatch(logout())
-    dispatch(fetchUserToken(username, password, rememberMe, Api.config.BACKEND_AUTH_PATH))
+export default class AuthApi {
+
+  constructor(config, commonApi) {
+    this.config = config
+    this.commonApi = commonApi
   }
-}
 
-export function login () {
-  store.dispatch(getUserByToken(getToken()))
-}
-
-export function registerFromForm (username, password) {
-  return dispatch => {
-    dispatch(logout())
-    dispatch(fetchUserToken(username, password, true, Api.config.BACKEND_AUTH_REGISTER_PATH))
+  loginFromForm (username, password, rememberMe) {
+    return dispatch => {
+      dispatch(this.logout())
+      dispatch(this.fetchUserToken(username, password, rememberMe, this.config.BACKEND_AUTH_PATH))
+    }
   }
-}
 
-function fetchUserToken (username, password, rememberMe, path) {
-  return dispatch => {
-    dispatch(requestToken())
-    return fetch(Api.config.BASE_URL + path, {
+  login () {
+    store.dispatch(this.getUserByToken(getToken()))
+  }
+
+  registerFromForm (username, password) {
+    return dispatch => {
+      dispatch(this.logout())
+      dispatch(this.fetchUserToken(username, password, true, this.config.BACKEND_AUTH_REGISTER_PATH))
+    }
+  }
+
+  fetchUserToken (username, password, rememberMe, path) {
+    return dispatch => {
+      dispatch(requestToken())
+      return fetch(this.config.BASE_URL + path, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password
+        })
+      })
+          .then(response => {
+            if (response.status >= 200 && response.status <= 300) {
+              response.json().then(json => {
+                const token = json.token.result
+                sessionStorage.setItem('token', token)
+                if (rememberMe) {
+                  localStorage.setItem('token', token)
+                }
+                dispatch(receiveToken(token))
+                dispatch(this.getUserByToken(token))
+              })
+            } else {
+              response.json().then(json => {
+                dispatch(receiveException(json.title))
+              })
+            }
+          })
+    }
+  }
+
+  getUserByToken (token) {
+    return dispatch => {
+      dispatch(requestUserInfo())
+      return getWithToken(this.config.BASE_URL + this.config.BACKEND_AUTH_FETCH_PATH)
+          .then(response => {
+            if (response.ok) {
+              response.json().then(json => {
+                const payload = {
+                  user: json,
+                  token: token
+                }
+                dispatch(receiveUserInfo(payload))
+              })
+            }
+          })
+    }
+  }
+
+  logout () {
+    return dispatch => {
+      localStorage.removeItem('token')
+      sessionStorage.removeItem('token')
+      dispatch(deleteUserInfo())
+      dispatch(deleteToken())
+    }
+  }
+
+  flushException () {
+    return dispatch => {
+      dispatch(deleteException())
+    }
+  }
+
+  googleAuth (props) {
+    const query = {
+      'accessToken': props.tokenId,
+      'oAuthProvider': 'google'
+    }
+    const options = {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    })
-      .then(response => {
-        if (response.status >= 200 && response.status <= 300) {
-          response.json().then(json => {
-            const token = json.token.result
-            sessionStorage.setItem('token', token)
-            if (rememberMe) {
-              localStorage.setItem('token', token)
+      body: JSON.stringify(query)
+    };
+    return dispatch => {
+      dispatch(googleLogin())
+      return fetch(this.config.BASE_URL + '/externalauth', options)
+          .then(response => {
+            if (response.ok) {
+              response.json().then(json => {
+                const token = json.token.result
+                sessionStorage.setItem('token', token)
+                dispatch(receiveToken(token))
+                dispatch(this.getUserByToken(token))
+              })
+            } else {
+              response.json().then(json => {
+                dispatch(receiveException(json.title))
+              })
             }
-            dispatch(receiveToken(token))
-            dispatch(getUserByToken(token))
           })
-        } else {
-          response.json().then(json => {
-            dispatch(receiveException(json.title))
-          })
-        }
-      })
-  }
-}
-
-function getUserByToken (token) {
-  return dispatch => {
-    dispatch(requestUserInfo())
-    return getWithToken(Api.config.BASE_URL + Api.config.BACKEND_AUTH_FETCH_PATH)
-      .then(response => {
-        if (response.ok) {
-          response.json().then(json => {
-            const payload = {
-              user: json,
-              token: token
-            }
-            dispatch(receiveUserInfo(payload))
-          })
-        }
-      })
-  }
-}
-
-export function logout () {
-  return dispatch => {
-    localStorage.removeItem('token')
-    sessionStorage.removeItem('token')
-    dispatch(deleteUserInfo())
-    dispatch(deleteToken())
-  }
-}
-
-export function flushException () {
-  return dispatch => {
-    dispatch(deleteException())
-  }
-}
-
-
-export function googleAuth (props) {
-  const query = {
-    'accessToken': props.tokenId,
-    'oAuthProvider': 'google'
-  }
-  const options = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(query)
-  };
-  return dispatch => {
-    dispatch(googleLogin())
-    return fetch(Api.config.BASE_URL + '/externalauth', options)
-        .then(response => {
-          if (response.status >= 200 && response.status <= 300) {
-            response.json().then(json => {
-              const token = json.token.result
-              sessionStorage.setItem('token', token)
-              dispatch(receiveToken(token))
-              dispatch(getUserByToken(token))
-            })
-          } else {
-            response.json().then(json => {
-              dispatch(receiveException(json.title))
-            })
-          }
-        })
+    }
   }
 }

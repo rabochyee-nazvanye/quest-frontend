@@ -8,7 +8,14 @@ const container = Awilix.createContainer({
 
 container.register({
     'config': Awilix.asClass(DevelopmentConfig),
-    'Api': Awilix.asClass(BackendApi)
+    'Api': Awilix.asClass(BackendApi),
+    'AuthApi': Awilix.asClass(),
+    'QuestPlaymodeApi': Awilix.asClass(),
+    'QuestRegistrationApi': Awilix.asClass(),
+    'QuestsApi': Awilix.asClass(),
+    'QuestsListApi': Awilix.asClass(),
+    'ScoreboardApi': Awilix.asClass(),
+    'TeamListApi': Awilix.asClass(),
 })
 
 export const Api = container.resolve('Api')
