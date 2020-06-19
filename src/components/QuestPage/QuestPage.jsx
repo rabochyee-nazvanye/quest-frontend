@@ -9,9 +9,9 @@ import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
-import { fetchQuestInfo } from '../../api/QuestsApi'
 import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
 import { connect } from 'react-redux'
+import { Api } from './../../application/app'
 
 
 class QuestPage extends Component {
@@ -102,8 +102,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id)),
-  openForm: () => dispatch(openRegistrationForm())
+  fetchQuestFromRedux: (id) => {dispatch(Api.fetchQuestInfo(id))},
+  openForm: () => {dispatch(Api.openRegistrationForm())}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)

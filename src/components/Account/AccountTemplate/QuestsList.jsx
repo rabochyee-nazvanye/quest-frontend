@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import './QuestsList.css'
 import { fetchQuestsListInfo } from '../../../api/QuestsListApi'
 import {connect} from "react-redux";
+import { Api } from './../../../application/app'
 
 
 class QuestsList extends Component {
@@ -54,7 +55,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestsList: () => dispatch(fetchQuestsListInfo())
+  fetchQuestsList: () => { dispatch(Api.fetchQuestsListInfo()) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestsList)

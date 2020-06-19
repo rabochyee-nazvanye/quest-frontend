@@ -27,8 +27,8 @@ function Auth (props) {
   const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
 
   const form = (isInLoginMode)
-    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login} googleAuth={props.googleAuth}/>)
-    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } googleAuth={props.googleAuth}/>)
+    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login} oAuth={props.oAuth}/>)
+    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } oAuth={props.oAuth}/>)
 
   const isInLoginChanger = (
     <a onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
   login: (username, password, rememberMe) => { dispatch(Api.loginFromForm(username, password, rememberMe)) },
   register: (username, password) => { dispatch(Api.registerFromForm(username, password)) },
   flushException: () => { dispatch(Api.flushException()) },
-  googleAuth: (response) => {dispatch(Api.googleAuth(response))}
+  oAuth: (response) => {dispatch(Api.oAuth(response))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)
