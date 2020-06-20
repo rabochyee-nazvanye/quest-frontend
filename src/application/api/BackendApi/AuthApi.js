@@ -102,7 +102,7 @@ export default class AuthApi {
     }
   }
 
-  googleAuth (props) {
+  oAuth (props) {
     const query = {
       'accessToken': props.tokenId,
       'oAuthProvider': 'google'
