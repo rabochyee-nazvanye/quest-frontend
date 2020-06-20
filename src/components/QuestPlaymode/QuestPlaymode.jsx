@@ -25,10 +25,8 @@ function QuestPlaymode(props) {
         if (props.loggedIn) {
             props.getQuest(questId);
             props.getTasks(questId);
-            if (props.quest.type === 'team') {
-                props.getTeam(questId);
-                props.getInviteCode()
-            }
+            props.getTeam(questId);
+            props.getInviteCode()
         }
     }, [props.loggedIn]);
 
