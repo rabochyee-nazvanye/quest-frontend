@@ -12,6 +12,11 @@ import {
     getTaskHint,
     sendTaskAttempt
 } from '../../api/QuestPlaymodeApi';
+import {deleteQuestInfo} from "../../redux/Actions/QuestsActions";
+import {deleteQuestsListInfo} from "../../redux/Actions/QuestsListActions";
+import {deleteQuestTasks} from "../../redux/Actions/QuestPlaymodeActions";
+import {deleteQuestRegistrationInfo} from "../../redux/Actions/QuestRegistrationActions";
+import {deleteTeamListInfo} from "../../redux/Actions/TeamListActions";
 
 function dataIsReady(props) {
     return !props.questIsFetching && !props.tasksAreFetching
@@ -26,8 +31,16 @@ function QuestPlaymode(props) {
             props.getQuest(questId);
             props.getTasks(questId);
             props.getTeam(questId);
-            props.getInviteCode()
+            props.getInviteCode();
         }
+
+        return function cleanup() {
+            props.deleteQuestInfo()
+            props.deleteQuestsListInfo()
+            props.deleteQuestTasks()
+            props.deleteQuestRegistrationInfo()
+            props.deleteTeamListInfo()
+        };
     }, [props.loggedIn]);
 
 
@@ -87,7 +100,12 @@ const mapDispatchToProps = (dispatch) => ({
     sendTaskAttempt: (taskId, attemptText) =>
         dispatch(sendTaskAttempt(taskId, attemptText)),
     getTaskHint: (taskId, hintNumber) =>
-        dispatch(getTaskHint(taskId, hintNumber))
+        dispatch(getTaskHint(taskId, hintNumber)),
+    deleteQuestInfo: () => dispatch(deleteQuestInfo()),
+    deleteQuestsListInfo: () => (dispatch(deleteQuestsListInfo())),
+    deleteQuestTasks: () => dispatch(deleteQuestTasks()),
+    deleteQuestRegistrationInfo: () => dispatch(deleteQuestRegistrationInfo()),
+    deleteTeamListInfo: () => dispatch(deleteTeamListInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode);

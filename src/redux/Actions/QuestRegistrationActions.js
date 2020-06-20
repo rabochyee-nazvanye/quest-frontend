@@ -7,6 +7,7 @@ export const OPEN_REGISTRATION_FORM = 'OPEN_REGISTRATION_FORM'
 export const REGISTRATION_ON_QUEST_ERROR_READ = 'REGISTRATION_ON_QUEST_ERROR_READ'
 export const SOLO_QUEST_SUBSCRIPTION_SUCCEED = 'SOLO_QUEST_SUBSCRIPTION_SUCCEED'
 export const SOLO_QUEST_SUBSCRIPTION_FAILED = 'SOLO_QUEST_SUBSCRIPTION_FAILED'
+export const DELETE_QUEST_REGISTRATION_INFO = 'DELETE_QUEST_REGISTRATION_INFO'
 
 export function closeForm() {
     return {
@@ -61,5 +62,11 @@ export function closeErrorMessage () {
         type: REGISTRATION_ON_QUEST_ERROR_READ,
         statusText: '',
         status: ''
+    }
+}
+
+export function deleteQuestRegistrationInfo() {
+    return {
+        type: DELETE_QUEST_REGISTRATION_INFO
     }
 }

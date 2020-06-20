@@ -1,7 +1,7 @@
 import {
     RECEIVE_INVITE_CODE,
     REQUEST_TEAM_LIST,
-    RECEIVE_TEAM_LIST, TEAM_LEAVE_SUCCEEDED, TEAM_LEAVE_FAILED, SHOW_TEAM_LEAVE_MESSAGE
+    RECEIVE_TEAM_LIST, TEAM_LEAVE_SUCCEEDED, TEAM_LEAVE_FAILED, SHOW_TEAM_LEAVE_MESSAGE, DELETE_TEAM_LIST_INFO
 } from "../Actions/TeamListActions";
 
 export default function teamListReducer(
@@ -26,6 +26,16 @@ export default function teamListReducer(
             return {...state, status: action.status, statusText : action.statusText, showMessage: action.showMessage}
         case SHOW_TEAM_LEAVE_MESSAGE:
             return {...state, status: action.status, statusText : action.statusText, showMessage: action.showMessage}
+        case DELETE_TEAM_LIST_INFO:
+            return {
+                ...state,
+                dataReady: false,
+                team: undefined,
+                inviteCode: null,
+                showMessage: '',
+                status: null,
+                statusText: null
+            }
         default:
             return state
     }

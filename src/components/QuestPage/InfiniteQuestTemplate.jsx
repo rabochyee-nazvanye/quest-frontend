@@ -9,12 +9,6 @@ import {connect} from "react-redux";
 
 function InfiniteQuestTemplate(props) {
     const history = useHistory();
-    const handleRedirectAfterSuccessSubscription = () => {
-        if (props.redirectToTasks) {
-
-            history.push("/quests/" + props.quest.id + "/play")
-        }
-    }
 
     const error = () => {
         if (props.statusText !== '') {
