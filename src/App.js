@@ -21,13 +21,15 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import Auth from './components/Auth/Auth'
 import Account from './components/Account/Account'
-import { login } from './api/AuthApi'
+import { login } from './application/api/BackendApi/AuthApi'
 import NoMatch from './components/NoMatch/NoMatch'
 import QuestPlaymode from './components/QuestPlaymode/QuestPlaymode'
 
+import { Api } from './application/app'
+
 function App () {
   useEffect(() => {
-    login()
+    Api.Auth.login()
   })
 
   return (

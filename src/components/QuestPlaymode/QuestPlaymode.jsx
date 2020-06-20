@@ -5,36 +5,48 @@ import { Spin } from 'antd';
 import { groupBy } from './Utils';
 import QuestTasks from './Templates/Tasks/QuestTasks';
 import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode';
-import { fetchQuestInfo } from '../../api/QuestsApi';
-import { getInviteCode, getTeam } from '../../api/TeamListApi'
-import {
-    getQuestTasks,
-    getTaskHint,
-    sendTaskAttempt
-} from '../../api/QuestPlaymodeApi';
+
+import {deleteQuestInfo} from "../../redux/Actions/QuestsActions";
+import {deleteQuestsListInfo} from "../../redux/Actions/QuestsListActions";
+import {deleteQuestTasks} from "../../redux/Actions/QuestPlaymodeActions";
+import {deleteQuestRegistrationInfo} from "../../redux/Actions/QuestRegistrationActions";
+import {deleteTeamListInfo} from "../../redux/Actions/TeamListActions";
+
+import {Api} from '../../application/app'
 
 function dataIsReady(props) {
-    console.log(props)
-    return (
-        !props.questIsFetching &&
-        !props.teamIsFetching &&
-        !props.tasksAreFetching
-    );
+    return !props.questIsFetching && !props.tasksAreFetching
 }
+
 
 function QuestPlaymode(props) {
     const questId = props.match.params.id;
 
     useEffect(() => {
+        props.deleteQuestInfo()
+        props.deleteQuestsListInfo()
+        props.deleteQuestTasks()
+        props.deleteQuestRegistrationInfo()
+        props.deleteTeamListInfo()
+
         if (props.loggedIn) {
             props.getQuest(questId);
-            props.getTeam(questId);
             props.getTasks(questId);
-            props.getInviteCode()
+            props.getTeam(questId);
+            props.getInviteCode();
         }
+
+        return function cleanup() {
+            props.deleteQuestInfo()
+            props.deleteQuestsListInfo()
+            props.deleteQuestTasks()
+            props.deleteQuestRegistrationInfo()
+            props.deleteTeamListInfo()
+        };
     }, [props.loggedIn]);
 
-    // TODO(toplenboren) exception processing
+
+    // TODO(toplenboren) exception procesing
     if (!props.loggedIn) {
         return (
             <Redirect
@@ -45,9 +57,11 @@ function QuestPlaymode(props) {
             />
         );
     } else if (dataIsReady(props)) {
+        const getMetainfo = {'solo': <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>,
+            'team': <MetaInfoPlaymode quest={props.quest} name={props.team.name} inviteCode={props.teamInviteCode} type={'Команда'}/>};
         return (
             <React.Fragment>
-                <MetaInfoPlaymode quest={props.quest} team={props.team} inviteCode={props.teamInviteCode} />
+                {getMetainfo[props.quest.type]}
                 <QuestTasks
                     tasks={groupBy(props.tasks, 'group')}
                     sendTaskCallback={(taskId, attemptText) =>
@@ -81,14 +95,20 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getQuest: (id) => dispatch(fetchQuestInfo(id)),
-    getTeam: (questId) => dispatch(getTeam(questId)),
-    getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
-    getTasks: (questId) => dispatch(getQuestTasks(questId)),
+    getQuest: (id) => dispatch(Api.Quests.fetchQuestInfo(id)),
+    getTeam: (questId) => dispatch(Api.TeamList.getTeam(questId)),
+    getInviteCode: (teamId) => dispatch(Api.TeamList.getInviteCode(teamId)),
+    getTasks: (questId) => dispatch(Api.QuestPlaymode.getQuestTasks(questId)),
     sendTaskAttempt: (taskId, attemptText) =>
-        dispatch(sendTaskAttempt(taskId, attemptText)),
+        dispatch(Api.QuestPlaymode.sendTaskAttempt(taskId, attemptText)),
     getTaskHint: (taskId, hintNumber) =>
-        dispatch(getTaskHint(taskId, hintNumber))
+        dispatch(Api.QuestPlaymode.getTaskHint(taskId, hintNumber)),
+
+    deleteQuestInfo: () => dispatch(deleteQuestInfo()),
+    deleteQuestsListInfo: () => (dispatch(deleteQuestsListInfo())),
+    deleteQuestTasks: () => dispatch(deleteQuestTasks()),
+    deleteQuestRegistrationInfo: () => dispatch(deleteQuestRegistrationInfo()),
+    deleteTeamListInfo: () => dispatch(deleteTeamListInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode);

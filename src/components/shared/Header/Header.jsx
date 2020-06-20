@@ -2,10 +2,12 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Divider, PageHeader } from 'antd'
 import { connect } from 'react-redux'
-import { logout } from '../../../api/AuthApi'
+import { logout } from '../../../application/api/BackendApi/AuthApi'
 import UserButton from './UserButton/UserButton'
 import QuestspaceIcon from '../Icons/QuestspaceIcon'
 import './Header.css'
+
+import { Api } from '../../../application/app'
 
 function Header (props) {
   const history = useHistory()
@@ -32,7 +34,7 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(Api.Auth.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

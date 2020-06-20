@@ -4,8 +4,9 @@ import {Spin} from 'antd'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
 import './QuestsList.css'
-import { fetchQuestsListInfo } from '../../../api/QuestsListApi'
+import { fetchQuestsListInfo } from '../../../application/api/BackendApi/QuestsListApi'
 import {connect} from "react-redux";
+import { Api } from './../../../application/app'
 
 
 class QuestsList extends Component {
@@ -54,7 +55,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestsList: () => dispatch(fetchQuestsListInfo())
+  fetchQuestsList: () => { dispatch(Api.QuestsList.fetchQuestsListInfo()) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestsList)

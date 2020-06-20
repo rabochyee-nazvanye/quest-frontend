@@ -7,6 +7,13 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { decodeException } from './Utils'
 import PropTypes from 'prop-types'
+import { GoogleOutlined } from "@ant-design/icons";
+
+import { GoogleLogin } from 'react-google-login';
+//todo decide where to put GOOGLE_CLIENT_ID
+import { GOOGLE_CLIENT_ID } from '../../../settings'
+import OAuthLoginButton, {GOOGLE_AUTH} from "./OAuthLoginButton";
+
 
 export default function LoginFormTemplate (props) {
   const onFinish = values => {
@@ -69,6 +76,7 @@ export default function LoginFormTemplate (props) {
                         Войти
           </Button>
         </Form.Item>
+          <OAuthLoginButton oAuth={props.oAuth} authProvider={GOOGLE_AUTH} buttonText={"Войти с помощью Google"}/>
       </Form>
     </div>
   )

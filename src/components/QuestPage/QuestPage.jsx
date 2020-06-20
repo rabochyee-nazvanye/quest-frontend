@@ -9,9 +9,9 @@ import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
-import { fetchQuestInfo } from '../../api/QuestsApi'
 import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
 import { connect } from 'react-redux'
+import { Api } from './../../application/app'
 
 
 class QuestPage extends Component {
@@ -40,20 +40,14 @@ class QuestPage extends Component {
 
 getRepresentationByState () {
   let timing;
-  let team;
   let questBottom;
+  const teamTypeInfo = {'solo': null, 'team': <TeamList quest={this.props.quest}/>};
   if (this.props.questIsFetching)
     return <Spin/>;
   else {
-    if(this.props.quest=== null)
+    if (this.props.quest=== null)
       return <Spin/>;
     else{
-      if(this.props.quest.teams!== undefined && this.props.loggedIn)
-      if (this.props.quest.type !== "solo")
-        team = <TeamList quest={this.props.quest}/>;
-      else
-        team = '';
-
       if (!this.props.quest.isInfinite && this.props.quest.status === 'resultsavailable')
         questBottom = <QuestResultsLogic id={this.props.quest.id}/>;
       else
@@ -65,7 +59,10 @@ getRepresentationByState () {
                                        quest_id={this.props.quest.id}
                                        url={'quests/' + this.props.quest.id}
         />
-    } else timing = <InfiniteQuestTemplate quest={this.props.quest}/>;
+    }       //ВОТ ЗДЕСЬ СТРАНИЧКА С БЕСКОНЕЧНЫМ КВЕСТОМ!!!!!!!!!!!!
+      else timing = <InfiniteQuestTemplate quest={this.props.quest}
+                                           registered={this.props.userHasTeam}
+                                           openForm={() => this.props.openForm()}/>;
       return (
           <React.Fragment>
             <QuestMinimalInfo quest={this.props.quest}/>
@@ -73,7 +70,7 @@ getRepresentationByState () {
               {timing}
             </h2>
             {questBottom}
-            {team}
+            {teamTypeInfo[this.props.quest.type]}
             <QuestModalReg
                 quest_id={this.props.quest.id}
                 url={'quests/' + this.props.quest.id}
@@ -102,8 +99,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestFromRedux: (id) => dispatch(fetchQuestInfo(id)),
-  openForm: () => dispatch(openRegistrationForm())
+  fetchQuestFromRedux: (id) => {dispatch(Api.Quests.fetchQuestInfo(id))},
+  openForm: () => {dispatch(Api.QuestRegistration.openRegistrationForm())}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)

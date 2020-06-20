@@ -3,9 +3,10 @@ import {Col, Spin, Table} from 'antd'
 import './QuestDescription.css'
 import {TrophyOutlined} from '@ant-design/icons'
 import QuestResultsTemplate from './QuestResultsTemplate'
-import { fetchScoreboard } from '../../api/ScoreboardApi'
+import { fetchScoreboard } from '../../application/api/BackendApi/ScoreboardApi'
 import { connect } from 'react-redux'
 import ResultsIcon from '../shared/Icons/ResultsIcon'
+import { Api } from './../../application/app'
 
 const columns = [
     {
@@ -121,7 +122,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchScoreboard: (id) => dispatch(fetchScoreboard(id))
+    fetchScoreboard: (id) => { dispatch(Api.Scoreboard.fetchScoreboard(id)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestResultsLogic)

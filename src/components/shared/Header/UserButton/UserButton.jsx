@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import UserButtonLoggedInTemplate from './Templates/UserButtonLoggedInTemplate'
 import UserButtonLoggedOutTemplate from './Templates/UserButtonLoggedOutTemplate'
 import { connect } from 'react-redux'
-import { logout } from '../../../../api/AuthApi'
+import { Api } from '../../../../application/app'
 
 function UserButton (props) {
   const history = useHistory()
@@ -26,7 +26,7 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(Api.Auth.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserButton)

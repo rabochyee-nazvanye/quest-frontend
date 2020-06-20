@@ -8,7 +8,7 @@ import {
     ClockCircleOutlined, StarOutlined, UserAddOutlined
 } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
-import { getToken } from '../../api/CommonApi.js';
+import { getToken } from '../../application/api/BackendApi/CommonApi.js';
 import QuestTimelineTemplate from './QuestTimelineTemplate'
 let dateTimeNow = new Date();
 
@@ -56,8 +56,7 @@ function QuestTimelineProcess(props) {
                 className="button"
                 onClick={
                     function() {
-                        //TODO(lalka-anka): Remove hardcoded link
-                        document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSczHbtw8c05IanZ02rcDvzMw37t7-CDtkiw9oiOpgesFZxiNw/viewform'
+                        document.location = 'https://docs.google.com/forms/d/e/1FAIpQLSeDcmG1Iai2nmFUDMR1pXMKMY6l5Tp5iVyDO_H8sSvMOvHhhA/viewform'
                     }}
             >
                 <StarOutlined/>

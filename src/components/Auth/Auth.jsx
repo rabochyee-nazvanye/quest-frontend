@@ -7,10 +7,10 @@ import {
   Redirect,
   useParams
 } from 'react-router-dom'
-import { loginFromForm, flushException, registerFromForm } from '../../api/AuthApi'
-import { Button, Typography } from 'antd'
+import { Typography } from 'antd'
 import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
+import { Api } from './../../application/app'
 
 const { Title } = Typography
 
@@ -27,8 +27,8 @@ function Auth (props) {
   const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
 
   const form = (isInLoginMode)
-    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login}/>)
-    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } />)
+    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login} oAuth={props.oAuth}/>)
+    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } oAuth={props.oAuth}/>)
 
   const isInLoginChanger = (
     <a onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
@@ -57,9 +57,10 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password, rememberMe) => { dispatch(loginFromForm(username, password, rememberMe)) },
-  register: (username, password) => { dispatch(registerFromForm(username, password)) },
-  flushException: () => { dispatch(flushException()) }
+  login: (username, password, rememberMe) => { dispatch(Api.Auth.loginFromForm(username, password, rememberMe)) },
+  register: (username, password) => { dispatch(Api.Auth.registerFromForm(username, password)) },
+  flushException: () => { dispatch(Api.Auth.flushException()) },
+  oAuth: (response) => {dispatch(Api.Auth.oAuth(response))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

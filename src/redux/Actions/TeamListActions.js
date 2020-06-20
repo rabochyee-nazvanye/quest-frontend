@@ -4,6 +4,7 @@ export const RECEIVE_TEAM_LIST = 'RECEIVE_TEAM_LIST'
 export const TEAM_LEAVE_SUCCEEDED = 'TEAM_LEAVE_SUCCEEDED'
 export const TEAM_LEAVE_FAILED = 'TEAM_LEAVE_FAILED'
 export const SHOW_TEAM_LEAVE_MESSAGE = 'SHOW_TEAM_LEAVE_MESSAGE'
+export const DELETE_TEAM_LIST_INFO = 'DELETE_TEAM_LIST_INFO'
 
 export function requestTeamList() {
     return {
@@ -50,5 +51,11 @@ export function showTeamLeaveMessage() {
         showMessage: '',
         status: null,
         statusText: null
+    }
+}
+
+export function deleteTeamListInfo() {
+    return {
+        type: DELETE_TEAM_LIST_INFO
     }
 }

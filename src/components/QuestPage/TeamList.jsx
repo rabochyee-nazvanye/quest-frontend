@@ -4,9 +4,10 @@ import {Col, Row, Divider, Typography, Button, Popconfirm, message} from "antd";
 import { CLIENT_URL } from '../../settings'
 import {LogoutOutlined} from "@ant-design/icons";
 import {connect} from "react-redux";
-import {getInviteCode, getTeamList, leaveTeam} from "../../api/TeamListApi";
+import {getInviteCode, getTeamList, leaveTeam} from "../../application/api/BackendApi/TeamListApi";
 import {showTeamLeaveMessage, TEAM_LEAVE_FAILED, TEAM_LEAVE_SUCCEEDED} from "../../redux/Actions/TeamListActions";
 import './TeamList.css'
+import { Api } from './../../application/app'
 
 const { Paragraph } = Typography;
 
@@ -122,13 +123,13 @@ const mapStateToProps = (store) => ({
     status: store.teamListReducer.status,
     statusText: store.teamListReducer.statusText,
     logged: store.authReducer.user !== null
-})
+});
 
 const mapDispatchToProps = dispatch => ({
-    getTeamList: (questId) => dispatch(getTeamList(questId)),
-    getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
-    leaveTeam: (teamId) => dispatch(leaveTeam(teamId)),
-    showTeamLeaveMessage: () => dispatch(showTeamLeaveMessage())
-})
+    getTeamList: (questId) => { dispatch(Api.TeamList.getTeamList(questId)) },
+    getInviteCode: (teamId) => { dispatch(Api.TeamList.getInviteCode(teamId)) },
+    leaveTeam: (teamId) => { dispatch(Api.TeamList.leaveTeam(teamId)) },
+    showTeamLeaveMessage: () => { dispatch(Api.TeamList.showTeamLeaveMessage())}
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamList)

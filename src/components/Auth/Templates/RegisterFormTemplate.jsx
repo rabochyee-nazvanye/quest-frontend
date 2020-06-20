@@ -3,10 +3,13 @@ import React from 'react'
 import './FormTemplate.css'
 
 import { Alert, Button, Form, Input } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import {UserOutlined, LockOutlined, GoogleOutlined} from '@ant-design/icons'
 
 import { decodeException } from './Utils'
 import PropTypes from 'prop-types'
+import { GOOGLE_CLIENT_ID } from '../../../settings'
+import {GoogleLogin} from "react-google-login";
+import OAuthLoginButton, {GOOGLE_AUTH} from "./OAuthLoginButton";
 
 export default function RegisterFormTemplate (props) {
   const onFinish = values => {
@@ -82,10 +85,11 @@ export default function RegisterFormTemplate (props) {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="auth-form-button">
-                  Зарегистрироваться
-          </Button>
+            <Button type="primary" htmlType="submit" className="auth-form-button">
+                Зарегистрироваться
+            </Button>
         </Form.Item>
+          <OAuthLoginButton oAuth={props.oAuth} authProvider={GOOGLE_AUTH} buttonText={"Регистрация с помощью Google"}/>
       </Form>
     </div>
   )

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import {Modal, Button, Input, Typography, InputNumber, Form, Alert} from 'antd';
-import handleTeamCreation from '../../api/QuestRegistrationApi'
+import {Modal, Button, Input, Typography, Form, Alert} from 'antd';
 import {connect} from "react-redux";
-import {closeErrorMessage, closeForm } from "../../redux/Actions/QuestRegistrationActions";
+
+import {Api} from '../../application/app'
+import { closeForm } from '../../redux/Actions/QuestRegistrationActions'
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -111,9 +112,9 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    closeErrorMessage: () => dispatch(closeErrorMessage()),
+    closeErrorMessage: () => dispatch(Api.QuestRegistration.closeErrorMessage()),
     closeForm: () => dispatch(closeForm()),
-    handleTeamCreation: (teamname, questId) => dispatch(handleTeamCreation(teamname, questId))
+    handleTeamCreation: (teamname, questId) => dispatch(Api.QuestRegistration.handleTeamCreation(teamname, questId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestModalReg)
