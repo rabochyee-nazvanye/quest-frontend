@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import {Modal, Button, Input, Typography, InputNumber, Form, Alert} from 'antd';
-import handleTeamCreation from '../../api/QuestRegistrationApi'
+import handleTeamCreation from '../../application/api/BackendApi/QuestRegistrationApi'
 import {connect} from "react-redux";
 import {closeErrorMessage, closeForm } from "../../redux/Actions/QuestRegistrationActions";
 

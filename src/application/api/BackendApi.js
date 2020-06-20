@@ -1,10 +1,10 @@
 import AbstractApi from './AbstractApi'
-import { flushException, oAuth, login, loginFromForm, logout, registerFromForm } from '../../api/AuthApi'
-import {fetchQuestInfo} from "../../api/QuestsApi";
-import {fetchScoreboard} from "../../api/ScoreboardApi";
-import {fetchQuestsListInfo} from "../../api/QuestsListApi";
+import { flushException, oAuth, login, loginFromForm, logout, registerFromForm } from './BackendApi/AuthApi'
+import {fetchQuestInfo} from "./BackendApi/QuestsApi";
+import {fetchScoreboard} from "./BackendApi/ScoreboardApi";
+import {fetchQuestsListInfo} from "./BackendApi/QuestsListApi";
 import {openRegistrationForm} from "../../redux/Actions/QuestRegistrationActions";
-import {getInviteCode, getTeamList, leaveTeam} from "../../api/TeamListApi";
+import {getInviteCode, getTeamList, leaveTeam} from "./BackendApi/TeamListApi";
 import {showTeamLeaveMessage} from "../../redux/Actions/TeamListActions";
 
 export default class BackendApi extends AbstractApi {

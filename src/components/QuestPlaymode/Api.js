@@ -1,5 +1,5 @@
 import { BASE_URL } from '../../settings';
-import { getToken } from '../../api/CommonApi';
+import { getToken } from '../../application/api/BackendApi/CommonApi';
 
 export function sendTaskAttempt(
     questId,

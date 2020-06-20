@@ -57,10 +57,10 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password, rememberMe) => { dispatch(Api.loginFromForm(username, password, rememberMe)) },
-  register: (username, password) => { dispatch(Api.registerFromForm(username, password)) },
-  flushException: () => { dispatch(Api.flushException()) },
-  oAuth: (response) => {dispatch(Api.oAuth(response))}
+  login: (username, password, rememberMe) => { dispatch(Api.Auth.loginFromForm(username, password, rememberMe)) },
+  register: (username, password) => { dispatch(Api.Auth.registerFromForm(username, password)) },
+  flushException: () => { dispatch(Api.Auth.flushException()) },
+  oAuth: (response) => {dispatch(Api.Auth.oAuth(response))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

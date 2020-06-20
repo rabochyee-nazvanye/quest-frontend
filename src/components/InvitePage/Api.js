@@ -1,5 +1,5 @@
 import {BASE_URL} from "../../settings";
-import { getToken } from '../../api/CommonApi.js';
+import { getToken } from '../../application/api/BackendApi/CommonApi.js';
 
 export function handleTeamCreation(inviteCode, setErrorState, setSuccessState) {
 

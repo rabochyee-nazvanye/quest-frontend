@@ -5,13 +5,7 @@ import { Spin } from 'antd';
 import { groupBy } from './Utils';
 import QuestTasks from './Templates/Tasks/QuestTasks';
 import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode';
-import { fetchQuestInfo } from '../../api/QuestsApi';
-import { getInviteCode, getTeam } from '../../api/TeamListApi'
-import {
-    getQuestTasks,
-    getTaskHint,
-    sendTaskAttempt
-} from '../../api/QuestPlaymodeApi';
+import { Api } from '../../application/app'
 
 function dataIsReady(props) {
     console.log(props)
@@ -81,14 +75,14 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getQuest: (id) => dispatch(fetchQuestInfo(id)),
-    getTeam: (questId) => dispatch(getTeam(questId)),
-    getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
-    getTasks: (questId) => dispatch(getQuestTasks(questId)),
+    getQuest: (id) => dispatch(Api.Quests.fetchQuestInfo(id)),
+    getTeam: (questId) => dispatch(Api.TeamList.getTeam(questId)),
+    getInviteCode: (teamId) => dispatch(Api.TeamList.getInviteCode(teamId)),
+    getTasks: (questId) => dispatch(Api.QuestPlaymode.getQuestTasks(questId)),
     sendTaskAttempt: (taskId, attemptText) =>
-        dispatch(sendTaskAttempt(taskId, attemptText)),
+        dispatch(Api.QuestPlaymode.sendTaskAttempt(taskId, attemptText)),
     getTaskHint: (taskId, hintNumber) =>
-        dispatch(getTaskHint(taskId, hintNumber))
+        dispatch(Api.QuestPlaymode.getTaskHint(taskId, hintNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode);

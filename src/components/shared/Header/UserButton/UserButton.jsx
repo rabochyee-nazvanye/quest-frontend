@@ -26,7 +26,7 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(Api.logout())
+  logout: () => dispatch(Api.Auth.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserButton)

@@ -6,16 +6,15 @@ import {
   deleteUserInfo,
   receiveUserInfo,
   receiveException, deleteToken, requestToken, deleteException, googleLogin
-} from '../redux/Actions/AuthActions'
-import { store } from '../redux/store'
+} from '../../../redux/Actions/AuthActions'
+import { store } from '../../../redux/store'
 import { getToken, getWithToken } from './CommonApi'
-import { Api } from './../application/app'
 
 export default class AuthApi {
 
-  constructor(config, commonApi) {
-    this.config = config
-    this.commonApi = commonApi
+  constructor(opts) {
+    this.config = opts.config
+    this.commonApi = opts.commonApi
   }
 
   loginFromForm (username, password, rememberMe) {
