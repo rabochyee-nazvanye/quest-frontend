@@ -1,11 +1,13 @@
 import React from 'react'
 import { Avatar, Button, Divider } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { logout } from '../../../api/AuthApi'
+import { logout } from '../../../application/api/BackendApi/AuthApi'
 import { connect } from 'react-redux'
 import QuestsList from './QuestsList';
 import {CLIENT_URL} from "../../../settings";
 import MetaTags from "../../shared/MetaTags/MetaTags";
+
+import {Api} from '../../../application/app'
 
 function getAvatar(avatarUrl) {
     if (avatarUrl === null) {
@@ -44,7 +46,7 @@ function AccountTemplate (props) {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => { dispatch(logout()) }
+  logout: () => { dispatch(Api.Auth.logout()) }
 })
 
 export default connect(null, mapDispatchToProps)(AccountTemplate)

@@ -2,10 +2,8 @@ import React from 'react'
 import { Button, Alert, message } from 'antd'
 import "./QuestTimeline.css"
 import {useHistory} from 'react-router-dom'
-import {getToken} from "../../api/CommonApi";
-import {closeErrorMessage} from "../../redux/Actions/QuestRegistrationActions";
-import {handleSoloQuestSubscription} from "../../api/QuestRegistrationApi";
 import {connect} from "react-redux";
+import { Api } from '../../application/app'
 
 function InfiniteQuestTemplate(props) {
     const history = useHistory();
@@ -25,7 +23,7 @@ function InfiniteQuestTemplate(props) {
                     className="button"
                     onClick={
                         () => {
-                            if (getToken() === '') {
+                            if (!props.isLoggedIn) {
                                 history.push("/auth/" + encodeURIComponent(props.url))
                             }
                             if (props.userSubscribed) {
@@ -43,14 +41,15 @@ function InfiniteQuestTemplate(props) {
 }
 
 const mapStateToProps = (store) => ({
+    isLoggedIn: store.authReducer.user === null,
     userSubscribed: store.questRegistrationReducer.userSubscribed,
     statusText: store.questRegistrationReducer.statusText,
     redirectToTasks: store.questRegistrationReducer.redirectToTasks
 })
 
 const mapDispatchToProps = dispatch => ({
-    closeErrorMessage: () => dispatch(closeErrorMessage()),
-    handleSoloQuestSubscription: (questId) => dispatch(handleSoloQuestSubscription(questId))
+    closeErrorMessage: () => dispatch(Api.QuestRegistration.closeErrorMessage()),
+    handleSoloQuestSubscription: (questId) => dispatch(Api.QuestRegistration.handleSoloQuestSubscription(questId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfiniteQuestTemplate)

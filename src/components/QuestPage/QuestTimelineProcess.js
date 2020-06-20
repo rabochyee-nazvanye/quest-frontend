@@ -8,7 +8,7 @@ import {
     ClockCircleOutlined, StarOutlined, UserAddOutlined
 } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
-import { getToken } from '../../api/CommonApi.js';
+import { getToken } from '../../application/api/BackendApi/CommonApi.js';
 import QuestTimelineTemplate from './QuestTimelineTemplate'
 let dateTimeNow = new Date();
 

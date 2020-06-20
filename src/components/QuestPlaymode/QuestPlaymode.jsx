@@ -5,18 +5,14 @@ import { Spin } from 'antd';
 import { groupBy } from './Utils';
 import QuestTasks from './Templates/Tasks/QuestTasks';
 import MetaInfoPlaymode from './Templates/MetaInfo/MetaInfoPlaymode';
-import { fetchQuestInfo } from '../../api/QuestsApi';
-import { getInviteCode, getTeam } from '../../api/TeamListApi'
-import {
-    getQuestTasks,
-    getTaskHint,
-    sendTaskAttempt
-} from '../../api/QuestPlaymodeApi';
+
 import {deleteQuestInfo} from "../../redux/Actions/QuestsActions";
 import {deleteQuestsListInfo} from "../../redux/Actions/QuestsListActions";
 import {deleteQuestTasks} from "../../redux/Actions/QuestPlaymodeActions";
 import {deleteQuestRegistrationInfo} from "../../redux/Actions/QuestRegistrationActions";
 import {deleteTeamListInfo} from "../../redux/Actions/TeamListActions";
+
+import {Api} from '../../application/app'
 
 function dataIsReady(props) {
     return !props.questIsFetching && !props.tasksAreFetching
@@ -27,6 +23,12 @@ function QuestPlaymode(props) {
     const questId = props.match.params.id;
 
     useEffect(() => {
+        props.deleteQuestInfo()
+        props.deleteQuestsListInfo()
+        props.deleteQuestTasks()
+        props.deleteQuestRegistrationInfo()
+        props.deleteTeamListInfo()
+
         if (props.loggedIn) {
             props.getQuest(questId);
             props.getTasks(questId);
@@ -93,14 +95,15 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getQuest: (id) => dispatch(fetchQuestInfo(id)),
-    getTeam: (questId) => dispatch(getTeam(questId)),
-    getInviteCode: (teamId) => dispatch(getInviteCode(teamId)),
-    getTasks: (questId) => dispatch(getQuestTasks(questId)),
+    getQuest: (id) => dispatch(Api.Quests.fetchQuestInfo(id)),
+    getTeam: (questId) => dispatch(Api.TeamList.getTeam(questId)),
+    getInviteCode: (teamId) => dispatch(Api.TeamList.getInviteCode(teamId)),
+    getTasks: (questId) => dispatch(Api.QuestPlaymode.getQuestTasks(questId)),
     sendTaskAttempt: (taskId, attemptText) =>
-        dispatch(sendTaskAttempt(taskId, attemptText)),
+        dispatch(Api.QuestPlaymode.sendTaskAttempt(taskId, attemptText)),
     getTaskHint: (taskId, hintNumber) =>
-        dispatch(getTaskHint(taskId, hintNumber)),
+        dispatch(Api.QuestPlaymode.getTaskHint(taskId, hintNumber)),
+
     deleteQuestInfo: () => dispatch(deleteQuestInfo()),
     deleteQuestsListInfo: () => (dispatch(deleteQuestsListInfo())),
     deleteQuestTasks: () => dispatch(deleteQuestTasks()),
