@@ -15,7 +15,8 @@ export default function questRegistrationReducer (
         status: '',
         regVisible: false,
         successVisible: false,
-        userSubscribed: false
+        userSubscribed: false,
+        redirectToTasks: false
     }, action ) {
     switch (action.type) {
         case REGISTRATION_ON_QUEST_SUCCEEDED:
@@ -29,7 +30,7 @@ export default function questRegistrationReducer (
         case REGISTRATION_ON_QUEST_ERROR_READ:
             return {...state, statusText: action.statusText, status: action.status}
         case SOLO_QUEST_SUBSCRIPTION_SUCCEED:
-            return{...state, userSubscribed: action.userSubscribed}
+            return{...state, userSubscribed: action.userSubscribed, redirectToTasks: action.redirectToTasks }
         case SOLO_QUEST_SUBSCRIPTION_FAILED:
             return{...state, statusText: action.statusText, status: action.status}
         case OPEN_REGISTRATION_FORM:

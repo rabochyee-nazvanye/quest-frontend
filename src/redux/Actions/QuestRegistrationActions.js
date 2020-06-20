@@ -36,6 +36,7 @@ export function setSuccessSubscriptionState() {
     return {
         type: SOLO_QUEST_SUBSCRIPTION_SUCCEED,
         userSubscribed: true,
+        redirectToTasks: true
     }
 }
 
