@@ -22,7 +22,7 @@ export default function MetaInfoPlaymode(props) {
                 <span className={'title__low-opacity'}> /Задания</span>
             </h1>
             <h2 className={'title__subtitle title__blue title__close '}>
-                Команда: {props.team.name}{' '}
+                {props.type}: {props.name}{' '}
                 <span className={'title__black title__low-opacity'}> | </span>
                 <Tooltip title={<TooltipBotTemplate />}>
                     <span className={'title__underscored'}>
@@ -36,6 +36,7 @@ export default function MetaInfoPlaymode(props) {
 
 MetaInfoPlaymode.propTypes = {
     quest: PropTypes.object,
-    team: PropTypes.object,
-    inviteCode: PropTypes.string
+    name: PropTypes.object,
+    inviteCode: PropTypes.string,
+    type: PropTypes.string
 };
