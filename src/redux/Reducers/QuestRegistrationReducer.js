@@ -1,8 +1,11 @@
 import {
     CLOSE_FORM,
-    OPEN_REGISTARTION_FORM,
+    OPEN_REGISTRATION_FORM,
     REGISTRATION_ON_QUEST_FAILED,
-    REGISTRATION_ON_QUEST_SUCCEEDED, REGISTRATION_ON_QUEST_ERROR_READ,
+    REGISTRATION_ON_QUEST_SUCCEEDED,
+    REGISTRATION_ON_QUEST_ERROR_READ,
+    SOLO_QUEST_SUBSCRIPTION_SUCCEED,
+    SOLO_QUEST_SUBSCRIPTION_FAILED,
 } from '../Actions/QuestRegistrationActions'
 
 export default function questRegistrationReducer (
@@ -11,7 +14,8 @@ export default function questRegistrationReducer (
         statusText: '',
         status: '',
         regVisible: false,
-        successVisible: false
+        successVisible: false,
+        userSubscribed: false
     }, action ) {
     switch (action.type) {
         case REGISTRATION_ON_QUEST_SUCCEEDED:
@@ -24,7 +28,11 @@ export default function questRegistrationReducer (
             return {...state, statusText: action.statusText, status: action.status}
         case REGISTRATION_ON_QUEST_ERROR_READ:
             return {...state, statusText: action.statusText, status: action.status}
-        case OPEN_REGISTARTION_FORM:
+        case SOLO_QUEST_SUBSCRIPTION_SUCCEED:
+            return{...state, userSubscribed: action.userSubscribed}
+        case SOLO_QUEST_SUBSCRIPTION_FAILED:
+            return{...state, statusText: action.statusText, status: action.status}
+        case OPEN_REGISTRATION_FORM:
             return {...state, regVisible: action.regVisible}
         case CLOSE_FORM:
             return {...state, regVisible: action.regVisible, successVisible: action.successVisible}

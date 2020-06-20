@@ -3,8 +3,10 @@ import { CLIENT_URL } from '../../settings'
 export const REGISTRATION_ON_QUEST_SUCCEEDED = 'REGISTRATION_ON_QUEST_SUCCEEDED'
 export const REGISTRATION_ON_QUEST_FAILED = 'REGISTRATION_ON_QUEST_FAILED'
 export const CLOSE_FORM = 'CLOSE_FORM'
-export const OPEN_REGISTARTION_FORM = 'OPEN_REGISTARTION_FORM'
+export const OPEN_REGISTRATION_FORM = 'OPEN_REGISTRATION_FORM'
 export const REGISTRATION_ON_QUEST_ERROR_READ = 'REGISTRATION_ON_QUEST_ERROR_READ'
+export const SOLO_QUEST_SUBSCRIPTION_SUCCEED = 'SOLO_QUEST_SUBSCRIPTION_SUCCEED'
+export const SOLO_QUEST_SUBSCRIPTION_FAILED = 'SOLO_QUEST_SUBSCRIPTION_FAILED'
 
 export function closeForm() {
     return {
@@ -16,7 +18,7 @@ export function closeForm() {
 
 export function openRegistrationForm() {
     return {
-        type: OPEN_REGISTARTION_FORM,
+        type: OPEN_REGISTRATION_FORM,
         regVisible: true
     }
 }
@@ -27,6 +29,21 @@ export function setSuccessState(payload) {
         regVisible: false,
         successVisible: true,
         inviteLink: CLIENT_URL + payload
+    }
+}
+
+export function setSuccessSubscriptionState() {
+    return {
+        type: SOLO_QUEST_SUBSCRIPTION_SUCCEED,
+        userSubscribed: true,
+    }
+}
+
+export function setSubscriptionErrorState (payload) {
+    return {
+        type: SOLO_QUEST_SUBSCRIPTION_FAILED,
+        statusText: payload.statusText,
+        status: payload.status
     }
 }
 
