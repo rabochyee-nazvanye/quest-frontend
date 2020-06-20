@@ -15,8 +15,7 @@ export default function questRegistrationReducer (
         status: '',
         regVisible: false,
         successVisible: false,
-        userSubscribed: false,
-        redirectToTasks: false
+        userSubscribed: false
     }, action ) {
     switch (action.type) {
         case REGISTRATION_ON_QUEST_SUCCEEDED:

@@ -11,6 +11,7 @@ function InfiniteQuestTemplate(props) {
     const history = useHistory();
     const handleRedirectAfterSuccessSubscription = () => {
         if (props.redirectToTasks) {
+
             history.push("/quests/" + props.quest.id + "/play")
         }
     }
@@ -25,7 +26,6 @@ function InfiniteQuestTemplate(props) {
     return (
         <React.Fragment>
             { error() }
-            { handleRedirectAfterSuccessSubscription() }
             <Button type="primary"
                     htmlType="submit"
                     className="button"
@@ -38,6 +38,7 @@ function InfiniteQuestTemplate(props) {
                                     history.push("/quests/" + props.quest.id + "/play")
                             } else {
                                 props.handleSoloQuestSubscription(props.quest.id)
+                                history.push("/quests/" + props.quest.id + "/play")
                             }
                         }
                     }>
