@@ -44,7 +44,15 @@ export function handleSoloQuestSubscription(questId) {
                 if (response.ok) {
                     dispatch(setSuccessSubscriptionState())
                 } else {
-                    response.json().then(data => dispatch(setSubscriptionErrorState({ status: data.status, statusText: data.title })))
+                    response.json().then(data =>
+                        {
+                            if (data.title ==='User already have associated participant in this quest.') {
+                                dispatch(setSuccessSubscriptionState())
+                            } else {
+                                dispatch(setSubscriptionErrorState({ status: data.status, statusText: data.title }))
+                            }
+                        }
+                    )
                 }
             })
     }
