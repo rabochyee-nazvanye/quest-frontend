@@ -7,7 +7,7 @@ import {
 import {getTeamList} from "./TeamListApi";
 
 
-export default function handleTeamCreation(teamName, questId) {
+export function handleTeamCreation(teamName, questId) {
     let query = {
         "questId": questId,
         "name": teamName
@@ -31,7 +31,7 @@ export default function handleTeamCreation(teamName, questId) {
     }
 }
 
-export default function handleSoloQuestSubscription(teamName, questId) {
+export function handleSoloQuestSubscription(questId) {
     let query = {
         "questId": questId
     };

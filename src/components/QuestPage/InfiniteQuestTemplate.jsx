@@ -1,45 +1,61 @@
 import React from 'react'
-import {Button} from 'antd'
+import { Button, Alert, message } from 'antd'
 import "./QuestTimeline.css"
 import {useHistory} from 'react-router-dom'
 import {getToken} from "../../api/CommonApi";
-import {UserAddOutlined} from "@ant-design/icons";
+import {closeErrorMessage} from "../../redux/Actions/QuestRegistrationActions";
+import {handleSoloQuestSubscription} from "../../api/QuestRegistrationApi";
+import {connect} from "react-redux";
 
 function InfiniteQuestTemplate(props) {
     const history = useHistory();
-    // TODO(tramakarov) add default registration to solo quest
-    // TODO(lalka-anka) same shit
-    //ниже просто копипаст обчной формы для реги, можно это убрать
-    let registration = <Button type="primary"
-            htmlType="submit"
-            className="button"
-            style={{ "background-color": "#52c41a", "border-color": "#52c41a" }}
-            onClick={
-                () => {
-                    if (getToken() === '') {
-                        history.push("/auth/" + encodeURIComponent(props.url))
-                    } else {
-                        props.openForm()
-                    }
-                }
-            }
-    >
-        <UserAddOutlined />
-        Зарегистрироваться
-    </Button>;
-    let open = <Button type="primary"
-                       htmlType="submit"
-                       className="button"
-                       onClick={
-                           () => {
-                               history.push("/quests/" + props.quest.id + "/play")
-                           }
-                       }>
-        Открыть задания
-    </Button>;
-    if (props.registered === true)
-        return open;
-    else return registration
+    const handleRedirectAfterSuccessSubscription = () => {
+        if (props.redirectToTasks) {
+            history.push("/quests/" + props.quest.id + "/play")
+        }
+    }
+
+    const error = () => {
+        if (props.statusText !== '') {
+            message.error(props.statusText);
+        }
+
+    };
+
+    return (
+        <React.Fragment>
+            { error() }
+            { handleRedirectAfterSuccessSubscription() }
+            <Button type="primary"
+                    htmlType="submit"
+                    className="button"
+                    onClick={
+                        () => {
+                            if (getToken() === '') {
+                                history.push("/auth/" + encodeURIComponent(props.url))
+                            }
+                            if (props.userSubscribed) {
+                                    history.push("/quests/" + props.quest.id + "/play")
+                            } else {
+                                props.handleSoloQuestSubscription(props.quest.id)
+                            }
+                        }
+                    }>
+                Открыть задания
+            </Button>
+        </React.Fragment>
+    )
 }
 
-export default InfiniteQuestTemplate
+const mapStateToProps = (store) => ({
+    userSubscribed: store.questRegistrationReducer.userSubscribed,
+    statusText: store.questRegistrationReducer.statusText,
+    redirectToTasks: store.questRegistrationReducer.redirectToTasks
+})
+
+const mapDispatchToProps = dispatch => ({
+    closeErrorMessage: () => dispatch(closeErrorMessage()),
+    handleSoloQuestSubscription: (questId) => dispatch(handleSoloQuestSubscription(questId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfiniteQuestTemplate)
