@@ -2,12 +2,12 @@ import {postWithToken} from "./CommonApi";
 import {BASE_URL} from "../settings";
 import {
     setSuccessState,
-    setErrorState
+    setErrorState, setSuccessSubscriptionState, setSubscriptionErrorState
 } from '../redux/Actions/QuestRegistrationActions'
 import {getTeamList} from "./TeamListApi";
 
 
-export default function handleTeamCreation(teamName, questId) {
+export function handleTeamCreation(teamName, questId) {
     let query = {
         "questId": questId,
         "name": teamName
@@ -26,6 +26,34 @@ export default function handleTeamCreation(teamName, questId) {
                     });
                 } else {
                     response.json().then(data => dispatch(setErrorState({ status: data.status, statusText: data.title })))
+                }
+            })
+    }
+}
+
+export function handleSoloQuestSubscription(questId) {
+    let query = {
+        "questId": questId
+    };
+
+    const path = BASE_URL + '/players';
+
+    return dispatch => {
+        return postWithToken(path, query)
+            .then(response => {
+                if (response.ok) {
+                    dispatch(setSuccessSubscriptionState())
+                } else {
+                    response.json().then(data =>
+                        {
+                            //TODO(tramakarov): Replace hot fix with normal check if user has already subscribed
+                            if (data.title ==='User already have associated participant in this quest.') {
+                                dispatch(setSuccessSubscriptionState())
+                            } else {
+                                dispatch(setSubscriptionErrorState({ status: data.status, statusText: data.title }))
+                            }
+                        }
+                    )
                 }
             })
     }
