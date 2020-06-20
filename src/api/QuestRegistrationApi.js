@@ -46,6 +46,7 @@ export function handleSoloQuestSubscription(questId) {
                 } else {
                     response.json().then(data =>
                         {
+                            //TODO(tramakarov): Replace hot fix with normal check if user has already subscribed
                             if (data.title ==='User already have associated participant in this quest.') {
                                 dispatch(setSuccessSubscriptionState())
                             } else {
