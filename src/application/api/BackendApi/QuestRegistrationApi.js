@@ -1,11 +1,10 @@
-import {postWithToken} from "./CommonApi";
+import { getWithToken, postWithToken } from './CommonApi'
 import {BASE_URL} from "../../../settings";
 import {
     setSuccessState,
-    setErrorState, openRegistrationForm,
+    setErrorState, openRegistrationForm, setSuccessSubscriptionState, setSubscriptionErrorState,
 } from '../../../redux/Actions/QuestRegistrationActions'
-import {getTeamList} from "./TeamListApi";
-import { Api } from '../../app'
+import { receiveTeamList, requestTeamList } from '../../../redux/Actions/TeamListActions'
 
 
 export default class QuestRegistrationApi {
@@ -15,7 +14,28 @@ export default class QuestRegistrationApi {
         this.commonApi = opts.commonApi
     }
 
-    handleTeamCreation (teamName, questId) {
+    /**
+     * Get form with registration
+     * */
+    openRegistrationForm() {
+        return dispatch => {
+            dispatch(openRegistrationForm())
+        }
+    }
+
+    getTeamList (questId) {
+        const path = BASE_URL + '/quests/' + questId + '/participants?members=currentUser';
+        return dispatch => {
+            dispatch(requestTeamList())
+            return getWithToken(path)
+                .then(response => response.json())
+                .then(readResponse => {
+                    dispatch(receiveTeamList(readResponse[0]))
+                })
+        }
+    }
+
+    handleTeamCreation(teamName, questId) {
         let query = {
             "questId": questId,
             "name": teamName
@@ -27,26 +47,44 @@ export default class QuestRegistrationApi {
             return postWithToken(path, query)
                 .then(response => {
                     if (response.ok) {
-                        response.json().then(data => {
-                            dispatch(Api.TeamList.getTeamList(questId))
+                        response.json().then(data =>
+                        {
+                            dispatch(this.getTeamList(questId))
                             dispatch(setSuccessState(data.inviteLink))
                         });
                     } else {
-                        response.json().then(data => dispatch(setErrorState({
-                            status: data.status,
-                            statusText: data.title
-                        })))
+                        response.json().then(data => dispatch(setErrorState({ status: data.status, statusText: data.title })))
                     }
                 })
         }
     }
 
-    /**
-     * Get form with registration
-     * */
-    openRegistrationForm() {
+    handleSoloQuestSubscription(questId) {
+        let query = {
+            "questId": questId
+        };
+
+        const path = BASE_URL + '/players';
+
         return dispatch => {
-            dispatch(openRegistrationForm())
+            return postWithToken(path, query)
+                .then(response => {
+                    if (response.ok) {
+                        dispatch(setSuccessSubscriptionState())
+                    } else {
+                        response.json().then(data =>
+                            {
+                                //TODO(tramakarov): Replace hot fix with normal check if user has already subscribed
+                                if (data.title ==='User already have associated participant in this quest.') {
+                                    dispatch(setSuccessSubscriptionState())
+                                } else {
+                                    dispatch(setSubscriptionErrorState({ status: data.status, statusText: data.title }))
+                                }
+                            }
+                        )
+                    }
+                })
         }
     }
+
 }

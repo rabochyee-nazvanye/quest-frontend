@@ -2,11 +2,8 @@ import React from 'react'
 
 import './FormTemplate.css'
 
-import {Form, Input, Button, Checkbox, Alert} from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 
-import { decodeException } from './Utils'
-import PropTypes from 'prop-types'
 import { GoogleOutlined } from "@ant-design/icons";
 
 import { GoogleLogin } from 'react-google-login';
@@ -29,10 +26,10 @@ export default function OAuthLoginButton(props) {
                     buttonText={props.buttonText}
                     onSuccess={
                         (response) =>
-                            props.oAuth({response: response, oAuthProvider: GOOGLE_AUTH})}
+                            props.oAuth({tokenId: response.tokenId, oAuthProvider: GOOGLE_AUTH})}
                     onFailure={
                         (response) =>
-                            props.oAuth({response: response, oAuthProvider: GOOGLE_AUTH})}
+                            props.oAuth({tokenId: response.tokenId, oAuthProvider: GOOGLE_AUTH})}
                 />
             )
     }
