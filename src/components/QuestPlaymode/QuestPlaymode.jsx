@@ -18,6 +18,15 @@ function dataIsReady(props) {
     return !props.questIsFetching && !props.tasksAreFetching
 }
 
+function getMetaInfoPlaymode(props) {
+    if (dataIsReady(props)) {
+        if (props.quest.type === 'team') {
+            return  <MetaInfoPlaymode quest={props.quest} name={props.team.name} inviteCode={props.teamInviteCode} type={'Команда'}/>
+        }
+        return <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>
+    }
+}
+
 
 function QuestPlaymode(props) {
     const questId = props.match.params.id;
@@ -57,11 +66,9 @@ function QuestPlaymode(props) {
             />
         );
     } else if (dataIsReady(props)) {
-        const getMetainfo = {'solo': <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>,
-            'team': <MetaInfoPlaymode quest={props.quest} name={props.team.name} inviteCode={props.teamInviteCode} type={'Команда'}/>};
         return (
             <React.Fragment>
-                {getMetainfo[props.quest.type]}
+                {getMetaInfoPlaymode(props)}
                 <QuestTasks
                     tasks={groupBy(props.tasks, 'group')}
                     sendTaskCallback={(taskId, attemptText) =>
