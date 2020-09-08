@@ -23,9 +23,7 @@ function getMetaInfoPlaymode(props) {
         if (props.quest.type === 'team') {
             return  <MetaInfoPlaymode quest={props.quest} name={props.team.name} inviteCode={props.teamInviteCode} type={'Команда'}/>
         }
-        else {
-            return <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>
-        }
+        return <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>
     }
 }
 
@@ -68,10 +66,6 @@ function QuestPlaymode(props) {
             />
         );
     } else if (dataIsReady(props)) {
-      //  const getMetainfo = {'solo': <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>,
-        //    'team': <MetaInfoPlaymode quest={props.quest} name={props.team.name} inviteCode={props.teamInviteCode} type={'Команда'}/>};
-        // {getMetainfo[props.quest.type]}
-
         return (
             <React.Fragment>
                 {getMetaInfoPlaymode(props)}
