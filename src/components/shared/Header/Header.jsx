@@ -17,7 +17,7 @@ function Header (props) {
       <PageHeader
         ghost={false}
         className={'header__padding-zero'}
-        title={ <QuestspaceIcon/> }
+        title={ <QuestspaceIcon color="#131313" width="236" height="21"/> }
         extra={[
           <div className={'header__addition'}>
             <UserButton/>
