@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom'
 export default function ErrorPage (props) {
   return (
     <React.Fragment>
-      <img className={'error-background'} src={Image}/>
+        <div className={"image-container"}>
+            <img className={'image'} src={Image}/>
+        </div>
       <div className={'error-text'}>
         <div className={'error-code'}>
           {props.code}

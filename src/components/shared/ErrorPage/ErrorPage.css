@@ -8,21 +8,21 @@
 
     font-weight: 800;
     width: 1170px;
-    height: 768px;
+    margin-top: 150px;
 }
 
 .error-code {
     width: 100%;
     position: absolute;
-    font-size: 500px;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 250px;
+    color: rgba(255, 88, 255, 0.4);
 }
 
 .error-description {
     width: 100%;
     position: absolute;
     font-size: 32px;
-    color: rgba(255, 255, 255, 1);
+    color: #000000;
 }
 
 .error-background {
@@ -37,4 +37,16 @@
     position: fixed;
     top: 0;
     left: 0;
+}
+
+.image {
+    width: 256px;
+    height: 256px;
+}
+
+.image-container {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
