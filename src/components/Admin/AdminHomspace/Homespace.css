@@ -35,39 +35,5 @@
     row-gap: 10px;
 }
 
-.admin-leader-board {
-    font-size: 32px;
-    padding: 20px 30px;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 2px 0 14px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    grid-column-start: 4;
-    height: 150px;
-    width: 450px;
-}
-
-.admin-leader-board_done-quests, .admin-leader-board_participated_quests,
-.admin-leader-board_total-tasks {
-    display: flex;
-    flex-direction: column;
-    row-gap: 4px;
-}
-
-.admin-leader-board_done-quests__description, .admin-leader-board_participated_quests__description,
-.admin-leader-board_total-tasks__description {
-    font-size: 12px;
-    margin: 0;
-
-}
-
-.admin-leader-board_total-tasks__rating {
-    font-size: 10px;
-}
-
-.admin-leader-board_total-tasks > h2 {
-    color: #00c114;
-}
-
 
 
