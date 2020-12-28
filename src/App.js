@@ -27,7 +27,7 @@ import NoMatch from './components/NoMatch/NoMatch'
 import QuestPlaymode from './components/QuestPlaymode/QuestPlaymode'
 
 import { Api } from './application/app'
-import Homespace from "./components/Admin/AdminHomspace/Homespace";
+import HomeSpace from "./components/Admin/AdminHomspace/Homespace";
 
 function App () {
   useEffect(() => {
@@ -43,7 +43,7 @@ function App () {
             <Switch>
               <Route path="/invites/:id" exact component={InvitePage}/>
               <Route path="/quests/:id" exact component={QuestPage}/>
-              <Route path="/adminspace" exact component={Homespace}/>
+              <Route path="/adminspace" exact component={HomeSpace}/>
               <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
               <Route exact path={'/'} component={Account}/>
