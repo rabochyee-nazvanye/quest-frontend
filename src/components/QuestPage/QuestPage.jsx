@@ -103,4 +103,5 @@ const mapDispatchToProps = dispatch => ({
   openForm: () => {dispatch(Api.QuestRegistration.openRegistrationForm())}
 });
 
+
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPage)
