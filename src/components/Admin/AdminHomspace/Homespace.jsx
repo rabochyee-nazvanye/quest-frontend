@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Tabs} from 'antd'
 import connect from 'react-redux/es/connect/connect'
 import './Homespace.css'
 import AdminBoard from './AdminStat'
+import AdminQuests from "./AdminQuests";
 import QuestsList from "../../Account/AccountTemplate/QuestsList";
 import MetaTags from "../../shared/MetaTags/MetaTags";
 import {Api} from "../../../application/app";
@@ -16,8 +17,7 @@ function HomeSpace(props) {
     if (!props.loggedIn) {
         return '...'
     }
-    else {
-        return <div>
+        return <React.Fragment>
             <div className='primary-info'>
                 <div className='primary-info__photo-element'>
                     <img src={props.user.avatarUrl} alt='userpic'>
@@ -30,13 +30,12 @@ function HomeSpace(props) {
             </div>
             <Tabs defaultActiveKey="1">
                 <TabPane tab="Квесты" key="1">
-                    <QuestsList/>
+                    <AdminQuests/>
                 </TabPane>
                 <TabPane tab="Управление квестами" key="2">
                 </TabPane>
             </Tabs>
-        </div>
-    }
+        </React.Fragment>
 }
 
 const mapDispatchToProps = dispatch => ({
