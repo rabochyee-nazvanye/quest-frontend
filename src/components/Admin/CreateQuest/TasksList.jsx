@@ -4,9 +4,7 @@ import { Formik, Form, Field, FieldArray } from "formik";
 import { Button } from 'antd';
 import TextArea from "antd/es/input/TextArea";
 
-// Here is an example of a form with an editable list.
-// Next to each input are buttons for insert and remove.
-// If the list is empty, there is a button to add an item.
+//едитабл таск лист
 const FriendList = () => (
     <div>
         <Formik
