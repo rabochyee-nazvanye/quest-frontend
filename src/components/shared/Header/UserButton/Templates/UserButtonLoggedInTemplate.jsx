@@ -21,6 +21,12 @@ export default function UserButtonLoggedInTemplate (props) {
                     Выйти
         </Button>
       </Menu.Item>
+
+    <Menu.Item>
+        <Button type="link" onClick={props.admin}>
+            Админ
+        </Button>
+    </Menu.Item>
     </Menu>
   )
 
@@ -44,5 +50,6 @@ UserButtonLoggedInTemplate.propTypes = {
   username: PropTypes.string,
   logout: PropTypes.func,
   account: PropTypes.func,
+  admin: PropTypes.func,
   avatar: PropTypes.object
 }

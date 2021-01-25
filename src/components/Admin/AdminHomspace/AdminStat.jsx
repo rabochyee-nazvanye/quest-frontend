@@ -13,7 +13,7 @@ class AdminStat extends Component {
             <p className='admin-leader-board_done-quests__description'>
                 Проведено квестов:
             </p>
-            <h2>{this.getAdminStat()}</h2>
+            <h2 className='admin-leader-board_total-tasks'>{this.getAdminStat()}</h2>
         </div>
     </div>
         )

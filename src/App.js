@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 
 import Header from './components/shared/Header/Header'
 import Footer from './components/shared/Footer/Footer'
-import About from './components/About/About'
-import QuestsList from './components/Account/AccountTemplate/QuestsList'
 import QuestPage from './components/QuestPage/QuestPage'
 import InvitePage from './components/InvitePage/InvitePage'
 import Progressboard from "./components/Progressboard/Progressboard";
-import FixQuestForm from "./components/Admin/AdminHomspace/Homespace"
+import QuestCreateForm from "./components/Admin/CreateQuest/QuestCreateForm";
+import QuestTasksCreation from "./components/Admin/CreateQuest/QuestTasksCreation";
 import './add-space.css'
 
 import './App.css'
@@ -45,6 +44,8 @@ function App () {
               <Route path="/quests/:id" exact component={QuestPage}/>
               <Route path="/adminspace" exact component={HomeSpace}/>
               <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
+              <Route path="/createQuestForm" exact component={QuestCreateForm}/>
+              <Route path="/createTasksForm" exact component={QuestTasksCreation}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
               <Route exact path={'/'} component={Account}/>
               <Route exact path={'/auth'} component={Auth}/>

@@ -9,7 +9,6 @@ import { fetchQuestsListInfo } from '../../../application/api/BackendApi/QuestsL
 import {connect} from "react-redux";
 import { Api } from '../../../application/app'
 
-
 class AdminQuests extends Component {
 
     componentDidMount () {
@@ -27,7 +26,7 @@ class AdminQuests extends Component {
         if (Array.isArray(adminQuests) && adminQuests.length) {
             return adminQuests
         }
-        return <h2>&nbsp;&nbsp;&nbsp;&nbsp;No quests for user :(</h2>
+        return <h2>&nbsp;&nbsp;&nbsp;&nbsp;Ты пока не проводил квестов</h2>
     }
 
     getRepresentationByState () {

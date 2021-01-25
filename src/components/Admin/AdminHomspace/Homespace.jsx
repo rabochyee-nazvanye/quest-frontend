@@ -1,19 +1,17 @@
 import React from 'react'
-import {Tabs} from 'antd'
+import {Tabs, Button, Col} from 'antd'
 import connect from 'react-redux/es/connect/connect'
 import './Homespace.css'
 import AdminBoard from './AdminStat'
 import AdminQuests from "./AdminQuests";
-import QuestsList from "../../Account/AccountTemplate/QuestsList";
-import MetaTags from "../../shared/MetaTags/MetaTags";
 import {Api} from "../../../application/app";
-import {Redirect} from "react-router-dom";
-import AccountTemplate from "../../Account/AccountTemplate/AccountTemplate";
-
+import {useHistory} from "react-router-dom";
 
 const {TabPane} = Tabs;
 
 function HomeSpace(props) {
+    const history = useHistory();
+
     if (!props.loggedIn) {
         return '...'
     }
@@ -31,21 +29,23 @@ function HomeSpace(props) {
             <Tabs defaultActiveKey="1">
                 <TabPane tab="Квесты" key="1">
                     <AdminQuests/>
-                </TabPane>
-                <TabPane tab="Управление квестами" key="2">
+                    <Button type={'primary'}
+                            onClick={() => { history.push('/createQuestForm') }
+                            }>
+                        Добавить квест +
+                    </Button>
                 </TabPane>
             </Tabs>
         </React.Fragment>
 }
 
 const mapDispatchToProps = dispatch => ({
-    logout: () => { dispatch(Api.Auth.logout()) }
+    logout: () => { dispatch(Api.Auth.logout()) },
 })
 
 const mapStateToProps = (store) => ({
     loggedIn: store.authReducer.user !== null,
     user: store.authReducer.user
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeSpace)
