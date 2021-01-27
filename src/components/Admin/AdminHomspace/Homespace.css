@@ -1,0 +1,39 @@
+.primary-info {
+    font-weight: bold;
+    height: 30%;
+    display: grid;
+    grid-template-columns: 120px 450px auto 450px;
+    column-gap: 32px;
+    margin: 44px 0;
+    overflow-clip: ellipse;
+}
+
+.primary-info__photo-element {
+    margin: 0 32px 0 0;
+}
+
+.primary-info__photo-element > img {
+    height: 120px;
+    width: 120px;
+    border-radius: 75px;
+    object-fit: cover;
+}
+
+.primary-info-geolocation {
+    color: #40A9FF;
+    font-size: 20px;
+}
+
+.user-name {
+    font-size: 46px;
+    margin: 0;
+}
+
+.primary-info-name-location {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+
