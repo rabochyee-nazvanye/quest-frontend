@@ -1,0 +1,13 @@
+.tasks {
+    justify-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+.task {
+    background-color: whitesmoke;
+    border-bottom: solid 1px darkgray;
+    justify-items: center;
+    justify-content: space-between;
+}
