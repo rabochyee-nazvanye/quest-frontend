@@ -35,5 +35,6 @@
     row-gap: 10px;
 }
 
-
-
+.adminspace__form-creation__alert-container {
+    margin-bottom: 10px;
+}

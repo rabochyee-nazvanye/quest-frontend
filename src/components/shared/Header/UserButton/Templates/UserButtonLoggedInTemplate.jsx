@@ -11,22 +11,21 @@ export default function UserButtonLoggedInTemplate (props) {
 
   const menu = (
     <Menu>
-      <Menu.Item>
-        <Button type="link" onClick={props.account}>
-                    Аккаунт
-        </Button>
-      </Menu.Item>
-      <Menu.Item>
-        <Button type="link" onClick={props.logout}>
-                    Выйти
-        </Button>
-      </Menu.Item>
-
-    <Menu.Item>
-        <Button type="link" onClick={props.admin}>
-            Админ
-        </Button>
-    </Menu.Item>
+        <Menu.Item>
+          <Button type="link" onClick={props.account}>
+                Все квесты
+          </Button>
+        </Menu.Item>
+        <Menu.Item>
+            <Button type="link" onClick={props.admin}>
+                Мои квесты
+            </Button>
+        </Menu.Item>
+        <Menu.Item>
+            <Button type="link" onClick={props.logout}>
+                Выйти
+            </Button>
+        </Menu.Item>
     </Menu>
   )
 
