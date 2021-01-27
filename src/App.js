@@ -6,7 +6,7 @@ import QuestPage from './components/QuestPage/QuestPage'
 import InvitePage from './components/InvitePage/InvitePage'
 import Progressboard from "./components/Progressboard/Progressboard";
 import QuestCreateForm from "./components/Admin/CreateQuest/QuestCreateForm";
-import QuestTasksCreation from "./components/Admin/CreateQuest/QuestTasksCreation";
+import TaskList from "./components/Admin/CreateQuest/TasksList";
 import './add-space.css'
 
 import './App.css'
@@ -45,7 +45,7 @@ function App () {
               <Route path="/adminspace" exact component={HomeSpace}/>
               <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
               <Route path="/createQuestForm" exact component={QuestCreateForm}/>
-              <Route path="/createTasksForm" exact component={QuestTasksCreation}/>
+              <Route path="/editTasks" exact component={TaskList}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
               <Route exact path={'/'} component={Account}/>
               <Route exact path={'/auth'} component={Auth}/>
