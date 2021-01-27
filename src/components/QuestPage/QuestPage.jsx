@@ -12,6 +12,7 @@ import QuestTimelineProcess from "./QuestTimelineProcess";
 import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
 import { connect } from 'react-redux'
 import { Api } from './../../application/app'
+import QuestCreatorControls from "./QuestCreatorControls";
 
 
 class QuestPage extends Component {
@@ -66,6 +67,7 @@ getRepresentationByState () {
       return (
           <React.Fragment>
             <QuestMinimalInfo quest={this.props.quest}/>
+            <QuestCreatorControls quest={this.props.quest} user={this.props.user}/>
             <h2>
               {timing}
             </h2>
