@@ -18,8 +18,8 @@ export default function CreateQuestFormTemplate ({submitFunction}) {
     };
 
     return (
-        <>
-        <h1>Создание квеста</h1>
+        <div>
+        <h1>Редактирование заданий</h1>
         <div className="create-quest-form__container">
             <Form
                 layout="vertical"
@@ -118,7 +118,7 @@ export default function CreateQuestFormTemplate ({submitFunction}) {
                 </Form.Item>
             </Form>
         </div>
-        </>
+        </div>
     )
 };
 
