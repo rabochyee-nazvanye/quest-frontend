@@ -20,7 +20,7 @@ class AdminQuests extends Component {
             .filter((obj) => obj.author.id === this.props.user.id)
             .map((obj) =>
             <Col key={'quest:' + obj.id} xs={22} md={8}>
-            {<Link to={'/quests/' + obj.json}><QuestCard quest={obj} isInfinite={obj.isInfinite}/></Link>}
+                {<Link to={'/quests/' + obj.id}><QuestCard quest={obj} isInfinite={obj.isInfinite}/></Link>}
             </Col>
         )
         if (Array.isArray(adminQuests) && adminQuests.length) {
