@@ -26,7 +26,7 @@ class AdminQuests extends Component {
         if (Array.isArray(adminQuests) && adminQuests.length) {
             return adminQuests
         }
-        return <h2>&nbsp;&nbsp;&nbsp;&nbsp;Ты пока не проводил квестов</h2>
+        return <h2>Ты пока не проводил квестов</h2>
     }
 
     getRepresentationByState () {
