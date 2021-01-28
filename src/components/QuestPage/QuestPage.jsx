@@ -9,7 +9,6 @@ import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
-import TaskList from "../Admin/CreateQuest/TasksList";
 
 import { connect } from 'react-redux'
 import { Api } from './../../application/app'
@@ -78,9 +77,6 @@ getRepresentationByState () {
                 url={'quests/' + this.props.quest.id}
 
             />
-            <Button type={'primary'}
-            >Редактировать задания</Button>
-
           </React.Fragment>
       )
   }}
