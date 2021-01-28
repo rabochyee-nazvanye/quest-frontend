@@ -16,8 +16,15 @@ class AdminQuests extends Component {
     }
 
     mapQuestsToTemplate () {
+        // const adminQuests = this.props.questsList
+        //     .filter((obj) => obj.author.id === this.props.user.id)
+        //     .map((obj) =>
+        //     <Col key={'quest:' + obj.id} xs={22} md={8}>
+        //         {<Link to={'/quests/' + obj.id}><QuestCard quest={obj} isInfinite={obj.isInfinite}/></Link>}
+        //     </Col>
+        // )
         const adminQuests = this.props.questsList
-            .filter((obj) => obj.author.id === this.props.user.id)
+            .filter((obj) => true)
             .map((obj) =>
             <Col key={'quest:' + obj.id} xs={22} md={8}>
                 {<Link to={'/quests/' + obj.id}><QuestCard quest={obj} isInfinite={obj.isInfinite}/></Link>}

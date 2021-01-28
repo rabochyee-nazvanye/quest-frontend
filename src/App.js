@@ -5,8 +5,7 @@ import Footer from './components/shared/Footer/Footer'
 import QuestPage from './components/QuestPage/QuestPage'
 import InvitePage from './components/InvitePage/InvitePage'
 import Progressboard from "./components/Progressboard/Progressboard";
-import QuestCreateForm from "./components/Admin/CreateQuest/QuestCreateForm";
-import TaskList from "./components/Admin/CreateQuest/TasksList";
+import EditableTaskList from "./components/Admin/EditableTasksList/EditableTasksList";
 import './add-space.css'
 
 import './App.css'
@@ -42,11 +41,10 @@ function App () {
             <Switch>
               <Route path="/invites/:id" exact component={InvitePage}/>
               <Route path="/quests/:id" exact component={QuestPage}/>
-              <Route path="/adminspace" exact component={HomeSpace}/>
-              <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
-              <Route path="/createQuestForm" exact component={QuestCreateForm}/>
-              <Route path="/editTasks" exact component={TaskList}/>
+              <Route path="/quests/:id/edit-Tasks" exact component={EditableTaskList}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
+              <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
+              <Route path="/adminspace" exact component={HomeSpace}/>
               <Route exact path={'/'} component={Account}/>
               <Route exact path={'/auth'} component={Auth}/>
               <Route exact path={'/auth/:redirectTo'} component={Auth} />

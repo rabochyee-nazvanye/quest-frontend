@@ -21,9 +21,10 @@ class AdminStat extends Component {
 
     getAdminStat() {
         if (this.props.questsList != null) {
-            const totalQuests = this.props.questsList
-                .filter((obj) => obj.author.id === this.props.user.id)
-            return arrayCount(totalQuests)
+            //const totalQuests = this.props.questsList
+            //    .filter((obj) => obj.author.id === this.props.user.id)
+            //return arrayCount(totalQuests)
+            return 1
         }
         return 0
     }
