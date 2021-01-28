@@ -19,7 +19,7 @@ export default function CreateQuestFormTemplate ({submitFunction}) {
 
     return (
         <div>
-        <h1>Редактирование заданий</h1>
+        <h1>Создать новый квест</h1>
         <div className="create-quest-form__container">
             <Form
                 layout="vertical"

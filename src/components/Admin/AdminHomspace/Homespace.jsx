@@ -111,6 +111,13 @@ function HomeSpace(props) {
         })
     }
 
+    function _resolveUserIsAllowedToCreateQuestsAlert() {
+        if (!['api_tg_user'].includes(props.user.name)) {
+            return <section className={"primary-info__user-not-allowed-alert"}><Alert message={"Пользователь! вам пока недоступно создание квестов"} description={"Функциональность пока находится в стадии альфа-тестирования. Если хотите получить доступ — напишите на info@questspace.live"} type={'warning'}/></section>
+        }
+        return null
+    }
+
     if (!props.loggedIn) {
         return '...'
     }
@@ -130,6 +137,7 @@ function HomeSpace(props) {
                     <AdminQuests/>
                 </TabPane>
                 <TabPane tab="Создать квест +" key="2">
+                    {_resolveUserIsAllowedToCreateQuestsAlert()}
                     {_resolveCreatedQuestView()}
                 </TabPane>
             </Tabs>
