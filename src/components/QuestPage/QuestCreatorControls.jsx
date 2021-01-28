@@ -12,7 +12,7 @@ export default function QuestCreatorControls({quest, user}) {
     if (user && quest && user.id === quest.author.id) {
         return <section className={'quest-creator-controls__container'}>
             <Space>
-                <Button icon={<OrderedListOutlined />} type={'primary'}>
+                <Button icon={<OrderedListOutlined />} onClick={() => history.push(`${quest.id}/edit-tasks`)} type={'primary'}>
                     Редактировать задания
                 </Button>
                 {/*<Button icon={<EditOutlined />} onClick={() => history.push(`${quest.id}/edit`)} type={'dashed'}>*/}
