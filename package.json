@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.0.2",
     "awilix": "^4.2.6",
-    "formik": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
@@ -25,7 +24,6 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
