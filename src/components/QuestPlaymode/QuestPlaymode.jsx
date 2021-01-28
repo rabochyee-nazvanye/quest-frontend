@@ -20,10 +20,11 @@ function dataIsReady(props) {
 
 function getMetaInfoPlaymode(props) {
     if (dataIsReady(props)) {
+        // We don't need to constantly remind users of their invite code, todo(toplenboren) remove completly
         if (props.quest.type === 'team') {
-            return  <MetaInfoPlaymode quest={props.quest} name={props.team.name} inviteCode={props.teamInviteCode} type={'Команда'}/>
+            return  <MetaInfoPlaymode quest={props.quest} name={' '} inviteCode={' '} type={'Команда'}/>
         }
-        return <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>
+        return <MetaInfoPlaymode quest={props.quest} name={' '} inviteCode={' '} type={'Участник'}/>
     }
 }
 
@@ -36,13 +37,11 @@ function QuestPlaymode(props) {
         props.deleteQuestsListInfo()
         props.deleteQuestTasks()
         props.deleteQuestRegistrationInfo()
-        props.deleteTeamListInfo()
 
         if (props.loggedIn) {
             props.getQuest(questId);
             props.getTasks(questId);
             props.getTeam(questId);
-            props.getInviteCode();
         }
 
         return function cleanup() {
