@@ -8,16 +8,27 @@ import QuestspaceIcon from '../Icons/QuestspaceIcon'
 import './Header.css'
 
 import { Api } from '../../../application/app'
+import {useThemeSwitcher} from "react-css-theme-switcher";
 
 function Header (props) {
   const history = useHistory()
+
+  const { currentTheme } = useThemeSwitcher();
+
+  const _resolveQuestSpaceIconColor = () => {
+      if (currentTheme === 'light') {
+          return 'dark'
+      } else {
+          return 'light'
+      }
+  }
 
   return (
     <React.Fragment>
       <PageHeader
         ghost={false}
         className={'header__padding-zero'}
-        title={ <QuestspaceIcon/> }
+        title={ <QuestspaceIcon color={_resolveQuestSpaceIconColor()} /> }
         extra={[
           <div className={'header__addition'}>
             <UserButton/>

@@ -40,7 +40,7 @@ function App () {
 
   return (
     <Provider store={store}>
-      <ThemeSwitcherProvider themeMap={themes} defaultTheme="light" insertionPoint="styles-insertion-point">
+      <ThemeSwitcherProvider themeMap={themes} defaultTheme="light" >
         <Router>
           <div className={'container'}>
             <Header/>
