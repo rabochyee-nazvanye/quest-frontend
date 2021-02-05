@@ -9,6 +9,18 @@ import { DownOutlined, UserOutlined } from '@ant-design/icons'
 export default function UserButtonLoggedInTemplate (props) {
   const history = useHistory()
 
+  const _resolveChangeThemeCaption = () => {
+      if (props.currentTheme === 'light') {
+          return 'Выключить свет'
+      }
+      else if (props.currentTheme === 'dark') {
+          return 'Включить свет'
+      }
+      else {
+          return 'Сменить тему'
+      }
+    }
+
   const menu = (
     <Menu>
         <Menu.Item>
@@ -19,6 +31,11 @@ export default function UserButtonLoggedInTemplate (props) {
         <Menu.Item>
             <Button type="link" onClick={props.admin}>
                 Мои квесты
+            </Button>
+        </Menu.Item>
+        <Menu.Item>
+            <Button type="link" onClick={props.toggleTheme}>
+                {_resolveChangeThemeCaption()}
             </Button>
         </Menu.Item>
         <Menu.Item>
@@ -50,5 +67,7 @@ UserButtonLoggedInTemplate.propTypes = {
   logout: PropTypes.func,
   account: PropTypes.func,
   admin: PropTypes.func,
-  avatar: PropTypes.object
+  avatar: PropTypes.object,
+  toggleTheme:PropTypes.func,
+  currentTheme:PropTypes.string,
 }
