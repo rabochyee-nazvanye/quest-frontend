@@ -11,7 +11,6 @@ function Account (props) {
     return (<Redirect to={'/auth'}/>)
   }
 
-
   return (
       <AccountTemplate user={props.user}/>
   )

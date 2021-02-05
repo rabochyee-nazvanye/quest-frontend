@@ -1,13 +1,13 @@
 import React from 'react'
 import { Avatar, Button, Divider } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { logout } from '../../../application/api/BackendApi/AuthApi'
 import { connect } from 'react-redux'
 import QuestsList from './QuestsList';
 import {CLIENT_URL} from "../../../settings";
 import MetaTags from "../../shared/MetaTags/MetaTags";
-
+import './AccountTemplate.css'
 import {Api} from '../../../application/app'
+
 
 function getAvatar(avatarUrl) {
     if (avatarUrl === null) {
@@ -16,7 +16,6 @@ function getAvatar(avatarUrl) {
         return (<Avatar size={128} src={avatarUrl} />)
     }
 }
-
 
 function AccountTemplate (props) {
     const metaData = {
@@ -29,9 +28,10 @@ function AccountTemplate (props) {
   return (
     <React.Fragment>
         <MetaTags metaData={metaData} />
-        {getAvatar(props.user.avatarUrl)}
-        <h1> Привет, &#160;@{props.user.name}! </h1>
-
+        <section className={'account__avatar-container'}>
+            {getAvatar(props.user.avatarUrl)}
+            <h1> Привет, &#160;@{props.user.name}! </h1>
+        </section>
         <Button
             icon={<LogoutOutlined />}
             onClick={() => props.logout()}
