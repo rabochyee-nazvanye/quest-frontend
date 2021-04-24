@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://super-secret-dev-api.questspace.live'
+export const BASE_URL = 'https://api2.questspace.app'
 export const BACKEND_AUTH_PATH = '/session'
 export const BACKEND_AUTH_REGISTER_PATH = '/users'
 export const BACKEND_AUTH_FETCH_PATH = '/session'

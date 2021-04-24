@@ -9,13 +9,14 @@ import { QuestsListApi } from './api/BackendApi/QuestsListApi'
 import ScoreboardApi from './api/BackendApi/ScoreboardApi'
 import TeamListApi from './api/BackendApi/TeamListApi'
 import ApiContainer from './api/Api'
+import ProductionConfig from './config/ProductionConfig'
 
 const container = Awilix.createContainer({
     injectionMode: Awilix.InjectionMode.PROXY
 })
 
 container.register({
-    'config': Awilix.asClass(DevelopmentConfig),
+    'config': Awilix.asClass(ProductionConfig),
     'commonApi': Awilix.asClass(CommonApi),
     'Api': Awilix.asClass(ApiContainer),
     'AuthApi': Awilix.asClass(AuthApi),
