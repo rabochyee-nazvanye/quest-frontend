@@ -5,24 +5,24 @@ import Image from './images/ekb.jpg'
 import { Link } from 'react-router-dom'
 
 export default function ErrorPage (props) {
-  return (
-    <React.Fragment>
-      <img className={'error-background'} src={Image}/>
-      <div className={'error-text'}>
-        <div className={'error-code'}>
-          {props.code}
+    return (
+        <div className="flexbox-errorpage-row">
+            <img className="image flexbox-item" src={Image}/>
+            <div className="flexbox-errorpage-column">
+                <div className="error-code flexbox-container">
+                    {props.code}
+                </div>
+                <Link to={'/'}>
+                    <div className="error-description flexbox-item">
+                        {props.description}
+                    </div>
+                </Link>
+            </div>
         </div>
-        <Link to={'/'}>
-          <div className={'error-description'}>
-            {props.description}
-          </div>
-        </Link>
-      </div>
-    </React.Fragment>
-  )
+    )
 }
 
 ErrorPage.propTypes = {
-  code: PropTypes.number,
-  description: PropTypes.string
+    code: PropTypes.number,
+    description: PropTypes.string
 }
