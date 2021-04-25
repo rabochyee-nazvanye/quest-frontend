@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Tabs, Button, Col, Alert} from 'antd'
 import connect from 'react-redux/es/connect/connect'
 import './Homespace.css'
+import QuestsList from "../../Account/AccountTemplate/QuestsList";
+import MetaTags from "../../shared/MetaTags/MetaTags";
 import AdminBoard from './AdminStat'
 import AdminQuests from "./AdminQuests";
 import {Api} from "../../../application/app";
@@ -130,7 +132,7 @@ function HomeSpace(props) {
                 <div className='primary-info-name-location'>
                     <h2 className='user-name'>{props.user.name}</h2>
                 </div>
-                <AdminBoard/>
+                {/*<AdminBoard/>*/}
             </div>
             <Tabs defaultActiveKey={currentTab} onChange={setCurrentTab}>
                 <TabPane tab="Мои квесты" key="1">
