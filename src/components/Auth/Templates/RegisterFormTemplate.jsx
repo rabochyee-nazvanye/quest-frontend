@@ -84,7 +84,7 @@ export default function RegisterFormTemplate (props) {
                         Зарегистрироваться
                     </Button>
                 </Form.Item>
-                <OAuthLoginButton oAuth={props.oAuth} authProvider={GOOGLE_AUTH} buttonText={"Регистрация с помощью Google"}/>
+                <OAuthLoginButton oAuth={props.oAuth} authProvider={GOOGLE_AUTH} buttonText={"Регистрация с Google"}/>
             </Form>
         </div>
     )

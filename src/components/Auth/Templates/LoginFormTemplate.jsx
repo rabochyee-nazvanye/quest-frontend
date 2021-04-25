@@ -67,7 +67,7 @@ export default function LoginFormTemplate (props) {
                         Войти
                     </Button>
                 </Form.Item>
-                <OAuthLoginButton oAuth={props.oAuth} authProvider={GOOGLE_AUTH} buttonText={"Войти с помощью Google"}/>
+                <OAuthLoginButton oAuth={props.oAuth} authProvider={GOOGLE_AUTH} buttonText={"Войти с Google"}/>
             </Form>
         </div>
     )
