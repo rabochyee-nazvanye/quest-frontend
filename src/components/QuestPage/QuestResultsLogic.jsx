@@ -5,7 +5,6 @@ import {TrophyOutlined} from '@ant-design/icons'
 import QuestResultsTemplate from './QuestResultsTemplate'
 import { fetchScoreboard } from '../../application/api/BackendApi/ScoreboardApi'
 import { connect } from 'react-redux'
-import ResultsIcon from '../shared/Icons/ResultsIcon'
 import { Api } from './../../application/app'
 
 const columns = [
@@ -37,9 +36,9 @@ class QuestResultsLogic extends Component {
     }
 
     mapResults() {
-                const a = Object.values(this.props.scoreboard.teamResults);
-                a.forEach(x => x.place += 1);
-                return a;
+        const a = Object.values(this.props.scoreboard.teamResults);
+        a.forEach(x => x.place += 1);
+        return a;
     }
 
     getCup(place) {
@@ -57,12 +56,12 @@ class QuestResultsLogic extends Component {
 
     getCol(col) {
         return <Col span={11} xs={11} md={11}>
-                <Table
-                    columns={columns}
-                    dataSource={col}
-                    pagination={false}
-                    showHeader={false}
-                />
+            <Table
+                columns={columns}
+                dataSource={col}
+                pagination={false}
+                showHeader={false}
+            />
         </Col>
     }
 
@@ -85,7 +84,6 @@ class QuestResultsLogic extends Component {
     }
 
     getRepresentationByState() {
-        let heading;
         let description;
         let results;
         let col1;
@@ -96,17 +94,19 @@ class QuestResultsLogic extends Component {
             if (this.props.scoreboard === null)
                 return <Spin/>;
             else {
-                heading = <ResultsIcon/>;
                 description = <p>В таблице указана разность количества баллов команды и баллов первого места</p>;
                 results = this.getTable();
                 col1 = results[0];
                 col2 = results[1];
             }
         }
-        return <QuestResultsTemplate heading={heading}
-                                     description={description}
-                                     col1 = {col1}
-                                     col2 = {col2}/>
+        return (
+            <section className={'quest__results__container'}>
+                <QuestResultsTemplate description={description}
+                                      col1 = {col1}
+                                      col2 = {col2}/>
+            </section>
+        )
     }
     render() {
         return (

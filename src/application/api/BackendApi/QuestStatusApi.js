@@ -1,35 +1,40 @@
 import {
-    receiveQuestInfo,
-    requestQuestInfo,
-    deleteQuestInfo
-} from '../../../redux/Actions/QuestsActions'
+    receiveQuestStatus,
+    requestQuestStatus,
+    deleteQuestStatus
+} from '../../../redux/Actions/QuestStatusActions'
 
 import { BASE_URL } from '../../../settings'
-import {getWithToken} from "./CommonApi";
 
-export default class QuestsApi {
+export default class QuestStatusApi {
 
     constructor(opts) {
         this.config = opts.config
         this.commonApi = opts.commonApi
     }
 
-    fetchQuestInfo (id) {
+    fetchQuestStatusInfo (id) {
         return dispatch => {
-            dispatch(deleteQuestInfo())
-            dispatch(requestQuestInfo())
-            return getWithToken(BASE_URL + '/quests/' + id)
+            dispatch(deleteQuestStatus())
+            dispatch(requestQuestStatus())
+            return this.commonApi.getWithToken(BASE_URL + '/quests/' + id + '/status')
                 .then(response => {
                     if (response.ok) {
                         response.json().then(
                             json => {
-                                dispatch(receiveQuestInfo(json))
+                                dispatch(receiveQuestStatus(json))
                             }
                         )
                     } else {
                         console.log('An error was encountered')
                     }
                 })
+        }
+    }
+
+    deleteQuestStatus() {
+        return dispatch => {
+            dispatch(deleteQuestStatus())
         }
     }
 }

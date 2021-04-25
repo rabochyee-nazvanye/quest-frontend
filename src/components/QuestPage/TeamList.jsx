@@ -4,8 +4,7 @@ import {Col, Row, Divider, Typography, Button, Popconfirm, message} from "antd";
 import { CLIENT_URL } from '../../settings'
 import {LogoutOutlined} from "@ant-design/icons";
 import {connect} from "react-redux";
-import {getInviteCode, getTeamList, leaveTeam} from "../../application/api/BackendApi/TeamListApi";
-import {showTeamLeaveMessage, TEAM_LEAVE_FAILED, TEAM_LEAVE_SUCCEEDED} from "../../redux/Actions/TeamListActions";
+import {TEAM_LEAVE_FAILED, TEAM_LEAVE_SUCCEEDED} from "../../redux/Actions/TeamListActions";
 import './TeamList.css'
 import { Api } from './../../application/app'
 
@@ -66,14 +65,14 @@ class TeamList extends Component {
                             >
                                 <Button
                                     className='logout-button'
-                                    icon={<LogoutOutlined/>}
+                                    icon={<LogoutOutlined color={"red"}/>}
                                     danger
                                 >
                                     Выйти из команды
                                 </Button>
                             </Popconfirm>
                         </Row>
-                        <Row>
+                        <Row className={"team-list__container"}>
                             {this.mapTeammatesToTemplate()}
                         </Row>
                         &#160;

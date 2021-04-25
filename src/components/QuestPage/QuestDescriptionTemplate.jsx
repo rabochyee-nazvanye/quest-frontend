@@ -1,20 +1,14 @@
 import React from 'react'
 import { Divider } from 'antd'
-import './QuestDescription.css'
+import ReactMarkdown from 'react-markdown'
+// import './QuestDescription.css'
 
 
 function QuestDescriptionTemplate(props) {
     return <React.Fragment>
-        <p>&nbsp;</p>
-        <Divider/>
-        <div className={'about'}>
-            {props.heading}
-        </div>
-            <h3>
-                <div className={'quest-descript'}>
-                    {props.description}
-                </div>
-            </h3>
+        <Divider />
+        <h2 className={'about'}>{props.heading}</h2>
+        <ReactMarkdown className={'quest-descript'}>{props.description}</ReactMarkdown>
     </React.Fragment>
 }
 
