@@ -3,16 +3,16 @@ import InfiniteQuestTemplate from "./InfiniteQuestTemplate";
 import QuestDescriptionLogic from './QuestDescriptionLogic'
 import QuestResultsLogic from './QuestResultsLogic'
 import QuestMinimalInfo from './QuestMinimalInfo'
-import {  Spin } from 'antd'
+import {  Spin, Button } from 'antd'
 import {  CLIENT_URL } from '../../settings'
 import QuestModalReg from './QuestModalReg'
 import TeamList from './TeamList'
 import MetaTags from '../shared/MetaTags/MetaTags'
 import QuestTimelineProcess from "./QuestTimelineProcess";
-import { openRegistrationForm } from "../../redux/Actions/QuestRegistrationActions";
+
 import { connect } from 'react-redux'
 import { Api } from './../../application/app'
-
+import QuestCreatorControls from "./QuestCreatorControls";
 
 class QuestPage extends Component {
   constructor (props) {
@@ -66,6 +66,7 @@ getRepresentationByState () {
       return (
           <React.Fragment>
             <QuestMinimalInfo quest={this.props.quest}/>
+            <QuestCreatorControls quest={this.props.quest} user={this.props.user}/>
             <h2>
               {timing}
             </h2>
@@ -74,6 +75,7 @@ getRepresentationByState () {
             <QuestModalReg
                 quest_id={this.props.quest.id}
                 url={'quests/' + this.props.quest.id}
+
             />
           </React.Fragment>
       )

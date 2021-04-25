@@ -2,12 +2,10 @@ import React, { useEffect } from 'react'
 
 import Header from './components/shared/Header/Header'
 import Footer from './components/shared/Footer/Footer'
-import About from './components/About/About'
-import QuestsList from './components/Account/AccountTemplate/QuestsList'
 import QuestPage from './components/QuestPage/QuestPage'
 import InvitePage from './components/InvitePage/InvitePage'
 import Progressboard from "./components/Progressboard/Progressboard";
-import FixQuestForm from "./components/Admin/AdminHomspace/Homespace"
+import EditableTaskList from "./components/Admin/EditableTasksList/EditableTasksList";
 import './add-space.css'
 
 import './App.css'
@@ -43,9 +41,10 @@ function App () {
             <Switch>
               <Route path="/invites/:id" exact component={InvitePage}/>
               <Route path="/quests/:id" exact component={QuestPage}/>
-              <Route path="/adminspace" exact component={HomeSpace}/>
-              <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
+              <Route path="/quests/:id/edit-Tasks" exact component={EditableTaskList}/>
               <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
+              <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
+              <Route path="/adminspace" exact component={HomeSpace}/>
               <Route exact path={'/'} component={Account}/>
               <Route exact path={'/auth'} component={Auth}/>
               <Route exact path={'/auth/:redirectTo'} component={Auth} />
@@ -61,3 +60,4 @@ function App () {
 }
 
 export default App
+

@@ -35,5 +35,11 @@
     row-gap: 10px;
 }
 
+.adminspace__form-creation__alert-container {
+    margin-bottom: 10px;
+}
 
-
+.primary-info__user-not-allowed-alert {
+    margin-top: 10px;
+    margin-bottom: 50px;
+}

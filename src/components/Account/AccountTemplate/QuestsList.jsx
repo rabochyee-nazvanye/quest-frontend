@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import './QuestsList.css'
 import { fetchQuestsListInfo } from '../../../application/api/BackendApi/QuestsListApi'
 import {connect} from "react-redux";
-import { Api } from './../../../application/app'
+import { Api } from '../../../application/app'
 
 
 class QuestsList extends Component {

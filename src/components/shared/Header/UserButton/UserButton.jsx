@@ -14,15 +14,17 @@ function UserButton (props) {
       username={props.user.name}
       logout={props.logout}
       avatar={props.user.avatarUrl}
+      admin={() => { history.push('/adminspace') }}
       account={() => { history.push('/') }}/>)
   } else {
     return (<UserButtonLoggedOutTemplate auth={() => { history.push('/auth') }}/>)
   }
 }
 
+
 const mapStateToProps = (store) => ({
   loggedIn: store.authReducer.user !== null,
-  user: store.authReducer.user
+  user: store.authReducer.user,
 })
 
 const mapDispatchToProps = dispatch => ({

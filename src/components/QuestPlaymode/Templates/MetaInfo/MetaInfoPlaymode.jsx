@@ -22,13 +22,6 @@ export default function MetaInfoPlaymode(props) {
                 <span className={'title__low-opacity'}> /Задания</span>
             </h1>
             <h2 className={'title__subtitle title__blue title__close '}>
-                {props.type}: {props.name}{' '}
-                <span className={'title__black title__low-opacity'}> | </span>
-                <Tooltip title={<TooltipBotTemplate />}>
-                    <span className={'title__underscored'}>
-                        {props.inviteCode}
-                    </span>
-                </Tooltip>
             </h2>
         </React.Fragment>
     );
