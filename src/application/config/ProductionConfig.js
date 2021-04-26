@@ -5,5 +5,5 @@ export default class ProductionConfig extends AbstractConfig {
     BACKEND_AUTH_PATH = '/session'
     BACKEND_AUTH_REGISTER_PATH = '/users'
     BACKEND_AUTH_FETCH_PATH = '/session'
-    CLIENT_URL = 'questspace.live'
+    CLIENT_URL = 'questspace.app'
 }
