@@ -13,6 +13,7 @@ import {deleteQuestRegistrationInfo} from "../../redux/Actions/QuestRegistration
 import {deleteTeamListInfo} from "../../redux/Actions/TeamListActions";
 
 import {Api} from '../../application/app'
+import QuestDeadlineAlert from "../QuestPage/QuestDeadlineAlert";
 
 function dataIsReady(props) {
     return !props.questIsFetching && !props.tasksAreFetching
@@ -20,11 +21,10 @@ function dataIsReady(props) {
 
 function getMetaInfoPlaymode(props) {
     if (dataIsReady(props)) {
-        // We don't need to constantly remind users of their invite code, todo(toplenboren) remove completly
         if (props.quest.type === 'team') {
-            return  <MetaInfoPlaymode quest={props.quest} name={' '} inviteCode={' '} type={'Команда'}/>
+            return  <MetaInfoPlaymode quest={props.quest} name={"cамая лучшая"} inviteCode={''} type={'Команда'}/>
         }
-        return <MetaInfoPlaymode quest={props.quest} name={' '} inviteCode={' '} type={'Участник'}/>
+        return <MetaInfoPlaymode quest={props.quest} name={props.user.name} inviteCode={' '} type={'Участник'}/>
     }
 }
 
@@ -37,11 +37,14 @@ function QuestPlaymode(props) {
         props.deleteQuestsListInfo()
         props.deleteQuestTasks()
         props.deleteQuestRegistrationInfo()
+        props.deleteTeamListInfo()
 
         if (props.loggedIn) {
             props.getQuest(questId);
             props.getTasks(questId);
             props.getTeam(questId);
+            props.getInviteCode();
+            props.fetchQuestStatusFromRedux(questId)
         }
 
         return function cleanup() {
@@ -50,11 +53,12 @@ function QuestPlaymode(props) {
             props.deleteQuestTasks()
             props.deleteQuestRegistrationInfo()
             props.deleteTeamListInfo()
+            props.deleteQuestStatus()
         };
     }, [props.loggedIn]);
 
 
-    // TODO(toplenboren) exception procesing
+    // TODO(toplenboren) exception processing
     if (!props.loggedIn) {
         return (
             <Redirect
@@ -68,15 +72,25 @@ function QuestPlaymode(props) {
         return (
             <React.Fragment>
                 {getMetaInfoPlaymode(props)}
+                {props.questStatus?.tasksRead ? <QuestDeadlineAlert deadline={props.questStatus.deadline}/> : null}
                 <QuestTasks
                     tasks={groupBy(props.tasks, 'group')}
-                    sendTaskCallback={(taskId, attemptText) =>
-                        props.sendTaskAttempt(taskId, attemptText)
-                    }
+                    sendTaskCallback={(taskId, attemptText) => {
+                        if (props.questStatus?.tasksRead && Date.now() > Date.parse(props.questStatus.deadline)) {
+                            alert('Время вышло, не могу отправить ответ')
+                            return
+                        }
+                        return props.sendTaskAttempt(taskId, attemptText)
+                    }}
                     updateTasksCallback={() => console.log('upd')}
-                    getHintCallback={(taskId, hintNumber) =>
-                        props.getTaskHint(taskId, hintNumber)
-                    }
+                    getHintCallback={(taskId, hintNumber) => {
+                        if (props.questStatus?.tasksRead && Date.now() > Date.parse(props.questStatus.deadline)) {
+                            alert('Время вышло, не могу спросить подсказку')
+                            return
+
+                        }
+                        return props.getTaskHint(taskId, hintNumber)
+                    }}
                 />
             </React.Fragment>
         );
@@ -88,6 +102,9 @@ function QuestPlaymode(props) {
 const mapStateToProps = (store) => ({
     quest: store.questsReducer.quest,
     questIsFetching: store.questsReducer.isFetching,
+
+    questStatus: store.questStatusReducer,
+    questStatusIsFetching: store.questStatusReducer?.isFetching,
 
     teamIsFetching: !store.teamListReducer.dataReady,
     team: store.teamListReducer.team,
@@ -114,7 +131,12 @@ const mapDispatchToProps = (dispatch) => ({
     deleteQuestsListInfo: () => (dispatch(deleteQuestsListInfo())),
     deleteQuestTasks: () => dispatch(deleteQuestTasks()),
     deleteQuestRegistrationInfo: () => dispatch(deleteQuestRegistrationInfo()),
-    deleteTeamListInfo: () => dispatch(deleteTeamListInfo())
+    deleteTeamListInfo: () => dispatch(deleteTeamListInfo()),
+
+    fetchQuestStatusFromRedux: (id) => {
+        dispatch(Api.QuestStatusApi.fetchQuestStatusInfo(id))
+    },
+    deleteQuestStatus: () => {dispatch(Api.QuestStatusApi.deleteQuestStatus())}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestPlaymode);
