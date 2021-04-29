@@ -12,7 +12,7 @@ export default function Hint(props) {
             <div className={'quest-task__container'}>
                 <div className={'quest-task__typography-container'}>
                     <div className={'quest-task__typography'}>
-                        <p>{'Подсказка: ' + props.number + ':'}</p>
+                        <p><b>{'Подсказка: ' + props.number + ':'}</b></p>
                         <ReactMarkdown>{props.content}</ReactMarkdown>
                     </div>
                 </div>
@@ -22,7 +22,7 @@ export default function Hint(props) {
         return (
             <div className={'quest-task__container'}>
                 <Popconfirm
-                    title="За взятие подсказок мы снимаем баллы, вы точно хотите взять подсказку?"
+                    title="За каждую подсказку мы снимаем 20% баллов задачи. Вы точно хотите взять подсказку?"
                     onConfirm={() =>
                         props.getHintCallback(props.id, props.number)
                     }

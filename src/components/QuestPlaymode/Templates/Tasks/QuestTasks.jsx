@@ -5,17 +5,9 @@ import {
     Col,
     Collapse,
     Typography,
-    Affix,
-    Button,
     Row,
     Menu,
-    Divider
 } from 'antd';
-import {
-    AppstoreOutlined,
-    MailOutlined,
-    SettingOutlined
-} from '@ant-design/icons';
 import QuestTaskGroup from './QuestTaskGroup';
 
 const { Title } = Typography;
@@ -29,12 +21,12 @@ export default function QuestTasks(props) {
                 header={<Title level={3}>{x}</Title>}
                 key={x}
             >
-            <QuestTaskGroup
-                taskGroupData={props.tasks[x]}
-                sendTaskCallback={props.sendTaskCallback}
-                updateTasksCallback={props.updateTasksCallback}
-                getHintCallback={props.getHintCallback}
-            />
+                <QuestTaskGroup
+                    taskGroupData={props.tasks[x]}
+                    sendTaskCallback={props.sendTaskCallback}
+                    updateTasksCallback={props.updateTasksCallback}
+                    getHintCallback={props.getHintCallback}
+                />
             </Collapse.Panel>
         ));
     };
@@ -55,19 +47,13 @@ export default function QuestTasks(props) {
                 <Col sm={18}>
                     <div className={'task__container'}>
                         <Collapse
+                            defaultActiveKey={['Круг «Новые клиенты»','2']}
                             bordered={false}
-                            style={{ 'background-color': '#ffffff' }}
+                            style={{ 'background-color': '#ffffff'}}
                         >
                             {forgeQuestTaskSections()}
                         </Collapse>
                     </div>
-                </Col>
-                <Col sm={1} />
-                <Col sm={5}>
-                    <Affix offsetTop={10}>
-                        <Divider />
-                        {insertQuestTaskSectionsToAffix()}
-                    </Affix>
                 </Col>
             </Row>
         </React.Fragment>

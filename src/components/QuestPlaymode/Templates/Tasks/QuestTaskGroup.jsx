@@ -72,7 +72,7 @@ export default function QuestTaskGroup(props) {
             };
         }
         return {
-            header: 'Автоматическая проверка',
+            header: '',
             tooltipText: 'Ответ проверяется автоматически'
         };
     };
