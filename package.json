@@ -13,6 +13,7 @@
     "jsonwebtoken": "^8.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
+    "react-css-theme-switcher": "^0.2.2",
     "react-dom": "^16.13.0",
     "react-google-login": "^5.1.20",
     "react-helmet": "^6.0.0",
@@ -20,7 +21,7 @@
     "react-progressive-image": "^0.6.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "4.0.2",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
@@ -46,14 +47,26 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "*.js": "eslint",
+    "*.jsx": "eslint"
+  },
+  "simple-pre-commit": "npx lint staged",
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "autoprefixer": "^9.8.6",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
-    "redux-devtools-extension": "^2.13.8"
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-less": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "less-plugin-npm-import": "^2.1.0",
+    "redux-devtools-extension": "^2.13.8",
+    "simple-pre-commit": "^1.1.3"
   }
 }

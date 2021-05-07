@@ -3,7 +3,6 @@ import QuestCard from '../../QuestCard/QuestCard'
 import {Spin} from 'antd'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
-import '../../../../src/components/Account/AccountTemplate/QuestsList.css'
 import './Homespace.css'
 import { fetchQuestsListInfo } from '../../../application/api/BackendApi/QuestsListApi'
 import {connect} from "react-redux";
@@ -16,13 +15,6 @@ class AdminQuests extends Component {
     }
 
     mapQuestsToTemplate () {
-        // const adminQuests = this.props.questsList
-        //     .filter((obj) => obj.author.id === this.props.user.id)
-        //     .map((obj) =>
-        //     <Col key={'quest:' + obj.id} xs={22} md={8}>
-        //         {<Link to={'/quests/' + obj.id}><QuestCard quest={obj} isInfinite={obj.isInfinite}/></Link>}
-        //     </Col>
-        // )
         const adminQuests = this.props.questsList
             .filter((obj) => true)
             .map((obj) =>
@@ -53,11 +45,9 @@ class AdminQuests extends Component {
     render () {
         return (
             <React.Fragment>
-                <div className={'quests-container'}>
-                    <Row type="flex" >
-                        {this.getRepresentationByState()}
-                    </Row>
-                </div>
+                <Row type="flex" >
+                    {this.getRepresentationByState()}
+                </Row>
             </React.Fragment>)
     }
 }

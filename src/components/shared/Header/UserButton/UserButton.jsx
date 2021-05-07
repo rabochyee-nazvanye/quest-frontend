@@ -5,9 +5,16 @@ import UserButtonLoggedInTemplate from './Templates/UserButtonLoggedInTemplate'
 import UserButtonLoggedOutTemplate from './Templates/UserButtonLoggedOutTemplate'
 import { connect } from 'react-redux'
 import { Api } from '../../../../application/app'
+import {useThemeSwitcher} from "react-css-theme-switcher";
 
 function UserButton (props) {
   const history = useHistory()
+
+  const { switcher, currentTheme, themes } = useThemeSwitcher();
+
+  const toggleTheme = () => {
+    switcher({ theme: currentTheme === 'light' ? themes.dark : themes.light });
+  };
 
   if (props.loggedIn) {
     return (<UserButtonLoggedInTemplate
@@ -15,7 +22,10 @@ function UserButton (props) {
       logout={props.logout}
       avatar={props.user.avatarUrl}
       admin={() => { history.push('/adminspace') }}
-      account={() => { history.push('/') }}/>)
+      account={() => { history.push('/') }}
+      currentTheme={currentTheme}
+      toggleTheme={() => { toggleTheme() }}
+    />)
   } else {
     return (<UserButtonLoggedOutTemplate auth={() => { history.push('/auth') }}/>)
   }
