@@ -26,6 +26,12 @@ import QuestPlaymode from './components/QuestPlaymode/QuestPlaymode'
 
 import { Api } from './application/app'
 import HomeSpace from "./components/Admin/AdminHomspace/Homespace";
+import { ThemeSwitcherProvider } from "react-css-theme-switcher";
+
+const themes = {
+  dark: `${process.env.PUBLIC_URL}/dark-theme.css`,
+  light: `${process.env.PUBLIC_URL}/light-theme.css`,
+};
 
 function App () {
   useEffect(() => {
@@ -34,27 +40,29 @@ function App () {
 
   return (
     <Provider store={store}>
-      <Router>
-        <div className={'container'}>
-          <Header/>
-          <div className={'add-space'}>
-            <Switch>
-              <Route path="/invites/:id" exact component={InvitePage}/>
-              <Route path="/quests/:id" exact component={QuestPage}/>
-              <Route path="/quests/:id/edit-Tasks" exact component={EditableTaskList}/>
-              <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
-              <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
-              <Route path="/adminspace" exact component={HomeSpace}/>
-              <Route exact path={'/'} component={Account}/>
-              <Route exact path={'/auth'} component={Auth}/>
-              <Route exact path={'/auth/:redirectTo'} component={Auth} />
-              <Route exact path={'/account'} component={Account} />
-              <Route component={NoMatch} />
-            </Switch>
+      <ThemeSwitcherProvider themeMap={themes} defaultTheme="light" >
+        <Router>
+          <div className={'container'}>
+            <Header/>
+            <div className={'add-space'}>
+              <Switch>
+                <Route path="/invites/:id" exact component={InvitePage}/>
+                <Route path="/quests/:id" exact component={QuestPage}/>
+                <Route path="/quests/:id/edit-Tasks" exact component={EditableTaskList}/>
+                <Route exact path={'/quests/:id/play'} component={QuestPlaymode}/>
+                <Route path="/quests/:id/progressboard" exact component={Progressboard}/>
+                <Route path="/adminspace" exact component={HomeSpace}/>
+                <Route exact path={'/'} component={Account}/>
+                <Route exact path={'/auth'} component={Auth}/>
+                <Route exact path={'/auth/:redirectTo'} component={Auth} />
+                <Route exact path={'/account'} component={Account} />
+                <Route component={NoMatch} />
+              </Switch>
+            </div>
           </div>
-        </div>
-        <Footer/>
-      </Router>
+          <Footer/>
+        </Router>
+      </ThemeSwitcherProvider>
     </Provider>
   )
 }

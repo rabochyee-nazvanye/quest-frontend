@@ -3,8 +3,6 @@ import QuestCard from '../../QuestCard/QuestCard'
 import {Spin} from 'antd'
 import { Row, Col } from 'antd'
 import {Link} from "react-router-dom";
-import './QuestsList.css'
-import { fetchQuestsListInfo } from '../../../application/api/BackendApi/QuestsListApi'
 import {connect} from "react-redux";
 import { Api } from '../../../application/app'
 
@@ -40,11 +38,9 @@ class QuestsList extends Component {
   render () {
     return (
         <React.Fragment>
-          <div className={'quests-container'}>
             <Row type="flex" >
               {this.getRepresentationByState()}
             </Row>
-          </div>
         </React.Fragment>)
       }
 }
