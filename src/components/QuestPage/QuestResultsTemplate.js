@@ -1,6 +1,9 @@
 import React from 'react'
 import { Divider, Row } from 'antd'
 import './QuestResults.css'
+import { Typography } from 'antd'
+
+const { Title } = Typography
 
 
 function QuestResultsTemplate(props) {
@@ -8,7 +11,7 @@ function QuestResultsTemplate(props) {
         <p>&nbsp;</p>
         <Divider/>
         <div className={'about'}>
-            {props.heading}
+            <Title level={2}>Результаты</Title>
         </div>
         <h3>
             <div className={'quest-description'}>

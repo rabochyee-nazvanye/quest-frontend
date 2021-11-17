@@ -11,7 +11,7 @@ import { Api } from '../../../application/app'
 import {useThemeSwitcher} from "react-css-theme-switcher";
 
 function Header (props) {
-  const history = useHistory()
+    const history = useHistory()
 
   const { currentTheme } = useThemeSwitcher();
 
@@ -38,14 +38,29 @@ function Header (props) {
       <Divider className={"header__divider"}/>
     </React.Fragment>
   )
+    return (
+        <React.Fragment>
+            <PageHeader
+                ghost={false}
+                className={'header__padding-zero'}
+                title={ <QuestspaceIcon color="#131313" width="168" height="21"/> }
+                extra={[
+                    <div className={'header__addition'}>
+                        <UserButton/>
+                    </div>
+                ]}
+            />
+            <Divider className={"header__divider"}/>
+        </React.Fragment>
+    )
 }
 
 const mapStateToProps = (store) => ({
-  loggedIn: store.authReducer.user !== null
+    loggedIn: store.authReducer.user !== null
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(Api.Auth.logout())
+    logout: () => dispatch(Api.Auth.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -11,6 +11,8 @@ import { Typography } from 'antd'
 import { decodeLoginState, decodePageTitle } from './Utils'
 import RegisterFormTemplate from './Templates/RegisterFormTemplate'
 import { Api } from './../../application/app'
+import './Auth.css'
+import Image from './images/illustration.png'
 
 const { Title } = Typography
 
@@ -24,28 +26,33 @@ function Auth (props) {
     redirectTo = decodeURIComponent(redirectTo)
   }
 
-  const title = <Title> { decodePageTitle(isInLoginMode) } </Title>
+  const title = <Title className="item" level={3}> { decodePageTitle(isInLoginMode) } </Title>
 
   const form = (isInLoginMode)
-    ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login} oAuth={props.oAuth}/>)
-    : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } oAuth={props.oAuth}/>)
+      ? (<LoginFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={props.login} oAuth={props.oAuth}/>)
+      : (<RegisterFormTemplate exceptionDetail={ props.exceptionDetail } submitFunction={ props.register } oAuth={props.oAuth}/>)
 
   const isInLoginChanger = (
-    <a onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
-          или { decodeLoginState(isInLoginMode) }
-    </a>
+      <a className="item" onClick={() => { setIsInLoginMode(!isInLoginMode); props.flushException() }}>
+        или { decodeLoginState(isInLoginMode) }
+      </a>
   )
 
   if (props.loggedIn) {
     return (<Redirect to={{ pathname: '/' + redirectTo }} />)
   } else {
     return (
-      <React.Fragment>
-        <MetaTags />
-        {title}
-        {form}
-        {isInLoginChanger}
-      </React.Fragment>
+        <React.Fragment>
+          <MetaTags />
+          <div className="flexbox-auth-container">
+            <div className={"image-container"}>
+              <img className={'image'} src={Image} height={50 }/>
+            </div>
+            {title}
+            {form}
+            {isInLoginChanger}
+          </div>
+        </React.Fragment>
     )
   }
 }

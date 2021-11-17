@@ -11,6 +11,7 @@ import scoreboardReducer from "./Reducers/ScoreboardReducer";
 import questRegistrationReducer from './Reducers/QuestRegistrationReducer'
 import teamListReducer from "./Reducers/TeamListReducer";
 import questPlaymodeReducer from "./Reducers/QuestPlaymodeReducer"
+import questStatusReducer from "./Reducers/QuestStatusReducer";
 
 const loggerMiddleware = createLogger();
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     questPlaymodeReducer,
     questRegistrationReducer,
     teamListReducer,
+    questStatusReducer,
 });
 
 export const store = createStore(

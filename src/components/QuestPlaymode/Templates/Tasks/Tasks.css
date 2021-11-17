@@ -15,9 +15,11 @@
     padding-right: 10px;
 }
 .quest-task__typography__hint {
-    display: block;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .quest-task__typography__container {
     padding-top: 10px;
@@ -58,4 +60,8 @@
 }
 .mt-30 {
     margin-top: 30px;
+}
+.quest-task_text-hints {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }

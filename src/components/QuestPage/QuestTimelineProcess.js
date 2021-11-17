@@ -12,7 +12,7 @@ import { getToken } from '../../application/api/BackendApi/CommonApi.js';
 import QuestTimelineTemplate from './QuestTimelineTemplate'
 let dateTimeNow = new Date();
 
-//TODO(lalka-anka): Please remove this huge dictionaries :(
+//TODO(lalka-anka): Please remove these huge dictionaries :(
 function QuestTimelineProcess(props) {
     let status = props.quest.status;
     const history = useHistory();
@@ -82,8 +82,40 @@ function QuestTimelineProcess(props) {
                 <UserAddOutlined />
                 Зарегистрироваться
             </Button>,
-        "registrationover": "",
-        "inprogress": "",
+        "registrationover": <Button type="primary"
+                                    htmlType="submit"
+                                    className="button"
+                                    style={{ "background-color": "#52c41a", "border-color": "#52c41a" }}
+                                    onClick={
+                                        () => {
+                                            if (getToken() === '') {
+                                                history.push("/auth/" + encodeURIComponent(props.url))
+                                            } else {
+                                                props.openForm()
+                                            }
+                                        }
+                                    }
+        >
+            <UserAddOutlined />
+            Зарегистрироваться
+        </Button>,
+        "inprogress": <Button type="primary"
+                              htmlType="submit"
+                              className="button"
+                              style={{ "background-color": "#52c41a", "border-color": "#52c41a" }}
+                              onClick={
+                                  () => {
+                                      if (getToken() === '') {
+                                          history.push("/auth/" + encodeURIComponent(props.url))
+                                      } else {
+                                          props.openForm()
+                                      }
+                                  }
+                              }
+        >
+            <UserAddOutlined />
+            Зарегистрироваться
+        </Button>,
         "finished" : "",
         "resultsavailable": ""
     };

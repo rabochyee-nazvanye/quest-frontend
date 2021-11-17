@@ -1,32 +1,24 @@
-.about{
-    position: relative;
-    top: 65%;
+.about {
+    font-size: 21px;
 }
 
-.quest-descript {
-    position: relative;
-    top: 59%;
-    left: 0.4%;
-    word-wrap: break-word;
-    width: 100%;
-    text-align: left;
-    white-space: pre-wrap;
-}
-
-@media (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .about {
-        position: relative;
-        top: 65%;
-        left: -6%;
+        font-size: 19px;
     }
+    team-heading
+    .status-layout {
+        font-size: 17px;
+    }
+
     .quest-descript {
-        position: relative;
-        top: 59%;
-        left: 3.2%;
         word-wrap: break-word;
-        width: 100%;
         text-align: left;
         white-space: pre-wrap;
     }
-}
 
+    .quest__results__container {
+        max-width: 100%;
+        overflow-x: scroll;
+    }
+}

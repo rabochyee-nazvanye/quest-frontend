@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 
 export default function AnswerInput(props) {
     const ANSWER_ACCEPTED_STATUS = 'accepted';
+    const [disabled, setDisabled] = useState(false)
 
     if (props.answerStatus === ANSWER_ACCEPTED_STATUS) {
         return (
@@ -12,8 +13,8 @@ export default function AnswerInput(props) {
                 <Input.Search
                     disabled={true}
                     enterButton=<SendOutlined />
-                    onSearch={(value) => value}
-                    placeholder={props.lastSubmittedAnswer}
+                onSearch={(value) => value}
+                placeholder={props.lastSubmittedAnswer}
                 />
             </div>
         );
@@ -21,14 +22,17 @@ export default function AnswerInput(props) {
     return (
         <div className={'quest-answer-input__container'}>
             <Input.Search
-                disabled={false}
+                disabled={disabled}
+                loading={disabled}
                 enterButton=<SendOutlined />
-                onSearch={(value) => {
-                    if (value !== '') {
-                        props.sendAnswer(value);
-                    }
-                }}
-                placeholder={props.lastSubmittedAnswer}
+            onSearch={(value) => {
+            if (value !== '') {
+                props.sendAnswer(value);
+                setDisabled(true)
+                setTimeout(() => setDisabled(false), 5000)
+            }
+        }}
+            placeholder={props.lastSubmittedAnswer}
             />
         </div>
     );

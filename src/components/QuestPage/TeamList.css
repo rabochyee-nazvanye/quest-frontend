@@ -16,6 +16,18 @@
     display: flex
 }
 
+@media (max-width: 550px) {
+    .team-heading {
+        display: block !important;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .team-list__container{
+        display: block !important;
+    }
+}
+
 .teammate-col {
     padding: 5px 0
 }

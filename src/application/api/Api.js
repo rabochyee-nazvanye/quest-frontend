@@ -1,6 +1,6 @@
 /**
  * A base haven for all Api endpoints
-*/
+ */
 export default class ApiContainer {
     constructor (opts){
         this.Auth = opts.AuthApi
@@ -10,5 +10,6 @@ export default class ApiContainer {
         this.QuestsList = opts.QuestsListApi
         this.Scoreboard = opts.ScoreboardApi
         this.TeamList = opts.TeamListApi
+        this.QuestStatusApi = opts.QuestStatusApi
     }
 }

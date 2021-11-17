@@ -1,17 +1,22 @@
 .auth-form-container {
     max-width: 300px;
     position: relative;
+    margin: auto;
 }
 .auth-alert-container {
-    padding-bottom: 25px;
+    padding-bottom: 20px;
+    margin: auto;
 }
 .auth-form-forgot {
     float: right;
+    margin: auto;
 }
 .auth-form-button {
     width: 100%;
+    margin: auto;
 }
 
 .oauth-button {
     width: 100%;
+    margin: auto;
 }
