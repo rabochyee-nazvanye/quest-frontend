@@ -1,0 +1,134 @@
+input,
+textarea {
+    border-radius: 4px !important;
+}
+
+.groups {
+    display: flex;
+    flex-direction: column;
+}
+
+.groups > .ant-btn {
+    width: 170px;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.collapse {
+    background-color: #ffffff !important;
+}
+
+.collapse__header {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.collapse .ant-collapse-header {
+    display: flex;
+    align-items: center;
+}
+
+.collapse .ant-collapse-content-box {
+    padding: 0 !important;
+}
+
+.task {
+    display: flex;
+    /* Этот important можно убрать */
+    flex-direction: row !important;
+    justify-content: space-between;
+
+    padding: 32px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    margin: 0 16px 16px 16px !important;
+    border: 0 !important;
+}
+
+.task .ant-card-body {
+    padding: 16px !important;
+}
+
+.task__controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.empty-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.empty-group > img {
+    margin-top: 33px;
+    margin-bottom: 18px;
+    width: fit-content;
+}
+
+.empty-group__info {
+    display: flex;
+}
+
+.empty-group__info > p {
+    margin-right: 10px;
+}
+
+.empty-group__info > svg {
+    margin-right: -340px;
+    margin-top: -220px;
+}
+
+.create-task-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.create-task-form .ant-form-item-label {
+    padding: 0 0 2px !important;
+}
+
+.create-task-form .ant-form-item {
+    width: 70%;
+}
+
+.description,
+.form-hints,
+.answer {
+    display: flex;
+}
+
+.description p,
+.form-hints p,
+.answer p {
+    margin-left: 30px;
+    margin-top: 18px;
+    color: #595959;
+    max-width: calc(30% - 30px);
+}
+
+.form-hints > div {
+    width: 70%;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.form-hints .ant-form-item-control {
+    width: 100%;
+}
+
+.form-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.form-controls .ant-form-item,
+.form-controls .ant-form-item-control {
+    width: fit-content !important;
+}

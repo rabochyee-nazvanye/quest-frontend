@@ -1,3 +1,92 @@
+.create-quest-form {
+  display: flex;
+  column-gap: 100px;
+  justify-content: space-between;
+}
+
 .create-quest-form__container {
     max-width: 500px;
+    width: 500px;
+}
+
+.create-quest-form__cover > .ant-form-item-label::after {
+  content: ", рекомендуемый размер ― 1140×300";
+  color: #8c8c8c;
+}
+
+.cover__modal > .ant-modal-content {
+  border-radius: 15px !important;
+}
+
+.cover__modal .ant-modal-close-x {
+  width: 35px !important;
+  height: 35px !important;
+  line-height: 35px !important;
+}
+
+.cover__edit-buttons {
+  display: inline-block;
+}
+
+.cover__upload-drag {
+  background: #ffffff !important;
+  border-radius: 15px !important;
+}
+
+.cover__upload-drag > .ant-upload {
+  padding: 15px !important;
+}
+
+.delete-modal {
+  width: auto !important;
+  max-width: 345px !important;
+}
+
+.delete-modal .ant-modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* TODO: сделать у всех модальных это свойство */
+  border-radius: 15px;
+}
+
+.delete-modal .ant-modal-body {
+  display: flex;
+  flex-direction: column;
+
+  padding: 60px 38px 50px !important;
+}
+
+.delete-modal .ant-btn-dangerous {
+  margin-top: 10px;
+}
+
+.create-quest-form__form-item-row {
+  flex-direction: row !important; /* Здесь можно без !important с помощью inline-стилей, но раз есть такой класс для стиля label ниже, то почему бы не воспользоваться */
+}
+
+.create-quest-form__form-item-row > .ant-form-item-label {
+  padding: 4px 0 !important; /* Научите переопределять стили без !important у такой vertical-layout-form'ы с компонентом, который не может повлиять на label в inline-ключе */
+}
+
+.create-quest-form__form-item-row-space > .ant-form-item-control {
+  display: flex;
+  align-items: flex-end;
+}
+
+.preview-quest-form__img,
+.preview-quest-form__default-img {
+  max-width: 100%;
+  width: 539px;
+  height: 142px;
+  border-radius: 5px;
+}
+
+.preview-quest-form__img {
+  object-fit: cover;
+}
+
+.preview-quest-form__default-img {
+  background: linear-gradient(180deg, #1890FF 0%, #6654F1 100%);
 }

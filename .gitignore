@@ -167,5 +167,8 @@ typings/
 /quest/coverage
 
 # production
+/build
 /quest/build
 src/api/authConfig.js
+package-lock.json
+.gitignore

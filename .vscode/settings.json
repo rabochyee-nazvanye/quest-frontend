@@ -1,0 +1,7 @@
+{
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+}

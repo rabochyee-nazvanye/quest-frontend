@@ -1,12 +1,101 @@
-.right-side{
+.right-side {
     position: relative;
     left:-100%;
     float:right;
 }
-.left-side{
+
+.left-side {
     position: relative;
 
 }
-.title{
+
+.title {
     white-space: nowrap;
+}
+
+.issuer-info {
+    display: inline-block;
+}
+
+.default-img {
+  margin: auto;
+  margin-top: 12px;
+
+  width: 1140px;
+  height: 300px;
+  max-width: 90vw;
+
+  background: linear-gradient(180deg, #1890FF 0%, #6654F1 100%);
+  border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .default-img {
+    width: 720px;
+    height: 190px;
+  }
+}
+
+@media (min-width: 992px) {
+  .default-img {
+    width: 940px;
+    height: 247px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .default-img {
+    width: 1140px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 500px) {
+  .default-img {
+    width: 370px;
+    height: 97px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header > h1 {
+  display: inline-block;
+}
+
+.delete-modal {
+  width: auto !important;
+  max-width: 345px;
+}
+
+.delete-modal .ant-modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* TODO: сделать у всех модальных это свойство */
+  border-radius: 15px;
+}
+
+.delete-modal .ant-modal-body {
+  display: flex;
+  flex-direction: column;
+
+  padding: 60px 38px 50px !important;
+}
+
+.delete-modal .ant-btn-dangerous {
+  margin-top: 10px;
+}
+
+.confirm-delete-modal .ant-modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.confirm-delete-modal input {
+  margin: 8px 0 15px;
 }

@@ -1,3 +1,18 @@
 .account__avatar-container {
-    margin-top: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.avatar-container__greetings {
+  display: inline-block;
+  margin-left: 22px;
+}
+
+.avatar-container__greetings > p {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 125%;
+
+  margin-bottom: 16px;
 }

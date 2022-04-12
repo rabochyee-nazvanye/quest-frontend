@@ -5,23 +5,35 @@
   margin-left: auto;
   width: 1170px;
 }
+
 @media (min-width: 768px) {
   .container {
     width: 750px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     width: 970px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
   }
 }
+
 @media (max-width: 500px) {
   .container {
     width: 400px;
   }
+}
+
+.ant-btn {
+  border-radius: 4px !important;
+}
+
+.ant-modal-content {
+  border-radius: 15px !important;
 }
